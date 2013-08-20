@@ -32,6 +32,7 @@
     feedTextField.backgroundColor = [UIColor whiteColor];
     feedTextField.textColor = [UIColor grayColor];
     feedTextField.layer.cornerRadius = 5.0;
+    feedTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     feedTextField.textAlignment = NSTextAlignmentLeft;
     feedTextField.font  =[UIFont systemFontOfSize:17];
     feedTextField.clearButtonMode = UITextFieldViewModeUnlessEditing;
@@ -47,7 +48,7 @@
     qqOrPhoneField.layer.cornerRadius = 3.0;
     qqOrPhoneField.font = [UIFont systemFontOfSize:22];
     qqOrPhoneField.textAlignment = NSTextAlignmentCenter;
-    qqOrPhoneField.textAlignment = UIControlContentVerticalAlignmentCenter;
+    qqOrPhoneField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     qqOrPhoneField.clearButtonMode = UITextFieldViewModeWhileEditing;
     qqOrPhoneField.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:qqOrPhoneField];

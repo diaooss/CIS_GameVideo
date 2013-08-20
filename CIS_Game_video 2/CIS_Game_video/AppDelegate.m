@@ -39,6 +39,8 @@
     IIViewDeckController * IIviewController = [[IIViewDeckController alloc]initWithCenterViewController:_rootNvc leftViewController:left];
     //将抽屉添加到window上
     [IIviewController setRightSize:0];
+    IIviewController.bounceOpenSideDurationFactor = 1.0;
+    IIviewController.openSlideAnimationDuration = 0.5;
     [IIviewController setPanningMode:IIViewDeckAllViewsPanning];
     [IIviewController setCenterhiddenInteractivity:IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose];
     [self.window setRootViewController:IIviewController];

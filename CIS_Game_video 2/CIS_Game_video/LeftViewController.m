@@ -15,6 +15,7 @@
 #import "SetTingPage.h"
 #import "NetSettingPage.h"
 #import "AboutUsPage.h"
+#import "LoginPage.h"
 @interface LeftViewController ()
 
 @end
@@ -151,10 +152,11 @@
         [user release];
     }else
     {
-        UserViewController* user = [[UserViewController alloc]init];
-        [self judgeTheView:name changeViecontroller:user];
-        [user release];
-        NSLog(@"不存在");
+        LoginPage *login = [[LoginPage alloc] init];
+        UINavigationController *loginNavc = [[UINavigationController alloc] initWithRootViewController:login];
+        [self presentViewController:loginNavc animated:YES completion:nil];
+        [login release];
+        [loginNavc release];
     }
     
   

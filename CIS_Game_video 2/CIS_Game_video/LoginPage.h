@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginPage : UIViewController
+@interface LoginPage : UIViewController<UITextFieldDelegate>
+{
+    UITextField *nameTextField;//登录名:昵称/邮箱
+    UITextField *psdTextField;//密码
+
+}
 
 @end

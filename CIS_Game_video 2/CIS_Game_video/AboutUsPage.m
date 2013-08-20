@@ -9,6 +9,7 @@
 #import "AboutUsPage.h"
 #import "Header.h"
 #import "FeedBackpage.h"
+#import "Tools.h"
 @interface AboutUsPage ()
 
 @end
@@ -113,7 +114,7 @@
     if (indexPath.section==0) {
         switch (indexPath.row) {
             case 0:
-                
+                [Tools giveAppraiseForOurApp];
                 break;
             case 1:
                 break;

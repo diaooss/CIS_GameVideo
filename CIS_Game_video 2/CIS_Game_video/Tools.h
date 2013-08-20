@@ -23,4 +23,9 @@
 
 //*****判断是不是登陆过
 +(BOOL)isHaveLogin;
+//评价
++(void)giveAppraiseForOurApp;
+//获得硬件信息
++(NSDictionary *)getMobileInfo;
+
 @end

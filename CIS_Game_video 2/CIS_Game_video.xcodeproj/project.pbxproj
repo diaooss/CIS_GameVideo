@@ -29,6 +29,7 @@
 		20D5813517C3142C0000A5C9 /* FeedBackpage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D5813417C3142C0000A5C9 /* FeedBackpage.m */; };
 		20D5813817C346160000A5C9 /* LoginPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D5813717C346160000A5C9 /* LoginPage.m */; };
 		20D5813B17C3462F0000A5C9 /* RegisterPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D5813A17C3462F0000A5C9 /* RegisterPage.m */; };
+		20D5813E17C366A90000A5C9 /* ForgetPSDPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D5813D17C366A90000A5C9 /* ForgetPSDPage.m */; };
 		20E8A4AB1797B51400160DE1 /* skin_blue_nav-menu-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E8A4AA1797B51400160DE1 /* skin_blue_nav-menu-icon.png */; };
 		20E8A4B11797BE0C00160DE1 /* AuthorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4B01797BE0C00160DE1 /* AuthorCell.m */; };
 		20E8A4B41797BE2200160DE1 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4B31797BE2200160DE1 /* MovieCell.m */; };
@@ -112,6 +113,8 @@
 		20D5813717C346160000A5C9 /* LoginPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPage.m; sourceTree = "<group>"; };
 		20D5813917C3462F0000A5C9 /* RegisterPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPage.h; sourceTree = "<group>"; };
 		20D5813A17C3462F0000A5C9 /* RegisterPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPage.m; sourceTree = "<group>"; };
+		20D5813C17C366A80000A5C9 /* ForgetPSDPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPSDPage.h; sourceTree = "<group>"; };
+		20D5813D17C366A90000A5C9 /* ForgetPSDPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPSDPage.m; sourceTree = "<group>"; };
 		20E8A4AA1797B51400160DE1 /* skin_blue_nav-menu-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skin_blue_nav-menu-icon.png"; sourceTree = "<group>"; };
 		20E8A4AF1797BE0C00160DE1 /* AuthorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorCell.h; sourceTree = "<group>"; };
 		20E8A4B01797BE0C00160DE1 /* AuthorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorCell.m; sourceTree = "<group>"; };
@@ -333,7 +336,7 @@
 			children = (
 				23AA7D011795424A00C7A8B1 /* UserViewController.h */,
 				23AA7D021795424A00C7A8B1 /* UserViewController.m */,
-				23505AAE17990A4400CC7549 /* LoginAndRegisterPage */,
+				23505AAE17990A4400CC7549 /* LoginAndRegisterPageAndForgetPsd */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -360,15 +363,17 @@
 			name = Tool;
 			sourceTree = "<group>";
 		};
-		23505AAE17990A4400CC7549 /* LoginAndRegisterPage */ = {
+		23505AAE17990A4400CC7549 /* LoginAndRegisterPageAndForgetPsd */ = {
 			isa = PBXGroup;
 			children = (
 				20D5813617C346160000A5C9 /* LoginPage.h */,
 				20D5813717C346160000A5C9 /* LoginPage.m */,
 				20D5813917C3462F0000A5C9 /* RegisterPage.h */,
 				20D5813A17C3462F0000A5C9 /* RegisterPage.m */,
+				20D5813C17C366A80000A5C9 /* ForgetPSDPage.h */,
+				20D5813D17C366A90000A5C9 /* ForgetPSDPage.m */,
 			);
-			name = LoginAndRegisterPage;
+			name = LoginAndRegisterPageAndForgetPsd;
 			sourceTree = "<group>";
 		};
 		23AA7CF01794E12700C7A8B1 /* Third */ = {
@@ -678,6 +683,7 @@
 				2316908617C3508B00B47694 /* MBProgressHUD.m in Sources */,
 				2316908717C3508B00B47694 /* Reachability.m in Sources */,
 				2316908817C3508B00B47694 /* Tools.m in Sources */,
+				20D5813E17C366A90000A5C9 /* ForgetPSDPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
