@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>list</key>
+		<array>
+			<string>魔兽第一发</string>
+			<string>魔兽第二发</string>
+			<string>魔兽第三发</string>
+		</array>
+		<key>name</key>
+		<string>星际阿川</string>
+	</dict>
+	<dict>
+		<key>list</key>
+		<array>
+			<string>老鼠爱大米</string>
+			<string>老鼠吃大米</string>
+			<string>太多吃不完,老鼠卖大米</string>
+		</array>
+		<key>name</key>
+		<string>老鼠789</string>
+	</dict>
+	<dict>
+		<key>list</key>
+		<array>
+			<string>你</string>
+			<string>好</string>
+			<string>中</string>
+		</array>
+		<key>name</key>
+		<string>李金蔚</string>
+	</dict>
+	<dict>
+		<key>list</key>
+		<array>
+			<string>你</string>
+			<string>好</string>
+			<string>china</string>
+		</array>
+		<key>name</key>
+		<string>李岳峰</string>
+	</dict>
+</array>
+</plist>
