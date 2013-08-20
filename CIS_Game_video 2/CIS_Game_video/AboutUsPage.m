@@ -8,6 +8,7 @@
 
 #import "AboutUsPage.h"
 #import "Header.h"
+#import "FeedBackpage.h"
 @interface AboutUsPage ()
 
 @end
@@ -73,6 +74,7 @@
     }
     return 3;
 }
+#pragma mark--列表的代理方法
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *reusename = @"reuse";
@@ -98,13 +100,47 @@
         }else if (indexPath.row == 1)
         {
             usCell.textLabel.text = @"用户协议";
-
         }else
         {
             usCell.textLabel.text = @"新版本检测";
         }
             }
         return usCell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.section==0) {
+        switch (indexPath.row) {
+            case 0:
+                
+                break;
+            case 1:
+                break;
+            default:
+                break;
+        }
+    }else if (indexPath.section == 1)
+    {
+        switch (indexPath.row) {
+            case 0:
+                [self goToFeedBack];
+                break;
+            case 1:
+                 break;
+            case 2:
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+-(void)goToFeedBack
+{
+    FeedBackpage *feedbackPage = [[FeedBackpage alloc] init];
+    [self.navigationController pushViewController:feedbackPage animated:YES];
+    [feedbackPage release];
 }
 - (void)viewDidLoad
 {
@@ -116,5 +152,4 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end

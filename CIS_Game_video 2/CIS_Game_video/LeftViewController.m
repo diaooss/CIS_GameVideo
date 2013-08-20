@@ -13,7 +13,6 @@
 #import "Public_ViewController.h"
 #import "MyLikeAuthorListPage.h"
 #import "SetTingPage.h"
-#import "LogInViewController.h"
 #import "NetSettingPage.h"
 #import "AboutUsPage.h"
 @interface LeftViewController ()
@@ -152,11 +151,10 @@
         [user release];
     }else
     {
+        UserViewController* user = [[UserViewController alloc]init];
+        [self judgeTheView:name changeViecontroller:user];
+        [user release];
         NSLog(@"不存在");
-        LogInViewController * login = [[LogInViewController alloc]init];
-        [login setIsHaveId:YES];
-        [self judgeTheView:@"账号登陆" changeViecontroller:login];
-        [login release];
     }
     
   
@@ -170,10 +168,10 @@
         return;
     }
     AppDelegate * delegate = [UIApplication sharedApplication].delegate;
-    [self.viewDeckController closeLeftViewAnimated:YES];
     [self.viewDeckController setCenterController:delegate.rootNvc];
     
-    
+    [self.viewDeckController closeLeftViewAnimated:YES];
+
 }
 //根据标签判断去哪个页面
 - (void)toSomePlace:(NSString *)cellName;

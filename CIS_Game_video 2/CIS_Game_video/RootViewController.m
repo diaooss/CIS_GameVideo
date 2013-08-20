@@ -44,12 +44,14 @@
 -(void)loadView
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+
     
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setBackgroundImage:[UIImage imageNamed:@"myFriends.png"] forState:UIControlStateNormal];
@@ -107,7 +109,7 @@
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0];
-    [UIView setAnimationTransition:UIViewAnimationTransitionCurlUp forView:self.view cache:YES];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
     if (sbView.hidden ==YES) {
         
         sbView.hidden = NO;

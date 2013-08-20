@@ -26,6 +26,9 @@
 		20A0BCA4179942ED00CFB711 /* 2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A0BC98179942ED00CFB711 /* 2@2x.png */; };
 		20A0BCA5179942ED00CFB711 /* 3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A0BC99179942ED00CFB711 /* 3@2x.png */; };
 		20A0BCA6179942ED00CFB711 /* 4@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A0BC9A179942ED00CFB711 /* 4@2x.png */; };
+		20D5813517C3142C0000A5C9 /* FeedBackpage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D5813417C3142C0000A5C9 /* FeedBackpage.m */; };
+		20D5813817C346160000A5C9 /* LoginPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D5813717C346160000A5C9 /* LoginPage.m */; };
+		20D5813B17C3462F0000A5C9 /* RegisterPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D5813A17C3462F0000A5C9 /* RegisterPage.m */; };
 		20E8A4AB1797B51400160DE1 /* skin_blue_nav-menu-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E8A4AA1797B51400160DE1 /* skin_blue_nav-menu-icon.png */; };
 		20E8A4B11797BE0C00160DE1 /* AuthorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4B01797BE0C00160DE1 /* AuthorCell.m */; };
 		20E8A4B41797BE2200160DE1 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4B31797BE2200160DE1 /* MovieCell.m */; };
@@ -51,8 +54,6 @@
 		20E8A4E81797E14E00160DE1 /* SetTingPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4E71797E14E00160DE1 /* SetTingPage.m */; };
 		20E8A4EC1797E98E00160DE1 /* AuthorMoviesListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4EB1797E98E00160DE1 /* AuthorMoviesListPage.m */; };
 		2306E45E17966E3B00BD3808 /* test.test.png in Resources */ = {isa = PBXBuildFile; fileRef = 2306E45D17966E3B00BD3808 /* test.test.png */; };
-		23505AB117990A7C00CC7549 /* LogInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23505AB017990A7C00CC7549 /* LogInViewController.m */; };
-		23505ABD1799299700CC7549 /* My_MakeVipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23505ABC1799299700CC7549 /* My_MakeVipView.m */; };
 		23AA7CE31794E0C700C7A8B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CE21794E0C700C7A8B1 /* UIViewAdditions.m */; };
 		23AA7CEF1794E10400C7A8B1 /* WZGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CEE1794E10400C7A8B1 /* WZGuideViewController.m */; };
 		23AA7CF91794E2C300C7A8B1 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CF81794E2C300C7A8B1 /* LeftViewController.m */; };
@@ -100,6 +101,12 @@
 		20A0BC98179942ED00CFB711 /* 2@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "2@2x.png"; sourceTree = "<group>"; };
 		20A0BC99179942ED00CFB711 /* 3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "3@2x.png"; sourceTree = "<group>"; };
 		20A0BC9A179942ED00CFB711 /* 4@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "4@2x.png"; sourceTree = "<group>"; };
+		20D5813317C3142C0000A5C9 /* FeedBackpage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedBackpage.h; sourceTree = "<group>"; };
+		20D5813417C3142C0000A5C9 /* FeedBackpage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedBackpage.m; sourceTree = "<group>"; };
+		20D5813617C346160000A5C9 /* LoginPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginPage.h; sourceTree = "<group>"; };
+		20D5813717C346160000A5C9 /* LoginPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginPage.m; sourceTree = "<group>"; };
+		20D5813917C3462F0000A5C9 /* RegisterPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterPage.h; sourceTree = "<group>"; };
+		20D5813A17C3462F0000A5C9 /* RegisterPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterPage.m; sourceTree = "<group>"; };
 		20E8A4AA1797B51400160DE1 /* skin_blue_nav-menu-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skin_blue_nav-menu-icon.png"; sourceTree = "<group>"; };
 		20E8A4AF1797BE0C00160DE1 /* AuthorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorCell.h; sourceTree = "<group>"; };
 		20E8A4B01797BE0C00160DE1 /* AuthorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorCell.m; sourceTree = "<group>"; };
@@ -131,10 +138,6 @@
 		20E8A4EA1797E98E00160DE1 /* AuthorMoviesListPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorMoviesListPage.h; sourceTree = "<group>"; };
 		20E8A4EB1797E98E00160DE1 /* AuthorMoviesListPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorMoviesListPage.m; sourceTree = "<group>"; };
 		2306E45D17966E3B00BD3808 /* test.test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.test.png; sourceTree = "<group>"; };
-		23505AAF17990A7C00CC7549 /* LogInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInViewController.h; sourceTree = "<group>"; };
-		23505AB017990A7C00CC7549 /* LogInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInViewController.m; sourceTree = "<group>"; };
-		23505ABB1799299600CC7549 /* My_MakeVipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = My_MakeVipView.h; sourceTree = "<group>"; };
-		23505ABC1799299700CC7549 /* My_MakeVipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = My_MakeVipView.m; sourceTree = "<group>"; };
 		23AA7CE11794E0C700C7A8B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		23AA7CE21794E0C700C7A8B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		23AA7CED1794E10400C7A8B1 /* WZGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZGuideViewController.h; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 			children = (
 				20A0BC8B17993D0D00CFB711 /* AboutUsPage.h */,
 				20A0BC8C17993D0D00CFB711 /* AboutUsPage.m */,
+				20D5813317C3142C0000A5C9 /* FeedBackpage.h */,
+				20D5813417C3142C0000A5C9 /* FeedBackpage.m */,
 			);
 			name = AboutUS;
 			sourceTree = "<group>";
@@ -313,7 +318,7 @@
 			children = (
 				23AA7D011795424A00C7A8B1 /* UserViewController.h */,
 				23AA7D021795424A00C7A8B1 /* UserViewController.m */,
-				23505AAE17990A4400CC7549 /* Log_In_ViewCOntroller */,
+				23505AAE17990A4400CC7549 /* LoginAndRegisterPage */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -327,15 +332,15 @@
 			name = There_public;
 			sourceTree = "<group>";
 		};
-		23505AAE17990A4400CC7549 /* Log_In_ViewCOntroller */ = {
+		23505AAE17990A4400CC7549 /* LoginAndRegisterPage */ = {
 			isa = PBXGroup;
 			children = (
-				23505AAF17990A7C00CC7549 /* LogInViewController.h */,
-				23505AB017990A7C00CC7549 /* LogInViewController.m */,
-				23505ABB1799299600CC7549 /* My_MakeVipView.h */,
-				23505ABC1799299700CC7549 /* My_MakeVipView.m */,
+				20D5813617C346160000A5C9 /* LoginPage.h */,
+				20D5813717C346160000A5C9 /* LoginPage.m */,
+				20D5813917C3462F0000A5C9 /* RegisterPage.h */,
+				20D5813A17C3462F0000A5C9 /* RegisterPage.m */,
 			);
-			name = Log_In_ViewCOntroller;
+			name = LoginAndRegisterPage;
 			sourceTree = "<group>";
 		};
 		23AA7CF01794E12700C7A8B1 /* Third */ = {
@@ -630,14 +635,15 @@
 				20E8A4E31797DE6500160DE1 /* MyFavorAuthorCell.m in Sources */,
 				20E8A4E81797E14E00160DE1 /* SetTingPage.m in Sources */,
 				20E8A4EC1797E98E00160DE1 /* AuthorMoviesListPage.m in Sources */,
-				23505AB117990A7C00CC7549 /* LogInViewController.m in Sources */,
-				23505ABD1799299700CC7549 /* My_MakeVipView.m in Sources */,
 				20A0BC8617993C3B00CFB711 /* SettingCell.m in Sources */,
 				20A0BC8917993C8700CFB711 /* NetSettingPage.m in Sources */,
 				20A0BC8D17993D0D00CFB711 /* AboutUsPage.m in Sources */,
 				203B8029179CBA7F0083016C /* IIWrapController.m in Sources */,
 				203B802A179CBA7F0083016C /* IISideController.m in Sources */,
 				203B802B179CBA7F0083016C /* IIViewDeckController.m in Sources */,
+				20D5813517C3142C0000A5C9 /* FeedBackpage.m in Sources */,
+				20D5813817C346160000A5C9 /* LoginPage.m in Sources */,
+				20D5813B17C3462F0000A5C9 /* RegisterPage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
