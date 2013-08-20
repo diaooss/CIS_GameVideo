@@ -54,6 +54,11 @@
 		20E8A4E81797E14E00160DE1 /* SetTingPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4E71797E14E00160DE1 /* SetTingPage.m */; };
 		20E8A4EC1797E98E00160DE1 /* AuthorMoviesListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4EB1797E98E00160DE1 /* AuthorMoviesListPage.m */; };
 		2306E45E17966E3B00BD3808 /* test.test.png in Resources */ = {isa = PBXBuildFile; fileRef = 2306E45D17966E3B00BD3808 /* test.test.png */; };
+		2316907C17C3500000B47694 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2316907B17C3500000B47694 /* SystemConfiguration.framework */; };
+		2316907E17C3500D00B47694 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2316907D17C3500D00B47694 /* CFNetwork.framework */; };
+		2316908617C3508B00B47694 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2316908117C3508B00B47694 /* MBProgressHUD.m */; };
+		2316908717C3508B00B47694 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 2316908317C3508B00B47694 /* Reachability.m */; };
+		2316908817C3508B00B47694 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2316908517C3508B00B47694 /* Tools.m */; };
 		23AA7CE31794E0C700C7A8B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CE21794E0C700C7A8B1 /* UIViewAdditions.m */; };
 		23AA7CEF1794E10400C7A8B1 /* WZGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CEE1794E10400C7A8B1 /* WZGuideViewController.m */; };
 		23AA7CF91794E2C300C7A8B1 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CF81794E2C300C7A8B1 /* LeftViewController.m */; };
@@ -138,6 +143,14 @@
 		20E8A4EA1797E98E00160DE1 /* AuthorMoviesListPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorMoviesListPage.h; sourceTree = "<group>"; };
 		20E8A4EB1797E98E00160DE1 /* AuthorMoviesListPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorMoviesListPage.m; sourceTree = "<group>"; };
 		2306E45D17966E3B00BD3808 /* test.test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = test.test.png; sourceTree = "<group>"; };
+		2316907B17C3500000B47694 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		2316907D17C3500D00B47694 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		2316908017C3508B00B47694 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		2316908117C3508B00B47694 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		2316908217C3508B00B47694 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		2316908317C3508B00B47694 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		2316908417C3508B00B47694 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
+		2316908517C3508B00B47694 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		23AA7CE11794E0C700C7A8B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		23AA7CE21794E0C700C7A8B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		23AA7CED1794E10400C7A8B1 /* WZGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZGuideViewController.h; sourceTree = "<group>"; };
@@ -178,6 +191,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2316907E17C3500D00B47694 /* CFNetwork.framework in Frameworks */,
+				2316907C17C3500000B47694 /* SystemConfiguration.framework in Frameworks */,
 				23DA1F7E17938F9A0092FB0F /* QuartzCore.framework in Frameworks */,
 				23DA1F5017938B030092FB0F /* UIKit.framework in Frameworks */,
 				23DA1F5217938B030092FB0F /* Foundation.framework in Frameworks */,
@@ -332,6 +347,19 @@
 			name = There_public;
 			sourceTree = "<group>";
 		};
+		2316907F17C3505600B47694 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				2316908017C3508B00B47694 /* MBProgressHUD.h */,
+				2316908117C3508B00B47694 /* MBProgressHUD.m */,
+				2316908217C3508B00B47694 /* Reachability.h */,
+				2316908317C3508B00B47694 /* Reachability.m */,
+				2316908417C3508B00B47694 /* Tools.h */,
+				2316908517C3508B00B47694 /* Tools.m */,
+			);
+			name = Tool;
+			sourceTree = "<group>";
+		};
 		23505AAE17990A4400CC7549 /* LoginAndRegisterPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -455,6 +483,8 @@
 		23DA1F4E17938B030092FB0F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2316907B17C3500000B47694 /* SystemConfiguration.framework */,
+				2316907D17C3500D00B47694 /* CFNetwork.framework */,
 				23DA1F7D17938F9A0092FB0F /* QuartzCore.framework */,
 				23DA1F4F17938B030092FB0F /* UIKit.framework */,
 				23DA1F5117938B030092FB0F /* Foundation.framework */,
@@ -466,6 +496,7 @@
 		23DA1F5517938B030092FB0F /* CIS_Game_video */ = {
 			isa = PBXGroup;
 			children = (
+				2316907F17C3505600B47694 /* Tool */,
 				20E8A4B51797BE3C00160DE1 /* TestData */,
 				20E8A4AC1797BDC700160DE1 /* Models */,
 				23AA7CF41794E1D900C7A8B1 /* Image */,
@@ -644,6 +675,9 @@
 				20D5813517C3142C0000A5C9 /* FeedBackpage.m in Sources */,
 				20D5813817C346160000A5C9 /* LoginPage.m in Sources */,
 				20D5813B17C3462F0000A5C9 /* RegisterPage.m in Sources */,
+				2316908617C3508B00B47694 /* MBProgressHUD.m in Sources */,
+				2316908717C3508B00B47694 /* Reachability.m in Sources */,
+				2316908817C3508B00B47694 /* Tools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
