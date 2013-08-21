@@ -42,14 +42,15 @@
 //加载一个动画
 +(void)labelMakeAnimation:(UIView* )sender
 {
-    [UIView beginAnimations:nil context:nil];
-    [sender setCenter:CGPointMake(160, 20)];
-    [UIView animateWithDuration:2 delay:2 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
-        [sender setCenter:CGPointMake(160, 20)];
+    [UIView animateWithDuration:9 animations:^{
+        [sender setCenter:CGPointMake(160, 70)];
     } completion:^(BOOL finished) {
-        [sender setAlpha:0];
+        [UIView animateWithDuration:3 animations:^{
+            [sender setAlpha:0];
+        } completion:^(BOOL finished) {
+            nil;
+        }];
     }];
-    [UIView commitAnimations];
 }
 //*****邮箱检测
 +(BOOL)cheeckEmail: (NSString *) userEmail
