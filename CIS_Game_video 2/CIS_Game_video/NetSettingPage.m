@@ -9,6 +9,7 @@
 #import "NetSettingPage.h"
 #import "Header.h"
 #import "SettingCell.h"
+#import "Tools.h"
 @interface NetSettingPage ()
 
 @end
@@ -26,19 +27,11 @@
 -(void)loadView
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]]autorelease];
-    self.navigationItem.title = @"网络设置";
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@"goBack.png"] forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0, 0, 44, 44)];
-    [button addTarget:self.viewDeckController action:@selector(toggleLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * bar = [[UIBarButtonItem alloc]initWithCustomView:button];
-    [self.navigationItem setLeftBarButtonItem:bar];
-    [bar release];
+    [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"goBack.png" title:@"网络设置"];
     //列表
     
     UITableView *netTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStyleGrouped];

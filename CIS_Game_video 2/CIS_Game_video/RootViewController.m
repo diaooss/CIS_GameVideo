@@ -4,8 +4,6 @@
 //
 //  Created by huangfangwang on 13-7-15.
 //  Copyright (c) 2013年 huangfang. All rights reserved.
-//
-
 #import "RootViewController.h"
 #import "SBView.h"
 #import "Header.h"
@@ -13,6 +11,7 @@
 #import "AuthorCell.h"
 #import "AuthorMoviesListPage.h"
 #import "AppDelegate.h"
+#import "Tools.h"
 //just test first
 @interface RootViewController ()
 
@@ -36,32 +35,19 @@
         NSString *path  = [[NSBundle mainBundle] pathForResource:@"ExpansionTableTestData" ofType:@"plist"];
         //数据源为一个大数组,里面内嵌字典或者小数组等,可变化.
         _dataList = [[NSMutableArray alloc] initWithContentsOfFile:path];
-
     }
-    
     return self;
 }
 -(void)loadView
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-
     
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@"myFriends.png"] forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0, 0, 40, 30)];
-    
-    [button addTarget:self.viewDeckController action:@selector(toggleLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * bar = [[UIBarButtonItem alloc]initWithCustomView:button];
-    [self.navigationItem setLeftBarButtonItem:bar];
-    [bar release];
-    
+    [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" title:@"幻方"];
     //翻转按钮
     UIButton  *changeViewBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
     changeViewBtn.frame = CGRectMake(280, 0, 40, 30);
@@ -70,7 +56,6 @@
     UIBarButtonItem *change = [[UIBarButtonItem alloc] initWithCustomView:changeViewBtn];
     self.navigationItem.rightBarButtonItem = change;
     [change release];
-    
 //滑动推荐
     Animation_Turn_View * animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height/4)];
     [self.view addSubview:animationView];
@@ -79,8 +64,6 @@
 //游戏类别分类
     NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Data",@"魔兽争霸",@"星级争霸",@"Data2", nil];
     UISegmentedControl * segment = [[UISegmentedControl alloc]initWithItems:nameArry];
-    [segment setImage:[UIImage imageNamed:@"Next.png"] forSegmentAtIndex:2];
-    [segment setBackgroundImage:[UIImage imageNamed:@"Next.png"] forState:UIControlStateHighlighted barMetrics:UIBarMetricsDefault];
     [segment setSegmentedControlStyle:UISegmentedControlStyleBar];
     [segment setFrame:CGRectMake(-5, animationView.bottom, 330, 30)];
     [self.view addSubview:segment];
@@ -101,7 +84,9 @@
     AuthorListTab.sectionHeaderHeight = 0;
     self.isOpen = NO;
     AuthorListTab.hidden = YES;
-
+    //是视图控制器.
+    int a = [self.viewDeckController isKindOfClass:[UIViewController class]];
+       NSLog(@"是不是个控制器啊?%d",a);
 }
 #pragma mark--翻转下半部分的视图
 -(void)changeViewForChoose
@@ -118,13 +103,8 @@
     {
         sbView.hidden = YES;
         AuthorListTab.hidden = NO;
-
-
     }
-
     [UIView commitAnimations];
-
-    
 }
 #pragma mark--系统列表代理方法
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -139,7 +119,6 @@
 {
     //分组来自于整个数据源内部统一属性比如作者数据的个数
     return [_dataList count];;
-    
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -151,11 +130,9 @@
         }
     }
     //如果是关闭状态,则返回一个
-    
     return 1;
 }
 #pragma mark--系统列表的代理方法
-
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (self.isOpen&&self.selectIndex.section == indexPath.section&&indexPath.row!=0)
@@ -164,7 +141,6 @@
         static NSString *CellIdentifier = @"Cell2";
         //可用自定义的cell替代展开列表中的CELL.
         MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
         if (!cell) {
             cell = [[MovieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
@@ -189,10 +165,8 @@
         NSString *name = [[_dataList objectAtIndex:indexPath.section] objectForKey:@"name"];
         cell.nameLabel.text = name;
         cell.countLabel.text = @"108部作品";
-        
         //在此设置为表示图标,为未打开样式.传入布尔值到自定义cell中去.
         //        [cell changeArrowWithUp:([self.selectIndex isEqual:indexPath]?YES:NO)];
-        
         return cell;
     }
 }
@@ -200,18 +174,15 @@
 {
     //点击分组CELL和展开CELL时的不同响应.
     if (indexPath.row == 0)
-        
     {
         if ([indexPath isEqual:self.selectIndex]) {
             self.isOpen = NO;
             [self didSelectCellRowFirstDo:NO nextDo:NO];
             self.selectIndex = nil;
-            
         }else
         {
             if (!self.selectIndex) {
                 self.selectIndex = indexPath;
-                
                 [self didSelectCellRowFirstDo:YES nextDo:NO];
                 
             }else

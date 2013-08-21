@@ -8,6 +8,7 @@
 
 #import "RegisterPage.h"
 #import "Header.h"
+#import "Tools.h"
 @interface RegisterPage ()
 
 @end
@@ -34,17 +35,10 @@
 -(void)loadView
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    self.navigationItem.title = @"注册";
-    
-    UILabel *titleLab  = [[UILabel alloc] initWithFrame:CGRectMake(10, 15, 300, 20)];
-    titleLab.text = @"幻方网络,精彩无限";
-    titleLab.backgroundColor  =[UIColor clearColor];
-    titleLab.textColor = [UIColor grayColor];
-    titleLab.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:titleLab];
-    [titleLab release];
+    [Tools navigaionView:self leftImageName:@"goBack.png" title:@"注册-幻方网络,精彩无限"];
+
     for (int i = 0; i<3; i++) {
-        UITextField *contentFiled = [[UITextField alloc] initWithFrame:CGRectMake(10, 50+i*17+i*40, 300, 35)];
+        UITextField *contentFiled = [[UITextField alloc] initWithFrame:CGRectMake(10, 70+i*17+i*40, 300, 35)];
         contentFiled.tag = 100*i+100;
         contentFiled.backgroundColor = [UIColor yellowColor];
         contentFiled.delegate= self;
@@ -71,7 +65,7 @@
     }
     
     UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    registerBtn.frame = CGRectMake(10, 220, 300, 40);
+    registerBtn.frame = CGRectMake(10, 240, 300, 40);
     registerBtn.layer.cornerRadius = 5.0;
     registerBtn.backgroundColor = [UIColor greenColor];
     [registerBtn setTitle:@"立即注册" forState:UIControlStateNormal];
@@ -110,8 +104,8 @@
     [UIView setAnimationDuration:0.5];
     
     CGRect frame = self.view.frame;
-    frame.origin.y -=35;
-    frame.size.height +=35;
+    frame.origin.y -=50;
+    frame.size.height +=50;
     self.view.frame = frame;
     [UIView commitAnimations];
 }
@@ -120,11 +114,15 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
     CGRect frame = self.view.frame;
-    frame.origin.y +=35;
-    frame.size.height -=35;
+    frame.origin.y +=50;
+    frame.size.height -=50;
     self.view.frame = frame;
     [UIView commitAnimations];
  
+}
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)viewDidLoad

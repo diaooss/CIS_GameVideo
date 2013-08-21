@@ -10,6 +10,7 @@
 #import "Header.h"
 #import "RegisterPage.h"
 #import "ForgetPSDPage.h"
+#import "Tools.h"
 @interface LoginPage ()
 
 @end
@@ -40,13 +41,11 @@
 -(void)loadView
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    self.navigationItem.title = @"登陆";
     self.view.backgroundColor = [UIColor whiteColor];
-    UIBarButtonItem *dismissBtn = [[UIBarButtonItem alloc] initWithTitle:@"返回" style:UIBarButtonItemStyleBordered target:self action:@selector(back)];
-    self.navigationItem.leftBarButtonItem = dismissBtn;
-    [dismissBtn release];
+//    self.navigationController.navigationBarHidden  = YES;
+    [Tools navigaionView:self leftImageName:@"goBack.png" title:@"用户登录"];
     /*/布局登陆面板/*/
-    UIImageView *logoImg = [[UIImageView alloc]  initWithFrame:CGRectMake(115, 15, 90, 90)];
+    UIImageView *logoImg = [[UIImageView alloc]  initWithFrame:CGRectMake(115, 60, 90, 90)];
     logoImg.backgroundColor = [UIColor blueColor];
     logoImg.layer.cornerRadius = 5.0;
     [self.view addSubview:logoImg];
@@ -106,8 +105,6 @@
     [forgetPsdBtn addTarget:self action:@selector(forgetPSD) forControlEvents:UIControlEventTouchUpInside];
     forgetPsdBtn.layer.cornerRadius = 5.0;
     [self.view addSubview:forgetPsdBtn];
-
-      
     //添加手势
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackGround)];
     [self.view addGestureRecognizer:tap];
@@ -118,7 +115,6 @@
     RegisterPage *newRegisterPage = [[RegisterPage alloc] init];
     [self.navigationController pushViewController:newRegisterPage animated:YES];
     [newRegisterPage release];
-    
 }
 #pragma mark--面板上下移动
 //面板上移.下移
@@ -128,8 +124,8 @@
     [UIView setAnimationDuration:0.5];
     
     CGRect frame = self.view.frame;
-    frame.origin.y -=110;
-    frame.size.height +=110;
+    frame.origin.y -=150;
+    frame.size.height +=150;
     self.view.frame = frame;
     [UIView commitAnimations];
 }
@@ -138,8 +134,8 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
     CGRect frame = self.view.frame;
-    frame.origin.y +=110;
-    frame.size.height -=110;
+    frame.origin.y +=150;
+    frame.size.height -=150;
     self.view.frame = frame;
     [UIView commitAnimations];
 

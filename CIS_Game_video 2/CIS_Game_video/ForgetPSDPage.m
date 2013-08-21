@@ -8,6 +8,7 @@
 
 #import "ForgetPSDPage.h"
 #import "Header.h"
+#import "Tools.h"
 @interface ForgetPSDPage ()
 
 @end
@@ -30,9 +31,8 @@
 -(void)loadView
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    self.navigationItem.title  = @"忘记密码";
-    
-    emailField = [[UITextField alloc] initWithFrame:CGRectMake(10, 30, 300, 40)];
+    [Tools navigaionView:self leftImageName:@"goBack.png" title:@"忘记密码"];
+    emailField = [[UITextField alloc] initWithFrame:CGRectMake(10, 70, 300, 40)];
     emailField.delegate= self;
     emailField.backgroundColor = [UIColor yellowColor];
     emailField.textColor = [UIColor grayColor];
@@ -69,7 +69,6 @@
     [self.view addGestureRecognizer:tap];
     [tap release];
 
-    
 
 }
 #pragma mark--键盘消失
@@ -86,6 +85,10 @@
 -(void)checkInWithEmail
 {
     
+}
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 - (void)viewDidLoad
 {

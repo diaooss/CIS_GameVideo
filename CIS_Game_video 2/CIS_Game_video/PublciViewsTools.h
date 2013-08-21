@@ -7,13 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-//MD5的相关
-@interface NSString (stringCategory)
-
-- (id)md5;
-
-@end
-
 //label的类目
 @interface UILabel (labelCategory)
 

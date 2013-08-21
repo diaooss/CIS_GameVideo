@@ -152,11 +152,11 @@
         [user release];
     }else
     {
-        UserViewController *user = [[UserViewController alloc] init];
-        UINavigationController *userNavc = [[UINavigationController alloc] initWithRootViewController:user];
-        [self presentViewController:userNavc animated:YES completion:nil];
-        [user release];
-        [userNavc release];
+        LoginPage *login = [[LoginPage alloc] init];
+        UINavigationController *loginNavc = [[UINavigationController alloc] initWithRootViewController:login];
+        [self presentViewController:loginNavc animated:YES completion:nil];
+        [login release];
+        [loginNavc release];
     }
     
   

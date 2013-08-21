@@ -27,12 +27,11 @@
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.view.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255. blue:240/255. alpha:1];
-    UITextField *feedTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 5, 300, self.view.height/4+20)];
+    UITextField *feedTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 5, 320, self.view.height/4+10)];
     feedTextField.tag = 1000;
     feedTextField.delegate= self;
     feedTextField.backgroundColor = [UIColor whiteColor];
     feedTextField.textColor = [UIColor grayColor];
-    feedTextField.layer.cornerRadius = 5.0;
     feedTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     feedTextField.textAlignment = NSTextAlignmentLeft;
     feedTextField.font  =[UIFont systemFontOfSize:17];
@@ -59,9 +58,7 @@
     [tap release];
     
     /*/顶部定制 /*/
-    UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"意见反馈" style:UIBarButtonItemStyleDone target:self action:@selector(goback)];
-    self.navigationItem.leftBarButtonItem = backBtn;
-    [backBtn release];
+    [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"goBack.png" title:@"关于CIS"];
     UIBarButtonItem *sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStyleDone target:self action:@selector(sendMessage)];
     self.navigationItem.rightBarButtonItem = sendBtn;
     [sendBtn release];

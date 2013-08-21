@@ -9,6 +9,7 @@
 #import "MyLikeAuthorListPage.h"
 #import "Header.h"
 #import "MyFavorAuthorCell.h"
+#import "Tools.h"
 @interface MyLikeAuthorListPage ()
 
 @end
@@ -32,15 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"我的关注";
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@"goBack.png"] forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0, 0, 44, 44)];
-    [button addTarget:self.viewDeckController action:@selector(toggleLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * bar = [[UIBarButtonItem alloc]initWithCustomView:button];
-    [self.navigationItem setLeftBarButtonItem:bar];
-    [bar release];
+    [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"goBack.png" title:@"我的关注"];
     
     UITableView *likeAuthorListTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     likeAuthorListTab.dataSource = self;

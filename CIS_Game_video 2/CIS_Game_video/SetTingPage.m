@@ -9,6 +9,7 @@
 #import "SetTingPage.h"
 #import "Header.h"
 #import "SettingCell.h"
+#import "Tools.h"
 @interface SetTingPage ()
 @end
 @implementation SetTingPage
@@ -25,20 +26,12 @@
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.view.backgroundColor = [UIColor whiteColor];
-    self.navigationItem.title = @"系统设置";
     
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@"goBack.png"] forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0, 0, 44, 44)];
-    [button addTarget:self.viewDeckController action:@selector(toggleLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * bar = [[UIBarButtonItem alloc]initWithCustomView:button];
-    [self.navigationItem setLeftBarButtonItem:bar];
-    [bar release];
+    [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"goBack.png" title:@"系统设置"];
     
     UITableView *setListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height) style:UITableViewStyleGrouped];
     setListTab.dataSource = self;

@@ -28,5 +28,14 @@
 +(NSString *)getNowAppVersions;
 //获得当前应用在APP商店中地址
 +(NSURL *)getTheAPPUrlInStore;
-
+//MD5加密
++ (NSString *)md5:(NSString *)string;
+//便捷生成导航视图,不涉及抽屉.
++ (void)navigaionView:(UIViewController *)viewController leftImageName:(NSString *)imgName title:(NSString *)title;
+//便捷生成导航视图,涉及抽屉.
++ (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName title:(NSString *)title;
+//便捷生成导航视图,涉及抽屉.不带标题
++ (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName;
+//计算时间差
++ (NSString *)calTimeMiss:(NSString *)dateString;
 @end

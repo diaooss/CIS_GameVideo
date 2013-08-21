@@ -32,7 +32,6 @@
     }
     //设定主视图控制器
     RootViewController * root = [[RootViewController alloc]init];
-    [root setTitle:@"幻方视频"];
     self.rootNvc =[[UINavigationController alloc]initWithRootViewController:root];
     //建立左视图控制器
     LeftViewController * left = [[LeftViewController alloc]init];
