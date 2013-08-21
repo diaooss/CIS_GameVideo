@@ -10,6 +10,7 @@
 		203B8029179CBA7F0083016C /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B8023179CBA7E0083016C /* IIWrapController.m */; };
 		203B802A179CBA7F0083016C /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B8026179CBA7F0083016C /* IISideController.m */; };
 		203B802B179CBA7F0083016C /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B8027179CBA7F0083016C /* IIViewDeckController.m */; };
+		20903B1C17C450900052EF21 /* PublciViewsTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 20903B1B17C450900052EF21 /* PublciViewsTools.m */; };
 		20A0BC831799392F00CFB711 /* smile32.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A0BC821799392F00CFB711 /* smile32.png */; };
 		20A0BC8617993C3B00CFB711 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A0BC8517993C3B00CFB711 /* SettingCell.m */; };
 		20A0BC8917993C8700CFB711 /* NetSettingPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A0BC8817993C8700CFB711 /* NetSettingPage.m */; };
@@ -88,6 +89,8 @@
 		203B8026179CBA7F0083016C /* IISideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IISideController.m; sourceTree = "<group>"; };
 		203B8027179CBA7F0083016C /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
 		203B8028179CBA7F0083016C /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		20903B1A17C450900052EF21 /* PublciViewsTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublciViewsTools.h; sourceTree = "<group>"; };
+		20903B1B17C450900052EF21 /* PublciViewsTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublciViewsTools.m; sourceTree = "<group>"; };
 		20A0BC821799392F00CFB711 /* smile32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile32.png; sourceTree = "<group>"; };
 		20A0BC8417993C3B00CFB711 /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
 		20A0BC8517993C3B00CFB711 /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
@@ -359,6 +362,8 @@
 				2316908317C3508B00B47694 /* Reachability.m */,
 				2316908417C3508B00B47694 /* Tools.h */,
 				2316908517C3508B00B47694 /* Tools.m */,
+				20903B1A17C450900052EF21 /* PublciViewsTools.h */,
+				20903B1B17C450900052EF21 /* PublciViewsTools.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -684,6 +689,7 @@
 				2316908717C3508B00B47694 /* Reachability.m in Sources */,
 				2316908817C3508B00B47694 /* Tools.m in Sources */,
 				20D5813E17C366A90000A5C9 /* ForgetPSDPage.m in Sources */,
+				20903B1C17C450900052EF21 /* PublciViewsTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

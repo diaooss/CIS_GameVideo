@@ -71,7 +71,6 @@
     self.navigationItem.rightBarButtonItem = change;
     [change release];
     
-    
 //滑动推荐
     Animation_Turn_View * animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height/4)];
     [self.view addSubview:animationView];

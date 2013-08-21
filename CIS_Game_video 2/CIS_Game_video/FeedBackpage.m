@@ -8,6 +8,7 @@
 
 #import "FeedBackpage.h"
 #import "Header.h"
+#import "Tools.h"
 @interface FeedBackpage ()
 
 @end
@@ -26,7 +27,7 @@
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.view.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255. blue:240/255. alpha:1];
-    UITextField *feedTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 5, 300, self.view.height/4)];
+    UITextField *feedTextField = [[UITextField alloc] initWithFrame:CGRectMake(10, 5, 300, self.view.height/4+20)];
     feedTextField.tag = 1000;
     feedTextField.delegate= self;
     feedTextField.backgroundColor = [UIColor whiteColor];
@@ -43,10 +44,10 @@
     qqOrPhoneField.tag = 1100;
     qqOrPhoneField.delegate= self;
     qqOrPhoneField.backgroundColor = [UIColor colorWithRed:220/255.0 green:223/255. blue:223/255. alpha:1];
-    qqOrPhoneField.placeholder = @"留下您的QQ或手机号(选填)";
+    qqOrPhoneField.placeholder = @"留下您的QQ(选填)";
     qqOrPhoneField.textColor = [UIColor colorWithRed:102/255.0 green:108/255. blue:120/255. alpha:1];
     qqOrPhoneField.layer.cornerRadius = 3.0;
-    qqOrPhoneField.font = [UIFont systemFontOfSize:22];
+    qqOrPhoneField.font = [UIFont systemFontOfSize:15];
     qqOrPhoneField.textAlignment = NSTextAlignmentCenter;
     qqOrPhoneField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     qqOrPhoneField.clearButtonMode = UITextFieldViewModeWhileEditing;
@@ -61,12 +62,12 @@
     UIBarButtonItem *backBtn = [[UIBarButtonItem alloc] initWithTitle:@"意见反馈" style:UIBarButtonItemStyleDone target:self action:@selector(goback)];
     self.navigationItem.leftBarButtonItem = backBtn;
     [backBtn release];
-    
     UIBarButtonItem *sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStyleDone target:self action:@selector(sendMessage)];
     self.navigationItem.rightBarButtonItem = sendBtn;
     [sendBtn release];
     /*/ 初始化一些东西/*/
     [self getPhoneAndAppInfo];
+    [Tools addNotlabel:self.view];
     
 }
 

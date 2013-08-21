@@ -10,9 +10,7 @@
 #import "Header.h"
 #import "SettingCell.h"
 @interface SetTingPage ()
-
 @end
-
 @implementation SetTingPage
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

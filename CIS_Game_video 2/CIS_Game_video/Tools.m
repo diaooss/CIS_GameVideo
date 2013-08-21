@@ -34,8 +34,9 @@
 {
     UILabel * notLabel = [[UILabel alloc]initWithFrame:CGRectMake(-320, 50, 320, 40)];
     [notLabel setText:@"现在木有网---有木有"];
-    [self labelMakeAnimation:notLabel];
     [view addSubview:notLabel];
+
+    [self labelMakeAnimation:notLabel];
     [notLabel release];
 }
 //加载一个动画
@@ -106,8 +107,14 @@
     float screenHeight=[UIScreen mainScreen].bounds.size.height;
     NSLog(@"%f",screenHeight);
     return nil;
+}
+//获得当前版本号
++(NSString *)getNowAppVersions
+{
+    return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
 
     
 }
+
 
 @end
