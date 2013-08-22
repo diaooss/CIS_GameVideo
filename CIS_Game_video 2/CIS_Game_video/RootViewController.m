@@ -12,11 +12,10 @@
 #import "AuthorMoviesListPage.h"
 #import "AppDelegate.h"
 #import "Tools.h"
+#import "MovieDetailPage.h"
 //just test first
 @interface RootViewController ()
-
 @end
-
 @implementation RootViewController
 - (void)dealloc
 {
@@ -42,21 +41,13 @@
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     [self.view setBackgroundColor:[UIColor whiteColor]];
-    
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" title:@"幻方"];
-    //翻转按钮
-    UIButton  *changeViewBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
-    changeViewBtn.frame = CGRectMake(280, 0, 40, 30);
-    [changeViewBtn addTarget:self action:@selector(changeViewForChoose) forControlEvents:UIControlEventTouchUpInside];
-    [changeViewBtn setBackgroundImage:[UIImage imageNamed:@"myFriends.png"] forState:UIControlStateNormal];
-    UIBarButtonItem *change = [[UIBarButtonItem alloc] initWithCustomView:changeViewBtn];
-    self.navigationItem.rightBarButtonItem = change;
-    [change release];
-//滑动推荐
+    ////
+    [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" rightImageName:@"myFriends.png" title:@"幻方"];
+    //滑动推荐
     Animation_Turn_View * animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height/4)];
     [self.view addSubview:animationView];
     [animationView setDelegate:self];
@@ -84,18 +75,14 @@
     AuthorListTab.sectionHeaderHeight = 0;
     self.isOpen = NO;
     AuthorListTab.hidden = YES;
-    //是视图控制器.
-    int a = [self.viewDeckController isKindOfClass:[UIViewController class]];
-       NSLog(@"是不是个控制器啊?%d",a);
 }
 #pragma mark--翻转下半部分的视图
--(void)changeViewForChoose
+-(void)topRightCorenerBtnAction
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.view cache:YES];
+    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.viewDeckController.view cache:YES];
     if (sbView.hidden ==YES) {
-        
         sbView.hidden = NO;
         AuthorListTab.hidden = YES;
     }
@@ -142,7 +129,7 @@
         //可用自定义的cell替代展开列表中的CELL.
         MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[MovieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[[MovieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
         }
         //根据数据源和下标配置展开cell内容,注意书写位置.每个展开列表中的"更多按钮"也可以写在这里.
         NSArray *list = [[_dataList objectAtIndex:self.selectIndex.section] objectForKey:@"list"];
@@ -184,7 +171,6 @@
             if (!self.selectIndex) {
                 self.selectIndex = indexPath;
                 [self didSelectCellRowFirstDo:YES nextDo:NO];
-                
             }else
             {
                 [self didSelectCellRowFirstDo:NO nextDo:YES];
@@ -200,8 +186,6 @@
         NSDictionary *dic = [_dataList objectAtIndex:indexPath.section];
         NSArray *list = [dic objectForKey:@"list"];
         NSString *item = [list objectAtIndex:indexPath.row-1];
-        UIAlertView *alert = [[[UIAlertView alloc] initWithTitle:item message:nil delegate:nil cancelButtonTitle:@"取消" otherButtonTitles: nil] autorelease];
-//        [alert show];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -244,6 +228,10 @@
 -(void)transportVideoInformation:(UIImage *)image
 {
     NSLog(@"有没有传过来");
+    MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
+    [self.navigationController pushViewController:detailPage animated:YES];
+    [detailPage release];
+    
 }
 - (void)didReceiveMemoryWarning
 {

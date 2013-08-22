@@ -10,6 +10,8 @@
 #import "Reachability.h"
 #import "MBProgressHUD.h"
 #import <CommonCrypto/CommonDigest.h>
+#define NavigationBGImage @"navbar.png"
+#define NavigationBACKImage @"goBack.png"
 
 @implementation Tools
 
@@ -141,9 +143,9 @@
 + (void)navigaionView:(UIViewController *)viewController leftImageName:(NSString *)imgName title:(NSString *)title
 {
     viewController.navigationItem.title = title;
-    [viewController.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
+    [viewController.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:NavigationBGImage] forBarMetrics:UIBarMetricsDefault];
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@"goBack.png"] forState:UIControlStateNormal];
+    [button setBackgroundImage:[UIImage imageNamed:NavigationBACKImage] forState:UIControlStateNormal];
     [button setFrame:CGRectMake(0, 0, 40, 30)];
     viewController.navigationItem.title = title;
     [button addTarget:viewController action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
@@ -151,10 +153,34 @@
     [viewController.navigationItem setLeftBarButtonItem:bar];
     [bar release];
 }
+//便捷生成导航视图,不涉及抽屉.带右上角按钮
++ (void)navigaionView:(UIViewController *)viewController leftImageName:(NSString *)imgName rightImageName:(NSString *)rightImgName title:(NSString *)title
+{
+    viewController.navigationItem.title = title;
+    [viewController.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:NavigationBGImage] forBarMetrics:UIBarMetricsDefault];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:NavigationBACKImage] forState:UIControlStateNormal];
+    [button setFrame:CGRectMake(0, 0, 40, 30)];
+    viewController.navigationItem.title = title;
+    [button addTarget:viewController action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * bar = [[UIBarButtonItem alloc]initWithCustomView:button];
+    [viewController.navigationItem setLeftBarButtonItem:bar];
+    [bar release];
+    //右上角按钮
+    UIButton  *topRightCorenerBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
+    topRightCorenerBtn.frame = CGRectMake(280, 0, 40, 30);
+    [topRightCorenerBtn addTarget:viewController action:@selector(topRightCorenerBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [topRightCorenerBtn setBackgroundImage:[UIImage imageNamed:rightImgName] forState:UIControlStateNormal];
+    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:topRightCorenerBtn];
+    viewController.navigationItem.rightBarButtonItem = rightBar;
+    [rightBar release];
+
+}
+
 //便捷生成导航视图,涉及抽屉,开拉抽屉.
 + (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName title:(NSString *)title
 {
-    [viewController.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
+    [viewController.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:NavigationBGImage] forBarMetrics:UIBarMetricsDefault];
     UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button setBackgroundImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
     [button setFrame:CGRectMake(0, 0, 40, 30)];
@@ -164,6 +190,32 @@
     [viewController.navigationItem setLeftBarButtonItem:bar];
     [bar release];
 }
+//便捷生成导航视图,涉及抽屉.带右上角按钮
++ (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName  rightImageName:(NSString *)rightImgName title:(NSString *)title
+{
+    [viewController.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:NavigationBGImage] forBarMetrics:UIBarMetricsDefault];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+    [button setFrame:CGRectMake(0, 0, 40, 30)];
+    viewController.navigationItem.title = title;
+    [button addTarget:deckViewController action:@selector(toggleLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * bar = [[UIBarButtonItem alloc]initWithCustomView:button];
+    [viewController.navigationItem setLeftBarButtonItem:bar];
+    [bar release];
+    //右上角按钮
+    UIButton  *topRightCorenerBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
+    topRightCorenerBtn.frame = CGRectMake(280, 0, 40, 30);
+    [topRightCorenerBtn addTarget:viewController action:@selector(topRightCorenerBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [topRightCorenerBtn setBackgroundImage:[UIImage imageNamed:rightImgName] forState:UIControlStateNormal];
+    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:topRightCorenerBtn];
+    viewController.navigationItem.rightBarButtonItem = rightBar;
+    [rightBar release];
+
+
+    
+}
+
+
 //便捷生成导航视图,涉及抽屉.不带标题
 + (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName;
 {

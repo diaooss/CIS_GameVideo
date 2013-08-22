@@ -32,7 +32,7 @@
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     [Tools navigaionView:self leftImageName:@"goBack.png" title:@"忘记密码"];
-    emailField = [[UITextField alloc] initWithFrame:CGRectMake(10, 70, 300, 40)];
+    emailField = [[UITextField alloc] initWithFrame:CGRectMake(10, 50, 300, 40)];
     emailField.delegate= self;
     emailField.backgroundColor = [UIColor yellowColor];
     emailField.textColor = [UIColor grayColor];
@@ -96,7 +96,6 @@
     
 	// Do any additional setup after loading the view.
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

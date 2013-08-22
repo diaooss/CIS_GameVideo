@@ -23,11 +23,17 @@
     }
     return self;
 }
+- (void)dealloc
+{
+    feedTextField = nil;
+    qqOrPhoneField = nil;
+    [super dealloc];
+}
 -(void)loadView
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.view.backgroundColor = [UIColor colorWithRed:240/255.0 green:240/255. blue:240/255. alpha:1];
-    UITextField *feedTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 5, 320, self.view.height/4+10)];
+    feedTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 5, 320, self.view.height/4+10)];
     feedTextField.tag = 1000;
     feedTextField.delegate= self;
     feedTextField.backgroundColor = [UIColor whiteColor];
@@ -38,8 +44,7 @@
     feedTextField.clearButtonMode = UITextFieldViewModeUnlessEditing;
     feedTextField.placeholder = @"您的反馈将帮助我们更快的成长";
     [self.view addSubview:feedTextField];
-    [feedTextField release];
-    UITextField *qqOrPhoneField = [[UITextField alloc] initWithFrame:CGRectMake(feedTextField.left, feedTextField.bottom+5, feedTextField.width, 35)];
+    qqOrPhoneField = [[UITextField alloc] initWithFrame:CGRectMake(feedTextField.left, feedTextField.bottom+5, feedTextField.width, 35)];
     qqOrPhoneField.tag = 1100;
     qqOrPhoneField.delegate= self;
     qqOrPhoneField.backgroundColor = [UIColor colorWithRed:220/255.0 green:223/255. blue:223/255. alpha:1];
@@ -52,13 +57,12 @@
     qqOrPhoneField.clearButtonMode = UITextFieldViewModeWhileEditing;
     qqOrPhoneField.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:qqOrPhoneField];
-    [qqOrPhoneField release];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackGround)];
     [self.view addGestureRecognizer:tap];
     [tap release];
     
     /*/顶部定制 /*/
-    [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"goBack.png" title:@"关于CIS"];
+    [Tools navigaionView:self leftImageName:@"goBack.png" title:@"意见反馈"];
     UIBarButtonItem *sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStyleDone target:self action:@selector(sendMessage)];
     self.navigationItem.rightBarButtonItem = sendBtn;
     [sendBtn release];
@@ -68,11 +72,6 @@
     
 }
 
--(void)goback
-{
-    [self.navigationController popToRootViewControllerAnimated:YES];
-    
-}
 #pragma mark--获得系统版本号,手机类型,APP版本号.
 -(void)getPhoneAndAppInfo
 {
@@ -93,18 +92,13 @@
 }
 -(void)tapBackGround
 {
-    UITextField *f = (UITextField *)[self.view viewWithTag:1000];
-    UITextField *ff = (UITextField *)[self.view viewWithTag:1100];
-    [ff resignFirstResponder];
-    [f resignFirstResponder];
+    [feedTextField resignFirstResponder];
+    [qqOrPhoneField resignFirstResponder];
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    UITextField *f = (UITextField *)[self.view viewWithTag:1000];
-    UITextField *ff = (UITextField *)[self.view viewWithTag:1100];
-    [ff resignFirstResponder];
-    [f resignFirstResponder];
-    
+    [feedTextField resignFirstResponder];
+    [qqOrPhoneField resignFirstResponder];
     return YES;
 
 }
@@ -113,6 +107,10 @@
     [super viewDidLoad];
     
 	// Do any additional setup after loading the view.
+}
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning

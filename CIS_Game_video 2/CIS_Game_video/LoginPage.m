@@ -42,10 +42,9 @@
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.view.backgroundColor = [UIColor whiteColor];
-//    self.navigationController.navigationBarHidden  = YES;
     [Tools navigaionView:self leftImageName:@"goBack.png" title:@"用户登录"];
     /*/布局登陆面板/*/
-    UIImageView *logoImg = [[UIImageView alloc]  initWithFrame:CGRectMake(115, 60, 90, 90)];
+    UIImageView *logoImg = [[UIImageView alloc]  initWithFrame:CGRectMake(115, 40, 90, 90)];
     logoImg.backgroundColor = [UIColor blueColor];
     logoImg.layer.cornerRadius = 5.0;
     [self.view addSubview:logoImg];

@@ -38,7 +38,7 @@
     [Tools navigaionView:self leftImageName:@"goBack.png" title:@"注册-幻方网络,精彩无限"];
 
     for (int i = 0; i<3; i++) {
-        UITextField *contentFiled = [[UITextField alloc] initWithFrame:CGRectMake(10, 70+i*17+i*40, 300, 35)];
+        UITextField *contentFiled = [[UITextField alloc] initWithFrame:CGRectMake(10, 50+i*17+i*40, 300, 35)];
         contentFiled.tag = 100*i+100;
         contentFiled.backgroundColor = [UIColor yellowColor];
         contentFiled.delegate= self;
@@ -104,8 +104,8 @@
     [UIView setAnimationDuration:0.5];
     
     CGRect frame = self.view.frame;
-    frame.origin.y -=50;
-    frame.size.height +=50;
+    frame.origin.y -=40;
+    frame.size.height +=40;
     self.view.frame = frame;
     [UIView commitAnimations];
 }
@@ -114,8 +114,8 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:0.5];
     CGRect frame = self.view.frame;
-    frame.origin.y +=50;
-    frame.size.height -=50;
+    frame.origin.y +=40;
+    frame.size.height -=40;
     self.view.frame = frame;
     [UIView commitAnimations];
  

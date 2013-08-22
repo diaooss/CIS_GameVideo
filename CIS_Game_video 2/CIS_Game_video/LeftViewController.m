@@ -17,11 +17,8 @@
 #import "AboutUsPage.h"
 #import "LoginPage.h"
 @interface LeftViewController ()
-
 @end
-
 @implementation LeftViewController
-
 - (void)dealloc
 {
     [_nameArry release];
@@ -34,18 +31,15 @@
     if (self) {
         // Custom initialization
     }
-    _nameArry = [[NSArray alloc]initWithObjects:@"用户中心",@"返回主页",@"我的收藏",@"下载记录",@"观看记录",@"我的关注", nil];
+    _nameArry = [[NSArray alloc]initWithObjects:@"返回主页",@"我的收藏",@"下载记录",@"观看记录",@"我的关注", nil];
     _pictureArry = [[NSArray alloc]initWithObjects:@"test.png",@"test.png",@"test.png",@"test.png",@"test.png",@"test.png", nil];
-    
     //增加一个判断  下面用
     _isCraete=NO;
     return self;
-    
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
     //基础信息
     UITableView * setTableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0,320, self.view.height*5/9) style:UITableViewStylePlain];
     [setTableView setDelegate:self];
@@ -76,11 +70,10 @@
     [recognizer setDirection:(UISwipeGestureRecognizerDirectionLeft)];
     [self.view addGestureRecognizer:recognizer];
     [recognizer release];
-    
     //签到
-    UILabel *checkLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 490, 320, 30)];
-    checkLabel.text = @"     每日签到(您已连续签到XX次)";
-    checkLabel.textAlignment = NSTextAlignmentLeft;
+    UILabel *checkLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bottom-60, 320, 30)];
+    checkLabel.text = @"每日签到(您已连续签到XX次)";
+    checkLabel.textAlignment = NSTextAlignmentCenter;
     checkLabel.textColor = [UIColor grayColor];
     checkLabel.backgroundColor  =[UIColor clearColor];
     [self.view addSubview:checkLabel];
@@ -89,7 +82,7 @@
 #pragma mark -----UItableView 的代理方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_nameArry count];
+    return 6;
 }
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -104,8 +97,14 @@
     if (nil==cell) {
         cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mark] autorelease];
     }
-    [cell.textLabel setText:[_nameArry objectAtIndex:indexPath.row]];
-    [cell.imageView setImage:[UIImage imageNamed:@"test.test.png"]];//[_pictureArry objectAtIndex:indexPath.row]]];
+    if (indexPath.row==0) {
+        [cell.textLabel setText:@"我是小强"];
+    }else
+    {
+    [cell.textLabel setText:[_nameArry objectAtIndex:indexPath.row-1]];
+    }
+    [cell.imageView setImage:[UIImage imageNamed:@"test.test.png"]];
+    //[_pictureArry objectAtIndex:indexPath.row]]];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,7 +130,6 @@
             NSLog(@"%@",cell.textLabel.text);
             [self toSomePlace:cell.textLabel.text];
             break;
-            
         case 5:
             NSLog(@"%@",cell.textLabel.text);//我的关注
             [self goToMyLikeAuthorListPageWith:cell.textLabel.text];
@@ -158,8 +156,6 @@
         [login release];
         [loginNavc release];
     }
-    
-  
 }
 - (void)backToRootViewController
 {
@@ -171,9 +167,7 @@
     }
     AppDelegate * delegate = [UIApplication sharedApplication].delegate;
     [self.viewDeckController setCenterController:delegate.rootNvc];
-    
     [self.viewDeckController closeLeftViewAnimated:YES];
-
 }
 //根据标签判断去哪个页面
 - (void)toSomePlace:(NSString *)cellName;
@@ -246,7 +240,6 @@
             [self judgeTheView:[sender titleForState:UIControlStateNormal] changeViecontroller:usPage];
             [usPage release];
             break;
-
         default:
             break;
     }
@@ -254,7 +247,5 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
 @end

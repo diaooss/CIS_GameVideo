@@ -10,6 +10,7 @@
 #import "Header.h"
 #import "FeedBackpage.h"
 #import "Tools.h"
+#import "JustWEBToShowSomeThing.h"
 @interface AboutUsPage ()
 
 @end
@@ -110,6 +111,7 @@
                 [Tools giveAppraiseForOurApp];
                 break;
             case 1:
+                [self goToGetHelpOrDeal:@"http://121.199.57.44:88/Help.htm" title:@"用户帮助"];
                 break;
             default:
                 break;
@@ -121,6 +123,8 @@
                 [self goToFeedBack];
                 break;
             case 1:
+                [self goToGetHelpOrDeal:@"http://121.199.57.44:88/Agreement1.htm" title:@"用户协议"];
+
                  break;
             case 2:
                 break;
@@ -129,7 +133,15 @@
         }
     }
 }
+-(void)goToGetHelpOrDeal:(NSString *)aUrlStr title:(NSString *)title
+{
+    JustWEBToShowSomeThing *web = [[JustWEBToShowSomeThing alloc] initWithRequestUrl:aUrlStr];
+    [self.navigationController pushViewController:web animated:YES];
+    web.navigationItem.title = title;
 
+    [web release];
+    
+}
 -(void)goToFeedBack
 {
     FeedBackpage *feedbackPage = [[FeedBackpage alloc] init];
