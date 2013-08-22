@@ -24,7 +24,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 
-    
     [super dealloc];
 }
 
@@ -34,7 +33,7 @@
     if (self) {
         // Custom initialization
         //注册键盘出现和消失时的通知.
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil]; [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow) name:UIKeyboardWillShowNotification object:nil]; [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide) name:UIKeyboardWillHideNotification object:nil];        
     }
     return self;
 }
@@ -47,12 +46,14 @@
     UIImageView *logoImg = [[UIImageView alloc]  initWithFrame:CGRectMake(115, 40, 90, 90)];
     logoImg.backgroundColor = [UIColor blueColor];
     logoImg.layer.cornerRadius = 5.0;
+    logoImg.image = [UIImage imageNamed:@"headerimage.png"];
     [self.view addSubview:logoImg];
     [logoImg release];
     nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, logoImg.bottom+30, 280, 30)];
     nameTextField.delegate= self;
     nameTextField.backgroundColor = [UIColor yellowColor];
     nameTextField.textColor = [UIColor grayColor];
+    nameTextField.keyboardType = UIKeyboardTypeEmailAddress;
     nameTextField.layer.cornerRadius = 5.0;
     nameTextField.autocorrectionType = UITextAutocorrectionTypeNo;
     nameTextField.textAlignment = NSTextAlignmentLeft;
@@ -81,7 +82,7 @@
     //登陆
     UIButton *login_btn = [UIButton buttonWithType:UIButtonTypeCustom];
     login_btn.backgroundColor = [UIColor greenColor];
-    login_btn.frame = CGRectMake(psdTextField.left, psdTextField.bottom+30, 280, 40);
+    login_btn.frame = CGRectMake(psdTextField.left, psdTextField.bottom+30, 280, 50);
     [login_btn setTitle:@"登陆" forState:UIControlStateNormal];
     login_btn.layer.cornerRadius = 5.0;
     login_btn.showsTouchWhenHighlighted = YES;
@@ -89,7 +90,7 @@
     //注册和忘记密码
     UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     registerBtn.backgroundColor = [UIColor brownColor];
-    registerBtn.frame = CGRectMake(login_btn.left, login_btn.bottom+30, 90, 50);
+    registerBtn.frame = CGRectMake(login_btn.left, login_btn.bottom+30, 90, 40);
     [registerBtn setTitle:@"注册账号" forState:UIControlStateNormal];
     [registerBtn setShowsTouchWhenHighlighted:YES];
     registerBtn.layer.cornerRadius = 5.0;
@@ -119,14 +120,18 @@
 //面板上移.下移
 -(void)keyboardWillShow
 {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    
-    CGRect frame = self.view.frame;
-    frame.origin.y -=150;
-    frame.size.height +=150;
-    self.view.frame = frame;
-    [UIView commitAnimations];
+    int a  =   self.view.frame.origin.y;
+    if (a!=-150) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        
+        CGRect frame = self.view.frame;
+        frame.origin.y -=150;
+        frame.size.height +=150;
+        self.view.frame = frame;
+        [UIView commitAnimations];
+
+    }
 }
 -(void)keyboardWillHide
 {

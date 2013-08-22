@@ -39,6 +39,7 @@
     emailField.layer.cornerRadius = 5.0;
     emailField.autocorrectionType = UITextAutocorrectionTypeNo;
     emailField.textAlignment = NSTextAlignmentLeft;
+    emailField.keyboardType = UIKeyboardTypeEmailAddress;
     emailField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     emailField.font  =[UIFont systemFontOfSize:19];
     emailField.clearButtonMode = UITextFieldViewModeWhileEditing;

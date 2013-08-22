@@ -100,14 +100,19 @@
 //面板上移.下移
 -(void)keyboardWillShow
 {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    
-    CGRect frame = self.view.frame;
-    frame.origin.y -=40;
-    frame.size.height +=40;
-    self.view.frame = frame;
-    [UIView commitAnimations];
+    int a  =   self.view.frame.origin.y;
+    if (a!=-40) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        
+        CGRect frame = self.view.frame;
+        frame.origin.y -=40;
+        frame.size.height +=40;
+        self.view.frame = frame;
+        [UIView commitAnimations];
+
+    }
+
 }
 -(void)keyboardWillHide
 {
