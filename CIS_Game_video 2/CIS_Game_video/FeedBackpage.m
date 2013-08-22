@@ -62,10 +62,7 @@
     [tap release];
     
     /*/顶部定制 /*/
-    [Tools navigaionView:self leftImageName:@"goBack.png" title:@"意见反馈"];
-    UIBarButtonItem *sendBtn = [[UIBarButtonItem alloc] initWithTitle:@"提交" style:UIBarButtonItemStyleDone target:self action:@selector(sendMessage)];
-    self.navigationItem.rightBarButtonItem = sendBtn;
-    [sendBtn release];
+    [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"goBack.png" title:@"意见反馈"];
     /*/ 初始化一些东西/*/
     [self getPhoneAndAppInfo];
     [Tools addNotlabel:self.view];
@@ -85,7 +82,7 @@
     
 }
 #pragma mark--提交意见
--(void)sendMessage
+-(void)topRightCorenerBtnAction
 {
     //提交反馈意见
     

@@ -123,7 +123,7 @@
                 [self goToFeedBack];
                 break;
             case 1:
-                [self goToGetHelpOrDeal:@"http://121.199.57.44:88/Agreement1.htm" title:@"用户协议"];
+                [self goToGetHelpOrDeal:@"http://121.199.57.44:88/Agreement.htm" title:@"用户协议"];
 
                  break;
             case 2:

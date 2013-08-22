@@ -27,7 +27,6 @@
     [label setTextAlignment:NSTextAlignmentCenter];
     return label;
 }
-
 + (id)labelWithRect:(CGRect)rect font:(UIFont *)font{
     UILabel *label = [[[UILabel alloc] init] autorelease];
     [label setFrame:rect];
@@ -35,7 +34,6 @@
     [label setBackgroundColor:[UIColor clearColor]];
     return label;
 }
-
 + (id)labelLinesWithRect:(CGRect)rect txt:(NSString *)txt font:(UIFont *)font{
     UILabel *label = [[[UILabel alloc] init] autorelease];
     [label setFrame:rect];
@@ -46,13 +44,11 @@
     [label setBackgroundColor:[UIColor clearColor]];
     return label;
 }
-
 - (void)setFrame:(CGRect)frame font:(UIFont *)font{
     [self setFrame:frame];
     [self setFont:font];
     [self setBackgroundColor:[UIColor clearColor]];
 }
-
 - (void)setFitWithText:(NSString *)txt{
     CGFloat labelWidth = [txt sizeWithFont:self.font].width;
     if (txt.length>3) {

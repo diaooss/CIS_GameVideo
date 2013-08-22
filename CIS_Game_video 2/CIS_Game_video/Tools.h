@@ -38,6 +38,8 @@
 + (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName title:(NSString *)title;
 //便捷生成导航视图,涉及抽屉.带右上角按钮
 + (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName  rightImageName:(NSString *)rightImgName title:(NSString *)title;
+//便捷生成导航视图,涉及抽屉.无标题,带右上角按钮
++ (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName  rightImageName:(NSString *)rightImgName;
 
 //便捷生成导航视图,涉及抽屉.不带标题
 + (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName;

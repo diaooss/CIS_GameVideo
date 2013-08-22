@@ -111,12 +111,10 @@
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (editingStyle == UITableViewCellEditingStyleDelete){
-       
         //写删除方法
                 [_showTab reloadData];
     }
 }
-
 - (void)changeInformation:(NSString *)titleName
 {
     [self setTitle:titleName];
@@ -124,7 +122,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

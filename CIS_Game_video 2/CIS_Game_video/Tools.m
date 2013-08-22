@@ -210,12 +210,27 @@
     UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:topRightCorenerBtn];
     viewController.navigationItem.rightBarButtonItem = rightBar;
     [rightBar release];
-
-
-    
 }
-
-
+//便捷生成导航视图,涉及抽屉.无标题,带右上角按钮
++ (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName  rightImageName:(NSString *)rightImgName
+{
+    [viewController.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:NavigationBGImage] forBarMetrics:UIBarMetricsDefault];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+    [button setFrame:CGRectMake(0, 0, 40, 30)];
+    [button addTarget:deckViewController action:@selector(toggleLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * bar = [[UIBarButtonItem alloc]initWithCustomView:button];
+    [viewController.navigationItem setLeftBarButtonItem:bar];
+    [bar release];
+    //右上角按钮
+    UIButton  *topRightCorenerBtn  = [UIButton buttonWithType:UIButtonTypeCustom];
+    topRightCorenerBtn.frame = CGRectMake(280, 0, 40, 30);
+    [topRightCorenerBtn addTarget:viewController action:@selector(topRightCorenerBtnAction) forControlEvents:UIControlEventTouchUpInside];
+    [topRightCorenerBtn setBackgroundImage:[UIImage imageNamed:rightImgName] forState:UIControlStateNormal];
+    UIBarButtonItem *rightBar = [[UIBarButtonItem alloc] initWithCustomView:topRightCorenerBtn];
+    viewController.navigationItem.rightBarButtonItem = rightBar;
+    [rightBar release];
+}
 //便捷生成导航视图,涉及抽屉.不带标题
 + (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName;
 {
@@ -228,8 +243,6 @@
     [viewController.navigationItem setLeftBarButtonItem:bar];
     [bar release];
 }
-
-
 + (NSString *)calTimeMiss:(NSString *)dateString{
     NSDateFormatter * dateFormater = [[NSDateFormatter alloc] init];
     [dateFormater setTimeZone:[NSTimeZone defaultTimeZone]];
@@ -252,5 +265,4 @@
     }
     return strtime;
 }
-
 @end

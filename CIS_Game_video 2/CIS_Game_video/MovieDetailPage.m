@@ -88,10 +88,8 @@ durationLable.text = @"<<  时长:9'16''  >>";
         if (i==0) {
             [bottomBtn setTitle:@"关注作者" forState:UIControlStateNormal];
             bottomBtn.backgroundColor = rightBtnColor;
-            
         }else{
             bottomBtn.backgroundColor = customBlueColor;
-        
             [bottomBtn setTitle:@"分享视频" forState:UIControlStateNormal];}
         [self.view addSubview:bottomBtn];
     }
@@ -115,15 +113,11 @@ durationLable.text = @"<<  时长:9'16''  >>";
                                        withObject:(id)UIInterfaceOrientationLandscapeRight];
     }
 }
-#pragma mark--视频收藏
--(void)collcetTheMovie
-{
-    
-}
 -(void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+#pragma mark--视频收藏
 -(void)topRightCorenerBtnAction
 {
     

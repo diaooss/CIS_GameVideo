@@ -45,7 +45,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    ////
     [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" rightImageName:@"myFriends.png" title:@"幻方"];
     //滑动推荐
     Animation_Turn_View * animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height/4)];
@@ -182,7 +181,6 @@
         AuthorMoviesListPage *authorMoviesList = [[AuthorMoviesListPage alloc] init];
         [self.navigationController pushViewController:authorMoviesList animated:YES];
         [authorMoviesList release];
-        
         NSDictionary *dic = [_dataList objectAtIndex:indexPath.section];
         NSArray *list = [dic objectForKey:@"list"];
         NSString *item = [list objectAtIndex:indexPath.row-1];
@@ -231,12 +229,10 @@
     MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
     [self.navigationController pushViewController:detailPage animated:YES];
     [detailPage release];
-    
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end
