@@ -101,7 +101,6 @@
     UIDevice *device_=[[UIDevice alloc] init];
     NSLog(@"设备所有者的名称－－%@",device_.name);
     NSString *userName = [NSString stringWithFormat:@"这是%@的手机,是爱疯4",device_.name];
-    
     NSLog(@"设备的类别－－－－－%@",device_.model);
     NSString *vStr = [NSString stringWithFormat:@"手机是%@",device_.model];
     NSLog(@"设备的的本地化版本－%@",device_.localizedModel);
@@ -110,7 +109,6 @@
     NSLog(@"当前系统的版本－－－%@",device_.systemVersion);
     int a = [device_.systemVersion intValue];
     NSLog(@"ios%d版本",a);//
-    
     NSLog(@"设备识别码－－－－－%@",device_.identifierForVendor.UUIDString);
     //得到设备屏幕高度,判断是爱疯5或以下.
     float screenHeight=[UIScreen mainScreen].bounds.size.height;

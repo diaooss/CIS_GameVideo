@@ -53,17 +53,14 @@
     [self.view addSubview:movieWeb];
     durationLable = [UILabel labelWithRect:CGRectMake(0, movieWeb.bottom-33, movieWeb.width, 30) font:[UIFont systemFontOfSize:14]];
 durationLable.text = @"<<  时长:9'16''  >>";
-    durationLable.layer.cornerRadius = 15.0;
+    durationLable.layer.cornerRadius = 5.0;
     durationLable.textAlignment = NSTextAlignmentCenter;
     durationLable.textColor = [UIColor whiteColor];
     durationLable.backgroundColor = [UIColor blackColor];
     durationLable.alpha = 0.8;
     [movieWeb addSubview:durationLable];
     
-    theAuthorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, movieWeb.bottom+45, 120, 120)];
-    theAuthorImageView.backgroundColor= [UIColor yellowColor];
-    [self.view addSubview:theAuthorImageView];
-    theAuthorImageView.image = [UIImage imageNamed:@"headerimage.png"];
+    
     movieNameLable = [UILabel labelWithRect:CGRectMake(5, movieWeb.bottom+5, durationLable.width-20, 30) font:[UIFont systemFontOfSize:16]];
     movieNameLable.text = @"安晓阳:最牛大神带你走进魔兽世界";
     movieNameLable.layer.cornerRadius = 5.0;
@@ -72,8 +69,12 @@ durationLable.text = @"<<  时长:9'16''  >>";
     movieNameLable.backgroundColor = [UIColor yellowColor];
     movieNameLable.alpha = 0.8;
     [self.view addSubview:movieNameLable];
+    theAuthorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, movieWeb.bottom+45, 100, self.view.height-movieWeb.height-8-movieNameLable.height-130)];
+    theAuthorImageView.backgroundColor= [UIColor yellowColor];
+    [self.view addSubview:theAuthorImageView];
+    theAuthorImageView.image = [UIImage imageNamed:@"headerimage.png"];
     
-    movieInfoTextView = [[UITextView alloc] initWithFrame:CGRectMake(theAuthorImageView.right+5, movieNameLable.bottom+5, self.view.width-theAuthorImageView.width-15, 125)];
+    movieInfoTextView = [[UITextView alloc] initWithFrame:CGRectMake(theAuthorImageView.right+5, movieNameLable.bottom+5, self.view.width-theAuthorImageView.width-15, theAuthorImageView.height+10)];
     movieInfoTextView.editable = NO;
     movieInfoTextView.text = @"开展评比达标表彰活动，是鼓励先进、鞭策后进、推动工作的一种手段。恰到好处的评比与表彰，能够激发相关部门与人员的工作热情，促进工作的开展、落实；能够树立好的典范，传递“正能量”，带动其他群体积极上进，推动事业的发展。";
     movieInfoTextView.backgroundColor = [UIColor whiteColor];

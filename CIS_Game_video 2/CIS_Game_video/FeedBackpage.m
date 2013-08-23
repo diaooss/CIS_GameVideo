@@ -60,7 +60,6 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackGround)];
     [self.view addGestureRecognizer:tap];
     [tap release];
-    
     /*/顶部定制 /*/
     [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"goBack.png" title:@"意见反馈"];
     /*/ 初始化一些东西/*/

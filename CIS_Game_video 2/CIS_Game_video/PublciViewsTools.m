@@ -10,7 +10,6 @@
  UILabel,UITextfield,UIButton,UIImageView,UIScrollView
  */
 
-
 #import "PublciViewsTools.h"
 #import "AppDelegate.h"
 
@@ -59,10 +58,8 @@
     else if (txt.length == 2){
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, labelWidth, self.frame.size.height)];
     }
-    
     [self setText:txt];
 }
-
 - (void)setText:(NSString *)txt font:(UIFont *)font{
     [self setText:txt];
     [self setFont:font];
@@ -70,7 +67,6 @@
     [self setLineBreakMode:NSLineBreakByCharWrapping];
     [self setNumberOfLines:0];
 }
-
 - (void)setText:(NSString *)txt font:(UIFont *)font txtColor:(UIColor *)txtColor{
     [self setText:txt];
     [self setFont:font];
@@ -79,36 +75,27 @@
     [self setLineBreakMode:NSLineBreakByCharWrapping];
     [self setNumberOfLines:0];
 }
-
 - (CGFloat)getLabelHeightOfWidth:(CGFloat)width{
     CGFloat height = [self.text sizeWithFont:self.font constrainedToSize:CGSizeMake(width, 10000) lineBreakMode:NSLineBreakByCharWrapping].height;
     return height;
 }
-
 @end
 /*/图像/*/
-
 @implementation UIImageView (imageViewCategory)
-
 + (id)imageViewWithRect:(CGRect)rect image:(UIImage *)image interaction:(BOOL)interaction{
     UIImageView *imageView = [[[self alloc] initWithFrame:rect] autorelease];
     [imageView setImage:image];
     [imageView setUserInteractionEnabled:interaction];
     return imageView;
 }
-
 - (void)setFrame:(CGRect)rect image:(UIImage *)image interaction:(BOOL)interaction{
     [self setFrame:rect];
     [self setImage:image];
     [self setUserInteractionEnabled:interaction];
 }
-
 @end
-
 /*/按钮/*/
-
 @implementation UIButton (buttonCategory)
-
 - (void)setTitle:(NSString *)title frame:(CGRect)frame font:(UIFont *)font bgImage:(UIImage *)bgImage{
     [self setTitle:title forState:UIControlStateNormal];
     [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
@@ -116,14 +103,12 @@
     [self.titleLabel setFont:font];
     [self setBackgroundImage:bgImage forState:UIControlStateNormal];
 }
-
 - (void)setFrame:(CGRect)frame font:(UIFont *)font bgImage:(UIImage *)bgImage{
     [self setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [self setFrame:frame];
     [self.titleLabel setFont:font];
     [self setBackgroundImage:bgImage forState:UIControlStateNormal];
 }
-
 + (id)buttonWithType:(UIButtonType)buttonType image:(UIImage *)image frame:(CGRect)frame target:(id)target action:(SEL)action{
     UIButton * button = [self buttonWithType:buttonType];
     [button setImage:image forState:UIControlStateNormal];
@@ -133,7 +118,6 @@
 }
 @end
 /*/滚动视图/*/
-
 @implementation UIScrollView (scrollViewCategory)
 
 + (id)scrollViewWithRect:(CGRect)rect contentSize:(CGSize)size{
@@ -141,6 +125,5 @@
     [scrollView setContentSize:size];
     return scrollView;
 }
-
 @end
 

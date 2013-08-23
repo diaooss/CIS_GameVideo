@@ -135,15 +135,19 @@
 }
 -(void)keyboardWillHide
 {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.5];
-    CGRect frame = self.view.frame;
-    frame.origin.y +=150;
-    frame.size.height -=150;
-    self.view.frame = frame;
-    [UIView commitAnimations];
+    int a  =   self.view.frame.origin.y;
+    if (a!=150) {
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:0.5];
+        CGRect frame = self.view.frame;
+        frame.origin.y +=150;
+        frame.size.height -=150;
+        self.view.frame = frame;
+        [UIView commitAnimations];
+        
 
-
+    }
+    
     
 }
 #pragma mark--键盘消失
@@ -157,6 +161,11 @@
     [nameTextField resignFirstResponder];
     [psdTextField resignFirstResponder];
     return YES;
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [nameTextField resignFirstResponder];
+    [psdTextField resignFirstResponder];
 }
 -(void)back
 {

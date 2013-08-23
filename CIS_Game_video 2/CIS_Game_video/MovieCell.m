@@ -30,13 +30,13 @@
         [self.contentView addSubview:_logoImageView];
         //标题
         _titleLabel  =[[UILabel alloc] init];
-        _titleLabel.backgroundColor = [UIColor clearColor];
+        _titleLabel.backgroundColor = [UIColor redColor];
         
         _titleLabel.font = [UIFont systemFontOfSize:15.0];
         
         _titleLabel.textColor = [UIColor blackColor];
         _titleLabel.highlightedTextColor = [UIColor whiteColor];
-        _titleLabel.textAlignment = NSTextAlignmentLeft;
+        _titleLabel.textAlignment = NSTextAlignmentCenter;
         [_titleLabel setNumberOfLines:0];
         [self.contentView addSubview:_titleLabel];
         //副标题
@@ -71,6 +71,7 @@
     CGSize collectBtnSzie = CGSizeMake(40, 40);
     
     _logoImageView.frame = CGRectMake(10, 10, logoImageViewSize.width, logoImageViewSize.height);
+    
     _titleLabel.frame = CGRectMake(_logoImageView.right+5, _logoImageView.top, 160, cellSize.height/2);
     _halfTitleLabel.frame = CGRectMake(_logoImageView.right+5, _titleLabel.bottom+5, _titleLabel.width, cellSize.height-_titleLabel.height-40);
     _collectBtn.frame = CGRectMake(_titleLabel.right+5, (cellSize.height-collectBtnSzie.height)/2, collectBtnSzie.width, collectBtnSzie.height);

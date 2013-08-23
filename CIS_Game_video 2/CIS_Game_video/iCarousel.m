@@ -506,12 +506,10 @@ NSInteger compareViewDepth(id obj1, id obj2, void *context)
     }
     return offset;
 }
-
 - (UIView *)containView:(UIView *)view
 {
     UIView *container = [[[UIView alloc] initWithFrame:view.frame] autorelease];
-	
-#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
+    #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
     
     //add tap gesture recogniser
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTap:)];

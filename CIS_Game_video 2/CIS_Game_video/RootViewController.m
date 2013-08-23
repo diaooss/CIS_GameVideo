@@ -61,7 +61,7 @@
     [categorySegmentedControl setSectionTitles:nameArry];
     [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
     [categorySegmentedControl setBackgroundColor:[UIColor colorWithRed:205.0f/232.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-    [categorySegmentedControl setTextColor:[UIColor redColor]];
+    [categorySegmentedControl setTextColor:[UIColor colorWithRed:47.0f/255.0f green:79.0f/255.0f blue:79.0f/255.0f alpha:0.8f]];
     [categorySegmentedControl setSelectionIndicatorColor:[UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:0.8f]];
     [categorySegmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
     [categorySegmentedControl setSegmentEdgeInset:UIEdgeInsetsMake(0, 5, 5, 0)];
@@ -69,12 +69,11 @@
     [self.view addSubview:categorySegmentedControl];
     [categorySegmentedControl release];
     /*/分类标签/*/
-//分类展示
     sbView = [[SBView alloc]initWithFrame:CGRectMake(0, categorySegmentedControl.bottom, 320, self.view.height-30-44-animationView.height)];
     [self.view addSubview:sbView];
     [sbView addTaget:self action:@selector(transportVideoInformation:)];
     //列表展示
-    AuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, categorySegmentedControl.bottom, 320, self.view.height-30-44-animationView.height) style:UITableViewStylePlain];
+    AuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, categorySegmentedControl.bottom, 320, self.view.height-categorySegmentedControl.height-44-animationView.height-12) style:UITableViewStylePlain];
     AuthorListTab.delegate = self;
     AuthorListTab.dataSource = self;
     [self.view addSubview:AuthorListTab];
@@ -84,8 +83,8 @@
     AuthorListTab.hidden = YES;
 }
 #pragma mark--标签选中的代理方法
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
-    
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
+{
 	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedIndex);
 }
 #pragma mark--翻转下半部分的视图
@@ -125,7 +124,7 @@
     if (self.isOpen) {
         
         if (self.selectIndex.section == section) {
-            return [[[_dataList objectAtIndex:section] objectForKey:@"list"] count]+1;;
+            return 4;//在此多累加一行列表,以便添加更多按钮
         }
     }
     //如果是关闭状态,则返回一个
@@ -142,13 +141,15 @@
         MovieCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
             cell = [[[MovieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell.selectionStyle = UITableViewCellSelectionStyleGray;
         }
         //根据数据源和下标配置展开cell内容,注意书写位置.每个展开列表中的"更多按钮"也可以写在这里.
         NSArray *list = [[_dataList objectAtIndex:self.selectIndex.section] objectForKey:@"list"];
-        cell.titleLabel.text = [list objectAtIndex:indexPath.row-1];
-        cell.halfTitleLabel.text = @"我是副标题啊,你妹,哇哈哈哈";
-        cell.logoImageView.image = [UIImage imageNamed:@"man.png"];
-        //        cell.textLabel.text = [list objectAtIndex:indexPath.row-1];
+        NSLog(@"数组数目是:%d",[list count]);
+                    cell.titleLabel.text = [list objectAtIndex:indexPath.row-1];
+            cell.halfTitleLabel.text = @"我是副标题啊,你妹,哇哈哈哈";
+            cell.logoImageView.image = [UIImage imageNamed:@"man.png"];
+               //        cell.textLabel.text = [list objectAtIndex:indexPath.row-1];
         //更多按钮可在此添加.
         return cell;
     }else
@@ -158,7 +159,8 @@
         static NSString *CellIdentifier = @"Cell1";
         AuthorCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (!cell) {
-            cell = [[AuthorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+            cell = [[[AuthorCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         //根据数据源配置分组CELL样式
         NSString *name = [[_dataList objectAtIndex:indexPath.section] objectForKey:@"name"];
@@ -194,6 +196,7 @@
         AuthorMoviesListPage *authorMoviesList = [[AuthorMoviesListPage alloc] init];
         [self.navigationController pushViewController:authorMoviesList animated:YES];
         [authorMoviesList release];
+        NSLog(@"点击的下标是:%d",indexPath.row);
         NSDictionary *dic = [_dataList objectAtIndex:indexPath.section];
         NSArray *list = [dic objectForKey:@"list"];
         NSString *item = [list objectAtIndex:indexPath.row-1];
@@ -229,11 +232,6 @@
         [self didSelectCellRowFirstDo:YES nextDo:NO];
     }
     if (self.isOpen) [AuthorListTab scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionTop animated:YES];
-}
-#pragma mark--UISegmentedControl关联方法
--(void)chooseTheKind:(UISegmentedControl * )selected
-{
-    NSLog(@"%@",[selected titleForSegmentAtIndex:[selected selectedSegmentIndex]]);
 }
 #pragma mark--Animation_Turn_View的代理方法
 -(void)transportVideoInformation:(UIImage *)image

@@ -46,9 +46,7 @@ NSString *const kReachabilityChangedNotification = @"kReachabilityChangedNotific
 
 -(void)reachabilityChanged:(SCNetworkReachabilityFlags)flags;
 -(BOOL)isReachableWithFlags:(SCNetworkReachabilityFlags)flags;
-
 @end
-
 static NSString *reachabilityFlags(SCNetworkReachabilityFlags flags) 
 {
     return [NSString stringWithFormat:@"%c%c %c%c%c%c%c%c%c",
@@ -508,5 +506,4 @@ static void TMReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkRea
                                                             object:self];
     });
 }
-
 @end
