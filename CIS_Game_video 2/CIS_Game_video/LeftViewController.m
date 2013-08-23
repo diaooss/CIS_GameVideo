@@ -96,6 +96,7 @@
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mark];
     if (nil==cell) {
         cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mark] autorelease];
+        cell.textLabel.font = mainFont;
     }
     if (indexPath.row==0) {
         [cell.textLabel setText:@"我是小强"];

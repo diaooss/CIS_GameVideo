@@ -8,6 +8,7 @@
 
 #ifndef CIS_Game_video_Header_h
 #define CIS_Game_video_Header_h
+#define mainFont [UIFont fontWithName:@"ChalkboardSE-Bold" size:20.0f]
 
 #import "UIViewAdditions.h"
 #import "IIViewDeckController.h"

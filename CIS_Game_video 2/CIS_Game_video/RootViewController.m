@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "Tools.h"
 #import "MovieDetailPage.h"
+#import "HMSegmentedControl.h"
 //just test first
 @interface RootViewController ()
 @end
@@ -47,26 +48,33 @@
     [super viewDidLoad];
     [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" rightImageName:@"myFriends.png" title:@"幻方"];
     //滑动推荐
-    Animation_Turn_View * animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.bounds.size.height/4)];
+    Animation_Turn_View * animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 3, 320, self.view.height/4)];
     [self.view addSubview:animationView];
     [animationView setDelegate:self];
     [animationView release];
-//游戏类别分类
-    NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Data",@"魔兽争霸",@"星级争霸",@"Data2", nil];
-    UISegmentedControl * segment = [[UISegmentedControl alloc]initWithItems:nameArry];
-    [segment setSegmentedControlStyle:UISegmentedControlStyleBar];
-    [segment setFrame:CGRectMake(-5, animationView.bottom, 330, 30)];
-    [self.view addSubview:segment];
-    [segment addTarget:self action:@selector(chooseTheKind:) forControlEvents:UIControlEventValueChanged];
-    [segment setTintColor:[UIColor grayColor]];
-    [segment setSelectedSegmentIndex:1];//初始化的时候显示的
-    [segment release];
+    NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Data",@"魔兽争霸",@"Data2", @"星级争霸",nil];
+    /*/分类标签/*/
+    HMSegmentedControl *categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom+5, 320, 32)];
+    [categorySegmentedControl setIndexChangeBlock:^(NSUInteger index) {
+        NSLog(@"Selected index %i (via block)", index);
+    }];
+    [categorySegmentedControl setSectionTitles:nameArry];
+    [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
+    [categorySegmentedControl setBackgroundColor:[UIColor colorWithRed:205.0f/232.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+    [categorySegmentedControl setTextColor:[UIColor redColor]];
+    [categorySegmentedControl setSelectionIndicatorColor:[UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:0.8f]];
+    [categorySegmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
+    [categorySegmentedControl setSegmentEdgeInset:UIEdgeInsetsMake(0, 5, 5, 0)];
+    [categorySegmentedControl setTag:2];
+    [self.view addSubview:categorySegmentedControl];
+    [categorySegmentedControl release];
+    /*/分类标签/*/
 //分类展示
-    sbView = [[SBView alloc]initWithFrame:CGRectMake(0, segment.bottom, 320, self.view.height-30-44-animationView.height)];
+    sbView = [[SBView alloc]initWithFrame:CGRectMake(0, categorySegmentedControl.bottom, 320, self.view.height-30-44-animationView.height)];
     [self.view addSubview:sbView];
     [sbView addTaget:self action:@selector(transportVideoInformation:)];
     //列表展示
-    AuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, segment.bottom, 320, self.view.height-30-44-animationView.height) style:UITableViewStylePlain];
+    AuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, categorySegmentedControl.bottom, 320, self.view.height-30-44-animationView.height) style:UITableViewStylePlain];
     AuthorListTab.delegate = self;
     AuthorListTab.dataSource = self;
     [self.view addSubview:AuthorListTab];
@@ -74,6 +82,11 @@
     AuthorListTab.sectionHeaderHeight = 0;
     self.isOpen = NO;
     AuthorListTab.hidden = YES;
+}
+#pragma mark--标签选中的代理方法
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl {
+    
+	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedIndex);
 }
 #pragma mark--翻转下半部分的视图
 -(void)topRightCorenerBtnAction
@@ -96,7 +109,7 @@
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==0) {
-        return 50;
+        return 40;
     }
     return 100;
 }

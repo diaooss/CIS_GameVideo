@@ -65,7 +65,7 @@
     [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"goBack.png" title:@"意见反馈"];
     /*/ 初始化一些东西/*/
     [self getPhoneAndAppInfo];
-    [Tools addNotlabel:self.view];
+    [Tools addTipslabel:self.view withTitle:@"网络中断了"];
     
 }
 

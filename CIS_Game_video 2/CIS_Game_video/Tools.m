@@ -35,10 +35,10 @@
     return @"3G";
 }
 /*****************************/
-+(void)addNotlabel:(UIView *)view
++(void)addTipslabel:(UIView *)view withTitle:(NSString *)title//加载提醒
 {
     UILabel * notLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, -40, 320, 40)];
-    [notLabel setText:@"网络貌似不给力了..."];
+    [notLabel setText:title];
 //    notLabel.alpha = 0.8;
     notLabel.textColor = [UIColor whiteColor];
     notLabel.backgroundColor = [UIColor lightGrayColor];
@@ -50,11 +50,11 @@
 //加载一个动画
 +(void)labelMakeAnimation:(UIView* )sender
 {
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.8 animations:^{
         [sender setCenter:CGPointMake(160, 20)];
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:3 animations:^{
-            [sender setAlpha:0];
+        [UIView animateWithDuration:2.0 animations:^{
+            [sender setCenter:CGPointMake(160, -40)];
         } completion:^(BOOL finished) {
             nil;
         }];

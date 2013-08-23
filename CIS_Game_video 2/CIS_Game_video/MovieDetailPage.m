@@ -98,6 +98,11 @@ durationLable.text = @"<<  时长:9'16''  >>";
 {
     [super viewDidLoad];
 }
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [movieWeb stopLoading];
+    movieWeb.delegate = nil;
+}
 -(void)exitFullScreen
 {
     NSLog(@"退出全屏");
@@ -120,6 +125,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
 {
     
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
