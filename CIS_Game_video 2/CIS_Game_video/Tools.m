@@ -13,6 +13,8 @@
 #define NavigationBGImage @"navbar.png"
 #define NavigationBACKImage @"goBack.png"
 
+#import <ShareSDK/ShareSDK.h>
+
 @implementation Tools
 
 +(BOOL)isHaveNet
@@ -261,5 +263,62 @@
         return strtime;
     }
     return strtime;
+}
+
++ (void)makeShare
+{
+    //创建分享内容
+    id<ISSContent>publishContent = [ShareSDK content:@"有没有你---------"
+                                      defaultContent:@"你在或者不在她都在哪里"
+                                               image:nil
+                                               title:@"test"
+                                                 url:@"http://www.baidu.com/index.php?tn=monline_5_dg"
+                                         description:@"这是一个标题"
+                                           mediaType:SSPublishContentMediaTypeText];
+    
+    //创建自定义分享列表
+    NSArray *shareList = [ShareSDK customShareListWithType:
+                          SHARE_TYPE_NUMBER(ShareTypeSinaWeibo),
+                          SHARE_TYPE_NUMBER(ShareTypeQQSpace),
+                          SHARE_TYPE_NUMBER(ShareTypeWeixiTimeline),
+                          SHARE_TYPE_NUMBER(ShareTypeWeixiSession),
+                          SHARE_TYPE_NUMBER(ShareTypeQQ),
+                          SHARE_TYPE_NUMBER(ShareTypeSMS),
+                          nil];
+    
+    //在授权页面中添加关注官方微博
+    //    [authOptions setFollowAccounts:[NSDictionary dictionaryWithObjectsAndKeys:
+    //                                    [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"ShareSDK"],
+    //                                    SHARE_TYPE_NUMBER(ShareTypeSinaWeibo),
+    //                                    [ShareSDK userFieldWithType:SSUserFieldTypeName value:@"ShareSDK"],
+    //                                    SHARE_TYPE_NUMBER(ShareTypeTencentWeibo),
+    //                                    nil]];
+    
+    [ShareSDK showShareActionSheet:nil
+                         shareList:shareList
+                           content:publishContent
+                     statusBarTips:YES
+                       authOptions:nil
+                      shareOptions:[ShareSDK defaultShareOptionsWithTitle:nil
+                                                          oneKeyShareList:shareList
+                                                           qqButtonHidden:NO
+                                                    wxSessionButtonHidden:NO
+                                                   wxTimelineButtonHidden:NO
+                                    
+                                                     showKeyboardOnAppear:YES
+                                                        shareViewDelegate:nil
+                                                      friendsViewDelegate:nil
+                                                    picViewerViewDelegate:nil]
+                            result:^(ShareType type, SSPublishContentState state, id<ISSStatusInfo> statusInfo, id<ICMErrorInfo> error, BOOL end) {
+                                if (state == SSPublishContentStateSuccess)
+                                {
+                                    NSLog(@"发表成功");
+                                }
+                                else if (state == SSPublishContentStateFail)
+                                {
+                                    NSLog(@"发布失败!error code == %d, error code == %@", [error errorCode], [error errorDescription]);
+                                }
+                            }];
+
 }
 @end

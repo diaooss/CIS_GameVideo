@@ -42,5 +42,19 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>sinaweibosso.905230395</string>
+				<string>wxcfa8e03b146447d4</string>
+				<string>tencent100509825</string>
+				<string>QQ05FDA881</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string></string>
+		</dict>
+	</array>
 </dict>
 </plist>

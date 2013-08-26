@@ -11,8 +11,37 @@
 #import "IIViewDeckController.h"
 #import "LeftViewController.h"
 #import "WZGuideViewController.h"
+
+//
+#import <ShareSDK/ShareSDK.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "WXApi.h"
+#import <TencentOpenAPI/QQApi.h>
 @implementation AppDelegate
 
+
+//初始化将要分享的平台
+- (void)initAllPlatforms
+{
+    //initSina//新浪
+    [ShareSDK connectSinaWeiboWithAppKey:@"905230395"
+                               appSecret:@"4a30c302c193396e5520a2a2e778f830"
+                             redirectUri:@"http://hunagfang.cn"];
+    //initQQzone
+    [ShareSDK connectQZoneWithAppKey:@"100509825"
+                           appSecret:@"f614d4292c15d510c31d3eede48e9dfb"
+                   qqApiInterfaceCls:[QQApiInterface class]
+                     tencentOAuthCls:[TencentOAuth class]];
+    //initQQFriend
+    [ShareSDK connectQQWithQZoneAppKey:@"100509825"
+                     qqApiInterfaceCls:[QQApiInterface class]
+                       tencentOAuthCls:[TencentOAuth class]];
+    //微信
+    [ShareSDK connectWeChatWithAppId:@"wxcfa8e03b146447d4"
+                           wechatCls:[WXApi class]];
+    
+}
 - (void)dealloc
 {
     [self.rootNvc release];
@@ -22,6 +51,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [ShareSDK registerApp:@"74d0e5cd250"];//初始化ShareSDK的App
+    [self initAllPlatforms];
+    
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor greenColor];
@@ -62,6 +94,15 @@
     return YES;
 }
 
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    return [ShareSDK handleOpenURL:url wxDelegate:self];
+}
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
+}
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

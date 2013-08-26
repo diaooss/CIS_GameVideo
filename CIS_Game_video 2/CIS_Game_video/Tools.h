@@ -42,4 +42,6 @@
 + (void)navigaionView:(UIViewController *)viewController deckVC:(id)deckViewController leftImageName:(NSString *)imgName;
 //计算时间差
 + (NSString *)calTimeMiss:(NSString *)dateString;
+//创建分享
++ (void)makeShare;
 @end
