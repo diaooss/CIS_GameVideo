@@ -63,21 +63,19 @@
     /*/顶部定制 /*/
     [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"goBack.png" title:@"意见反馈"];
     /*/ 初始化一些东西/*/
-    [self getPhoneAndAppInfo];
     [Tools addTipslabel:self.view withTitle:@"网络中断了"];
+    NSMutableDictionary *mobileInfoDic = [Tools getMobileInfo];
+    NSLog(@"设备者姓名:%@",[mobileInfoDic objectForKey:@"mobileUserName"]);
     
-}
-
-#pragma mark--获得系统版本号,手机类型,APP版本号.
--(void)getPhoneAndAppInfo
-{
-    UIDevice *device_=[UIDevice currentDevice];
-    NSLog(@"设备所有者的名称－－%@",device_.name);
-    NSLog(@"设备的类别－－－－－%@",device_.model);
-    NSLog(@"设备运行的系统－－－%@",device_.systemName);
-    NSLog(@"当前系统的版本－－－%@",device_.systemVersion);
-    //得到设备屏幕高度,判断是爱疯5或以下.
-    float screenHeight=[UIScreen mainScreen].bounds.size.height;
+    /*/归档,讲字典转为data/*/
+    NSMutableData *data = [[NSMutableData alloc] init];
+    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+    [archiver encodeObject:mobileInfoDic forKey:@"mobileInfo"];
+    [archiver finishEncoding];
+    [data release];
+    [archiver release];
+    //
+    
     
 }
 #pragma mark--提交意见
@@ -102,17 +100,14 @@
 {
     [super viewDidLoad];
     
-	// Do any additional setup after loading the view.
 }
 -(void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

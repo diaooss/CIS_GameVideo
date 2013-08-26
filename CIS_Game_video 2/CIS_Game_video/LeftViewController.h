@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
 {
     NSArray * _nameArry;
     NSArray * _pictureArry;

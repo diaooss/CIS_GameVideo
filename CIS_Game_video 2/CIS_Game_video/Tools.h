@@ -23,7 +23,7 @@
 //评价
 +(void)giveAppraiseForOurApp;
 //获得硬件信息
-+(NSDictionary *)getMobileInfo;
++(NSMutableDictionary *)getMobileInfo;
 //获得当前APP的版本号
 +(NSString *)getNowAppVersions;
 //MD5加密

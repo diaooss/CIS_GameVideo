@@ -9,6 +9,7 @@
 #import "AuthorMoviesListPage.h"
 #import "MovieCell.h"
 #import "Header.h"
+#import "Tools.h"
 @interface AuthorMoviesListPage ()
 
 @end
@@ -31,17 +32,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title = @"作者名字:xxxx";
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
-    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setBackgroundImage:[UIImage imageNamed:@"goBack.png"] forState:UIControlStateNormal];
-    [button setFrame:CGRectMake(0, 0, 44, 44)];
-    [button addTarget:self action:@selector(backToFatherPage) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * bar = [[UIBarButtonItem alloc]initWithCustomView:button];
-    [self.navigationItem setLeftBarButtonItem:bar];
-    [bar release];
-    
-    UITableView *authorListTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"goBack.png" title:@"作者名字:xxxx"];
+       UITableView *authorListTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     authorListTab.delegate = self;
     authorListTab.dataSource = self;
     [self.view addSubview:authorListTab];
@@ -115,9 +107,13 @@
 //    btn.showsTouchWhenHighlighted = YES;
 //    return headerView;
 //}
--(void)backToFatherPage
+-(void)back
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
+}
+-(void)topRightCorenerBtnAction
+{
+    //实现收藏代码
 }
 - (void)didReceiveMemoryWarning
 {

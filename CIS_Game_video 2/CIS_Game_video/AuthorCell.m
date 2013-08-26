@@ -25,7 +25,6 @@
         _stateImgView = [[UIImageView alloc] init];
         _stateImgView.contentMode = UIViewContentModeScaleToFill;
         _stateImgView.image = [UIImage imageNamed:@"DownAccessory.png"];
-
         [self.contentView addSubview:_stateImgView];
         //作者姓名
         _nameLabel = [[UILabel alloc] init];
@@ -44,7 +43,6 @@
         _countLabel.backgroundColor = [UIColor clearColor];
         [_countLabel setNumberOfLines:0];
         [self.contentView addSubview:_countLabel];
-        
         //
         _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _likeBtn.backgroundColor = [UIColor colorWithRed:95/255.0 green:112/255.0 blue:38/255.0 alpha:1];
@@ -52,24 +50,15 @@
         _likeBtn.showsTouchWhenHighlighted = YES;
         _likeBtn.layer.cornerRadius = 15.0;
         [self.contentView addSubview:_likeBtn];
-        
-        
-        
-        
-        
-        
-        
-        
-    }
+        }
     return self;
 }
 -(void)layoutSubviews
 {
-        [super layoutSubviews];
+    [super layoutSubviews];
     CGSize cellSize = self.bounds.size;
     CGSize stateImageViewSize = CGSizeMake(36, 30);
-    _stateImgView.frame = CGRectMake(0, (cellSize.height-30)/2, stateImageViewSize.width , stateImageViewSize.height);
-    
+    _stateImgView.frame = CGRectMake(0, (cellSize.height-30)/2, stateImageViewSize.width ,stateImageViewSize.height);
     _nameLabel.frame = CGRectMake(_stateImgView.right, 0, 170, cellSize.height);
     _countLabel.frame = CGRectMake(_nameLabel.right, 0, 70, cellSize.height);
     _likeBtn.frame = CGRectMake(_countLabel.right+10, (cellSize.height-30)/2, 30, 30);
@@ -77,7 +66,6 @@
 - (void)changeArrowWithUp:(BOOL)up
 {
         if (up) {
-            
             _stateImgView.image = [UIImage imageNamed:@"UpAccessory.png"];
         }else
         {
@@ -88,7 +76,6 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
-
     // Configure the view for the selected state
 }
 

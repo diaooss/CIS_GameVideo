@@ -100,6 +100,10 @@
     }
     if (indexPath.row==0) {
         [cell.textLabel setText:@"我是小强"];
+        UITapGestureRecognizer *tapHeaerImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTheHeaerImageView)];
+        [cell.imageView setUserInteractionEnabled:YES];
+        [cell.imageView addGestureRecognizer:tapHeaerImageView];
+        [tapHeaerImageView release];
     }else
     {
     [cell.textLabel setText:[_nameArry objectAtIndex:indexPath.row-1]];
@@ -157,6 +161,15 @@
         [login release];
         [loginNavc release];
     }
+}
+//更换头像,点击时需确认是否登陆,如登陆执行如下动作
+-(void)tapTheHeaerImageView
+{
+   
+    UIActionSheet *imageActionSheet  =[[UIActionSheet alloc] initWithTitle:@"更换头像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"从相册" otherButtonTitles:@"拍照", nil];
+    [imageActionSheet showInView:self.view];
+    [imageActionSheet release];
+    
 }
 - (void)backToRootViewController
 {

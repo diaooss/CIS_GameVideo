@@ -18,7 +18,6 @@
 @interface MovieDetailPage ()
 
 @end
-
 @implementation MovieDetailPage
 - (void)dealloc
 {

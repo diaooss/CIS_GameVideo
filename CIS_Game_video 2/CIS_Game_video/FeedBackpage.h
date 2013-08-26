@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface FeedBackpage : UIViewController<UITextFieldDelegate>
+@interface FeedBackpage : UIViewController<UITextFieldDelegate,NSCoding>
 {
     UITextField *feedTextField;//反馈内容
     UITextField *qqOrPhoneField;//QQ号码
