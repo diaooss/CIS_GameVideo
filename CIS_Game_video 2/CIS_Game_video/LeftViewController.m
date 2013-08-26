@@ -23,6 +23,7 @@
 {
     [_nameArry release];
     [_pictureArry release];
+    [checkLabel release],checkLabel = nil;
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -71,13 +72,12 @@
     [self.view addGestureRecognizer:recognizer];
     [recognizer release];
     //签到
-    UILabel *checkLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bottom-60, 320, 30)];
+    checkLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bottom-60, 320, 30)];
     checkLabel.text = @"每日签到(您已连续签到XX次)";
     checkLabel.textAlignment = NSTextAlignmentCenter;
     checkLabel.textColor = [UIColor grayColor];
     checkLabel.backgroundColor  =[UIColor clearColor];
     [self.view addSubview:checkLabel];
-    [checkLabel release];
 }
 #pragma mark -----UItableView 的代理方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -162,14 +162,81 @@
         [loginNavc release];
     }
 }
-//更换头像,点击时需确认是否登陆,如登陆执行如下动作
+#pragma mark--选择头像创建方式.点击时需确认是否登陆,如登陆执行如下动作
 -(void)tapTheHeaerImageView
 {
-   
     UIActionSheet *imageActionSheet  =[[UIActionSheet alloc] initWithTitle:@"更换头像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"从相册" otherButtonTitles:@"拍照", nil];
     [imageActionSheet showInView:self.view];
     [imageActionSheet release];
-    
+}
+#pragma mark--选择头像创建方式.
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    switch (buttonIndex) {
+        case 0:
+            [self congXiangCe];
+            break;
+        case 1:
+            [self congXiangJi];
+            break;
+        default:
+            break;
+    }
+}
+#pragma matk-从相册
+-(void)congXiangCe
+{
+    NSLog(@"从相册");
+//    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+//    UIImagePickerController *PickerConteroller=[[UIImagePickerController alloc]init];
+//    [PickerConteroller setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+//    [PickerConteroller setAllowsEditing:YES];
+//    // [PickerConteroller setAccessibilityViewIsModal:YES];
+//    [PickerConteroller setDelegate:self];
+//    [self presentViewController:PickerConteroller animated:YES completion:nil];
+//    [PickerConteroller release];
+}
+#pragma matk-从相机
+-(void)congXiangJi
+{
+    NSLog(@"相机");
+    //震动未动.
+//    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+//    UIImagePickerController *picker=[[UIImagePickerController alloc]init];
+//    [picker setDelegate:self];
+//    [picker setAllowsEditing:YES];
+//    NSString *requiredMediaType = ( NSString *)kUTTypeJPEG;
+//    NSLog(@"类型是:%@",requiredMediaType);
+//    //    NSString *requiredMediaType1 = ( NSString *)kUTTypeMovie;
+//    NSArray *arrMediaTypes=[NSArray arrayWithObjects:requiredMediaType,nil];
+//    [picker setMediaTypes:arrMediaTypes];
+//    [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
+//    [self presentViewController:picker animated:YES completion:nil];
+//    [picker release];
+}
+#pragma mark-
+#pragma matk-确定时
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    //    _tempImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    [self dismissViewControllerAnimated:YES completion:^{
+        NSData *data = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerEditedImage"], 0.5);
+        NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)objectAtIndex:0];
+        static int i = 0;
+//        self.photoPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.png",i++]];
+//        [data writeToFile:self.photoPath atomically:YES];
+    }];
+    [self performSelector:@selector(selectPic:) withObject:[info objectForKey:@"UIImagePickerControllerEditedImage"] afterDelay:0.1];
+}
+- (void)selectPic:(UIImage*)image
+{
+    NSLog(@"image%@",image);
+}
+/*/-----------/*/
+#pragma matk-取消时
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)backToRootViewController
 {

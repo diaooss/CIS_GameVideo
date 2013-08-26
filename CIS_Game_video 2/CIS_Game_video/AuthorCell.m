@@ -46,7 +46,7 @@
         //
         _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _likeBtn.backgroundColor = [UIColor colorWithRed:95/255.0 green:112/255.0 blue:38/255.0 alpha:1];
-        [_likeBtn setTitle:@">>" forState:UIControlStateNormal];
+        [_likeBtn setTitle:@"m" forState:UIControlStateNormal];
         _likeBtn.showsTouchWhenHighlighted = YES;
         _likeBtn.layer.cornerRadius = 15.0;
         [self.contentView addSubview:_likeBtn];

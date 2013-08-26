@@ -31,10 +31,7 @@
 }
 -(id)initWithRequestUrl:(NSString *)urlStr
 {
-    if ([urlStr length]<5) {
-        urlStr = @"http://m.xczx.ccoo.cn";
-    }
-    NSURL *url = [NSURL URLWithString:urlStr];
+        NSURL *url = [NSURL URLWithString:urlStr];
     _request = [[NSURLRequest alloc] initWithURL:url];
     return self;
     

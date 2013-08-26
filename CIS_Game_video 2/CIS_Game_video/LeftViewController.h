@@ -13,5 +13,6 @@
     NSArray * _nameArry;
     NSArray * _pictureArry;
     BOOL _isCraete;
+    UILabel *checkLabel;//签到的标签
 }
 @end

@@ -60,7 +60,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
     [movieWeb addSubview:durationLable];
     
     
-    movieNameLable = [UILabel labelWithRect:CGRectMake(5, movieWeb.bottom+5, durationLable.width-20, 30) font:[UIFont systemFontOfSize:16]];
+    movieNameLable = [UILabel labelWithRect:CGRectMake(5, movieWeb.bottom+5, durationLable.width-20, 20) font:[UIFont systemFontOfSize:16]];
     movieNameLable.text = @"安晓阳:最牛大神带你走进魔兽世界";
     movieNameLable.layer.cornerRadius = 5.0;
     movieNameLable.textAlignment = NSTextAlignmentCenter;
@@ -68,7 +68,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
     movieNameLable.backgroundColor = [UIColor yellowColor];
     movieNameLable.alpha = 0.8;
     [self.view addSubview:movieNameLable];
-    theAuthorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, movieWeb.bottom+45, 100, self.view.height-movieWeb.height-8-movieNameLable.height-130)];
+    theAuthorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, movieWeb.bottom+40, 100, self.view.height-movieWeb.height-8-movieNameLable.height-130)];
     theAuthorImageView.backgroundColor= [UIColor yellowColor];
     [self.view addSubview:theAuthorImageView];
     theAuthorImageView.image = [UIImage imageNamed:@"headerimage.png"];
