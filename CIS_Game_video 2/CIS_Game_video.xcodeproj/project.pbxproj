@@ -481,7 +481,7 @@
 			name = Tools;
 			sourceTree = "<group>";
 		};
-		233A4E7A17CB4922007F1143 /* ShareSDK_v2.3.1 */ = {
+		233A4E7A17CB4922007F1143 /* ShareSDK_v2.3. */ = {
 			isa = PBXGroup;
 			children = (
 				233A4E7B17CB4922007F1143 /* Connection */,
@@ -490,6 +490,7 @@
 				233A4EA417CB4922007F1143 /* ShareSDK.framework */,
 				233A4EA517CB4922007F1143 /* UI */,
 			);
+			name = ShareSDK_v2.3.;
 			path = ShareSDK_v2.3.1;
 			sourceTree = "<group>";
 		};
@@ -716,7 +717,7 @@
 		23DA1F5517938B030092FB0F /* CIS_Game_video */ = {
 			isa = PBXGroup;
 			children = (
-				233A4E7A17CB4922007F1143 /* ShareSDK_v2.3.1 */,
+				233A4E7A17CB4922007F1143 /* ShareSDK_v2.3. */,
 				2316907F17C3505600B47694 /* Tools */,
 				20E8A4B51797BE3C00160DE1 /* TestData */,
 				20E8A4AC1797BDC700160DE1 /* Models */,
