@@ -90,19 +90,20 @@
 #pragma mark--翻转下半部分的视图
 -(void)topRightCorenerBtnAction
 {
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1.0];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.viewDeckController.view cache:YES];
-    if (sbView.hidden ==YES) {
-        sbView.hidden = NO;
-        AuthorListTab.hidden = YES;
-    }
-    else
-    {
-        sbView.hidden = YES;
-        AuthorListTab.hidden = NO;
-    }
-    [UIView commitAnimations];
+//    [UIView beginAnimations:nil context:nil];
+//    [UIView setAnimationDuration:1.0];
+//    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.viewDeckController.view cache:YES];
+//    if (sbView.hidden ==YES) {
+//        sbView.hidden = NO;
+//        AuthorListTab.hidden = YES;
+//    }
+//    else
+//    {
+//        sbView.hidden = YES;
+//        AuthorListTab.hidden = NO;
+//    }
+//    [UIView commitAnimations];
+    [Tools makeShare];
 }
 #pragma mark--系统列表代理方法
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
