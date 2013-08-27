@@ -13,7 +13,7 @@
 #define NavigationBGImage @"navbar.png"
 #define NavigationBACKImage @"goBack.png"
 
-#import <ShareSDK/ShareSDK.h>
+//#import <ShareSDK/ShareSDK.h>
 
 @implementation Tools
 
@@ -264,7 +264,7 @@
     }
     return strtime;
 }
-
+/*
 + (void)makeShare
 {
     //创建分享内容
@@ -319,6 +319,8 @@
                                     NSLog(@"发布失败!error code == %d, error code == %@", [error errorCode], [error errorDescription]);
                                 }
                             }];
+ 
 
 }
+ */
 @end
