@@ -105,6 +105,7 @@
 //    [UIView commitAnimations];
     [Tools makeShare];
     //8888888888******
+    //**************************
 }
 #pragma mark--系统列表代理方法
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

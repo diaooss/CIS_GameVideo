@@ -488,6 +488,7 @@
 				233A4E9117CB4922007F1143 /* Core */,
 				233A4E9617CB4922007F1143 /* Extend */,
 				233A4EA417CB4922007F1143 /* ShareSDK.framework */,
+				233A4EA517CB4922007F1143 /* UI */,
 			);
 			name = ShareSDK_v2.3.;
 			path = ShareSDK_v2.3.1;
@@ -567,8 +568,7 @@
 				233A4EAD17CB4922007F1143 /* ShareSDKiPhoneSimpleShareViewUI.bundle */,
 				233A4EAE17CB4922007F1143 /* ShareSDKiPhoneSimpleShareViewUI.framework */,
 			);
-			name = UI;
-			path = ShareSDK_v2.3.1/UI;
+			path = UI;
 			sourceTree = "<group>";
 		};
 		23505AAE17990A4400CC7549 /* LoginAndRegisterPageAndForgetPsd */ = {
@@ -717,7 +717,6 @@
 		23DA1F5517938B030092FB0F /* CIS_Game_video */ = {
 			isa = PBXGroup;
 			children = (
-				233A4EA517CB4922007F1143 /* UI */,
 				233A4E7A17CB4922007F1143 /* ShareSDK_v2.3. */,
 				2316907F17C3505600B47694 /* Tools */,
 				20E8A4B51797BE3C00160DE1 /* TestData */,
