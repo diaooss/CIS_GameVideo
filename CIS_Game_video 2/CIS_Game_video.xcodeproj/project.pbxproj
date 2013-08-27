@@ -84,17 +84,17 @@
 		233A4ECC17CB4923007F1143 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 233A4E9F17CB4922007F1143 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		233A4ECD17CB4923007F1143 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EA117CB4922007F1143 /* libWeiboSDK.a */; };
 		233A4ECE17CB4923007F1143 /* ShareSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EA417CB4922007F1143 /* ShareSDK.framework */; };
-		233A4ED317CB4923007F1143 /* ShareSDKiPhoneAppRecommendShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EAA17CB4922007F1143 /* ShareSDKiPhoneAppRecommendShareViewUI.framework */; };
-		233A4ED417CB4923007F1143 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 233A4EAB17CB4922007F1143 /* ShareSDKiPhoneDefaultShareViewUI.bundle */; };
-		233A4ED517CB4923007F1143 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EAC17CB4922007F1143 /* ShareSDKiPhoneDefaultShareViewUI.framework */; };
-		233A4ED617CB4923007F1143 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 233A4EAD17CB4922007F1143 /* ShareSDKiPhoneSimpleShareViewUI.bundle */; };
-		233A4ED717CB4923007F1143 /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EAE17CB4922007F1143 /* ShareSDKiPhoneSimpleShareViewUI.framework */; };
 		233A4ED917CB4996007F1143 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4ED817CB4996007F1143 /* MessageUI.framework */; };
 		233A4EDB17CB49E6007F1143 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EDA17CB49E6007F1143 /* CoreTelephony.framework */; };
 		233A4EDD17CB4A08007F1143 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EDC17CB4A08007F1143 /* libsqlite3.dylib */; };
 		233A4EDF17CB4A1B007F1143 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EDE17CB4A1B007F1143 /* libstdc++.dylib */; };
 		233A4EE117CB4A30007F1143 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EE017CB4A30007F1143 /* libicucore.dylib */; };
 		233A4EE317CB4A3F007F1143 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EE217CB4A3F007F1143 /* libz.1.2.5.dylib */; };
+		233DC51017CC358E00822759 /* ShareSDKiPhoneAppRecommendShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC50717CC358D00822759 /* ShareSDKiPhoneAppRecommendShareViewUI.framework */; };
+		233DC51117CC358E00822759 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 233DC50817CC358D00822759 /* ShareSDKiPhoneDefaultShareViewUI.bundle */; };
+		233DC51217CC358E00822759 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC50917CC358D00822759 /* ShareSDKiPhoneDefaultShareViewUI.framework */; };
+		233DC51317CC358E00822759 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 233DC50A17CC358D00822759 /* ShareSDKiPhoneSimpleShareViewUI.bundle */; };
+		233DC51417CC358E00822759 /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC50B17CC358D00822759 /* ShareSDKiPhoneSimpleShareViewUI.framework */; };
 		23AA7CE31794E0C700C7A8B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CE21794E0C700C7A8B1 /* UIViewAdditions.m */; };
 		23AA7CEF1794E10400C7A8B1 /* WZGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CEE1794E10400C7A8B1 /* WZGuideViewController.m */; };
 		23AA7CF91794E2C300C7A8B1 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CF81794E2C300C7A8B1 /* LeftViewController.m */; };
@@ -222,17 +222,17 @@
 		233A4EA217CB4922007F1143 /* WBApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBApi.h; sourceTree = "<group>"; };
 		233A4EA317CB4922007F1143 /* WBApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBApiObject.h; sourceTree = "<group>"; };
 		233A4EA417CB4922007F1143 /* ShareSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDK.framework; sourceTree = "<group>"; };
-		233A4EAA17CB4922007F1143 /* ShareSDKiPhoneAppRecommendShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneAppRecommendShareViewUI.framework; sourceTree = "<group>"; };
-		233A4EAB17CB4922007F1143 /* ShareSDKiPhoneDefaultShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneDefaultShareViewUI.bundle; sourceTree = "<group>"; };
-		233A4EAC17CB4922007F1143 /* ShareSDKiPhoneDefaultShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneDefaultShareViewUI.framework; sourceTree = "<group>"; };
-		233A4EAD17CB4922007F1143 /* ShareSDKiPhoneSimpleShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneSimpleShareViewUI.bundle; sourceTree = "<group>"; };
-		233A4EAE17CB4922007F1143 /* ShareSDKiPhoneSimpleShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneSimpleShareViewUI.framework; sourceTree = "<group>"; };
 		233A4ED817CB4996007F1143 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		233A4EDA17CB49E6007F1143 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		233A4EDC17CB4A08007F1143 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		233A4EDE17CB4A1B007F1143 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		233A4EE017CB4A30007F1143 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		233A4EE217CB4A3F007F1143 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
+		233DC50717CC358D00822759 /* ShareSDKiPhoneAppRecommendShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneAppRecommendShareViewUI.framework; sourceTree = "<group>"; };
+		233DC50817CC358D00822759 /* ShareSDKiPhoneDefaultShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneDefaultShareViewUI.bundle; sourceTree = "<group>"; };
+		233DC50917CC358D00822759 /* ShareSDKiPhoneDefaultShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneDefaultShareViewUI.framework; sourceTree = "<group>"; };
+		233DC50A17CC358D00822759 /* ShareSDKiPhoneSimpleShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneSimpleShareViewUI.bundle; sourceTree = "<group>"; };
+		233DC50B17CC358D00822759 /* ShareSDKiPhoneSimpleShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneSimpleShareViewUI.framework; sourceTree = "<group>"; };
 		23AA7CE11794E0C700C7A8B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		23AA7CE21794E0C700C7A8B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		23AA7CED1794E10400C7A8B1 /* WZGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZGuideViewController.h; sourceTree = "<group>"; };
@@ -298,9 +298,9 @@
 				233A4ECB17CB4923007F1143 /* TencentOpenAPI.framework in Frameworks */,
 				233A4ECD17CB4923007F1143 /* libWeiboSDK.a in Frameworks */,
 				233A4ECE17CB4923007F1143 /* ShareSDK.framework in Frameworks */,
-				233A4ED317CB4923007F1143 /* ShareSDKiPhoneAppRecommendShareViewUI.framework in Frameworks */,
-				233A4ED517CB4923007F1143 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */,
-				233A4ED717CB4923007F1143 /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */,
+				233DC51017CC358E00822759 /* ShareSDKiPhoneAppRecommendShareViewUI.framework in Frameworks */,
+				233DC51217CC358E00822759 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */,
+				233DC51417CC358E00822759 /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,11 +484,11 @@
 		233A4E7A17CB4922007F1143 /* ShareSDK_v2.3. */ = {
 			isa = PBXGroup;
 			children = (
+				233DC50217CC358D00822759 /* UI */,
 				233A4E7B17CB4922007F1143 /* Connection */,
 				233A4E9117CB4922007F1143 /* Core */,
 				233A4E9617CB4922007F1143 /* Extend */,
 				233A4EA417CB4922007F1143 /* ShareSDK.framework */,
-				233A4EA517CB4922007F1143 /* UI */,
 			);
 			name = ShareSDK_v2.3.;
 			path = ShareSDK_v2.3.1;
@@ -559,16 +559,17 @@
 			path = TencentWeiboSSO;
 			sourceTree = "<group>";
 		};
-		233A4EA517CB4922007F1143 /* UI */ = {
+		233DC50217CC358D00822759 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				233A4EAA17CB4922007F1143 /* ShareSDKiPhoneAppRecommendShareViewUI.framework */,
-				233A4EAB17CB4922007F1143 /* ShareSDKiPhoneDefaultShareViewUI.bundle */,
-				233A4EAC17CB4922007F1143 /* ShareSDKiPhoneDefaultShareViewUI.framework */,
-				233A4EAD17CB4922007F1143 /* ShareSDKiPhoneSimpleShareViewUI.bundle */,
-				233A4EAE17CB4922007F1143 /* ShareSDKiPhoneSimpleShareViewUI.framework */,
+				233DC50717CC358D00822759 /* ShareSDKiPhoneAppRecommendShareViewUI.framework */,
+				233DC50817CC358D00822759 /* ShareSDKiPhoneDefaultShareViewUI.bundle */,
+				233DC50917CC358D00822759 /* ShareSDKiPhoneDefaultShareViewUI.framework */,
+				233DC50A17CC358D00822759 /* ShareSDKiPhoneSimpleShareViewUI.bundle */,
+				233DC50B17CC358D00822759 /* ShareSDKiPhoneSimpleShareViewUI.framework */,
 			);
-			path = UI;
+			name = UI;
+			path = Connection/UI;
 			sourceTree = "<group>";
 		};
 		23505AAE17990A4400CC7549 /* LoginAndRegisterPageAndForgetPsd */ = {
@@ -868,8 +869,8 @@
 				233A4EC717CB4923007F1143 /* ShareSDKLocalizable.strings in Resources */,
 				233A4EC817CB4923007F1143 /* RennSDK.bundle in Resources */,
 				233A4ECC17CB4923007F1143 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
-				233A4ED417CB4923007F1143 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
-				233A4ED617CB4923007F1143 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
+				233DC51117CC358E00822759 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
+				233DC51317CC358E00822759 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -999,6 +1000,7 @@
 					"\"$(SRCROOT)/CIS_Game_video/ShareSDK_v2.3.1/Extend\"",
 					"\"$(SRCROOT)/CIS_Game_video/ShareSDK_v2.3.1\"",
 					"\"$(SRCROOT)/CIS_Game_video/ShareSDK_v2.3.1/UI\"",
+					"\"$(SRCROOT)/CIS_Game_video/ShareSDK_v2.3.1/Connection/UI\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CIS_Game_video/CIS_Game_video-Prefix.pch";
@@ -1025,6 +1027,7 @@
 					"\"$(SRCROOT)/CIS_Game_video/ShareSDK_v2.3.1/Extend\"",
 					"\"$(SRCROOT)/CIS_Game_video/ShareSDK_v2.3.1\"",
 					"\"$(SRCROOT)/CIS_Game_video/ShareSDK_v2.3.1/UI\"",
+					"\"$(SRCROOT)/CIS_Game_video/ShareSDK_v2.3.1/Connection/UI\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "CIS_Game_video/CIS_Game_video-Prefix.pch";
