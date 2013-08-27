@@ -14,7 +14,6 @@
 		20903B1C17C450900052EF21 /* PublciViewsTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 20903B1B17C450900052EF21 /* PublciViewsTools.m */; };
 		20903B2017C48C570052EF21 /* ChangePSDPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20903B1F17C48C560052EF21 /* ChangePSDPage.m */; };
 		20A0BC831799392F00CFB711 /* smile32.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A0BC821799392F00CFB711 /* smile32.png */; };
-		20A0BC8617993C3B00CFB711 /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A0BC8517993C3B00CFB711 /* SettingCell.m */; };
 		20A0BC8917993C8700CFB711 /* NetSettingPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A0BC8817993C8700CFB711 /* NetSettingPage.m */; };
 		20A0BC8D17993D0D00CFB711 /* AboutUsPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A0BC8C17993D0D00CFB711 /* AboutUsPage.m */; };
 		20A0BC9B179942ED00CFB711 /* btn_nor.png in Resources */ = {isa = PBXBuildFile; fileRef = 20A0BC8F179942ED00CFB711 /* btn_nor.png */; };
@@ -38,8 +37,6 @@
 		20D5813B17C3462F0000A5C9 /* RegisterPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D5813A17C3462F0000A5C9 /* RegisterPage.m */; };
 		20D5813E17C366A90000A5C9 /* ForgetPSDPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D5813D17C366A90000A5C9 /* ForgetPSDPage.m */; };
 		20E8A4AB1797B51400160DE1 /* skin_blue_nav-menu-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E8A4AA1797B51400160DE1 /* skin_blue_nav-menu-icon.png */; };
-		20E8A4B11797BE0C00160DE1 /* AuthorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4B01797BE0C00160DE1 /* AuthorCell.m */; };
-		20E8A4B41797BE2200160DE1 /* MovieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4B31797BE2200160DE1 /* MovieCell.m */; };
 		20E8A4B71797BE4C00160DE1 /* ExpansionTableTestData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20E8A4B61797BE4C00160DE1 /* ExpansionTableTestData.plist */; };
 		20E8A4BD1797BE7C00160DE1 /* DownAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E8A4B91797BE7C00160DE1 /* DownAccessory@2x.png */; };
 		20E8A4BE1797BE7C00160DE1 /* UpAccessory@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E8A4BA1797BE7C00160DE1 /* UpAccessory@2x.png */; };
@@ -58,7 +55,6 @@
 		20E8A4D71797CF4F00160DE1 /* qie_110.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E8A4D51797CF4F00160DE1 /* qie_110.png */; };
 		20E8A4D81797CF4F00160DE1 /* qie_110@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 20E8A4D61797CF4F00160DE1 /* qie_110@2x.png */; };
 		20E8A4DC1797D54900160DE1 /* MyLikeAuthorListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4DB1797D54900160DE1 /* MyLikeAuthorListPage.m */; };
-		20E8A4E31797DE6500160DE1 /* MyFavorAuthorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4E21797DE6500160DE1 /* MyFavorAuthorCell.m */; };
 		20E8A4E81797E14E00160DE1 /* SetTingPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4E71797E14E00160DE1 /* SetTingPage.m */; };
 		20E8A4EC1797E98E00160DE1 /* AuthorMoviesListPage.m in Sources */ = {isa = PBXBuildFile; fileRef = 20E8A4EB1797E98E00160DE1 /* AuthorMoviesListPage.m */; };
 		2306E45E17966E3B00BD3808 /* test.test.png in Resources */ = {isa = PBXBuildFile; fileRef = 2306E45D17966E3B00BD3808 /* test.test.png */; };
@@ -73,27 +69,12 @@
 		233A4EDF17CB4A1B007F1143 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EDE17CB4A1B007F1143 /* libstdc++.dylib */; };
 		233A4EE117CB4A30007F1143 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EE017CB4A30007F1143 /* libicucore.dylib */; };
 		233A4EE317CB4A3F007F1143 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EE217CB4A3F007F1143 /* libz.1.2.5.dylib */; };
-		233DC52C17CC38D200822759 /* DouBanConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC51717CC38D200822759 /* DouBanConnection.framework */; };
-		233DC52D17CC38D200822759 /* EverNoteConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC51817CC38D200822759 /* EverNoteConnection.framework */; };
-		233DC52E17CC38D200822759 /* FacebookConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC51917CC38D200822759 /* FacebookConnection.framework */; };
-		233DC52F17CC38D200822759 /* InstapaperConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC51A17CC38D200822759 /* InstapaperConnection.framework */; };
-		233DC53017CC38D200822759 /* InstapaperResource.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 233DC51B17CC38D200822759 /* InstapaperResource.bundle */; };
-		233DC53117CC38D200822759 /* KaiXinConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC51C17CC38D200822759 /* KaiXinConnection.framework */; };
-		233DC53217CC38D200822759 /* MailConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC51D17CC38D200822759 /* MailConnection.framework */; };
-		233DC53317CC38D200822759 /* PocketConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC51E17CC38D200822759 /* PocketConnection.framework */; };
-		233DC53417CC38D200822759 /* PrintConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC51F17CC38D200822759 /* PrintConnection.framework */; };
 		233DC53517CC38D200822759 /* QQConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52017CC38D200822759 /* QQConnection.framework */; };
 		233DC53617CC38D200822759 /* QZoneConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52117CC38D200822759 /* QZoneConnection.framework */; };
-		233DC53717CC38D200822759 /* RenRenConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52217CC38D200822759 /* RenRenConnection.framework */; };
 		233DC53817CC38D200822759 /* SinaWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52317CC38D200822759 /* SinaWeiboConnection.framework */; };
 		233DC53917CC38D200822759 /* SMSConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52417CC38D200822759 /* SMSConnection.framework */; };
-		233DC53A17CC38D200822759 /* SohuConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52517CC38D200822759 /* SohuConnection.framework */; };
-		233DC53B17CC38D200822759 /* SohuWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52617CC38D200822759 /* SohuWeiboConnection.framework */; };
-		233DC53C17CC38D200822759 /* T163WeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52717CC38D200822759 /* T163WeiboConnection.framework */; };
 		233DC53D17CC38D200822759 /* TencentWeiboConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52817CC38D200822759 /* TencentWeiboConnection.framework */; };
-		233DC53E17CC38D200822759 /* TwitterConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52917CC38D200822759 /* TwitterConnection.framework */; };
 		233DC53F17CC38D200822759 /* WeChatConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52A17CC38D200822759 /* WeChatConnection.framework */; };
-		233DC54017CC38D200822759 /* YouDaoNoteConnection.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC52B17CC38D200822759 /* YouDaoNoteConnection.framework */; };
 		23AA7CE31794E0C700C7A8B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CE21794E0C700C7A8B1 /* UIViewAdditions.m */; };
 		23AA7CEF1794E10400C7A8B1 /* WZGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CEE1794E10400C7A8B1 /* WZGuideViewController.m */; };
 		23AA7CF91794E2C300C7A8B1 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CF81794E2C300C7A8B1 /* LeftViewController.m */; };
@@ -129,8 +110,6 @@
 		20903B1E17C48C560052EF21 /* ChangePSDPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePSDPage.h; sourceTree = "<group>"; };
 		20903B1F17C48C560052EF21 /* ChangePSDPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePSDPage.m; sourceTree = "<group>"; };
 		20A0BC821799392F00CFB711 /* smile32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smile32.png; sourceTree = "<group>"; };
-		20A0BC8417993C3B00CFB711 /* SettingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
-		20A0BC8517993C3B00CFB711 /* SettingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		20A0BC8717993C8700CFB711 /* NetSettingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetSettingPage.h; sourceTree = "<group>"; };
 		20A0BC8817993C8700CFB711 /* NetSettingPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetSettingPage.m; sourceTree = "<group>"; };
 		20A0BC8B17993D0D00CFB711 /* AboutUsPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsPage.h; sourceTree = "<group>"; };
@@ -162,10 +141,6 @@
 		20D5813C17C366A80000A5C9 /* ForgetPSDPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgetPSDPage.h; sourceTree = "<group>"; };
 		20D5813D17C366A90000A5C9 /* ForgetPSDPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgetPSDPage.m; sourceTree = "<group>"; };
 		20E8A4AA1797B51400160DE1 /* skin_blue_nav-menu-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "skin_blue_nav-menu-icon.png"; sourceTree = "<group>"; };
-		20E8A4AF1797BE0C00160DE1 /* AuthorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorCell.h; sourceTree = "<group>"; };
-		20E8A4B01797BE0C00160DE1 /* AuthorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthorCell.m; sourceTree = "<group>"; };
-		20E8A4B21797BE2200160DE1 /* MovieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MovieCell.h; sourceTree = "<group>"; };
-		20E8A4B31797BE2200160DE1 /* MovieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MovieCell.m; sourceTree = "<group>"; };
 		20E8A4B61797BE4C00160DE1 /* ExpansionTableTestData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ExpansionTableTestData.plist; sourceTree = "<group>"; };
 		20E8A4B91797BE7C00160DE1 /* DownAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "DownAccessory@2x.png"; sourceTree = "<group>"; };
 		20E8A4BA1797BE7C00160DE1 /* UpAccessory@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UpAccessory@2x.png"; sourceTree = "<group>"; };
@@ -185,8 +160,6 @@
 		20E8A4D61797CF4F00160DE1 /* qie_110@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qie_110@2x.png"; sourceTree = "<group>"; };
 		20E8A4DA1797D54900160DE1 /* MyLikeAuthorListPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyLikeAuthorListPage.h; sourceTree = "<group>"; };
 		20E8A4DB1797D54900160DE1 /* MyLikeAuthorListPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyLikeAuthorListPage.m; sourceTree = "<group>"; };
-		20E8A4E11797DE6500160DE1 /* MyFavorAuthorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFavorAuthorCell.h; sourceTree = "<group>"; };
-		20E8A4E21797DE6500160DE1 /* MyFavorAuthorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFavorAuthorCell.m; sourceTree = "<group>"; };
 		20E8A4E61797E14E00160DE1 /* SetTingPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetTingPage.h; sourceTree = "<group>"; };
 		20E8A4E71797E14E00160DE1 /* SetTingPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetTingPage.m; sourceTree = "<group>"; };
 		20E8A4EA1797E98E00160DE1 /* AuthorMoviesListPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthorMoviesListPage.h; sourceTree = "<group>"; };
@@ -206,27 +179,12 @@
 		233A4EDE17CB4A1B007F1143 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "usr/lib/libstdc++.dylib"; sourceTree = SDKROOT; };
 		233A4EE017CB4A30007F1143 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		233A4EE217CB4A3F007F1143 /* libz.1.2.5.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.2.5.dylib; path = usr/lib/libz.1.2.5.dylib; sourceTree = SDKROOT; };
-		233DC51717CC38D200822759 /* DouBanConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DouBanConnection.framework; sourceTree = "<group>"; };
-		233DC51817CC38D200822759 /* EverNoteConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = EverNoteConnection.framework; sourceTree = "<group>"; };
-		233DC51917CC38D200822759 /* FacebookConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookConnection.framework; sourceTree = "<group>"; };
-		233DC51A17CC38D200822759 /* InstapaperConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = InstapaperConnection.framework; sourceTree = "<group>"; };
-		233DC51B17CC38D200822759 /* InstapaperResource.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = InstapaperResource.bundle; sourceTree = "<group>"; };
-		233DC51C17CC38D200822759 /* KaiXinConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KaiXinConnection.framework; sourceTree = "<group>"; };
-		233DC51D17CC38D200822759 /* MailConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MailConnection.framework; sourceTree = "<group>"; };
-		233DC51E17CC38D200822759 /* PocketConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PocketConnection.framework; sourceTree = "<group>"; };
-		233DC51F17CC38D200822759 /* PrintConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PrintConnection.framework; sourceTree = "<group>"; };
 		233DC52017CC38D200822759 /* QQConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QQConnection.framework; sourceTree = "<group>"; };
 		233DC52117CC38D200822759 /* QZoneConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = QZoneConnection.framework; sourceTree = "<group>"; };
-		233DC52217CC38D200822759 /* RenRenConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RenRenConnection.framework; sourceTree = "<group>"; };
 		233DC52317CC38D200822759 /* SinaWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SinaWeiboConnection.framework; sourceTree = "<group>"; };
 		233DC52417CC38D200822759 /* SMSConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SMSConnection.framework; sourceTree = "<group>"; };
-		233DC52517CC38D200822759 /* SohuConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SohuConnection.framework; sourceTree = "<group>"; };
-		233DC52617CC38D200822759 /* SohuWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SohuWeiboConnection.framework; sourceTree = "<group>"; };
-		233DC52717CC38D200822759 /* T163WeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = T163WeiboConnection.framework; sourceTree = "<group>"; };
 		233DC52817CC38D200822759 /* TencentWeiboConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentWeiboConnection.framework; sourceTree = "<group>"; };
-		233DC52917CC38D200822759 /* TwitterConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TwitterConnection.framework; sourceTree = "<group>"; };
 		233DC52A17CC38D200822759 /* WeChatConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WeChatConnection.framework; sourceTree = "<group>"; };
-		233DC52B17CC38D200822759 /* YouDaoNoteConnection.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YouDaoNoteConnection.framework; sourceTree = "<group>"; };
 		23AA7CE11794E0C700C7A8B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		23AA7CE21794E0C700C7A8B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		23AA7CED1794E10400C7A8B1 /* WZGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZGuideViewController.h; sourceTree = "<group>"; };
@@ -279,26 +237,12 @@
 				23DA1F5017938B030092FB0F /* UIKit.framework in Frameworks */,
 				23DA1F5217938B030092FB0F /* Foundation.framework in Frameworks */,
 				23DA1F5417938B030092FB0F /* CoreGraphics.framework in Frameworks */,
-				233DC52C17CC38D200822759 /* DouBanConnection.framework in Frameworks */,
-				233DC52D17CC38D200822759 /* EverNoteConnection.framework in Frameworks */,
-				233DC52E17CC38D200822759 /* FacebookConnection.framework in Frameworks */,
-				233DC52F17CC38D200822759 /* InstapaperConnection.framework in Frameworks */,
-				233DC53117CC38D200822759 /* KaiXinConnection.framework in Frameworks */,
-				233DC53217CC38D200822759 /* MailConnection.framework in Frameworks */,
-				233DC53317CC38D200822759 /* PocketConnection.framework in Frameworks */,
-				233DC53417CC38D200822759 /* PrintConnection.framework in Frameworks */,
 				233DC53517CC38D200822759 /* QQConnection.framework in Frameworks */,
 				233DC53617CC38D200822759 /* QZoneConnection.framework in Frameworks */,
-				233DC53717CC38D200822759 /* RenRenConnection.framework in Frameworks */,
 				233DC53817CC38D200822759 /* SinaWeiboConnection.framework in Frameworks */,
 				233DC53917CC38D200822759 /* SMSConnection.framework in Frameworks */,
-				233DC53A17CC38D200822759 /* SohuConnection.framework in Frameworks */,
-				233DC53B17CC38D200822759 /* SohuWeiboConnection.framework in Frameworks */,
-				233DC53C17CC38D200822759 /* T163WeiboConnection.framework in Frameworks */,
 				233DC53D17CC38D200822759 /* TencentWeiboConnection.framework in Frameworks */,
-				233DC53E17CC38D200822759 /* TwitterConnection.framework in Frameworks */,
 				233DC53F17CC38D200822759 /* WeChatConnection.framework in Frameworks */,
-				233DC54017CC38D200822759 /* YouDaoNoteConnection.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,35 +290,6 @@
 			name = GuideImages;
 			sourceTree = "<group>";
 		};
-		20E8A4AC1797BDC700160DE1 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				20E8A4ED1797EF1A00160DE1 /* SettingCell */,
-				20E8A4DD1797DA4500160DE1 /* MyLikeAuthorCell */,
-				20E8A4AE1797BDF400160DE1 /* MoviesCell */,
-				20E8A4AD1797BDD800160DE1 /* AuthorCell */,
-			);
-			name = Models;
-			sourceTree = "<group>";
-		};
-		20E8A4AD1797BDD800160DE1 /* AuthorCell */ = {
-			isa = PBXGroup;
-			children = (
-				20E8A4AF1797BE0C00160DE1 /* AuthorCell.h */,
-				20E8A4B01797BE0C00160DE1 /* AuthorCell.m */,
-			);
-			name = AuthorCell;
-			sourceTree = "<group>";
-		};
-		20E8A4AE1797BDF400160DE1 /* MoviesCell */ = {
-			isa = PBXGroup;
-			children = (
-				20E8A4B21797BE2200160DE1 /* MovieCell.h */,
-				20E8A4B31797BE2200160DE1 /* MovieCell.m */,
-			);
-			name = MoviesCell;
-			sourceTree = "<group>";
-		};
 		20E8A4B51797BE3C00160DE1 /* TestData */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,15 +318,6 @@
 			name = MyLikeAuthorListPage;
 			sourceTree = "<group>";
 		};
-		20E8A4DD1797DA4500160DE1 /* MyLikeAuthorCell */ = {
-			isa = PBXGroup;
-			children = (
-				20E8A4E11797DE6500160DE1 /* MyFavorAuthorCell.h */,
-				20E8A4E21797DE6500160DE1 /* MyFavorAuthorCell.m */,
-			);
-			name = MyLikeAuthorCell;
-			sourceTree = "<group>";
-		};
 		20E8A4E51797E13700160DE1 /* SetTingPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -430,15 +336,6 @@
 				20E8A4EB1797E98E00160DE1 /* AuthorMoviesListPage.m */,
 			);
 			name = AthorMoviesListPage;
-			sourceTree = "<group>";
-		};
-		20E8A4ED1797EF1A00160DE1 /* SettingCell */ = {
-			isa = PBXGroup;
-			children = (
-				20A0BC8417993C3B00CFB711 /* SettingCell.h */,
-				20A0BC8517993C3B00CFB711 /* SettingCell.m */,
-			);
-			name = SettingCell;
 			sourceTree = "<group>";
 		};
 		2306E45917962EB600BD3808 /* User */ = {
@@ -490,27 +387,12 @@
 		233DC51617CC38D200822759 /* Connection */ = {
 			isa = PBXGroup;
 			children = (
-				233DC51717CC38D200822759 /* DouBanConnection.framework */,
-				233DC51817CC38D200822759 /* EverNoteConnection.framework */,
-				233DC51917CC38D200822759 /* FacebookConnection.framework */,
-				233DC51A17CC38D200822759 /* InstapaperConnection.framework */,
-				233DC51B17CC38D200822759 /* InstapaperResource.bundle */,
-				233DC51C17CC38D200822759 /* KaiXinConnection.framework */,
-				233DC51D17CC38D200822759 /* MailConnection.framework */,
-				233DC51E17CC38D200822759 /* PocketConnection.framework */,
-				233DC51F17CC38D200822759 /* PrintConnection.framework */,
 				233DC52017CC38D200822759 /* QQConnection.framework */,
 				233DC52117CC38D200822759 /* QZoneConnection.framework */,
-				233DC52217CC38D200822759 /* RenRenConnection.framework */,
 				233DC52317CC38D200822759 /* SinaWeiboConnection.framework */,
 				233DC52417CC38D200822759 /* SMSConnection.framework */,
-				233DC52517CC38D200822759 /* SohuConnection.framework */,
-				233DC52617CC38D200822759 /* SohuWeiboConnection.framework */,
-				233DC52717CC38D200822759 /* T163WeiboConnection.framework */,
 				233DC52817CC38D200822759 /* TencentWeiboConnection.framework */,
-				233DC52917CC38D200822759 /* TwitterConnection.framework */,
 				233DC52A17CC38D200822759 /* WeChatConnection.framework */,
-				233DC52B17CC38D200822759 /* YouDaoNoteConnection.framework */,
 			);
 			path = Connection;
 			sourceTree = "<group>";
@@ -664,7 +546,6 @@
 			children = (
 				2316907F17C3505600B47694 /* Tools */,
 				20E8A4B51797BE3C00160DE1 /* TestData */,
-				20E8A4AC1797BDC700160DE1 /* Models */,
 				23AA7CF41794E1D900C7A8B1 /* Image */,
 				23AA7CF01794E12700C7A8B1 /* ThirdSDK */,
 				23AA7CF51794E20900C7A8B1 /* CenterVIewController */,
@@ -808,7 +689,6 @@
 				20A0BCA6179942ED00CFB711 /* 4@2x.png in Resources */,
 				20B971ED17C5A7BD00BA6554 /* windowBg.png in Resources */,
 				20B971F217C5EC0800BA6554 /* headerimage.png in Resources */,
-				233DC53017CC38D200822759 /* InstapaperResource.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,13 +710,9 @@
 				23AA7CF91794E2C300C7A8B1 /* LeftViewController.m in Sources */,
 				23AA7D031795424A00C7A8B1 /* UserViewController.m in Sources */,
 				23AA7D0617954B1900C7A8B1 /* Public_ViewController.m in Sources */,
-				20E8A4B11797BE0C00160DE1 /* AuthorCell.m in Sources */,
-				20E8A4B41797BE2200160DE1 /* MovieCell.m in Sources */,
 				20E8A4DC1797D54900160DE1 /* MyLikeAuthorListPage.m in Sources */,
-				20E8A4E31797DE6500160DE1 /* MyFavorAuthorCell.m in Sources */,
 				20E8A4E81797E14E00160DE1 /* SetTingPage.m in Sources */,
 				20E8A4EC1797E98E00160DE1 /* AuthorMoviesListPage.m in Sources */,
-				20A0BC8617993C3B00CFB711 /* SettingCell.m in Sources */,
 				20A0BC8917993C8700CFB711 /* NetSettingPage.m in Sources */,
 				20A0BC8D17993D0D00CFB711 /* AboutUsPage.m in Sources */,
 				203B8029179CBA7F0083016C /* IIWrapController.m in Sources */,
