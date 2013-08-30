@@ -214,7 +214,6 @@
 //    [self presentViewController:picker animated:YES completion:nil];
 //    [picker release];
 }
-#pragma mark-
 #pragma matk-确定时
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {

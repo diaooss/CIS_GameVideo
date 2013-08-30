@@ -9,6 +9,7 @@
  公共类目，包含：
  UILabel,UITextfield,UIButton,UIImageView,UIScrollView
  */
+//均为便利构造器生成,因此不用释放.
 
 #import "PublciViewsTools.h"
 #import "AppDelegate.h"

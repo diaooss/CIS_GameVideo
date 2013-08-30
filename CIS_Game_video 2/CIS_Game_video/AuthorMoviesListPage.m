@@ -15,6 +15,12 @@
 @end
 
 @implementation AuthorMoviesListPage
+- (void)dealloc
+{
+    authorListTab = nil;
+    
+    [super dealloc];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -33,20 +39,12 @@
 {
     [super viewDidLoad];
     [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"goBack.png" title:@"作者名字:xxxx"];
-       UITableView *authorListTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+       authorListTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     authorListTab.delegate = self;
     authorListTab.dataSource = self;
+    [authorListTab setTag:1000];
     [self.view addSubview:authorListTab];
-    [authorListTab release];
 
-}
--(void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView.contentOffset.y>10) {
-        NSLog(@"越界了");
-        //在此让headerview隐藏.
-    }
-    
 }
 #pragma mark--列表代理方法
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -74,39 +72,49 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 #pragma  mark--自定义headerview
-//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-//{
-//    return 40;
-//}
-//-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 40)];//创建一个视图    
-//    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 40)];
-//    headerImageView.image = [UIImage imageNamed:@"next.png"];    
-//    [headerView addSubview:headerImageView];    
-//    [headerImageView release];
-//    UILabel *headerLab = [[UILabel alloc] initWithFrame:CGRectMake(headerImageView.right, 10, 100, 20)];
-//    headerLab.backgroundColor = [UIColor clearColor];
-//    headerLab.textColor = [UIColor grayColor];
-//    headerLab.font = [UIFont fontWithName:@"Arial" size:20];
-//    headerLab.textAlignment = NSTextAlignmentCenter;
-//    headerLab.shadowColor = [UIColor whiteColor];
-//    [headerLab setShadowOffset:CGSizeMake(0, 1)];
-//    [headerLab setHighlightedTextColor:[UIColor whiteColor]];
-//    //设置每组的的标题
-//    headerLab.text = @"魔兽阿川";
-//    [headerView addSubview:headerLab];    
-//    [headerLab release];
-//    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-//    btn.frame = CGRectMake(headerLab.right+70, 0, 40, 40);
-//    btn.backgroundColor = [UIColor greenColor];
-//    btn.layer.cornerRadius = 20.0;
-//    [headerView addSubview:btn];
-//    [btn setTitle:@"LIKE" forState:UIControlStateNormal];
-//    btn.backgroundColor = [UIColor redColor];
-//    btn.showsTouchWhenHighlighted = YES;
-//    return headerView;
-//}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 200;
+}
+-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
+    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    headerView.backgroundColor = [UIColor redColor];
+    headerImageView.image = [UIImage imageNamed:@"next.png"];
+    headerImageView.backgroundColor = [UIColor  yellowColor];
+    [headerView addSubview:headerImageView];    
+    [headerImageView release];
+    UILabel *headerLab = [[UILabel alloc] initWithFrame:CGRectMake(headerImageView.right, 10, 100, 20)];
+    headerLab.backgroundColor = [UIColor clearColor];
+    headerLab.textColor = [UIColor grayColor];
+    headerLab.font = [UIFont fontWithName:@"Arial" size:15];
+    headerLab.textAlignment = NSTextAlignmentCenter;
+    headerLab.shadowColor = [UIColor whiteColor];
+    [headerLab setShadowOffset:CGSizeMake(0, 1)];
+    [headerLab setHighlightedTextColor:[UIColor whiteColor]];
+    //设置每组的的标题
+    headerLab.text = @"魔兽阿川";
+    [headerView addSubview:headerLab];    
+    [headerLab release];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    btn.frame = CGRectMake(headerLab.right+70, 0, 40, 20);
+    btn.backgroundColor = [UIColor greenColor];
+    btn.layer.cornerRadius = 5.0;
+    [headerView addSubview:btn];
+    [btn setTitle:@"LIKE" forState:UIControlStateNormal];
+    btn.backgroundColor = [UIColor redColor];
+    btn.showsTouchWhenHighlighted = YES;
+    UITableView *tab = (UITableView *) [self.view viewWithTag:1000];
+    authorListTab.tableHeaderView = headerView;
+    
+    return headerView;
+    }
+    return nil;
+}
 -(void)back
 {
     [self.navigationController popToRootViewControllerAnimated:YES];

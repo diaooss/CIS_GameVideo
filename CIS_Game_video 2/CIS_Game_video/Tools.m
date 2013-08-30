@@ -52,7 +52,7 @@
 //加载一个动画
 +(void)labelMakeAnimation:(UIView* )sender
 {
-    [UIView animateWithDuration:0.8 animations:^{
+    [UIView animateWithDuration:2.0 animations:^{
         [sender setCenter:CGPointMake(160, 20)];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:2.0 animations:^{

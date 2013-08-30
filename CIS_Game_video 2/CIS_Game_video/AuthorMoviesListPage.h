@@ -8,7 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AuthorMoviesListPage : UIViewController<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
+@interface AuthorMoviesListPage : UIViewController<UITableViewDataSource,UITableViewDelegate>
 {
+    UITableView *authorListTab;
 }
 @end
