@@ -94,6 +94,7 @@
 		2316907E17C3500D00B47694 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2316907D17C3500D00B47694 /* CFNetwork.framework */; };
 		2316908617C3508B00B47694 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2316908117C3508B00B47694 /* MBProgressHUD.m */; };
 		2316908817C3508B00B47694 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2316908517C3508B00B47694 /* Tools.m */; };
+		2327068717D5AE2300AF9832 /* Animation_Turn_View.m in Sources */ = {isa = PBXBuildFile; fileRef = 2327068617D5AE2300AF9832 /* Animation_Turn_View.m */; };
 		233A4ED917CB4996007F1143 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4ED817CB4996007F1143 /* MessageUI.framework */; };
 		233A4EDB17CB49E6007F1143 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EDA17CB49E6007F1143 /* CoreTelephony.framework */; };
 		233A4EDD17CB4A08007F1143 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EDC17CB4A08007F1143 /* libsqlite3.dylib */; };
@@ -143,7 +144,6 @@
 		23DA1F6E17938B740092FB0F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA1F6D17938B740092FB0F /* RootViewController.m */; };
 		23DA1F7C17938F790092FB0F /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA1F7B17938F790092FB0F /* iCarousel.m */; };
 		23DA1F7E17938F9A0092FB0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DA1F7D17938F9A0092FB0F /* QuartzCore.framework */; };
-		23DA1F811793904E0092FB0F /* Animation_Turn_View.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA1F801793904E0092FB0F /* Animation_Turn_View.m */; };
 		23DA1F881793BB960092FB0F /* SBView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA1F871793BB960092FB0F /* SBView.m */; };
 /* End PBXBuildFile section */
 
@@ -288,6 +288,8 @@
 		2316908117C3508B00B47694 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		2316908417C3508B00B47694 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		2316908517C3508B00B47694 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		2327068517D5AE2300AF9832 /* Animation_Turn_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation_Turn_View.h; sourceTree = "<group>"; };
+		2327068617D5AE2300AF9832 /* Animation_Turn_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation_Turn_View.m; sourceTree = "<group>"; };
 		233A4ED817CB4996007F1143 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		233A4EDA17CB49E6007F1143 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		233A4EDC17CB4A08007F1143 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -357,8 +359,6 @@
 		23DA1F7A17938F790092FB0F /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		23DA1F7B17938F790092FB0F /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		23DA1F7D17938F9A0092FB0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		23DA1F7F1793904E0092FB0F /* Animation_Turn_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation_Turn_View.h; sourceTree = "<group>"; };
-		23DA1F801793904E0092FB0F /* Animation_Turn_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation_Turn_View.m; sourceTree = "<group>"; };
 		23DA1F861793BB960092FB0F /* SBView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBView.h; sourceTree = "<group>"; };
 		23DA1F871793BB960092FB0F /* SBView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -960,8 +960,8 @@
 		23DA1F851793B8AD0092FB0F /* JustViews */ = {
 			isa = PBXGroup;
 			children = (
-				23DA1F7F1793904E0092FB0F /* Animation_Turn_View.h */,
-				23DA1F801793904E0092FB0F /* Animation_Turn_View.m */,
+				2327068517D5AE2300AF9832 /* Animation_Turn_View.h */,
+				2327068617D5AE2300AF9832 /* Animation_Turn_View.m */,
 			);
 			name = JustViews;
 			sourceTree = "<group>";
@@ -1086,7 +1086,6 @@
 				23DA1F6017938B030092FB0F /* AppDelegate.m in Sources */,
 				23DA1F6E17938B740092FB0F /* RootViewController.m in Sources */,
 				23DA1F7C17938F790092FB0F /* iCarousel.m in Sources */,
-				23DA1F811793904E0092FB0F /* Animation_Turn_View.m in Sources */,
 				23DA1F881793BB960092FB0F /* SBView.m in Sources */,
 				23AA7CE31794E0C700C7A8B1 /* UIViewAdditions.m in Sources */,
 				23AA7CEF1794E10400C7A8B1 /* WZGuideViewController.m in Sources */,
@@ -1144,6 +1143,7 @@
 				2074012B17D0712C00B08A38 /* AsynImageView.m in Sources */,
 				2074012F17D0714600B08A38 /* GroupView.m in Sources */,
 				203C637B17D574D1001595AA /* MyNsstringTools.m in Sources */,
+				2327068717D5AE2300AF9832 /* Animation_Turn_View.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

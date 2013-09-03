@@ -70,26 +70,14 @@
     self.isOpen = NO;
     rootAuthorListTab.hidden = YES;
     [self.view addSubview:rootAuthorListTab];
-    //测试
-    self.rootRequest = [[[RequestTools alloc]init] autorelease];
-    [_rootRequest setDelegate:self];
-    //检验邮箱
-    NSLog(@"邮箱检测结果----%@",[RequestTools checkEmail:@"1010@.com"]);
-    //注册
-    NSLog(@"注册结果--------%@",[RequestTools registerWithUserName:@"张三" withEamil:@"1010@.com" andPassWord:@"123456"]);
-    //登陆是否成功
-    NSLog(@"登陆结果-------%@",[RequestTools loginWithEamil:@"1010@.com" andPassWord:@"123456"]);
-    [RequestTools attentionOneAuthorWith:@"魔王" ByUserEmaiil:@"1010@.com"];
+
 }
-#pragma mark--标签选中的代理方法
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
-{
-	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedIndex);
-}
+
 #pragma mark--请求的代理值回传
 -(void)backOneDic:(NSDictionary* )dic
 {
     NSLog(@"代理值回传:%@",dic);
+    
 }
 #pragma mark--切换浏览模式
 -(void)topRightCorenerBtnAction
@@ -342,7 +330,7 @@
     if (section==0) {
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 20)] ;//创建一个视图
         headerView.backgroundColor = [UIColor redColor];
-        //        //滑动推荐
+//        //滑动推荐
         animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
         [headerView addSubview:animationView];
         [animationView setDelegate:self];
