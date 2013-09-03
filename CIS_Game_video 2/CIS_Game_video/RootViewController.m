@@ -71,27 +71,7 @@
     self.isOpen = NO;
     rootAuthorListTab.hidden = YES;
     [self.view addSubview:rootAuthorListTab];
-<<<<<<< HEAD
-    //测试
-    self.rootRequest = [[RequestTools alloc]init];
-    [_rootRequest setDelegate:self];
-    //检验邮箱
-    NSLog(@"邮箱检测结果----%@",[RequestTools checkEmail:@"1010@.com"]);
-    //注册
-    NSLog(@"注册结果--------%@",[RequestTools registerWithUserName:@"张三" withEamil:@"1010@.com" andPassWord:@"123456"]);
-    //登陆是否成功
-    NSLog(@"登陆结果-------%@",[RequestTools loginWithEamil:@"1010@.com" andPassWord:@"123456"]);
-    [RequestTools attentionOneAuthorWith:@"魔王" ByUserEmaiil:@"1010@.com"];
 }
-#pragma mark--标签选中的代理方法
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
-{
-	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedIndex);
-=======
-
->>>>>>> 2943852f0004374e8d65cf32dc580fe11baadf8c
-}
-
 #pragma mark--请求的代理值回传
 -(void)backOneDic:(NSDictionary* )dic
 {
