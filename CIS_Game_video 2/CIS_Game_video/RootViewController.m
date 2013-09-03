@@ -71,7 +71,7 @@
     rootAuthorListTab.hidden = YES;
     [self.view addSubview:rootAuthorListTab];
     //测试
-    self.rootRequest = [[[RequestTools alloc]init] autorelease];
+    self.rootRequest = [[RequestTools alloc]init];
     [_rootRequest setDelegate:self];
     //检验邮箱
     NSLog(@"邮箱检测结果----%@",[RequestTools checkEmail:@"1010@.com"]);
