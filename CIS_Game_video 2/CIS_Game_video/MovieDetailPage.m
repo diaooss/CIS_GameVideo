@@ -10,14 +10,13 @@
 #import "Tools.h"
 #import "PublciViewsTools.h"
 #import "Header.h"
+#import "MyNsstringTools.h"
+#import "RequestTools.h"
+#import "RequestUrls.h"
 #define leftBtnColor [UIColor colorWithRed:98/255.0 green:138/255.0 blue:14/255.0 alpha:1]
 #define rightBtnColor [UIColor colorWithRed:176/255.0 green:45/255.0 blue:35/255.0 alpha:1]
 #define customBlueColor [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0]
 #define testColor [UIColor colorWithRed:77/255.0 green:88/255.0 blue:0/255.0 alpha:1.0]
-#import "MyNsstringTools.h"
-#import "RequestTools.h"
-#import "RequestUrls.h"
-
 @interface MovieDetailPage ()
 
 @end
@@ -30,6 +29,8 @@
     theAuthorImageView = nil;
     movieInfoTextView = nil;
     movieWeb = nil;
+    _detailRequest = nil;
+    self.detailDic = nil;
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -94,8 +95,15 @@ durationLable.text = @"<<  时长:9'16''  >>";
             [bottomBtn setTitle:@"分享视频" forState:UIControlStateNormal];}
         [self.view addSubview:bottomBtn];
     }
-    NSURLRequest *movieRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://player.youku.com/embed/XNTk1NzQxMDMy" ] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5.0];
-    [movieWeb loadRequest:movieRequest];
+    //测试
+    self.detailRequest = [[RequestTools alloc]init];
+    [_detailRequest setDelegate:self];
+    NSArray *strArry = [NSArray arrayWithObjects:GET_Moview_DETAIL,@"?ID=0000001",nil];
+    
+    [_detailRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    NSLog(@"请求详情:%@",[MyNsstringTools groupStrByAStrArray:strArry]);
+    
+
 }
 - (void)viewDidLoad
 {
@@ -123,12 +131,28 @@ durationLable.text = @"<<  时长:9'16''  >>";
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+-(void)loadMovieWithUrl:(NSString *)urlStr
+{
+          NSURLRequest *movieRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStr ] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5.0];
+        [movieWeb loadRequest:movieRequest];
+}
 #pragma mark--视频收藏
 -(void)topRightCorenerBtnAction
 {
     
 }
-
+#pragma mark--请求的回调方法
+-(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
+{
+    NSLog(@"请求回来的数据是:%@",dic);
+    NSLog(@"链接:%@",[dic objectForKey:@"m_url"]);
+    
+    [self loadMovieWithUrl:[dic objectForKey:@"m_url"]];
+    
+}
+-(void)requestFailedWithResultDictionary:(NSDictionary *)dic
+{
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

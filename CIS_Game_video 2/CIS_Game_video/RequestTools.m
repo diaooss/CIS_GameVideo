@@ -76,7 +76,7 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     resultDic = (NSDictionary *)[request.responseData objectFromJSONData];
     //回调代理
-    if (self.delegate&&[self.delegate respondsToSelector:@selector(backOneDic:)]) {
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(requestSuccessWithResultDictionary:)]) {
         [self.delegate requestSuccessWithResultDictionary:resultDic];
     }
 }
@@ -85,7 +85,9 @@
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     //回调代理
-    if (self.delegate&&[self.delegate respondsToSelector:@selector(backOneDic:)]) {
+    resultDic = (NSDictionary *)[request.responseData objectFromJSONData];
+
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(requestFailedWithResultDictionary:)]) {
         [self.delegate requestFailedWithResultDictionary:resultDic];
     }
     NSLog(@"requestFailed:%@",request.responseString);

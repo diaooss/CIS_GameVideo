@@ -80,7 +80,7 @@
     [_rootRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
     
-    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrWithUtf8ByAStrArray:strArry]];
+    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
     
     
     
@@ -94,11 +94,11 @@
 
 
 #pragma mark--请求的代理值回传
--(void)backOneDic:(NSDictionary* )dic
-{
-    NSLog(@"代理值回传:%@",dic);
-    
-}
+//-(void)backOneDic:(NSDictionary* )dic
+//{
+//    NSLog(@"代理值回传:%@",dic);
+//    
+//}
 #pragma mark--切换浏览模式
 -(void)topRightCorenerBtnAction
 {
@@ -393,7 +393,10 @@
 {
     //可以在这里面推界面 参数 已经传过来
     NSLog(@"--------%@",videoID);
+
     MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
+    detailPage.movieId = videoID;
+
     [self.navigationController pushViewController:detailPage animated:YES];
     [detailPage release];
 }
