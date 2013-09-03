@@ -374,7 +374,7 @@
            
 }
 #pragma mark--Animation_Turn_View的代理方法
--(void)transportVideoInformation:(UIImage *)image
+-(void)transportVideoInformation:(UIImage *)imageID
 {
     NSLog(@"有没有传过来");
     MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
