@@ -43,7 +43,7 @@
         [self addSubview:_nameLabel];
         [_nameLabel setFont:[UIFont systemFontOfSize:13]];
         [_nameLabel setNumberOfLines:0];
-//        [_nameLabel setLineBreakMode:NSLineBreakByWordWrapping];
+        [_nameLabel setLineBreakMode:NSLineBreakByWordWrapping];
         [_nameLabel setBackgroundColor:[UIColor clearColor]];
         
         [_nameLabel setText:@"这是一个测试的名字能不能"];
