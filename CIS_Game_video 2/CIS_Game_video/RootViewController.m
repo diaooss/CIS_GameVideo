@@ -16,6 +16,7 @@
 #import "Cell.h"
 #import "RequestUrls.h"
 #import "RequestTools.h"
+#import "MyNsstringTools.h"
 #import "CategoryListViewController.h"
 @interface RootViewController ()
 @end
@@ -28,6 +29,8 @@
     [defaultListTab release];
     self.rootRequest = nil;
     self.selectIndex = nil;
+    categorySegmentedControl = nil;
+    [_authorListArray release],_authorListArray = nil;
     [categorySegmentedControl release];
     [super dealloc];
 }
@@ -41,6 +44,7 @@
         //数据源为一个大数组,里面内嵌字典或者小数组等,可变化.
         _dataList = [[NSMutableArray alloc] initWithContentsOfFile:path];
         self.mark=0;//初始化标记值
+        _authorListArray = [NSArray array];
     }
     return self;
 }
@@ -71,7 +75,24 @@
     self.isOpen = NO;
     rootAuthorListTab.hidden = YES;
     [self.view addSubview:rootAuthorListTab];
+    //测试
+    self.rootRequest = [[RequestTools alloc]init];
+    [_rootRequest setDelegate:self];
+    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
+    
+    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrWithUtf8ByAStrArray:strArry]];
+    
+    
+    
 }
+#pragma mark--标签选中的代理方法
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
+{
+	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedIndex);
+
+}
+
+
 #pragma mark--请求的代理值回传
 -(void)backOneDic:(NSDictionary* )dic
 {
@@ -120,8 +141,9 @@
 {
    if (tableView == rootAuthorListTab)//代理方法中,要记得判断是在对哪一个列表进行的操作!!!!
         {
+            NSLog(@"you jige%d",[_dataList count]);
             //分组来自于整个数据源内部统一属性比如作者数据的个数
-            return [_dataList count];
+            return [_authorListArray count];
         }
    else{
        return 1;
@@ -178,11 +200,10 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         //根据数据源配置分组CELL样式
-        NSString *name = [[_dataList objectAtIndex:indexPath.section] objectForKey:@"name"];
+        NSString *name = [[self.authorListArray objectAtIndex:indexPath.section] objectForKey:@"author"];
         cell.nameLabel.text = name;
-        cell.countLabel.text = @"108部作品";
-        //在此设置为表示图标,为未打开样式.传入布尔值到自定义cell中去.
-        //        [cell changeArrowWithUp:([self.selectIndex isEqual:indexPath]?YES:NO)];
+        cell.countLabel.text = [NSString stringWithFormat:@"%@部",[[self.authorListArray objectAtIndex:indexPath.section] objectForKey:@"opusCount"]];
+        NSLog(@"图片地址:%@",[[self.authorListArray objectAtIndex:indexPath.section] objectForKey:@"photo"]);
         return cell;
     }
     }else
@@ -232,14 +253,12 @@
         [cell setDelegate:self];
         self.mark=indexPath.row;
         return cell;
-
     }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == rootAuthorListTab) {
         
-    
     //点击分组CELL和展开CELL时的不同响应.
     if (indexPath.row == 0)
     {
@@ -324,12 +343,10 @@
         }
     }
     return 0;
-        
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (tableView == rootAuthorListTab) {
-        
     if (section==0) {
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 20)] ;//创建一个视图
         headerView.backgroundColor = [UIColor redColor];
@@ -337,6 +354,7 @@
         animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
         [headerView addSubview:animationView];
         [animationView setDelegate:self];
+        //        /*/分类标签/*/
         
 //        /*/分类标签/*/
         categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
@@ -353,11 +371,8 @@
         [categorySegmentedControl setSegmentEdgeInset:UIEdgeInsetsMake(0, 5, 5, 0)];
         [categorySegmentedControl setTag:2];
         [headerView addSubview:categorySegmentedControl];
-        
         rootAuthorListTab.tableHeaderView = headerView;
-        
         return [headerView autorelease];
-
     }
             }else{
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
@@ -365,13 +380,9 @@
         [headerView addSubview:animationView];
         [animationView setDelegate:self];
         defaultListTab.tableHeaderView = headerView;
-        
         return headerView;
-
-    
 }
     return nil;
-           
 }
 #pragma mark--Animation_Turn_View的代理方法
 -(void)transportVideoInformation:(UIImage *)imageID
@@ -390,10 +401,19 @@
     [self.navigationController pushViewController:detailPage animated:YES];
     [detailPage release];
 }
-
+#pragma mark--请求的回调方法
+-(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
+{
+    NSLog(@"请求回来的数据是:%@",dic);
+    self.authorListArray = [dic objectForKey:@"result"];
+    NSLog(@"%d",[_authorListArray count]);
+    [rootAuthorListTab reloadData];
+}
+-(void)requestFailedWithResultDictionary:(NSDictionary *)dic
+{
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 @end
