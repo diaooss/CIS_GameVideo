@@ -23,7 +23,7 @@
     [super dealloc];
 }
 //根据字符串,发起异步请求
--(void )requestWithUrl_Asynchronous:(NSString *)urlStr;
+-(void )requestWithUrl_Asynchronous:(NSString *)urlStr
 {
     httpRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[MyNsstringTools changeStrWithUT8:urlStr]]];
     [httpRequest setDelegate:self];
@@ -32,7 +32,7 @@
     [httpRequest startAsynchronous];
 }
 //根据字符串,发起同步请求
--(void )requestWithUrl_Synchronous:(NSString *)urlStr;
+-(void )requestWithUrl_Synchronous:(NSString *)urlStr
 {
     httpRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[MyNsstringTools changeStrWithUT8:urlStr]]];
     [httpRequest setDelegate:self];

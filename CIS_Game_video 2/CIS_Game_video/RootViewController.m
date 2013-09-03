@@ -5,7 +5,6 @@
 //  Created by huangfangwang on 13-7-15.
 //  Copyright (c) 2013年 huangfang. All rights reserved.
 #import "RootViewController.h"
-#import "SBView.h"
 #import "Header.h"
 #import "MovieCell.h"
 #import "AuthorCell.h"
@@ -14,8 +13,9 @@
 #import "Tools.h"
 #import "MovieDetailPage.h"
 #import "HMSegmentedControl.h"
-#import "RequestTools.h"
 #import "Cell.h"
+#import "RequestUrls.h"
+#import "RequestTools.h"
 @interface RootViewController ()
 @end
 @implementation RootViewController
