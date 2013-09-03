@@ -14,42 +14,20 @@
 {
     ASIHTTPRequest * httpRequest;//请求的执行者
     NSURL *requestUrl;
-    NSData *finalData;
-    NSDictionary * _getDic;
-
+    NSDictionary * resultDic;//请求后的解析后的结果字典
 }
-@property(nonatomic,assign)id<myHttpRequestDelegate>delegate;
-//获取用户信息
--(void)getUserInformation;
-//获取作者信息****每次20*****第几个请求
--(void)getAuthorInforWithCategory:(NSString *)category withPage:(int )page;
-//获取视频信息
--(void)getVidoeInforWithCategory:(NSString *)category authorName:(NSString *)authorName withPage:(int )page;
+@property(nonatomic,assign)id<myHttpRequestDelegate>delegate;//设置代理
+//类方法--根据请求返回的状态值,返回布尔值,以供判断
++(BOOL)requestReturnYesOrOkWithCheckUrl_Asynchronous:(NSString *)checkUrl;//异步
++(BOOL)requestReturnYesOrOkWithCheckUrl_Synchronous:(NSString *)checkUrl;//同步
 
-
-//************************************************************
-/*检测账号是否注册过----
- YES-可以注册***NO-不可以注册或者已经存在---
- */
-+ (NSString *) checkEmail:(NSString *)email;
-/*注册----
- YES-注册成功***NO-注册失败---
- */
-+ (NSString *) registerWithUserName:(NSString *)userName withEamil:(NSString *)email andPassWord:(NSString *)passWord;
-/*登陆----
- YES-登陆成功***NO-登陆失败---
- */
-+ (NSString*) loginWithEamil:(NSString *)email andPassWord:(NSString *)passWord;
-//关注一个作者...返回关注是否成功
-+(NSString *)attentionOneAuthorWith:(NSString *)authorName ByUserEmaiil:(NSString*)userEmail;
-//收藏视频.....返回收藏是否成功
-+(NSString *)collectOneVidoe:(NSString *)moveID ByUser:(NSString*)userMeail;
-//签到
-+(NSString *)isSignIn:(NSString*)userMeail;
 @end
-
-//代理
+//定义请求工具的代理,以便进行监控和值回传
 @protocol myHttpRequestDelegate <NSObject>
 @optional
--(void)backOneDic:(NSDictionary* )dic;
+//请求成功
+-(void)requestSuccessWithResultDictionary:(NSDictionary* )dic;
+//请求失败
+-(void)requestFailedWithResultDictionary:(NSDictionary* )dic;
+
 @end

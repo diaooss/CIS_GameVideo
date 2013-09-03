@@ -10,6 +10,7 @@
 		203B8029179CBA7F0083016C /* IIWrapController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B8023179CBA7E0083016C /* IIWrapController.m */; };
 		203B802A179CBA7F0083016C /* IISideController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B8026179CBA7F0083016C /* IISideController.m */; };
 		203B802B179CBA7F0083016C /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B8027179CBA7F0083016C /* IIViewDeckController.m */; };
+		203C637B17D574D1001595AA /* MyNsstringTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 203C637A17D574D1001595AA /* MyNsstringTools.m */; };
 		2045085917C6F2560062A6D8 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2045085817C6F2560062A6D8 /* HMSegmentedControl.m */; };
 		207400FE17D028C800B08A38 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 207400CB17D028C800B08A38 /* ASIAuthenticationDialog.m */; };
 		207400FF17D028C800B08A38 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 207400CE17D028C800B08A38 /* ASIDataCompressor.m */; };
@@ -153,6 +154,9 @@
 		203B8026179CBA7F0083016C /* IISideController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IISideController.m; sourceTree = "<group>"; };
 		203B8027179CBA7F0083016C /* IIViewDeckController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IIViewDeckController.m; sourceTree = "<group>"; };
 		203B8028179CBA7F0083016C /* IIViewDeckController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IIViewDeckController.h; sourceTree = "<group>"; };
+		203C637917D574D1001595AA /* MyNsstringTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyNsstringTools.h; sourceTree = "<group>"; };
+		203C637A17D574D1001595AA /* MyNsstringTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyNsstringTools.m; sourceTree = "<group>"; };
+		203C637C17D57BEA001595AA /* RequestUrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestUrls.h; sourceTree = "<group>"; };
 		2045085717C6F2560062A6D8 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		2045085817C6F2560062A6D8 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		207400CA17D028C800B08A38 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
@@ -639,6 +643,9 @@
 				23AA7CFA179518FC00C7A8B1 /* Header.h */,
 				2074012117D032DC00B08A38 /* RequestTools.h */,
 				2074012217D032DC00B08A38 /* RequestTools.m */,
+				203C637C17D57BEA001595AA /* RequestUrls.h */,
+				203C637917D574D1001595AA /* MyNsstringTools.h */,
+				203C637A17D574D1001595AA /* MyNsstringTools.m */,
 				2316908017C3508B00B47694 /* MBProgressHUD.h */,
 				2316908117C3508B00B47694 /* MBProgressHUD.m */,
 				2316908417C3508B00B47694 /* Tools.h */,
@@ -1136,6 +1143,7 @@
 				2074012717D070E300B08A38 /* Cell.m in Sources */,
 				2074012B17D0712C00B08A38 /* AsynImageView.m in Sources */,
 				2074012F17D0714600B08A38 /* GroupView.m in Sources */,
+				203C637B17D574D1001595AA /* MyNsstringTools.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,7 +21,7 @@
 @implementation RootViewController
 - (void)dealloc
 {
-    AuthorListTab = nil;
+    rootAuthorListTab = nil;
     _dataList = nil;
     animationView = nil;
     defaultListTab = nil;
@@ -57,20 +57,19 @@
     [defaultListTab setDelegate:self];
     [defaultListTab setDataSource:self];
     defaultListTab.hidden = NO;
-    [defaultListTab setTag:2000];
-    defaultListTab.backgroundColor = [UIColor greenColor];
+    defaultListTab.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:defaultListTab];
     [defaultListTab setDecelerationRate:0.3];
     //列表展示
     //代理方法中,要记得判断是在对哪一个列表进行的操作!!!!
-    AuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
-    AuthorListTab.delegate = self;
-    AuthorListTab.dataSource = self;
-    AuthorListTab.sectionFooterHeight = 0;
-    AuthorListTab.sectionHeaderHeight = 0;
+    rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
+    rootAuthorListTab.delegate = self;
+    rootAuthorListTab.dataSource = self;
+    rootAuthorListTab.sectionFooterHeight = 0;
+    rootAuthorListTab.sectionHeaderHeight = 0;
     self.isOpen = NO;
-    AuthorListTab.hidden = YES;
-    [self.view addSubview:AuthorListTab];
+    rootAuthorListTab.hidden = YES;
+    [self.view addSubview:rootAuthorListTab];
     //测试
     self.rootRequest = [[[RequestTools alloc]init] autorelease];
     [_rootRequest setDelegate:self];
@@ -80,7 +79,6 @@
     NSLog(@"注册结果--------%@",[RequestTools registerWithUserName:@"张三" withEamil:@"1010@.com" andPassWord:@"123456"]);
     //登陆是否成功
     NSLog(@"登陆结果-------%@",[RequestTools loginWithEamil:@"1010@.com" andPassWord:@"123456"]);
-    ;
     [RequestTools attentionOneAuthorWith:@"魔王" ByUserEmaiil:@"1010@.com"];
 }
 #pragma mark--标签选中的代理方法
@@ -100,21 +98,24 @@
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.viewDeckController.view cache:YES];
         [UIView commitAnimations];
-    if (AuthorListTab.hidden == YES) {
+    if (rootAuthorListTab.hidden == YES) {
         defaultListTab.hidden = YES;
-        AuthorListTab.hidden = NO;
+        rootAuthorListTab.hidden = NO;
     }else
     {
         defaultListTab.hidden = NO;
-        AuthorListTab.hidden = YES;
+        rootAuthorListTab.hidden = YES;
     }
 //    [Tools makeShare];
 }
 #pragma mark--系统列表代理方法
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == AuthorListTab) {
+    if (tableView == rootAuthorListTab) {
         if (indexPath.row==0) {
+            if (indexPath.section == 0&&indexPath.row==0) {
+               return  40;
+            }
             return 50;
         }else
         {
@@ -126,24 +127,22 @@
             return 30;
         return 230;
     }
-    
 }
 //根据数据源,判断有几个分组
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (tableView == AuthorListTab) {
-        if (tableView == AuthorListTab)//代理方法中,要记得判断是在对哪一个列表进行的操作!!!!
+   if (tableView == rootAuthorListTab)//代理方法中,要记得判断是在对哪一个列表进行的操作!!!!
         {
             //分组来自于整个数据源内部统一属性比如作者数据的个数
             return [_dataList count];
         }
-        return 0;
-    }
-    return 1;
+   else{
+       return 1;
+   }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView==AuthorListTab) {
+    if (tableView==rootAuthorListTab) {
         //如果是打开状态,分组内的行数根据数据数量返回,
         if (self.isOpen) {
             if (self.selectIndex.section == section) {
@@ -160,7 +159,7 @@
 #pragma mark--系统列表的代理方法
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == AuthorListTab) {
+    if (tableView == rootAuthorListTab) {
         
     if (self.isOpen&&self.selectIndex.section == indexPath.section&&indexPath.row!=0)
         //打开了分组CELL
@@ -225,7 +224,6 @@
                 [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
                 [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
             }
-            
             [cell.textLabel setText:[nameArry objectAtIndex:indexPath.row/2]];
             return cell;
         }
@@ -252,7 +250,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == AuthorListTab) {
+    if (tableView == rootAuthorListTab) {
         
     
     //点击分组CELL和展开CELL时的不同响应.
@@ -290,13 +288,14 @@
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
+#pragma mark--此为展开闭合的列表代理方法
 - (void)didSelectCellRowFirstDo:(BOOL)firstDoInsert nextDo:(BOOL)nextDoInsert
 {
     self.isOpen = firstDoInsert;
     //根据传进的布尔值,确定分组指示器的图标样式.并把布尔值会传到自定义cell中去.
-    AuthorCell *cell = (AuthorCell *)[AuthorListTab cellForRowAtIndexPath:self.selectIndex];
+    AuthorCell *cell = (AuthorCell *)[rootAuthorListTab cellForRowAtIndexPath:self.selectIndex];
     [cell changeArrowWithUp:firstDoInsert];
-    [AuthorListTab beginUpdates];
+    [rootAuthorListTab beginUpdates];
     int section = self.selectIndex.section;
     int contentCount = [[[_dataList objectAtIndex:section] objectForKey:@"list"] count];
 	NSMutableArray* rowToInsert = [[NSMutableArray alloc] init];
@@ -305,146 +304,84 @@
 		[rowToInsert addObject:indexPathToInsert];
 	}
 	if (firstDoInsert)
-    {   [AuthorListTab insertRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationTop];
+    {   [rootAuthorListTab insertRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationTop];
         NSLog(@"展开了");
     }
 	else
     {
-        [AuthorListTab deleteRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationTop];
+        [rootAuthorListTab deleteRowsAtIndexPaths:rowToInsert withRowAnimation:UITableViewRowAnimationTop];
         NSLog(@"关闭了");
     }
 	[rowToInsert release];
-	[AuthorListTab endUpdates];
+	[rootAuthorListTab endUpdates];
     if (nextDoInsert) {
         self.isOpen = YES;
-        self.selectIndex = [AuthorListTab indexPathForSelectedRow];
+        self.selectIndex = [rootAuthorListTab indexPathForSelectedRow];
         [self didSelectCellRowFirstDo:YES nextDo:NO];
     }
-    if (self.isOpen) [AuthorListTab scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionTop animated:YES];
+    if (self.isOpen) [rootAuthorListTab scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionTop animated:YES];
 }
-#pragma mark--滚动时轮显视图伴随
+#pragma mark--配置滚动时轮显视图伴随
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (tableView == defaultListTab&&section == 0) {
-        return 100;
+    if (tableView == defaultListTab) {
+        return self.view.height/4;
+    }
+    if (tableView == rootAuthorListTab) {
+        if (section == 0) {
+            return self.view.height/3;
+        }
     }
     return 0;
-    
-    
+        
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (tableView == defaultListTab&&section == 0) {
+    if (tableView == rootAuthorListTab) {
         
-        
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];//创建一个视图
-        UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    if (section==0) {
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 20)] ;//创建一个视图
         headerView.backgroundColor = [UIColor redColor];
-        headerImageView.image = [UIImage imageNamed:@"next.png"];
-        headerImageView.backgroundColor = [UIColor  yellowColor];
-        [headerView addSubview:headerImageView];
-        [headerImageView release];
-        UILabel *headerLab = [[UILabel alloc] initWithFrame:CGRectMake(headerImageView.right, 10, 100, 20)];
-        headerLab.backgroundColor = [UIColor clearColor];
-        headerLab.textColor = [UIColor grayColor];
-        headerLab.font = [UIFont fontWithName:@"Arial" size:15];
-        headerLab.textAlignment = NSTextAlignmentCenter;
-        headerLab.shadowColor = [UIColor whiteColor];
-        [headerLab setShadowOffset:CGSizeMake(0, 1)];
-        [headerLab setHighlightedTextColor:[UIColor whiteColor]];
-        //设置每组的的标题
-        headerLab.text = @"魔兽阿川";
-        [headerView addSubview:headerLab];
-        [headerLab release];
-        UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        btn.frame = CGRectMake(headerLab.right+70, 0, 40, 20);
-        btn.backgroundColor = [UIColor greenColor];
-        btn.layer.cornerRadius = 5.0;
-        [headerView addSubview:btn];
-        [btn setTitle:@"LIKE" forState:UIControlStateNormal];
-        btn.backgroundColor = [UIColor redColor];
-        btn.showsTouchWhenHighlighted = YES;
+        //        //滑动推荐
+        animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
+        [headerView addSubview:animationView];
+        [animationView setDelegate:self];
+        
+        //        /*/分类标签/*/
+        categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
+        [categorySegmentedControl setIndexChangeBlock:^(NSUInteger index) {
+            NSLog(@"Selected index %i (via block)", index);
+        }];
+        NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Data",@"魔兽争霸",@"Data2", @"星级争霸",nil];
+        [categorySegmentedControl setSectionTitles:nameArry];
+        [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
+        [categorySegmentedControl setBackgroundColor:[UIColor colorWithRed:205.0f/232.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
+        [categorySegmentedControl setTextColor:[UIColor colorWithRed:47.0f/255.0f green:79.0f/255.0f blue:79.0f/255.0f alpha:0.8f]];
+        [categorySegmentedControl setSelectionIndicatorColor:[UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:0.8f]];
+        [categorySegmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
+        [categorySegmentedControl setSegmentEdgeInset:UIEdgeInsetsMake(0, 5, 5, 0)];
+        [categorySegmentedControl setTag:2];
+        [headerView addSubview:categorySegmentedControl];
+        
+        rootAuthorListTab.tableHeaderView = headerView;
+        
+        return [headerView autorelease];
+
+    }
+            }else{
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
+        animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.view.height/4)];
+        [headerView addSubview:animationView];
+        [animationView setDelegate:self];
         defaultListTab.tableHeaderView = headerView;
         
         return headerView;
-    }
-    return nil;
-}
 
-//-(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    if (tableView == AuthorListTab) {
-//        
-//    
-//    if (section==0) {
-//        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)] ;//创建一个视图
-//        headerView.backgroundColor = [UIColor redColor];
-//        //        //滑动推荐
-//        animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 0, 320, 100-32)];
-//        [headerView addSubview:animationView];
-//        [animationView setDelegate:self];
-//        
-//        //        /*/分类标签/*/
-//        categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 100-32, 320, 32)];
-//        [categorySegmentedControl setIndexChangeBlock:^(NSUInteger index) {
-//            NSLog(@"Selected index %i (via block)", index);
-//        }];
-//        NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Data",@"魔兽争霸",@"Data2", @"星级争霸",nil];
-//        
-//        [categorySegmentedControl setSectionTitles:nameArry];
-//        [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
-//        [categorySegmentedControl setBackgroundColor:[UIColor colorWithRed:205.0f/232.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-//        [categorySegmentedControl setTextColor:[UIColor colorWithRed:47.0f/255.0f green:79.0f/255.0f blue:79.0f/255.0f alpha:0.8f]];
-//        [categorySegmentedControl setSelectionIndicatorColor:[UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:0.8f]];
-//        [categorySegmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
-//        [categorySegmentedControl setSegmentEdgeInset:UIEdgeInsetsMake(0, 5, 5, 0)];
-//        [categorySegmentedControl setTag:2];
-//        [headerView addSubview:categorySegmentedControl];
-//        
-//        AuthorListTab.tableHeaderView = headerView;
-//        
-//        return [headerView autorelease];
-//
-//    }
-//        return nil;
-//    }else{
-//        
-//        if (section==1) {
-//            UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100+32)] ;//创建一个视图
-//            headerView.backgroundColor = [UIColor redColor];
-//            //        //滑动推荐
-//            animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 0, 320, 100-32)];
-//            [headerView addSubview:animationView];
-//            [animationView setDelegate:self];
-//            
-//            //        /*/分类标签/*/
-//            categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, 100-32, 320, 32)];
-//            [categorySegmentedControl setIndexChangeBlock:^(NSUInteger index) {
-//                NSLog(@"Selected index %i (via block)", index);
-//            }];
-//            NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Data",@"魔兽争霸",@"Data2", @"星级争霸",nil];
-//            [categorySegmentedControl setSectionTitles:nameArry];
-//            [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
-//            [categorySegmentedControl setBackgroundColor:[UIColor colorWithRed:205.0f/232.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
-//            [categorySegmentedControl setTextColor:[UIColor colorWithRed:47.0f/255.0f green:79.0f/255.0f blue:79.0f/255.0f alpha:0.8f]];
-//            [categorySegmentedControl setSelectionIndicatorColor:[UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:0.8f]];
-//            [categorySegmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
-//            [categorySegmentedControl setSegmentEdgeInset:UIEdgeInsetsMake(0, 5, 5, 0)];
-//            [categorySegmentedControl setTag:2];
-//            [headerView addSubview:categorySegmentedControl];
-//            defaultListTab.tableHeaderView = headerView;
-//            return [headerView autorelease];
-//
-//
-//    }else
-//    {
-//        return nil;
-//    }
-//}
-//        return nil;
-//    
-//    
-//}
+    
+}
+    return nil;
+           
+}
 #pragma mark--Animation_Turn_View的代理方法
 -(void)transportVideoInformation:(UIImage *)image
 {

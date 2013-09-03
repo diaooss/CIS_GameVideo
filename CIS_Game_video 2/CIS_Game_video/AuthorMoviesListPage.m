@@ -108,7 +108,6 @@
     [btn setTitle:@"LIKE" forState:UIControlStateNormal];
     btn.backgroundColor = [UIColor redColor];
     btn.showsTouchWhenHighlighted = YES;
-    UITableView *tab = (UITableView *) [self.view viewWithTag:1000];
     authorListTab.tableHeaderView = headerView;
     
     return headerView;

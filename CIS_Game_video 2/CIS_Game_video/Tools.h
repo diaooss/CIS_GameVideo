@@ -17,7 +17,7 @@
 + (void)openLoadsign:(UIView* )view;//创建
 + (void)closeLoadsign:(UIView* )view;//关闭
 //********检测邮箱格式
-+(BOOL)cheeckEmail: (NSString *) userEmail;
++(BOOL)cheeckEmail: (NSString *)userEmail;
 //*****判断是不是登陆过
 +(BOOL)isHaveLogin;
 //评价
@@ -26,8 +26,7 @@
 +(NSMutableDictionary *)getMobileInfo;
 //获得当前APP的版本号
 +(NSString *)getNowAppVersions;
-//MD5加密
-+ (NSString *)md5:(NSString *)string;
+
 //便捷生成导航视图,不涉及抽屉.
 + (void)navigaionView:(UIViewController *)viewController leftImageName:(NSString *)imgName title:(NSString *)title;
 //便捷生成导航视图,不涉及抽屉.带右上角按钮

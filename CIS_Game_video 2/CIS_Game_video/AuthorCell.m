@@ -59,8 +59,8 @@
     CGSize cellSize = self.bounds.size;
     CGSize stateImageViewSize = CGSizeMake(36, 30);
     _stateImgView.frame = CGRectMake(0, (cellSize.height-30)/2, stateImageViewSize.width ,stateImageViewSize.height);
-    _nameLabel.frame = CGRectMake(_stateImgView.right, 0, 170, cellSize.height);
-    _countLabel.frame = CGRectMake(_nameLabel.right, 0, 70, cellSize.height);
+    _nameLabel.frame = CGRectMake(_stateImgView.right, 0, 160, cellSize.height);
+    _countLabel.frame = CGRectMake(_nameLabel.right, 0, 80, cellSize.height);
     _likeBtn.frame = CGRectMake(_countLabel.right+10, (cellSize.height-30)/2, 30, 30);
 }
 - (void)changeArrowWithUp:(BOOL)up
