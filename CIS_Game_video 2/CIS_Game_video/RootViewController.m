@@ -70,6 +70,7 @@
     self.isOpen = NO;
     rootAuthorListTab.hidden = YES;
     [self.view addSubview:rootAuthorListTab];
+<<<<<<< HEAD
     //测试
     self.rootRequest = [[RequestTools alloc]init];
     [_rootRequest setDelegate:self];
@@ -85,11 +86,16 @@
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
 	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedIndex);
+=======
+
+>>>>>>> 2943852f0004374e8d65cf32dc580fe11baadf8c
 }
+
 #pragma mark--请求的代理值回传
 -(void)backOneDic:(NSDictionary* )dic
 {
     NSLog(@"代理值回传:%@",dic);
+    
 }
 #pragma mark--切换浏览模式
 -(void)topRightCorenerBtnAction
@@ -342,7 +348,7 @@
     if (section==0) {
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 20)] ;//创建一个视图
         headerView.backgroundColor = [UIColor redColor];
-        //        //滑动推荐
+//        //滑动推荐
         animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
         [headerView addSubview:animationView];
         [animationView setDelegate:self];
