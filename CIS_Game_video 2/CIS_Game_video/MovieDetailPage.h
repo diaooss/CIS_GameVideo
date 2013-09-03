@@ -16,5 +16,5 @@
     UITextView *movieInfoTextView;
     UIWebView *movieWeb;
 }
-
+@property(nonatomic,copy)NSString * movieId;//等待被请求的视频ID
 @end

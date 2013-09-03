@@ -258,7 +258,6 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView == rootAuthorListTab) {
-        
     //点击分组CELL和展开CELL时的不同响应.
     if (indexPath.row == 0)
     {
@@ -294,7 +293,6 @@
         CategoryListViewController * category = [[CategoryListViewController alloc]init];
         [category setTitle:cell.textLabel.text];
         [self.navigationController pushViewController:category animated:YES];
-
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -350,13 +348,11 @@
     if (section==0) {
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 20)] ;//创建一个视图
         headerView.backgroundColor = [UIColor redColor];
-//        //滑动推荐
+        //滑动推荐
         animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
         [headerView addSubview:animationView];
         [animationView setDelegate:self];
-        //        /*/分类标签/*/
-        
-//        /*/分类标签/*/
+        /*/分类标签/*/
         categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
         [categorySegmentedControl setIndexChangeBlock:^(NSUInteger index) {
             NSLog(@"Selected index %i (via block)", index);

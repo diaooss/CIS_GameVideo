@@ -14,6 +14,9 @@
 #define rightBtnColor [UIColor colorWithRed:176/255.0 green:45/255.0 blue:35/255.0 alpha:1]
 #define customBlueColor [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0]
 #define testColor [UIColor colorWithRed:77/255.0 green:88/255.0 blue:0/255.0 alpha:1.0]
+#import "MyNsstringTools.h"
+#import "RequestTools.h"
+#import "RequestUrls.h"
 
 @interface MovieDetailPage ()
 
