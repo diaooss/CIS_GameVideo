@@ -17,10 +17,7 @@
 @end
 @interface Animation_Turn_View : UIView<iCarouselDataSource,iCarouselDelegate,GroupViewDelegate,myHttpRequestDelegate>
 
-{
-    iCarousel * _icarousel;
-    
-}
+@property (nonatomic,retain)iCarousel *icarousel;
 @property(nonatomic,retain)NSArray * slideArry;
 @property (nonatomic,assign)id <AnimationViewDelegate> delegate;
 

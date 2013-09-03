@@ -23,55 +23,32 @@
     if (self) {
         // Initialization code
     }
-    //风火轮
-#pragma mark --调用接口--------------先请求数据请求成功后加载!!图片
-    return self;
-}
--(void)backOneDic:(NSDictionary *)dic
-{
     _icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(0, 0, self.width, self.height)];
     [_icarousel setDataSource:self];
     [_icarousel setDelegate:self];
     [_icarousel setType:iCarouselTypeRotary];
     [self addSubview:_icarousel];
-    NSLog(@"----*****%@",dic);
+    //风火轮
+#pragma mark --调用接口--------------先请求数据请求成功后加载!!图片
+    return self;
 }
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-}
-
- #pragma mark -
- #pragma mark iCarousel methods
+#pragma mark iCarousel methods
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
 {
     return 5;
 }
- - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index
+- (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index
  {
-     NSArray * arry = [NSArray arrayWithObjects:
-                       @"http://121.199.57.44:88/images/m001.png",
-                       @"http://121.199.57.44:88/images/m002.png",
-                       @"http://121.199.57.44:88/images/003.gif",
-                       @"http://121.199.57.44:88/images/m004.png",
-                       @"http://121.199.57.44:88/images/m005.png",
-                       @"http://121.199.57.44:88/images/m006.png",
-                       @"http://121.199.57.44:88/images/m007.png",
-                       @"http://121.199.57.44:88/images/m008.png",
-                       @"http://121.199.57.44:88/images/m009.png",
-                       @"http://121.199.57.44:88/images/m010.png",
-                       @"http://121.199.57.44:88/images/m011.png",
-                       @"http://121.199.57.44:88/images/m012.png",
-                       nil];
      GroupView * view = [[[GroupView alloc]initWithFrame:CGRectMake(0, 0, self.width-100, self.height)] autorelease];
      [view.nameLabel setAlpha:0];
      [view.timeLabel setAlpha:0];
      [view setDelegate:self];
      [view setVideoID:[NSString stringWithFormat:@"%lu",(unsigned long)index]];
      [view.asImageView setFrame: CGRectMake(0, 0,self.width-100, self.height)];
-     [view.asImageView setImageURL:[arry objectAtIndex:index]];
+     if ([self.slideArry count]>0) {
+         [view.asImageView setImageURL:[self.slideArry objectAtIndex:index]];
+     }
      return view;
-     
 }
 -(void)clickThePictureWith:(NSString *)videoID
 {

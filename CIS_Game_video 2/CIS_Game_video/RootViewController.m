@@ -16,18 +16,19 @@
 #import "Cell.h"
 #import "RequestUrls.h"
 #import "RequestTools.h"
+#import "CategoryListViewController.h"
 @interface RootViewController ()
 @end
 @implementation RootViewController
 - (void)dealloc
 {
-    rootAuthorListTab = nil;
-    _dataList = nil;
-    animationView = nil;
-    defaultListTab = nil;
+    [rootAuthorListTab release];;
+    [_dataList release];
+    [animationView release];
+    [defaultListTab release];
     self.rootRequest = nil;
     self.selectIndex = nil;
-    categorySegmentedControl = nil;
+    [categorySegmentedControl release];
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -272,6 +273,10 @@
     }else
     {
         NSLog(@"点击栏目");
+        UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+        CategoryListViewController * category = [[CategoryListViewController alloc]init];
+        [category setTitle:cell.textLabel.text];
+        [self.navigationController pushViewController:category animated:YES];
 
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -335,7 +340,7 @@
         [headerView addSubview:animationView];
         [animationView setDelegate:self];
         
-        //        /*/分类标签/*/
+//        /*/分类标签/*/
         categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
         [categorySegmentedControl setIndexChangeBlock:^(NSUInteger index) {
             NSLog(@"Selected index %i (via block)", index);
@@ -382,7 +387,10 @@
 -(void)accessPlayViewControllerWithVideoID:(NSString *)videoID
 {
     //可以在这里面推界面 参数 已经传过来
-    NSLog(@"%@",videoID);
+    NSLog(@"--------%@",videoID);
+    MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
+    [self.navigationController pushViewController:detailPage animated:YES];
+    [detailPage release];
 }
 
 - (void)didReceiveMemoryWarning

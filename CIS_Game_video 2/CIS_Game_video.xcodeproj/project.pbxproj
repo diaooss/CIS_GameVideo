@@ -95,6 +95,8 @@
 		2316908617C3508B00B47694 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2316908117C3508B00B47694 /* MBProgressHUD.m */; };
 		2316908817C3508B00B47694 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2316908517C3508B00B47694 /* Tools.m */; };
 		2327068717D5AE2300AF9832 /* Animation_Turn_View.m in Sources */ = {isa = PBXBuildFile; fileRef = 2327068617D5AE2300AF9832 /* Animation_Turn_View.m */; };
+		2327068A17D5BFE700AF9832 /* CategoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2327068917D5BFE700AF9832 /* CategoryListViewController.m */; };
+		2327068D17D5C03100AF9832 /* CategoryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2327068C17D5C03100AF9832 /* CategoryListCell.m */; };
 		233A4ED917CB4996007F1143 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4ED817CB4996007F1143 /* MessageUI.framework */; };
 		233A4EDB17CB49E6007F1143 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EDA17CB49E6007F1143 /* CoreTelephony.framework */; };
 		233A4EDD17CB4A08007F1143 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EDC17CB4A08007F1143 /* libsqlite3.dylib */; };
@@ -290,6 +292,10 @@
 		2316908517C3508B00B47694 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		2327068517D5AE2300AF9832 /* Animation_Turn_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation_Turn_View.h; sourceTree = "<group>"; };
 		2327068617D5AE2300AF9832 /* Animation_Turn_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation_Turn_View.m; sourceTree = "<group>"; };
+		2327068817D5BFE700AF9832 /* CategoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryListViewController.h; sourceTree = "<group>"; };
+		2327068917D5BFE700AF9832 /* CategoryListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryListViewController.m; sourceTree = "<group>"; };
+		2327068B17D5C03100AF9832 /* CategoryListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryListCell.h; sourceTree = "<group>"; };
+		2327068C17D5C03100AF9832 /* CategoryListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CategoryListCell.m; sourceTree = "<group>"; };
 		233A4ED817CB4996007F1143 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		233A4EDA17CB49E6007F1143 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		233A4EDC17CB4A08007F1143 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -857,6 +863,10 @@
 				20E8A4E91797E96200160DE1 /* AthorMoviesListPage */,
 				23DA1F6C17938B740092FB0F /* RootViewController.h */,
 				23DA1F6D17938B740092FB0F /* RootViewController.m */,
+				2327068817D5BFE700AF9832 /* CategoryListViewController.h */,
+				2327068917D5BFE700AF9832 /* CategoryListViewController.m */,
+				2327068B17D5C03100AF9832 /* CategoryListCell.h */,
+				2327068C17D5C03100AF9832 /* CategoryListCell.m */,
 				23DA1F901793D6A60092FB0F /* showVIew */,
 				20B971EE17C5AC0000BA6554 /* MovieDetailPage.h */,
 				20B971EF17C5AC0000BA6554 /* MovieDetailPage.m */,
@@ -1144,6 +1154,8 @@
 				2074012F17D0714600B08A38 /* GroupView.m in Sources */,
 				203C637B17D574D1001595AA /* MyNsstringTools.m in Sources */,
 				2327068717D5AE2300AF9832 /* Animation_Turn_View.m in Sources */,
+				2327068A17D5BFE700AF9832 /* CategoryListViewController.m in Sources */,
+				2327068D17D5C03100AF9832 /* CategoryListCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
