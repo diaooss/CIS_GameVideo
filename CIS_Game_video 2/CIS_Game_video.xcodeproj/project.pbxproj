@@ -13,6 +13,10 @@
 		203C637B17D574D1001595AA /* MyNsstringTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 203C637A17D574D1001595AA /* MyNsstringTools.m */; };
 		2045085917C6F2560062A6D8 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2045085817C6F2560062A6D8 /* HMSegmentedControl.m */; };
 		206E1DE517D6BED300F55C22 /* DefaultRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206E1DE417D6BED200F55C22 /* DefaultRootView.m */; };
+		206E1DEE17D6F49800F55C22 /* sr_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 206E1DE717D6F49800F55C22 /* sr_refresh.png */; };
+		206E1DEF17D6F49800F55C22 /* sr_refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 206E1DE817D6F49800F55C22 /* sr_refresh@2x.png */; };
+		206E1DF017D6F49800F55C22 /* SRSlimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206E1DEA17D6F49800F55C22 /* SRSlimeView.m */; };
+		206E1DF117D6F49800F55C22 /* SRRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206E1DEC17D6F49800F55C22 /* SRRefreshView.m */; };
 		207400FE17D028C800B08A38 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 207400CB17D028C800B08A38 /* ASIAuthenticationDialog.m */; };
 		207400FF17D028C800B08A38 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 207400CE17D028C800B08A38 /* ASIDataCompressor.m */; };
 		2074010017D028C800B08A38 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 207400D017D028C800B08A38 /* ASIDataDecompressor.m */; };
@@ -164,6 +168,13 @@
 		2045085817C6F2560062A6D8 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
 		206E1DE317D6BED200F55C22 /* DefaultRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultRootView.h; sourceTree = "<group>"; };
 		206E1DE417D6BED200F55C22 /* DefaultRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultRootView.m; sourceTree = "<group>"; };
+		206E1DE717D6F49800F55C22 /* sr_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sr_refresh.png; sourceTree = "<group>"; };
+		206E1DE817D6F49800F55C22 /* sr_refresh@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sr_refresh@2x.png"; sourceTree = "<group>"; };
+		206E1DE917D6F49800F55C22 /* SRSlimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSlimeView.h; sourceTree = "<group>"; };
+		206E1DEA17D6F49800F55C22 /* SRSlimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSlimeView.m; sourceTree = "<group>"; };
+		206E1DEB17D6F49800F55C22 /* SRRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRefreshView.h; sourceTree = "<group>"; };
+		206E1DEC17D6F49800F55C22 /* SRRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRefreshView.m; sourceTree = "<group>"; };
+		206E1DED17D6F49800F55C22 /* SRDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDefine.h; sourceTree = "<group>"; };
 		207400CA17D028C800B08A38 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		207400CB17D028C800B08A38 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		207400CC17D028C800B08A38 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -421,6 +432,20 @@
 				2045085817C6F2560062A6D8 /* HMSegmentedControl.m */,
 			);
 			path = HMSegmentedControl;
+			sourceTree = "<group>";
+		};
+		206E1DE617D6F48300F55C22 /* RefreshSDK */ = {
+			isa = PBXGroup;
+			children = (
+				206E1DE717D6F49800F55C22 /* sr_refresh.png */,
+				206E1DE817D6F49800F55C22 /* sr_refresh@2x.png */,
+				206E1DE917D6F49800F55C22 /* SRSlimeView.h */,
+				206E1DEA17D6F49800F55C22 /* SRSlimeView.m */,
+				206E1DEB17D6F49800F55C22 /* SRRefreshView.h */,
+				206E1DEC17D6F49800F55C22 /* SRRefreshView.m */,
+				206E1DED17D6F49800F55C22 /* SRDefine.h */,
+			);
+			name = RefreshSDK;
 			sourceTree = "<group>";
 		};
 		207400C917D028C800B08A38 /* ASI */ = {
@@ -792,6 +817,7 @@
 		23AA7CF01794E12700C7A8B1 /* ThirdSDK */ = {
 			isa = PBXGroup;
 			children = (
+				206E1DE617D6F48300F55C22 /* RefreshSDK */,
 				2074011417D028E300B08A38 /* JsonKit */,
 				207400C917D028C800B08A38 /* ASI */,
 				233DC58017CC400B00822759 /* ShareSDK_v2.3.1 */,
@@ -1087,6 +1113,8 @@
 				233DC5DA17CC400C00822759 /* ShareSDKiPhoneDefaultShareViewUI.bundle in Resources */,
 				233DC5DC17CC400C00822759 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */,
 				2074013117D0722D00B08A38 /* plant1.jpg in Resources */,
+				206E1DEE17D6F49800F55C22 /* sr_refresh.png in Resources */,
+				206E1DEF17D6F49800F55C22 /* sr_refresh@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1162,6 +1190,8 @@
 				2327068A17D5BFE700AF9832 /* CategoryListViewController.m in Sources */,
 				2327068D17D5C03100AF9832 /* CategoryListCell.m in Sources */,
 				206E1DE517D6BED300F55C22 /* DefaultRootView.m in Sources */,
+				206E1DF017D6F49800F55C22 /* SRSlimeView.m in Sources */,
+				206E1DF117D6F49800F55C22 /* SRRefreshView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

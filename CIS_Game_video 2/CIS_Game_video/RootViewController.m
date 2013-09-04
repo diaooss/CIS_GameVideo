@@ -29,6 +29,7 @@
     self.rootRequest = nil;
     self.selectIndex = nil;
     categorySegmentedControl = nil;
+    rootRefreshView = nil;
     [_authorListArray release],_authorListArray = nil;
     [categorySegmentedControl release];
     [super dealloc];
@@ -48,7 +49,7 @@
 -(void)loadView
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    [self.view setBackgroundColor:[UIColor whiteColor]];
+    [self.view setBackgroundColor:[UIColor grayColor]];
 }
 - (void)viewDidLoad
 {
@@ -63,6 +64,19 @@
     self.isOpen = NO;
     rootAuthorListTab.hidden = NO;
     [self.view addSubview:rootAuthorListTab];
+    ///
+    rootRefreshView = [[SRRefreshView alloc] init];
+    rootRefreshView.delegate = self;
+    rootRefreshView.upInset = 0;
+    rootRefreshView.slimeMissWhenGoingBack = YES;
+    rootRefreshView.slime.bodyColor = [UIColor grayColor];
+    rootRefreshView.slime.skinColor = [UIColor grayColor];
+    rootRefreshView.slime.lineWith = 5;
+    rootRefreshView.slime.shadowBlur = 1;
+    rootRefreshView.slime.shadowColor = [UIColor blackColor];
+    rootRefreshView.activityIndicationView.color = [UIColor blackColor];
+    ///
+    [rootAuthorListTab addSubview:rootRefreshView];
    
     /*/翻转后的页面/*/
     //测试
@@ -283,7 +297,7 @@
         categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
 
             [categorySegmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Dota",@"魔兽争霸",@"Dota2", @"星级争霸",nil];
+        NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Dota",@"魔兽争霸",@"Dota2", @"星际争霸",nil];
         [categorySegmentedControl setSectionTitles:nameArry];
         [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
         [categorySegmentedControl setBackgroundColor:[UIColor colorWithRed:205.0f/232.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
@@ -321,7 +335,6 @@
     self.authorListArray = [dic objectForKey:@"result"];
     NSLog(@"%d",[_authorListArray count]);
     [rootAuthorListTab reloadData];
-    [categorySegmentedControl setSelectedIndex:3];
 
 
 }
@@ -355,6 +368,27 @@
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
 }
+#pragma mark - scrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [rootRefreshView scrollViewDidScroll];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [rootRefreshView scrollViewDidEndDraging];
+}
+#pragma mark - slimeRefresh delegate
+- (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
+{
+    
+        [rootRefreshView endRefresh];
+        
+    
+    
+    
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

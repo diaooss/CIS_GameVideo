@@ -10,13 +10,15 @@
 #import "IIViewDeckController.h"
 #import "RequestTools.h"
 #import "DefaultRootView.h"
+#import "SRRefreshView.h"
 @class HMSegmentedControl;
-@interface RootViewController : UIViewController<IIViewDeckControllerDelegate,AnimationViewDelegate,UITableViewDataSource,UITableViewDelegate,myHttpRequestDelegate,DefaultRootViewDelegate>
+@interface RootViewController : UIViewController<IIViewDeckControllerDelegate,AnimationViewDelegate,UITableViewDataSource,UITableViewDelegate,myHttpRequestDelegate,DefaultRootViewDelegate,SRRefreshDelegate,UIScrollViewDelegate>
 {
     UITableView *rootAuthorListTab;//切换视图后作者的集合列表
     NSMutableArray *_dataList;//测试数据所用的数据源
     Animation_Turn_View * animationView;//轮显
     HMSegmentedControl *categorySegmentedControl;//标签
+    SRRefreshView*rootRefreshView;//下拉刷新.
 }
 @property(nonatomic,retain)RequestTools * rootRequest;//请求的代理,方便回传值.
 @property (nonatomic,retain)NSIndexPath *selectIndex;//选中的标记
