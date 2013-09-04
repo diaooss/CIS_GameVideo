@@ -21,6 +21,7 @@
 @implementation LeftViewController
 - (void)dealloc
 {
+    [_setTableView release];
     [_nameArry release];
     [_pictureArry release];
     [checkLabel release],checkLabel = nil;
@@ -42,11 +43,11 @@
 {
     [super viewDidLoad];
     //基础信息
-    UITableView * setTableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0,320, self.view.height*5/9) style:UITableViewStylePlain];
-    [setTableView setDelegate:self];
-    [setTableView setDataSource:self];
-    [self.view addSubview:setTableView];
-    [setTableView release];
+    _setTableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0,320, self.view.height*5/9) style:UITableViewStylePlain];
+    [_setTableView setDelegate:self];
+    [_setTableView setDataSource:self];
+    [self.view addSubview:_setTableView];
+   
     NSArray * arry = [NSArray arrayWithObjects:@"系统设置",@"分享设置",@"应用推荐",@"网络设置",@"关于CIS", nil];
 //有待更改
     for (int j=0; j<3; j++) {
@@ -54,7 +55,7 @@
             if (2*j+i<5) {
                 //but??????
             UIButton * but = [UIButton buttonWithType:UIButtonTypeCustom];
-            [but setFrame:CGRectMake(0+((320-44)/2)*i, setTableView.bottom+j*self.view.height/9, (320-44)/2, self.view.height/9)];
+            [but setFrame:CGRectMake(0+((320-44)/2)*i, _setTableView.bottom+j*self.view.height/9, (320-44)/2, self.view.height/9)];
             [self.view addSubview:but];
             [but setTag:100+2*j+i];
             [but.layer setBorderWidth:3];
@@ -108,7 +109,13 @@
     {
     [cell.textLabel setText:[_nameArry objectAtIndex:indexPath.row-1]];
     }
-    [cell.imageView setImage:[UIImage imageNamed:@"test.test.png"]];
+    if (self.photoPath) {
+        [cell.imageView setImage:[UIImage imageWithContentsOfFile:self.photoPath]];
+    }else
+    {
+        [cell.imageView setImage:[UIImage imageNamed:@"smile32.png"]];
+    }
+    
     //[_pictureArry objectAtIndex:indexPath.row]]];
     return cell;
 }
@@ -191,56 +198,50 @@
 {
     NSLog(@"从相册");
 #pragma mark 从摄像头获取活动图片
-    UIImagePickerController*imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        imagePicker.allowsEditing = YES;
-    [self presentViewController:imagePicker animated:YES completion:^{
-        nil;
-    }];
+    UIImagePickerController *pickC = [[UIImagePickerController alloc] init];
+    pickC.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    pickC.allowsEditing = YES;
+    pickC.delegate = self;
+    [self presentViewController:pickC animated:YES completion:nil];
+    [pickC release];
     
 }
 #pragma matk-从相机
 -(void)congXiangJi
 {
     NSLog(@"相机");
-    //震动未动.
-//    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-//    UIImagePickerController *picker=[[UIImagePickerController alloc]init];
-//    [picker setDelegate:self];
-//    [picker setAllowsEditing:YES];
-//    NSString *requiredMediaType = ( NSString *)kUTTypeJPEG;
-//    NSLog(@"类型是:%@",requiredMediaType);
-//    //    NSString *requiredMediaType1 = ( NSString *)kUTTypeMovie;
-//    NSArray *arrMediaTypes=[NSArray arrayWithObjects:requiredMediaType,nil];
-//    [picker setMediaTypes:arrMediaTypes];
-//    [picker setSourceType:UIImagePickerControllerSourceTypeCamera];
-//    [self presentViewController:picker animated:YES completion:nil];
-//    [picker release];
+    UIImagePickerController *pickC = [[UIImagePickerController alloc] init];
+    pickC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    pickC.allowsEditing = YES;
+    pickC.delegate = self;
+    [self presentViewController:pickC animated:YES completion:nil];
+    [pickC release];
 }
 #pragma matk-确定时
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
-    //    _tempImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+    _tempImage = [info objectForKey:@"UIImagePickerControllerEditedImage"];
     [self dismissViewControllerAnimated:YES completion:^{
         NSData *data = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerEditedImage"], 0.5);
         NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)objectAtIndex:0];
         static int i = 0;
-//        self.photoPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.png",i++]];
-//        [data writeToFile:self.photoPath atomically:YES];
+        self.photoPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.png",i++]];
+        [data writeToFile:self.photoPath atomically:YES];
     }];
     [self performSelector:@selector(selectPic:) withObject:[info objectForKey:@"UIImagePickerControllerEditedImage"] afterDelay:0.1];
 }
 - (void)selectPic:(UIImage*)image
 {
     NSLog(@"image%@",image);
+    [_setTableView reloadData];
+[self.viewDeckController dismissViewControllerAnimated:YES completion:nil];
 }
 /*/-----------/*/
 #pragma matk-取消时
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"-------");
+    [self.viewDeckController dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)backToRootViewController
 {
@@ -308,22 +309,25 @@
     NSLog(@"%d",sender.tag);
     switch (sender.tag) {
         case 100:
-            NSLog(@"哈哈哈");
+        {
             SetTingPage *configPage = [[SetTingPage alloc] init];
             [self judgeTheView:[sender titleForState:UIControlStateNormal] changeViecontroller:configPage];
             [configPage release];
+        }
             break;
         case 103:
-            NSLog(@"哈哈哈");
+        {
             NetSettingPage *netConfigPage = [[NetSettingPage alloc] init];
             [self judgeTheView:[sender titleForState:UIControlStateNormal] changeViecontroller:netConfigPage];
             [netConfigPage release];
+        }
             break;
         case 104:
-            NSLog(@"哈哈哈");
+        {
             AboutUsPage *usPage = [[AboutUsPage alloc] init];
             [self judgeTheView:[sender titleForState:UIControlStateNormal] changeViecontroller:usPage];
             [usPage release];
+        }
             break;
         default:
             break;
