@@ -8,11 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate>
+@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 {
     NSArray * _nameArry;
     NSArray * _pictureArry;
     BOOL _isCraete;
     UILabel *checkLabel;//签到的标签
+    UIImage * _tempImage;
+    
+    UITableView * _setTableView;
 }
+@property(nonatomic,copy)NSString * photoPath;
 @end
