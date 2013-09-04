@@ -13,7 +13,6 @@
 #import "Tools.h"
 #import "MovieDetailPage.h"
 #import "HMSegmentedControl.h"
-#import "Cell.h"
 #import "RequestUrls.h"
 #import "RequestTools.h"
 #import "MyNsstringTools.h"
@@ -26,7 +25,6 @@
     [rootAuthorListTab release];;
     [_dataList release];
     [animationView release];
-    [defaultListTab release];
     self.rootRequest = nil;
     self.selectIndex = nil;
     categorySegmentedControl = nil;
@@ -43,7 +41,6 @@
         NSString *path  = [[NSBundle mainBundle] pathForResource:@"ExpansionTableTestData" ofType:@"plist"];
         //数据源为一个大数组,里面内嵌字典或者小数组等,可变化.
         _dataList = [[NSMutableArray alloc] initWithContentsOfFile:path];
-        self.mark=0;//初始化标记值
         _authorListArray = [NSArray array];
     }
     return self;
@@ -58,13 +55,7 @@
     [super viewDidLoad];
     [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" rightImageName:@"myFriends.png" title:@"幻方"];
     /*/配置默认界面/*/
-    defaultListTab = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
-    [defaultListTab setDelegate:self];
-    [defaultListTab setDataSource:self];
-    defaultListTab.hidden = NO;
-    defaultListTab.backgroundColor = [UIColor whiteColor];
-    [self.view addSubview:defaultListTab];
-    [defaultListTab setDecelerationRate:0.3];
+    
     //列表展示
     //代理方法中,要记得判断是在对哪一个列表进行的操作!!!!
     rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
@@ -73,16 +64,13 @@
     rootAuthorListTab.sectionFooterHeight = 0;
     rootAuthorListTab.sectionHeaderHeight = 0;
     self.isOpen = NO;
-    rootAuthorListTab.hidden = YES;
+    rootAuthorListTab.hidden = NO;
     [self.view addSubview:rootAuthorListTab];
     //测试
     self.rootRequest = [[RequestTools alloc]init];
     [_rootRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
-    
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-    
-    
     
 }
 #pragma mark--标签选中的代理方法
@@ -93,12 +81,6 @@
 }
 
 
-#pragma mark--请求的代理值回传
-//-(void)backOneDic:(NSDictionary* )dic
-//{
-//    NSLog(@"代理值回传:%@",dic);
-//    
-//}
 #pragma mark--切换浏览模式
 -(void)topRightCorenerBtnAction
 {
@@ -106,20 +88,11 @@
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.viewDeckController.view cache:YES];
         [UIView commitAnimations];
-    if (rootAuthorListTab.hidden == YES) {
-        defaultListTab.hidden = YES;
-        rootAuthorListTab.hidden = NO;
-    }else
-    {
-        defaultListTab.hidden = NO;
-        rootAuthorListTab.hidden = YES;
-    }
-//    [Tools makeShare];
 }
 #pragma mark--系统列表代理方法
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == rootAuthorListTab) {
+   
         if (indexPath.row==0) {
             if (indexPath.section == 0&&indexPath.row==0) {
                return  40;
@@ -129,12 +102,7 @@
         {
         return 100;
         }
-    }else
-    {
-        if (indexPath.row%2==0)
-            return 30;
-        return 230;
-    }
+    
 }
 //根据数据源,判断有几个分组
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -151,7 +119,7 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView==rootAuthorListTab) {
+    
         //如果是打开状态,分组内的行数根据数据数量返回,
         if (self.isOpen) {
             if (self.selectIndex.section == section) {
@@ -160,17 +128,12 @@
         }
         //如果是关闭状态,则返回一个
         return 1;
-    }else
-    {
-        return 10;
-    }
+    
 }
 #pragma mark--系统列表的代理方法
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == rootAuthorListTab) {
-        
-    if (self.isOpen&&self.selectIndex.section == indexPath.section&&indexPath.row!=0)
+        if (self.isOpen&&self.selectIndex.section == indexPath.section&&indexPath.row!=0)
         //打开了分组CELL
     {
         static NSString *CellIdentifier = @"Cell2";
@@ -206,58 +169,10 @@
         NSLog(@"图片地址:%@",[[self.authorListArray objectAtIndex:indexPath.section] objectForKey:@"photo"]);
         return cell;
     }
-    }else
-    {
-        NSArray * arry = [NSArray arrayWithObjects:
-                          @"http://121.199.57.44:88/images/m001.png",
-                          @"http://121.199.57.44:88/images/m002.png",
-                          @"http://121.199.57.44:88/images/003.gif",
-                          @"http://121.199.57.44:88/images/m004.png",
-                          @"http://121.199.57.44:88/images/m005.png",
-                          @"http://121.199.57.44:88/images/m006.png",
-                          @"http://121.199.57.44:88/images/m007.png",
-                          @"http://121.199.57.44:88/images/m008.png",
-                          @"http://121.199.57.44:88/images/m009.png",
-                          @"http://121.199.57.44:88/images/m010.png",
-                          @"http://121.199.57.44:88/images/m011.png",
-                          @"http://121.199.57.44:88/images/m012.png",
-                          nil];
-        NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"DOTA",@"DOTA2",@"魔兽争霸",@"星际争霸2", nil];
-        //加载标题
-        if (indexPath.row%2==0) {
-            static NSString *mark = @"mark";
-            UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mark];
-            if (cell==nil) {
-                cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mark] autorelease];
-                [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-                [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-            }
-            [cell.textLabel setText:[nameArry objectAtIndex:indexPath.row/2]];
-            return cell;
-        }
-        //加载标题下的数据
-        static NSString *identity = @"cell";
-        Cell *cell = [tableView dequeueReusableCellWithIdentifier:identity];
-        if (cell==nil) {
-            cell = [[[Cell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identity]autorelease];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        //*****************确保重用的cell起始位置不变
-        [cell.scrollerView setContentOffset:CGPointMake(0, 0)];
-        //***加载过以后不再加载-------很重要-----
-        if (self.mark>indexPath.row||self.mark==19) {
-            return cell;
-        }
-        //调用----加载数据
-        [cell loadInforWithNetArry:arry];
-        [cell setDelegate:self];
-        self.mark=indexPath.row;
-        return cell;
-    }
+    
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == rootAuthorListTab) {
     //点击分组CELL和展开CELL时的不同响应.
     if (indexPath.row == 0)
     {
@@ -285,14 +200,6 @@
         NSDictionary *dic = [_dataList objectAtIndex:indexPath.section];
         NSArray *list = [dic objectForKey:@"list"];
         NSString *item = [list objectAtIndex:indexPath.row-1];
-    }
-    }else
-    {
-        NSLog(@"点击栏目");
-        UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
-        CategoryListViewController * category = [[CategoryListViewController alloc]init];
-        [category setTitle:cell.textLabel.text];
-        [self.navigationController pushViewController:category animated:YES];
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -332,10 +239,7 @@
 #pragma mark--配置滚动时轮显视图伴随
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    if (tableView == defaultListTab) {
-        return self.view.height/4;
-    }
-    if (tableView == rootAuthorListTab) {
+        if (tableView == rootAuthorListTab) {
         if (section == 0) {
             return self.view.height/3;
         }
@@ -344,8 +248,7 @@
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    if (tableView == rootAuthorListTab) {
-    if (section==0) {
+        if (section==0) {
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 20)] ;//创建一个视图
         headerView.backgroundColor = [UIColor redColor];
         //滑动推荐
@@ -370,33 +273,14 @@
         rootAuthorListTab.tableHeaderView = headerView;
         return [headerView autorelease];
     }
-            }else{
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
-        animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.view.height/4)];
-        [headerView addSubview:animationView];
-        [animationView setDelegate:self];
-        defaultListTab.tableHeaderView = headerView;
-        return headerView;
-}
     return nil;
+            
 }
 #pragma mark--Animation_Turn_View的代理方法
 -(void)transportVideoInformation:(UIImage *)imageID
 {
     NSLog(@"有没有传过来");
     MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
-    [self.navigationController pushViewController:detailPage animated:YES];
-    [detailPage release];
-}
-//自定义cell的代理 找到当前点击的视频
--(void)accessPlayViewControllerWithVideoID:(NSString *)videoID
-{
-    //可以在这里面推界面 参数 已经传过来
-    NSLog(@"--------%@",videoID);
-
-    MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
-    detailPage.movieId = videoID;
-
     [self.navigationController pushViewController:detailPage animated:YES];
     [detailPage release];
 }

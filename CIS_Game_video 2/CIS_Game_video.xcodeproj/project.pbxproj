@@ -12,6 +12,7 @@
 		203B802B179CBA7F0083016C /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B8027179CBA7F0083016C /* IIViewDeckController.m */; };
 		203C637B17D574D1001595AA /* MyNsstringTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 203C637A17D574D1001595AA /* MyNsstringTools.m */; };
 		2045085917C6F2560062A6D8 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2045085817C6F2560062A6D8 /* HMSegmentedControl.m */; };
+		206E1DE517D6BED300F55C22 /* DefaultRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206E1DE417D6BED200F55C22 /* DefaultRootView.m */; };
 		207400FE17D028C800B08A38 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = 207400CB17D028C800B08A38 /* ASIAuthenticationDialog.m */; };
 		207400FF17D028C800B08A38 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 207400CE17D028C800B08A38 /* ASIDataCompressor.m */; };
 		2074010017D028C800B08A38 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = 207400D017D028C800B08A38 /* ASIDataDecompressor.m */; };
@@ -161,6 +162,8 @@
 		203C637C17D57BEA001595AA /* RequestUrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestUrls.h; sourceTree = "<group>"; };
 		2045085717C6F2560062A6D8 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		2045085817C6F2560062A6D8 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		206E1DE317D6BED200F55C22 /* DefaultRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultRootView.h; sourceTree = "<group>"; };
+		206E1DE417D6BED200F55C22 /* DefaultRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultRootView.m; sourceTree = "<group>"; };
 		207400CA17D028C800B08A38 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
 		207400CB17D028C800B08A38 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
 		207400CC17D028C800B08A38 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
@@ -863,6 +866,8 @@
 				20E8A4E91797E96200160DE1 /* AthorMoviesListPage */,
 				23DA1F6C17938B740092FB0F /* RootViewController.h */,
 				23DA1F6D17938B740092FB0F /* RootViewController.m */,
+				206E1DE317D6BED200F55C22 /* DefaultRootView.h */,
+				206E1DE417D6BED200F55C22 /* DefaultRootView.m */,
 				2327068817D5BFE700AF9832 /* CategoryListViewController.h */,
 				2327068917D5BFE700AF9832 /* CategoryListViewController.m */,
 				2327068B17D5C03100AF9832 /* CategoryListCell.h */,
@@ -1156,6 +1161,7 @@
 				2327068717D5AE2300AF9832 /* Animation_Turn_View.m in Sources */,
 				2327068A17D5BFE700AF9832 /* CategoryListViewController.m in Sources */,
 				2327068D17D5C03100AF9832 /* CategoryListCell.m in Sources */,
+				206E1DE517D6BED300F55C22 /* DefaultRootView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
