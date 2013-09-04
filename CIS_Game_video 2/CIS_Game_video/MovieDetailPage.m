@@ -144,7 +144,6 @@ durationLable.text = @"<<  时长:9'16''  >>";
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
-    NSLog(@"请求回来的数据是:%@",dic);
     NSLog(@"链接:%@",[dic objectForKey:@"m_url"]);
     
     [self loadMovieWithUrl:[dic objectForKey:@"m_url"]];

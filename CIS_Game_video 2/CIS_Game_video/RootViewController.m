@@ -42,6 +42,7 @@
         //数据源为一个大数组,里面内嵌字典或者小数组等,可变化.
         _dataList = [[NSMutableArray alloc] initWithContentsOfFile:path];
         _authorListArray = [NSArray array];
+        
     }
     return self;
 }
@@ -55,53 +56,28 @@
     [super viewDidLoad];
     [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" rightImageName:@"myFriends.png" title:@"幻方"];
     /*/配置默认界面/*/
-    
     rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
     rootAuthorListTab.delegate = self;
     rootAuthorListTab.dataSource = self;
     rootAuthorListTab.sectionFooterHeight = 0;
     rootAuthorListTab.sectionHeaderHeight = 0;
     self.isOpen = NO;
-
     rootAuthorListTab.hidden = NO;
     [self.view addSubview:rootAuthorListTab];
-    //测试
-    self.rootRequest = [[RequestTools alloc]init];
-    [_rootRequest setDelegate:self];
-    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
-    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-    [self.view addSubview:rootAuthorListTab];    
-//    //列表展示
-//    //代理方法中,要记得判断是在对哪一个列表进行的操作!!!!
-//    rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
-//    rootAuthorListTab.delegate = self;
-//    rootAuthorListTab.dataSource = self;
-//    rootAuthorListTab.sectionFooterHeight = 0;
-//    rootAuthorListTab.sectionHeaderHeight = 0;
-//    self.isOpen = NO;
-//
-//    rootAuthorListTab.hidden = NO;
-//    [self.view addSubview:rootAuthorListTab];
-//    //测试
-//    self.rootRequest = [[RequestTools alloc]init];
-//    [_rootRequest setDelegate:self];
-//    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
-//    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-//    rootAuthorListTab.hidden = YES;
-//    [self.view addSubview:rootAuthorListTab];
-    
-    
+   
+    /*/翻转后的页面/*/
     DefaultRootView * rootView = [[DefaultRootView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height)];
+    rootView.hidden = YES;
     [rootView addTarget:self action:@selector(transportVideoInformation:)];
     [self.view addSubview:rootView];
     [rootView release];
-    
-}
-#pragma mark--标签选中的代理方法
-- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
-{
-	NSLog(@"Selected index %i (via UIControlEventValueChanged)", segmentedControl.selectedIndex);
+    //请求测试
+    self.rootRequest = [[RequestTools alloc]init];
+    [_rootRequest setDelegate:self];
 
+    [self startRequestWithCateStr:@"dota"];//发起请求
+
+    
 }
 
 #pragma mark--切换浏览模式
@@ -273,10 +249,9 @@
         [animationView setDelegate:self];
         /*/分类标签/*/
         categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
-        [categorySegmentedControl setIndexChangeBlock:^(NSUInteger index) {
-            NSLog(@"Selected index %i (via block)", index);
-        }];
-        NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Data",@"魔兽争霸",@"Data2", @"星级争霸",nil];
+
+            [categorySegmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
+        NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Dota",@"魔兽争霸",@"Dota2", @"星级争霸",nil];
         [categorySegmentedControl setSectionTitles:nameArry];
         [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
         [categorySegmentedControl setBackgroundColor:[UIColor colorWithRed:205.0f/232.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
@@ -300,6 +275,13 @@
     [self.navigationController pushViewController:detailPage animated:YES];
     [detailPage release];
 }
+#pragma mark--发起请求
+-(void)startRequestWithCateStr:cateStr
+{
+    NSString *newCateStr = [NSString stringWithFormat:@"?category=%@",cateStr];
+    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,newCateStr,nil];
+    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+}
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
@@ -307,6 +289,36 @@
     self.authorListArray = [dic objectForKey:@"result"];
     NSLog(@"%d",[_authorListArray count]);
     [rootAuthorListTab reloadData];
+    [categorySegmentedControl setSelectedIndex:3];
+
+
+}
+#pragma mark--标签选中的代理方法
+- (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
+{
+	NSLog(@"选中的是: %i", segmentedControl.selectedIndex);
+
+    switch (segmentedControl.selectedIndex) {
+        case 0:
+            [self startRequestWithCateStr:@"英雄联盟"];
+            break;
+            case 1:
+            [self startRequestWithCateStr:@"dota"];
+            break;
+        case 2:
+            [self startRequestWithCateStr:@"魔兽争霸3"];
+            break;
+        case 3:
+            [self startRequestWithCateStr:@"dota2"];
+            break;
+        case 4:
+            [self startRequestWithCateStr:@"星际大战2"];
+            break;
+        default:
+            break;
+    }
+    
+    
 }
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
