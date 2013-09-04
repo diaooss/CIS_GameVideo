@@ -22,9 +22,6 @@
     [_fileName release];
     [loadData release];
     [connection release];
- 
-    NSLog(@"%s",__FUNCTION__);
-    
     [_imageURL release];
     
     [super dealloc];

@@ -74,15 +74,7 @@
     rootAuthorListTab.sectionHeaderHeight = 0;
     self.isOpen = NO;
     rootAuthorListTab.hidden = YES;
-    [self.view addSubview:rootAuthorListTab];
-    //测试
-    self.rootRequest = [[RequestTools alloc]init];
-    [_rootRequest setDelegate:self];
-    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
-    
-    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-    
-    
+    [self.view addSubview:rootAuthorListTab];    
     
 }
 #pragma mark--标签选中的代理方法
@@ -211,7 +203,7 @@
         NSArray * arry = [NSArray arrayWithObjects:
                           @"http://121.199.57.44:88/images/m001.png",
                           @"http://121.199.57.44:88/images/m002.png",
-                          @"http://121.199.57.44:88/images/003.gif",
+                          @"http://121.199.57.44:88/images/m003.png",
                           @"http://121.199.57.44:88/images/m004.png",
                           @"http://121.199.57.44:88/images/m005.png",
                           @"http://121.199.57.44:88/images/m006.png",
@@ -351,6 +343,8 @@
         //滑动推荐
         animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
         [headerView addSubview:animationView];
+        
+        
         [animationView setDelegate:self];
         /*/分类标签/*/
         categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
@@ -381,7 +375,7 @@
     return nil;
 }
 #pragma mark--Animation_Turn_View的代理方法
--(void)transportVideoInformation:(UIImage *)imageID
+-(void)transportVideoInformation:(NSString *)imageID
 {
     NSLog(@"有没有传过来");
     MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
