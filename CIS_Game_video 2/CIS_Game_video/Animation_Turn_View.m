@@ -47,6 +47,8 @@
      [view.asImageView setFrame: CGRectMake(0, 0,self.width-100, self.height)];
      if ([self.slideArry count]>0) {
          [view.asImageView setImageURL:[self.slideArry objectAtIndex:index]];
+         //加ID
+         
      }
      return view;
 }

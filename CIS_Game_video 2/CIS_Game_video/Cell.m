@@ -50,6 +50,7 @@
     int mark = 0;
     for (GroupView * obj in self.PicArry) {
         [obj.asImageView setImageURL:[netArry objectAtIndex:mark]];
+        NSLog(@"-----------%@",[netArry objectAtIndex:mark]);
 //        [obj.nameLabel setText:<#(NSString *)#>];//名字
 //        [obj.timeLabel setText:<#(NSString *)#>];//时间
         [obj setVideoID:[NSString stringWithFormat:@"%d",mark]];//视频ID;

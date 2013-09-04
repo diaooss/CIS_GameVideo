@@ -64,6 +64,7 @@
     rootAuthorListTab.sectionFooterHeight = 0;
     rootAuthorListTab.sectionHeaderHeight = 0;
     self.isOpen = NO;
+
     rootAuthorListTab.hidden = NO;
     [self.view addSubview:rootAuthorListTab];
     //测试
@@ -71,6 +72,8 @@
     [_rootRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    rootAuthorListTab.hidden = YES;
+    [self.view addSubview:rootAuthorListTab];    
     
 }
 #pragma mark--标签选中的代理方法
@@ -169,6 +172,8 @@
         NSLog(@"图片地址:%@",[[self.authorListArray objectAtIndex:indexPath.section] objectForKey:@"photo"]);
         return cell;
     }
+
+    
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -254,6 +259,8 @@
         //滑动推荐
         animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
         [headerView addSubview:animationView];
+        
+        
         [animationView setDelegate:self];
         /*/分类标签/*/
         categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
@@ -277,7 +284,7 @@
             
 }
 #pragma mark--Animation_Turn_View的代理方法
--(void)transportVideoInformation:(UIImage *)imageID
+-(void)transportVideoInformation:(NSString *)imageID
 {
     NSLog(@"有没有传过来");
     MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
