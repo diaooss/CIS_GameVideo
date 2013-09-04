@@ -36,8 +36,6 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-        //使用测试数据
         NSString *path  = [[NSBundle mainBundle] pathForResource:@"ExpansionTableTestData" ofType:@"plist"];
         //数据源为一个大数组,里面内嵌字典或者小数组等,可变化.
         _dataList = [[NSMutableArray alloc] initWithContentsOfFile:path];
@@ -56,8 +54,6 @@
     [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" rightImageName:@"myFriends.png" title:@"幻方"];
     /*/配置默认界面/*/
     
-    //列表展示
-    //代理方法中,要记得判断是在对哪一个列表进行的操作!!!!
     rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
     rootAuthorListTab.delegate = self;
     rootAuthorListTab.dataSource = self;
@@ -72,7 +68,6 @@
     [_rootRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-    rootAuthorListTab.hidden = YES;
     [self.view addSubview:rootAuthorListTab];    
     
 }
@@ -83,19 +78,17 @@
 
 }
 
-
 #pragma mark--切换浏览模式
 -(void)topRightCorenerBtnAction
 {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.viewDeckController.view cache:YES];
-        [UIView commitAnimations];
+    [UIView commitAnimations];
 }
 #pragma mark--系统列表代理方法
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
         if (indexPath.row==0) {
             if (indexPath.section == 0&&indexPath.row==0) {
                return  40;
@@ -105,20 +98,13 @@
         {
         return 100;
         }
-    
 }
 //根据数据源,判断有几个分组
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-   if (tableView == rootAuthorListTab)//代理方法中,要记得判断是在对哪一个列表进行的操作!!!!
-        {
-            NSLog(@"you jige%d",[_dataList count]);
-            //分组来自于整个数据源内部统一属性比如作者数据的个数
-            return [_authorListArray count];
-        }
-   else{
-       return 1;
-   }
+     NSLog(@"you jige%d",[_dataList count]);
+     //分组来自于整个数据源内部统一属性比如作者数据的个数
+    return [_authorListArray count];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -131,7 +117,6 @@
         }
         //如果是关闭状态,则返回一个
         return 1;
-    
 }
 #pragma mark--系统列表的代理方法
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -172,8 +157,6 @@
         NSLog(@"图片地址:%@",[[self.authorListArray objectAtIndex:indexPath.section] objectForKey:@"photo"]);
         return cell;
     }
-
-    
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
