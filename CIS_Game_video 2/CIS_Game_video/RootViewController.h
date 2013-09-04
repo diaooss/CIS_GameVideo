@@ -9,8 +9,9 @@
 #import "Animation_Turn_View.h"
 #import "IIViewDeckController.h"
 #import "RequestTools.h"
+#import "DefaultRootView.h"
 @class HMSegmentedControl;
-@interface RootViewController : UIViewController<IIViewDeckControllerDelegate,AnimationViewDelegate,UITableViewDataSource,UITableViewDelegate,myHttpRequestDelegate>
+@interface RootViewController : UIViewController<IIViewDeckControllerDelegate,AnimationViewDelegate,UITableViewDataSource,UITableViewDelegate,myHttpRequestDelegate,DefaultRootViewDelegate>
 {
     UITableView *rootAuthorListTab;//切换视图后作者的集合列表
     NSMutableArray *_dataList;//测试数据所用的数据源

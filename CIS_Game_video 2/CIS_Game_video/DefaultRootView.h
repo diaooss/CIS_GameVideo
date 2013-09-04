@@ -9,17 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "Animation_Turn_View.h"
 #import "Cell.h"
+@protocol DefaultRootViewDelegate <NSObject>
 
+-(void)transferCategoryWithCategoryName:(NSString * )CategoryName;
 
+@end
 @interface DefaultRootView : UIView<UITableViewDataSource,UITableViewDelegate,CellDelegate,AnimationViewDelegate>
 {
     Animation_Turn_View * _animationView;//轮显
     UITableView * _defaultListTab;
-    
-    
 }
 @property(nonatomic,assign)int mark;//
+@property(nonatomic,assign)id<DefaultRootViewDelegate>delegate;
+
+
 @property(nonatomic,assign)id target;
 @property(nonatomic,assign)SEL action;
 -(void)addTarget:(id)target action:(SEL)action;
 @end
+
+

@@ -102,6 +102,10 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(transferCategoryWithCategoryName:)]) {
+        [self.delegate performSelector:@selector(transferCategoryWithCategoryName:) withObject:cell.textLabel.text];
+    }
 
 }
 -(CGFloat )tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -117,6 +121,7 @@
     _defaultListTab.tableHeaderView = headerView;
     return headerView;
 }
+
 #pragma mark--Animation_Turn_View的代理方法
 -(void)transportVideoInformation:(UIImage *)imageID
 {

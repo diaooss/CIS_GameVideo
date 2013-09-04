@@ -18,7 +18,6 @@
 #import "MyNsstringTools.h"
 #import "CategoryListViewController.h"
 
-#import "DefaultRootView.h"
 @interface RootViewController ()
 @end
 @implementation RootViewController
@@ -77,13 +76,23 @@
 //    rootAuthorListTab.hidden = YES;
 //    [self.view addSubview:rootAuthorListTab];
     
-    
+//首页界面
     DefaultRootView * rootView = [[DefaultRootView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height)];
     [rootView addTarget:self action:@selector(transportVideoInformation:)];
     [self.view addSubview:rootView];
+    [rootView setDelegate:self];
     [rootView release];
     
 }
+#pragma mark-----DefaultRootView代理
+-(void)transferCategoryWithCategoryName:(NSString *)CategoryName
+{
+    CategoryListViewController * Category = [[CategoryListViewController alloc]init];
+    [self setTitle:CategoryName];
+    [self.navigationController pushViewController:Category animated:YES];
+    [Category release];
+}
+
 #pragma mark--标签选中的代理方法
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {

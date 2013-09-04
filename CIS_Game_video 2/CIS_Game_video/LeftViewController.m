@@ -175,6 +175,9 @@
     switch (buttonIndex) {
         case 0:
             [self congXiangCe];
+            
+            
+            
             break;
         case 1:
             [self congXiangJi];
@@ -187,14 +190,16 @@
 -(void)congXiangCe
 {
     NSLog(@"从相册");
-//    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
-//    UIImagePickerController *PickerConteroller=[[UIImagePickerController alloc]init];
-//    [PickerConteroller setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
-//    [PickerConteroller setAllowsEditing:YES];
-//    // [PickerConteroller setAccessibilityViewIsModal:YES];
-//    [PickerConteroller setDelegate:self];
-//    [self presentViewController:PickerConteroller animated:YES completion:nil];
-//    [PickerConteroller release];
+#pragma mark 从摄像头获取活动图片
+    UIImagePickerController*imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        imagePicker.allowsEditing = YES;
+    [self presentViewController:imagePicker animated:YES completion:^{
+        nil;
+    }];
+    
 }
 #pragma matk-从相机
 -(void)congXiangJi
