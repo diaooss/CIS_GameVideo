@@ -7,9 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface AuthorMoviesListPage : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "RequestTools.h"
+#import "RequestUrls.h"
+#import "MyNsstringTools.h"
+@interface AuthorMoviesListPage : UIViewController<UITableViewDataSource,UITableViewDelegate,myHttpRequestDelegate>
 {
     UITableView *authorListTab;
+   RequestTools * getAuthorListByAuthorID;
 }
+@property(nonatomic,retain)NSString *authorIDStr;
+@property(nonatomic ,copy)NSString *authorNameStr;
 @end

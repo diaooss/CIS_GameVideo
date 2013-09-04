@@ -160,9 +160,10 @@
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
         }
         //根据数据源和下标配置展开cell内容,注意书写位置.每个展开列表中的"更多按钮"也可以写在这里.
-        NSArray *list = [[_dataList objectAtIndex:self.selectIndex.section] objectForKey:@"list"];
-        NSLog(@"数组数目是:%d",[list count]);
-                    cell.titleLabel.text = [list objectAtIndex:indexPath.row-1];
+        NSArray *list = [[self.authorListArray objectAtIndex:self.selectIndex.section] objectForKey:@"movies"];
+        
+        NSLog(@"数组是:%@",list);
+                    cell.titleLabel.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"movieName"];
             cell.halfTitleLabel.text = @"我是副标题啊,你妹,哇哈哈哈";
             cell.logoImageView.image = [UIImage imageNamed:@"man.png"];
                //        cell.textLabel.text = [list objectAtIndex:indexPath.row-1];
@@ -182,9 +183,24 @@
         NSString *name = [[self.authorListArray objectAtIndex:indexPath.section] objectForKey:@"author"];
         cell.nameLabel.text = name;
         cell.countLabel.text = [NSString stringWithFormat:@"%@部",[[self.authorListArray objectAtIndex:indexPath.section] objectForKey:@"opusCount"]];
-        NSLog(@"图片地址:%@",[[self.authorListArray objectAtIndex:indexPath.section] objectForKey:@"photo"]);
+        [cell.moreBtn setTag:indexPath.section];
+        [cell.moreBtn addTarget:self action:@selector(getAuthorlist:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
+    
+}
+-(void)getAuthorlist:(UIButton *)sender
+{
+    NSLog(@"点中的作者是:%d",sender.tag);
+    //根据标记值渠道对应的作者ID,请求推进到作者作品列表
+    
+    AuthorMoviesListPage *authorMoviesList = [[AuthorMoviesListPage alloc] init];
+    authorMoviesList.authorIDStr = [[self.authorListArray objectAtIndex:sender.tag] objectForKey:@"authorID"];
+    authorMoviesList.authorNameStr = [[self.authorListArray objectAtIndex:sender.tag] objectForKey:@"author"];
+    [self.navigationController pushViewController:authorMoviesList animated:YES];
+    [authorMoviesList release];
+
+    
     
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -209,10 +225,8 @@
     }else
     {
         //点击展开的小Cell的方法写在这里,根据下标判断
-        AuthorMoviesListPage *authorMoviesList = [[AuthorMoviesListPage alloc] init];
-        [self.navigationController pushViewController:authorMoviesList animated:YES];
-        [authorMoviesList release];
-        NSLog(@"点击的下标是:%d",indexPath.row);
+        
+                NSLog(@"点击的下标是:%d",indexPath.row);
         NSDictionary *dic = [_dataList objectAtIndex:indexPath.section];
         NSArray *list = [dic objectForKey:@"list"];
         NSString *item = [list objectAtIndex:indexPath.row-1];
@@ -228,7 +242,7 @@
     [cell changeArrowWithUp:firstDoInsert];
     [rootAuthorListTab beginUpdates];
     int section = self.selectIndex.section;
-    int contentCount = [[[_dataList objectAtIndex:section] objectForKey:@"list"] count];
+    int contentCount = [[[self.authorListArray objectAtIndex:section] objectForKey:@"movies"] count];
 	NSMutableArray* rowToInsert = [[NSMutableArray alloc] init];
 	for (NSUInteger i = 1; i < contentCount + 1; i++) {
 		NSIndexPath* indexPathToInsert = [NSIndexPath indexPathForRow:i inSection:section];
@@ -271,11 +285,9 @@
         animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
         [headerView addSubview:animationView];
         
-        
         [animationView setDelegate:self];
         /*/分类标签/*/
         categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
-
             [categorySegmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Dota",@"魔兽争霸",@"Dota2", @"星际争霸",nil];
         [categorySegmentedControl setSectionTitles:nameArry];
@@ -291,7 +303,6 @@
         return [headerView autorelease];
     }
     return nil;
-            
 }
 #pragma mark--Animation_Turn_View的代理方法
 -(void)transportVideoInformation:(NSString *)imageID
@@ -314,7 +325,6 @@
 {
     NSLog(@"请求回来的数据是:%@",dic);
     [rootRefreshView endRefresh];
-
     self.authorListArray = [dic objectForKey:@"result"];
     NSLog(@"到底是几?%d",[[[_authorListArray objectAtIndex:0] objectForKey:@"movies"] count]);
     [rootAuthorListTab reloadData];
@@ -355,15 +365,13 @@
 {
     [rootRefreshView scrollViewDidEndDraging];
 }
-#pragma mark - slimeRefresh delegate
+#pragma mark - 水滴下拉刷新
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
     [self startRequestWithCateStr:staticCateGoryStr];
-        
 }
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
 }
 @end

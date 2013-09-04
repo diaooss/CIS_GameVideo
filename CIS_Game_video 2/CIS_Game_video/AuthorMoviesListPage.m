@@ -18,7 +18,8 @@
 - (void)dealloc
 {
     authorListTab = nil;
-    
+    self.authorIDStr = nil;
+    self.authorNameStr = nil;
     [super dealloc];
 }
 
@@ -38,12 +39,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"goBack.png" title:@"作者名字:xxxx"];
+    [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"goBack.png" title:_authorNameStr];
        authorListTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     authorListTab.delegate = self;
     authorListTab.dataSource = self;
     [authorListTab setTag:1000];
     [self.view addSubview:authorListTab];
+    
+    
 
 }
 #pragma mark--列表代理方法

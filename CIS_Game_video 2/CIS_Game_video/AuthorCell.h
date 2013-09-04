@@ -12,7 +12,7 @@
 @property(nonatomic,retain)UIImageView *stateImgView;//盛放向上,向下的箭头.
 @property(nonatomic,retain)UILabel *nameLabel;//作者姓名
 @property(nonatomic,retain)UILabel *countLabel;//作者作品总数
-@property(nonatomic,retain)UIButton *likeBtn;//快捷关注按钮
+@property(nonatomic,retain)UIButton *moreBtn;//快捷关注按钮
 - (void)changeArrowWithUp:(BOOL)up;//指示器向上,向下翻转
 
 @end

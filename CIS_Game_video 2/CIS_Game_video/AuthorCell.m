@@ -44,12 +44,12 @@
         [_countLabel setNumberOfLines:0];
         [self.contentView addSubview:_countLabel];
         //
-        _likeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _likeBtn.backgroundColor = [UIColor colorWithRed:95/255.0 green:112/255.0 blue:38/255.0 alpha:1];
-        [_likeBtn setTitle:@"m" forState:UIControlStateNormal];
-        _likeBtn.showsTouchWhenHighlighted = YES;
-        _likeBtn.layer.cornerRadius = 15.0;
-        [self.contentView addSubview:_likeBtn];
+        _moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _moreBtn.backgroundColor = [UIColor colorWithRed:95/255.0 green:112/255.0 blue:38/255.0 alpha:1];
+        [_moreBtn setTitle:@"m" forState:UIControlStateNormal];
+        _moreBtn.showsTouchWhenHighlighted = YES;
+        _moreBtn.layer.cornerRadius = 15.0;
+        [self.contentView addSubview:_moreBtn];
         }
     return self;
 }
@@ -61,7 +61,7 @@
     _stateImgView.frame = CGRectMake(0, (cellSize.height-30)/2, stateImageViewSize.width ,stateImageViewSize.height);
     _nameLabel.frame = CGRectMake(_stateImgView.right, 0, 160, cellSize.height);
     _countLabel.frame = CGRectMake(_nameLabel.right, 0, 80, cellSize.height);
-    _likeBtn.frame = CGRectMake(_countLabel.right+10, (cellSize.height-30)/2, 30, 30);
+    _moreBtn.frame = CGRectMake(_countLabel.right+10, (cellSize.height-30)/2, 30, 30);
 }
 - (void)changeArrowWithUp:(BOOL)up
 {
