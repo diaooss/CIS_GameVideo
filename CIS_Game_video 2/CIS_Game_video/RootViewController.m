@@ -30,6 +30,7 @@
     self.selectIndex = nil;
     categorySegmentedControl = nil;
     rootRefreshView = nil;
+    [staticCateGoryStr release];
     [_authorListArray release],_authorListArray = nil;
     [categorySegmentedControl release];
     [super dealloc];
@@ -42,7 +43,6 @@
         //数据源为一个大数组,里面内嵌字典或者小数组等,可变化.
         _dataList = [[NSMutableArray alloc] initWithContentsOfFile:path];
         _authorListArray = [NSArray array];
-        
     }
     return self;
 }
@@ -69,15 +69,14 @@
     rootRefreshView.delegate = self;
     rootRefreshView.upInset = 0;
     rootRefreshView.slimeMissWhenGoingBack = YES;
-    rootRefreshView.slime.bodyColor = [UIColor grayColor];
-    rootRefreshView.slime.skinColor = [UIColor grayColor];
+    rootRefreshView.slime.bodyColor = [UIColor blackColor];
+    rootRefreshView.slime.skinColor = [UIColor blackColor];
     rootRefreshView.slime.lineWith = 5;
     rootRefreshView.slime.shadowBlur = 1;
-    rootRefreshView.slime.shadowColor = [UIColor blackColor];
+    rootRefreshView.slime.shadowColor = [UIColor yellowColor];
     rootRefreshView.activityIndicationView.color = [UIColor blackColor];
     ///
     [rootAuthorListTab addSubview:rootRefreshView];
-   
     /*/翻转后的页面/*/
     //测试
     self.rootRequest = [[RequestTools alloc]init];
@@ -85,25 +84,6 @@
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
     [self.view addSubview:rootAuthorListTab];    
-//    //列表展示
-//    //代理方法中,要记得判断是在对哪一个列表进行的操作!!!!
-//    rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
-//    rootAuthorListTab.delegate = self;
-//    rootAuthorListTab.dataSource = self;
-//    rootAuthorListTab.sectionFooterHeight = 0;
-//    rootAuthorListTab.sectionHeaderHeight = 0;
-//    self.isOpen = NO;
-//
-//    rootAuthorListTab.hidden = NO;
-//    [self.view addSubview:rootAuthorListTab];
-//    //测试
-//    self.rootRequest = [[RequestTools alloc]init];
-//    [_rootRequest setDelegate:self];
-//    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
-//    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-//    rootAuthorListTab.hidden = YES;
-//    [self.view addSubview:rootAuthorListTab];
-    
 //首页界面
     DefaultRootView * rootView = [[DefaultRootView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height)];
     rootView.hidden = YES;
@@ -324,6 +304,7 @@
 #pragma mark--发起请求
 -(void)startRequestWithCateStr:cateStr
 {
+    staticCateGoryStr = cateStr==NULL?@"dota":cateStr;
     NSString *newCateStr = [NSString stringWithFormat:@"?category=%@",cateStr];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,newCateStr,nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
@@ -332,17 +313,16 @@
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     NSLog(@"请求回来的数据是:%@",dic);
+    [rootRefreshView endRefresh];
+
     self.authorListArray = [dic objectForKey:@"result"];
-    NSLog(@"%d",[_authorListArray count]);
+    NSLog(@"到底是几?%d",[[[_authorListArray objectAtIndex:0] objectForKey:@"movies"] count]);
     [rootAuthorListTab reloadData];
-
-
 }
 #pragma mark--标签选中的代理方法
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
 	NSLog(@"选中的是: %i", segmentedControl.selectedIndex);
-
     switch (segmentedControl.selectedIndex) {
         case 0:
             [self startRequestWithCateStr:@"英雄联盟"];
@@ -362,14 +342,11 @@
         default:
             break;
     }
-    
-    
 }
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
 }
 #pragma mark - scrollView delegate
-
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     [rootRefreshView scrollViewDidScroll];
@@ -381,16 +358,12 @@
 #pragma mark - slimeRefresh delegate
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
-    
-        [rootRefreshView endRefresh];
+    [self startRequestWithCateStr:staticCateGoryStr];
         
-    
-    
-    
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+    
 }
 @end

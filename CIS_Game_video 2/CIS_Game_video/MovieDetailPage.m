@@ -65,7 +65,6 @@ durationLable.text = @"<<  时长:9'16''  >>";
     
     
     movieNameLable = [UILabel labelWithRect:CGRectMake(5, movieWeb.bottom+5, durationLable.width-20, 20) font:[UIFont systemFontOfSize:16]];
-    movieNameLable.text = @"安晓阳:最牛大神带你走进魔兽世界";
     movieNameLable.layer.cornerRadius = 5.0;
     movieNameLable.textAlignment = NSTextAlignmentCenter;
     movieNameLable.textColor = [UIColor blackColor];
@@ -133,8 +132,8 @@ durationLable.text = @"<<  时长:9'16''  >>";
 }
 -(void)loadMovieWithUrl:(NSString *)urlStr
 {
-          NSURLRequest *movieRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStr ] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5.0];
-        [movieWeb loadRequest:movieRequest];
+    NSURLRequest *movieRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:urlStr ] cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:5.0];
+    [movieWeb loadRequest:movieRequest];
 }
 #pragma mark--视频收藏
 -(void)topRightCorenerBtnAction
@@ -145,9 +144,11 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     NSLog(@"链接:%@",[dic objectForKey:@"m_url"]);
-    
+    NSLog(@"详情字典:%@",dic);
+    movieNameLable.text = [dic objectForKey:@"m_name"];
+    movieInfoTextView.text = [dic objectForKey:@"m_description"];
     [self loadMovieWithUrl:[dic objectForKey:@"m_url"]];
-    
+    durationLable.text = [dic objectForKey:@"m_duration"];
 }
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
@@ -155,6 +156,5 @@ durationLable.text = @"<<  时长:9'16''  >>";
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 @end
