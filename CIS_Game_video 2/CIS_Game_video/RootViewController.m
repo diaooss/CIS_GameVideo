@@ -17,6 +17,8 @@
 #import "RequestTools.h"
 #import "MyNsstringTools.h"
 #import "CategoryListViewController.h"
+
+#import "DefaultRootView.h"
 @interface RootViewController ()
 @end
 @implementation RootViewController
@@ -69,6 +71,30 @@
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
     [self.view addSubview:rootAuthorListTab];    
+//    //列表展示
+//    //代理方法中,要记得判断是在对哪一个列表进行的操作!!!!
+//    rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
+//    rootAuthorListTab.delegate = self;
+//    rootAuthorListTab.dataSource = self;
+//    rootAuthorListTab.sectionFooterHeight = 0;
+//    rootAuthorListTab.sectionHeaderHeight = 0;
+//    self.isOpen = NO;
+//
+//    rootAuthorListTab.hidden = NO;
+//    [self.view addSubview:rootAuthorListTab];
+//    //测试
+//    self.rootRequest = [[RequestTools alloc]init];
+//    [_rootRequest setDelegate:self];
+//    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
+//    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+//    rootAuthorListTab.hidden = YES;
+//    [self.view addSubview:rootAuthorListTab];
+    
+    
+    DefaultRootView * rootView = [[DefaultRootView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height)];
+    [rootView addTarget:self action:@selector(transportVideoInformation:)];
+    [self.view addSubview:rootView];
+    [rootView release];
     
 }
 #pragma mark--标签选中的代理方法
