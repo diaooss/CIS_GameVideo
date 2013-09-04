@@ -39,6 +39,13 @@
     _isCraete=NO;
     return self;
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    NSLog(@"出现几次啊");
+    [_setTableView reloadData];
+    
+    
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -333,6 +340,10 @@
             break;
     }
 }
+
+
+
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

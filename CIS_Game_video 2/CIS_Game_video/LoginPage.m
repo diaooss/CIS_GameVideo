@@ -11,6 +11,10 @@
 #import "RegisterPage.h"
 #import "ForgetPSDPage.h"
 #import "Tools.h"
+//
+#import "MyNsstringTools.h"
+#import "RequestTools.h"
+#import "RequestUrls.h"
 @interface LoginPage ()
 
 @end
@@ -26,7 +30,6 @@
 
     [super dealloc];
 }
-
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -49,7 +52,7 @@
     logoImg.image = [UIImage imageNamed:@"headerimage.png"];
     [self.view addSubview:logoImg];
     [logoImg release];
-    nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, logoImg.bottom+30, 280, 30)];
+    nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, logoImg.bottom+30, 280, 35)];
     nameTextField.delegate= self;
     nameTextField.backgroundColor = [UIColor yellowColor];
     nameTextField.textColor = [UIColor grayColor];
@@ -60,12 +63,12 @@
     nameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     nameTextField.font  =[UIFont systemFontOfSize:19];
     nameTextField.clearButtonMode = UITextFieldViewModeUnlessEditing;
-    nameTextField.placeholder = @"昵称/邮箱";
+    nameTextField.placeholder = @"登陆邮箱";
     nameTextField.borderStyle = UITextBorderStyleBezel;
     [self.view addSubview:nameTextField];
     [nameTextField release];
     //密码
-    psdTextField = [[UITextField alloc] initWithFrame:CGRectMake(nameTextField.left, nameTextField.bottom+30, 280, 30)];
+    psdTextField = [[UITextField alloc] initWithFrame:CGRectMake(nameTextField.left, nameTextField.bottom+30, 280, 35)];
     psdTextField.delegate= self;
     psdTextField.backgroundColor = [UIColor yellowColor];
     psdTextField.textColor = [UIColor grayColor];
@@ -86,6 +89,7 @@
     [login_btn setTitle:@"登陆" forState:UIControlStateNormal];
     login_btn.layer.cornerRadius = 5.0;
     login_btn.showsTouchWhenHighlighted = YES;
+    [login_btn addTarget:self action:@selector(login) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:login_btn];
     //注册和忘记密码
     UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -124,13 +128,11 @@
     if (a!=-150) {
         [UIView beginAnimations:nil context:nil];
         [UIView setAnimationDuration:0.5];
-        
         CGRect frame = self.view.frame;
         frame.origin.y -=150;
         frame.size.height +=150;
         self.view.frame = frame;
         [UIView commitAnimations];
-
     }
 }
 -(void)keyboardWillHide
@@ -144,11 +146,7 @@
         frame.size.height -=150;
         self.view.frame = frame;
         [UIView commitAnimations];
-        
-
     }
-    
-    
 }
 #pragma mark--键盘消失
 -(void)tapBackGround
@@ -171,6 +169,32 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+-(void)login
+{
+    //做邮箱格式及所有内容是否为空的判断
+    if ([Tools cheeckEmail:nameTextField.text]==YES) {
+        
+    
+    NSString *nameStr = [NSString stringWithFormat:@"?email=%@",nameTextField.text];
+    NSString *pswStr = [NSString stringWithFormat:@"&psw=%@",psdTextField.text];
+  BOOL isLogin =   [RequestTools requestReturnYesOrOkWithCheckUrl_Synchronous:[MyNsstringTools groupStrByAStrArray:[NSArray arrayWithObjects:LOGIN,nameStr,pswStr,nil]]];
+        [self loginIsSuccess:isLogin];
+       //需重新定义一个在中央显示的提示块.淡入淡出,可以用在正误提醒,收藏关注成功与否等提醒.
+  }
+}
+-(void)loginIsSuccess:(BOOL)flag
+{
+    if (flag == YES) {
+        
+    //存起来用户名(邮箱)和登陆密码
+    [[NSUserDefaults standardUserDefaults] setObject:nameTextField.text forKey:@"user_email"];
+    [[NSUserDefaults standardUserDefaults] setObject:psdTextField.text forKey:@"user_psw"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    [self back];
+    }
+    
+}
 #pragma mark--忘记密码
 -(void)forgetPSD
 {
@@ -182,6 +206,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     
     
     

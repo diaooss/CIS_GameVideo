@@ -9,6 +9,9 @@
 #import "RegisterPage.h"
 #import "Header.h"
 #import "Tools.h"
+#import "MyNsstringTools.h"
+#import "RequestTools.h"
+#import "RequestUrls.h"
 @interface RegisterPage ()
 
 @end
@@ -54,7 +57,7 @@
             contentFiled.placeholder = @"请输入昵称(不超过八位字符)";
         }else if (i==1)
         {
-            contentFiled.placeholder = @"请输入邮箱";
+            contentFiled.placeholder = @"请输入正确邮箱以便找回密码...";
         }else
         {
             contentFiled.placeholder = @"请输入密码";
@@ -70,6 +73,7 @@
     registerBtn.backgroundColor = [UIColor greenColor];
     [registerBtn setTitle:@"立即注册" forState:UIControlStateNormal];
     [registerBtn setShowsTouchWhenHighlighted:YES];
+    [registerBtn addTarget:self action:@selector(goToRegister) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:registerBtn];
     
     //添加手势
@@ -129,6 +133,34 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+-(void)goToRegister
+{
+    //做不为空判断
+    //做邮箱格式验证
+    //做邮箱是否占用验证
+    
+    NSMutableArray *arry = [NSMutableArray array];
+    for (int i = 0; i<3; i++) {
+        UITextField *tempTxetField = (UITextField *) [self.view viewWithTag:100+100*i];
+        
+        [arry addObject:tempTxetField.text];
+    }
+    NSLog(@"%d",[arry count]);
+    NSString *nameStr = [NSString stringWithFormat:@"?user_Name=%@",[arry objectAtIndex:0]];
+    NSString *emailStr = [NSString stringWithFormat:@"&email=%@",[arry objectAtIndex:1]];
+    NSString *pswStr = [NSString stringWithFormat:@"&psw=%@",[arry objectAtIndex:2]];
+    NSArray *newArry  =[NSArray arrayWithObjects:REGISTER,nameStr,emailStr,pswStr, nil];
+    
+    BOOL registrIsOk = [RequestTools requestReturnYesOrOkWithCheckUrl_Synchronous:[MyNsstringTools groupStrByAStrArray:newArry]];
+        [self registerIsSuccess:registrIsOk];
+        
+    
+}
+-(void)registerIsSuccess:(BOOL)flag
+{
+    //做注册成功与否的再处理
+}
+
 
 - (void)viewDidLoad
 {

@@ -56,6 +56,7 @@
 }
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Synchronous:(NSString *)checkUrl//同步
 {
+    NSLog(@"请求的串是:%@",checkUrl);
     ASIHTTPRequest*Request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[MyNsstringTools changeStrWithUT8:checkUrl]]] autorelease];
     [Request setRequestMethod:@"GET"];
     Request.timeOutSeconds = 5.0;
@@ -86,7 +87,6 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     //回调代理
     resultDic = (NSDictionary *)[request.responseData objectFromJSONData];
-
     if (self.delegate&&[self.delegate respondsToSelector:@selector(requestFailedWithResultDictionary:)]) {
         [self.delegate requestFailedWithResultDictionary:resultDic];
     }

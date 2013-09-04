@@ -18,5 +18,5 @@
 #define AUTHOR_LIST @"http://121.199.57.44:88/webServer/GetAuthorlist.ashx"//作者列表
 #define VIDOE_LIST @"http://121.199.57.44:88/webServer/GetMovielist.ashx"//视频列表
 #define GET_Moview_DETAIL @"http://121.199.57.44:88/webServer/GetMovieInfoByID.ashx"
-
+#define GET_NEW_PSW_byEmail @"http://121.199.57.44:88//webServer/SendEmailForPsw.ashx"
 #endif

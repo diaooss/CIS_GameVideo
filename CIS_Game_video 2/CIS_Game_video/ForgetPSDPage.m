@@ -9,6 +9,9 @@
 #import "ForgetPSDPage.h"
 #import "Header.h"
 #import "Tools.h"
+#import "RequestTools.h"
+#import "MyNsstringTools.h"
+#import "RequestUrls.h"
 @interface ForgetPSDPage ()
 
 @end
@@ -85,6 +88,24 @@
 }
 -(void)checkInWithEmail
 {
+    if (emailField.text!=NULL&&[Tools cheeckEmail:emailField.text]==YES) {
+        //发起请求
+        NSString *newEmaiStr = [NSString stringWithFormat:@"?ToEmail=%@",[emailField text]];
+     BOOL flag =    [RequestTools requestReturnYesOrOkWithCheckUrl_Synchronous:[MyNsstringTools groupStrByAStrArray:[NSArray arrayWithObjects:GET_NEW_PSW_byEmail,newEmaiStr, nil]]];
+        [self checktoGetNewPSWIsOK:flag];
+    }
+    
+}
+-(void)checktoGetNewPSWIsOK:(BOOL)flag
+{
+    NSLog(@"%d",flag);
+    //根据标记值进行判断
+    if (flag == YES) {
+        
+        [self back];
+        //同时进行合理提示
+    }
+    [self back];
     
 }
 -(void)back

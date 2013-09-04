@@ -18,7 +18,6 @@
 
 +(BOOL)isHaveNet
 {
-    
     if ([Reachability getCurrentNetWorkStatus]==NotReachable) {
         return NO;
     }
@@ -29,7 +28,6 @@
     if (![self isHaveNet]) {
         return @"没有网络";
     }
-    
     if ([Reachability getCurrentNetWorkStatus]==ReachableViaWiFi) {
         return @"WiFi";
     }
@@ -43,19 +41,20 @@
     notLabel.textColor = [UIColor whiteColor];
     notLabel.backgroundColor = [UIColor lightGrayColor];
     [notLabel setTextAlignment:NSTextAlignmentCenter];
-    [view addSubview:notLabel];
+    [view.superview addSubview:notLabel];
     [self labelMakeAnimation:notLabel];
     [notLabel release];
 }
 //加载一个动画
 +(void)labelMakeAnimation:(UIView* )sender
 {
-    [UIView animateWithDuration:2.0 animations:^{
+    [UIView animateWithDuration:1.0 animations:^{
         [sender setCenter:CGPointMake(160, 20)];
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:2.0 animations:^{
+        [UIView animateWithDuration:3.5 animations:^{
             [sender setCenter:CGPointMake(160, -40)];
         } completion:^(BOOL finished) {
+            [sender removeFromSuperview];
             nil;
         }];
     }];

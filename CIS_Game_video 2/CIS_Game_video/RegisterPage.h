@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface RegisterPage : UIViewController<UITextFieldDelegate>
+#import "RequestTools.h"
+@interface RegisterPage : UIViewController<UITextFieldDelegate,myHttpRequestDelegate>
 
 @end
