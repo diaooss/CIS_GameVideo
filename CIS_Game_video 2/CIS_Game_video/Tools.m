@@ -41,7 +41,7 @@
     notLabel.textColor = [UIColor whiteColor];
     notLabel.backgroundColor = [UIColor lightGrayColor];
     [notLabel setTextAlignment:NSTextAlignmentCenter];
-    [view.superview addSubview:notLabel];
+    [view addSubview:notLabel];
     [self labelMakeAnimation:notLabel];
     [notLabel release];
 }

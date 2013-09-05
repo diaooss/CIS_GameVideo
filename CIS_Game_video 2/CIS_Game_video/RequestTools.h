@@ -21,6 +21,13 @@
 -(void )requestWithUrl_Asynchronous:(NSString *)urlStr;
 //根据字符串,发起同步请求
 -(void )requestWithUrl_Synchronous:(NSString *)urlStr;
+////头像上传
+//-(void)postHeaderImageToServer;
+////反馈信息上传
+//-(void)postFeedBackInfo;
+////版本检测
+//-(void)versionsCheck;
+
 //类方法--根据请求返回的状态值,返回布尔值,以供判断
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Asynchronous:(NSString *)checkUrl;//异步
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Synchronous:(NSString *)checkUrl;//同步

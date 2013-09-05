@@ -292,10 +292,14 @@
         NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Dota",@"魔兽争霸",@"Dota2", @"星际争霸",nil];
         [categorySegmentedControl setSectionTitles:nameArry];
         [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
+            NSString *indexStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"index"];
+            int index = [indexStr intValue];
+            categorySegmentedControl.selectedIndex  = index;
         [categorySegmentedControl setBackgroundColor:[UIColor colorWithRed:205.0f/232.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [categorySegmentedControl setTextColor:[UIColor colorWithRed:47.0f/255.0f green:79.0f/255.0f blue:79.0f/255.0f alpha:0.8f]];
         [categorySegmentedControl setSelectionIndicatorColor:[UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:0.8f]];
-        [categorySegmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
+        [categorySegmentedControl setSelectionIndicatorMode:
+         HMSelectionIndicatorFillsSegment];
         [categorySegmentedControl setSegmentEdgeInset:UIEdgeInsetsMake(0, 5, 5, 0)];
         [categorySegmentedControl setTag:2];
         [headerView addSubview:categorySegmentedControl];
@@ -326,13 +330,17 @@
     NSLog(@"请求回来的数据是:%@",dic);
     [rootRefreshView endRefresh];
     self.authorListArray = [dic objectForKey:@"result"];
-    NSLog(@"到底是几?%d",[[[_authorListArray objectAtIndex:0] objectForKey:@"movies"] count]);
     [rootAuthorListTab reloadData];
 }
 #pragma mark--标签选中的代理方法
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
+    
 	NSLog(@"选中的是: %i", segmentedControl.selectedIndex);
+    NSString *indexStr = [NSString stringWithFormat:@"%i",segmentedControl.selectedIndex];
+    [[NSUserDefaults standardUserDefaults] setObject:indexStr forKey:@"index"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+
     switch (segmentedControl.selectedIndex) {
         case 0:
             [self startRequestWithCateStr:@"英雄联盟"];
