@@ -56,7 +56,7 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 100.0;
+    return 120.0;
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -65,8 +65,8 @@
     if (moviesListCell == nil) {
         moviesListCell = [[[MovieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseName] autorelease];
     }
-    moviesListCell.titleLabel.text = @"哈哈哈,我是大标题";
-    moviesListCell.halfTitleLabel.text = @"哈哈,我是副标题";
+    moviesListCell.titleLabel.text = @"哈哈哈,我是大标题,分组内的行数根据数据数量返回,分组内的行数根据数据数量返回";
+    moviesListCell.categoryLabel.text = @"哈副标题";
     moviesListCell.logoImageView.image = [UIImage imageNamed:@"test.png"];
     return moviesListCell;
 }

@@ -13,6 +13,10 @@
 @interface MovieCell : UITableViewCell
 @property(nonatomic,retain)UIImageView *logoImageView;//视频缩略图
 @property(nonatomic,retain)UILabel *titleLabel;//视频标题
-@property(nonatomic,retain)UILabel *halfTitleLabel;//副标题,在视频标题下....
+@property(nonatomic,retain)UILabel *categoryLabel;//副标题,在视频标题下....
 @property(nonatomic,retain)UIButton *collectBtn;//收藏按钮
+@property(nonatomic,retain)UIImageView *timeImg;//时长前小图标
+@property(nonatomic,retain)UILabel *timeLab;//显示时长
+@property(nonatomic,retain)UIImageView *popularImg;//人气小图标
+@property(nonatomic,retain)UILabel * popularLab;//显示人气
 @end
