@@ -18,7 +18,6 @@
 #define customBlueColor [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0]
 #define testColor [UIColor colorWithRed:77/255.0 green:88/255.0 blue:0/255.0 alpha:1.0]
 @interface MovieDetailPage ()
-
 @end
 @implementation MovieDetailPage
 - (void)dealloc
@@ -67,7 +66,6 @@ durationLable.text = @"<<  时长:9'16''  >>";
     durationLable.alpha = 0.8;
     [movieWeb addSubview:durationLable];
     
-    
     movieNameLable = [UILabel labelWithRect:CGRectMake(5, movieWeb.bottom+5, durationLable.width-20, 20) font:[UIFont systemFontOfSize:16]];
     movieNameLable.layer.cornerRadius = 5.0;
     movieNameLable.textAlignment = NSTextAlignmentCenter;
@@ -79,7 +77,6 @@ durationLable.text = @"<<  时长:9'16''  >>";
     theAuthorImageView.backgroundColor= [UIColor yellowColor];
     [self.view addSubview:theAuthorImageView];
     theAuthorImageView.image = [UIImage imageNamed:@"headerimage.png"];
-    
     movieInfoTextView = [[UITextView alloc] initWithFrame:CGRectMake(theAuthorImageView.right+5, movieNameLable.bottom+5, self.view.width-theAuthorImageView.width-15, theAuthorImageView.height+10)];
     movieInfoTextView.editable = NO;
     movieInfoTextView.text = @"开展评比达标表彰活动，是鼓励先进、鞭策后进、推动工作的一种手段。恰到好处的评比与表彰，能够激发相关部门与人员的工作热情，促进工作的开展、落实；能够树立好的典范，传递“正能量”，带动其他群体积极上进，推动事业的发展。";
@@ -109,8 +106,6 @@ durationLable.text = @"<<  时长:9'16''  >>";
     
     [_detailRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
     NSLog(@"请求详情:%@",[MyNsstringTools groupStrByAStrArray:strArry]);
-    
-
 }
 - (void)viewDidLoad
 {
@@ -158,7 +153,6 @@ durationLable.text = @"<<  时长:9'16''  >>";
 {
     [Tools makeShare];//分享内容二次定制,捆绑APP商店地址
 }
-
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {

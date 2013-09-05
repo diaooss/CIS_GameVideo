@@ -10,15 +10,17 @@
 #import "Animation_Turn_View.h"
 #import "Cell.h"
 #import "RequestTools.h"
+#import "SRRefreshView.h"
 @protocol DefaultRootViewDelegate <NSObject>
 
 -(void)transferCategoryWithCategoryName:(NSString * )CategoryName;
 
 @end
-@interface DefaultRootView : UIView<UITableViewDataSource,UITableViewDelegate,CellDelegate,AnimationViewDelegate,myHttpRequestDelegate>
+@interface DefaultRootView : UIView<UITableViewDataSource,UITableViewDelegate,CellDelegate,AnimationViewDelegate,myHttpRequestDelegate,SRRefreshDelegate>
 {
     Animation_Turn_View * _animationView;//轮显
     UITableView * _defaultListTab;
+    SRRefreshView * rootRefreshView;
 }
 @property(nonatomic,retain)Animation_Turn_View * animationView;
 @property(nonatomic,assign)int mark;//

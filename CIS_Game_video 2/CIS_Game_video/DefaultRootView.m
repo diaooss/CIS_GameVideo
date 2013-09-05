@@ -15,6 +15,7 @@
 {
     [_defaultListTab release];
     [_animationView release];
+    [rootRefreshView release];
     [super dealloc];
 }
 
@@ -32,7 +33,19 @@
         _defaultListTab.backgroundColor = [UIColor whiteColor];
         [self addSubview:_defaultListTab];
         [_defaultListTab setDecelerationRate:0.3];
+        /*/水滴/*/
         
+        rootRefreshView = [[SRRefreshView alloc] init];
+        rootRefreshView.delegate = self;
+        rootRefreshView.upInset = 0;
+        rootRefreshView.slimeMissWhenGoingBack = YES;
+        rootRefreshView.slime.bodyColor = [UIColor blackColor];
+        rootRefreshView.slime.skinColor = [UIColor blackColor];
+        rootRefreshView.slime.lineWith = 5;
+        rootRefreshView.slime.shadowBlur = 1;
+        rootRefreshView.slime.shadowColor = [UIColor yellowColor];
+        rootRefreshView.activityIndicationView.color = [UIColor blackColor];
+        [_defaultListTab addSubview:rootRefreshView];
         [self requestNet];
     }
     return self;
@@ -47,7 +60,7 @@
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     [self setMydic:dic];//接收到数据
-    NSLog(@"%@",dic );
+   // NSLog(@"%@",dic );
     [_defaultListTab reloadData];
     [_defaultListTab reloadInputViews];
 }
@@ -139,4 +152,20 @@
     self.target = target;
     self.action = action;
 }
+#pragma mark - scrollView delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [rootRefreshView scrollViewDidScroll];
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [rootRefreshView scrollViewDidEndDraging];
+}
+#pragma mark - 水滴下拉刷新
+- (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
+{
+//
+    [rootRefreshView endRefresh];//
+}
+
 @end

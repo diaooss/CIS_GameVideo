@@ -54,44 +54,13 @@
 {
     [super viewDidLoad];
     [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" rightImageName:@"myFriends.png" title:@"幻方"];
-//    /*/配置默认界面/*/
-//    rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
-//    rootAuthorListTab.delegate = self;
-//    rootAuthorListTab.dataSource = self;
-//    rootAuthorListTab.sectionFooterHeight = 0;
-//    rootAuthorListTab.sectionHeaderHeight = 0;
-//    self.isOpen = NO;
-//    rootAuthorListTab.hidden = NO;
-//    [self.view addSubview:rootAuthorListTab];
-//    ///
-//    rootRefreshView = [[SRRefreshView alloc] init];
-//    rootRefreshView.delegate = self;
-//    rootRefreshView.upInset = 0;
-//    rootRefreshView.slimeMissWhenGoingBack = YES;
-//    rootRefreshView.slime.bodyColor = [UIColor blackColor];
-//    rootRefreshView.slime.skinColor = [UIColor blackColor];
-//    rootRefreshView.slime.lineWith = 5;
-//    rootRefreshView.slime.shadowBlur = 1;
-//    rootRefreshView.slime.shadowColor = [UIColor yellowColor];
-//    rootRefreshView.activityIndicationView.color = [UIColor blackColor];
-//    ///
-//    [rootAuthorListTab addSubview:rootRefreshView];
-//    /*/翻转后的页面/*/
-//    //测试
-//    self.rootRequest = [[RequestTools alloc]init];
-//    [_rootRequest setDelegate:self];
-//    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
-//    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-//    [self.view addSubview:rootAuthorListTab];    
 //首页界面
     DefaultRootView * rootView = [[DefaultRootView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height)];
     [rootView addTarget:self action:@selector(transportVideoInformation:)];
     [self.view addSubview:rootView];
     [rootView setDelegate:self];
     [rootView release];
-    //请求测试
-    self.rootRequest = [[RequestTools alloc]init];
-    [_rootRequest setDelegate:self];
+    
 }
 #pragma mark-----DefaultRootView代理
 -(void)transferCategoryWithCategoryName:(NSString *)CategoryName
@@ -107,7 +76,42 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.viewDeckController.view cache:YES];
+    
+    
     [UIView commitAnimations];
+}
+-(void)rootAuthorListTab
+{
+    /*/配置默认界面/*/
+    rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
+    rootAuthorListTab.delegate = self;
+    rootAuthorListTab.dataSource = self;
+    rootAuthorListTab.sectionFooterHeight = 0;
+    rootAuthorListTab.sectionHeaderHeight = 0;
+    self.isOpen = NO;
+    rootAuthorListTab.hidden = YES;
+    [self.view addSubview:rootAuthorListTab];
+    ///
+    rootRefreshView = [[SRRefreshView alloc] init];
+    rootRefreshView.delegate = self;
+    rootRefreshView.upInset = 0;
+    rootRefreshView.slimeMissWhenGoingBack = YES;
+    rootRefreshView.slime.bodyColor = [UIColor blackColor];
+    rootRefreshView.slime.skinColor = [UIColor blackColor];
+    rootRefreshView.slime.lineWith = 5;
+    rootRefreshView.slime.shadowBlur = 1;
+    rootRefreshView.slime.shadowColor = [UIColor yellowColor];
+    rootRefreshView.activityIndicationView.color = [UIColor blackColor];
+    ///
+    [rootAuthorListTab addSubview:rootRefreshView];
+    /*/翻转后的页面/*/
+    //测试
+    self.rootRequest = [[RequestTools alloc]init];
+    [_rootRequest setDelegate:self];
+    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
+    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    [self.view addSubview:rootAuthorListTab];
+
 }
 #pragma mark--系统列表代理方法
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
