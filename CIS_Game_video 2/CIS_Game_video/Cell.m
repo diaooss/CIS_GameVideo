@@ -8,6 +8,7 @@
 
 #import "Cell.h"
 #import "GroupView.h"
+#import "MyNsstringTools.h"
 @implementation Cell
 -(void)dealloc
 {
@@ -49,11 +50,10 @@
 {
     int mark = 0;
     for (GroupView * obj in self.PicArry) {
-        [obj.asImageView setImageURL:[netArry objectAtIndex:mark]];
-        NSLog(@"-----------%@",[netArry objectAtIndex:mark]);
-//        [obj.nameLabel setText:<#(NSString *)#>];//名字
-//        [obj.timeLabel setText:<#(NSString *)#>];//时间
-        [obj setVideoID:[NSString stringWithFormat:@"%d",mark]];//视频ID;
+        [obj.asImageView setImageURL:[MyNsstringTools changeStrWithUT8:[[netArry objectAtIndex:mark]valueForKey:@"thumbnail"]]];
+        [obj.nameLabel setText:[[netArry objectAtIndex:mark]valueForKey:@"movieName"]];//名字
+        [obj.timeLabel setText:[[netArry objectAtIndex:mark]valueForKey:@"duration"]];//时间
+        [obj setVideoID:[[netArry objectAtIndex:mark]valueForKey:@"movieID"]];//视频ID;
         mark++;
     }
 }

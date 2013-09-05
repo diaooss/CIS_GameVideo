@@ -8,6 +8,7 @@
 
 #import "Animation_Turn_View.h"
 #import "Header.h"
+#import "MyNsstringTools.h"
 #define USE_BUTTONS YES
 
 @implementation Animation_Turn_View
@@ -23,14 +24,18 @@
     if (self) {
         // Initialization code
     }
+
+    //风火轮
+#pragma mark --调用接口--------------先请求数据请求成功后加载!!图片
+    return self;
+}
+-(void)addChildViews
+{
     _icarousel = [[iCarousel alloc]initWithFrame:CGRectMake(0, 0, self.width, self.height)];
     [_icarousel setDataSource:self];
     [_icarousel setDelegate:self];
     [_icarousel setType:iCarouselTypeRotary];
     [self addSubview:_icarousel];
-    //风火轮
-#pragma mark --调用接口--------------先请求数据请求成功后加载!!图片
-    return self;
 }
 #pragma mark iCarousel methods
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel
@@ -43,12 +48,11 @@
      [view.nameLabel setAlpha:0];
      [view.timeLabel setAlpha:0];
      [view setDelegate:self];
-     [view setVideoID:[NSString stringWithFormat:@"%lu",(unsigned long)index]];
      [view.asImageView setFrame: CGRectMake(0, 0,self.width-100, self.height)];
      if ([self.slideArry count]>0) {
-         [view.asImageView setImageURL:[self.slideArry objectAtIndex:index]];
+         [view.asImageView setImageURL:[MyNsstringTools changeStrWithUT8:[[self.slideArry objectAtIndex:index] valueForKey:@"picPath"]]];
          //加ID
-         
+         [view setVideoID:[[self.slideArry objectAtIndex:index] valueForKey:@"m_ID"]];
      }
      return view;
 }
