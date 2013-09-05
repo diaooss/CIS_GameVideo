@@ -66,7 +66,7 @@
 -(void)transferCategoryWithCategoryName:(NSString *)CategoryName
 {
     CategoryListViewController * Category = [[CategoryListViewController alloc]init];
-    [self setTitle:CategoryName];
+    [Category setTitle:CategoryName];
     [self.navigationController pushViewController:Category animated:YES];
     [Category release];
 }
