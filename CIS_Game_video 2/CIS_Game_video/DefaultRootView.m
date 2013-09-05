@@ -65,6 +65,11 @@
     [_defaultListTab reloadInputViews];
     [rootRefreshView endRefresh];
 }
+-(void)requestFailedWithResultDictionary:(NSDictionary *)dic
+{
+    [rootRefreshView endRefresh];
+    
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -127,7 +132,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
-    _animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.height/4)];
+        self.animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.height/4)];
     [_animationView setSlideArry:[self.mydic valueForKey:@"bannerResult"]];
     [_animationView addChildViews];//布局子视图
     [headerView addSubview:_animationView];

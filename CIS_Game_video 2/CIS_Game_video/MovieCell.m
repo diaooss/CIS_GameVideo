@@ -37,7 +37,7 @@
         _titleLabel.font = [UIFont systemFontOfSize:13.0];
         _titleLabel.textColor = [UIColor blackColor];
         _titleLabel.highlightedTextColor = [UIColor whiteColor];
-        _titleLabel.textAlignment = NSTextAlignmentCenter;
+        _titleLabel.textAlignment = NSTextAlignmentLeft;
         [_titleLabel setNumberOfLines:0];
         [self.contentView addSubview:_titleLabel];
         //副标题
@@ -70,7 +70,7 @@
         _timeLab.font = [UIFont systemFontOfSize:10.0];
         _timeLab.textColor = [UIColor blackColor];
         _timeLab.highlightedTextColor = [UIColor whiteColor];
-        _timeLab.textAlignment = NSTextAlignmentLeft;
+        _timeLab.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:_timeLab];
 
         //人气标签

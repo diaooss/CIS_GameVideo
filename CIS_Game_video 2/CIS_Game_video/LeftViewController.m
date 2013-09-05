@@ -179,7 +179,6 @@
         case 0:
             [self congXiangCe];
             
-            
             break;
         case 1:
             [self congXiangJi];
@@ -248,8 +247,9 @@
 {
         Public_ViewController * public = [[Public_ViewController alloc]init];
         UINavigationController * publicNVC =[[UINavigationController alloc]initWithRootViewController:public];
-        [self.viewDeckController closeLeftViewAnimated:YES];
-        [self.viewDeckController setCenterController:publicNVC];
+        [self.viewDeckController setCenterController:publicNVC ];
+    [self.viewDeckController closeLeftViewAnimated:YES];
+
         [public changeInformation:cellName];//设置名字 并且更新数据
         [publicNVC release];
         [public release];
@@ -268,12 +268,7 @@
 //判断当前的center 是不是点击所选中的
 - (void)judgeTheView:(NSString *)nowSelectionCell changeViecontroller:(UIViewController *)controller
 {
-    UIViewController *viewController = (UIViewController *)self.viewDeckController.centerController;
-    if ([viewController.title isEqualToString:nowSelectionCell]) {
-        [self.viewDeckController closeLeftViewAnimated:YES];
-        return;
-    }
-    UINavigationController * controllerNVC =[[UINavigationController alloc]initWithRootViewController:controller];
+       UINavigationController * controllerNVC =[[UINavigationController alloc]initWithRootViewController:controller];
     [self.viewDeckController closeLeftViewAnimated:YES];
     [self.viewDeckController setCenterController:controllerNVC];
     [controllerNVC release];

@@ -113,8 +113,8 @@
     rootRefreshView.delegate = self;
     rootRefreshView.upInset = 0;
     rootRefreshView.slimeMissWhenGoingBack = YES;
-    rootRefreshView.slime.bodyColor = [UIColor blackColor];
-    rootRefreshView.slime.skinColor = [UIColor blackColor];
+    rootRefreshView.slime.bodyColor = [UIColor grayColor];
+    rootRefreshView.slime.skinColor = [UIColor grayColor];
     rootRefreshView.slime.lineWith = 5;
     rootRefreshView.slime.shadowBlur = 1;
     rootRefreshView.slime.shadowColor = [UIColor yellowColor];
@@ -122,14 +122,12 @@
     ///
     [rootAuthorListTab addSubview:rootRefreshView];
     [self.view addSubview:rootAuthorListTab];
-
     /*/翻转后的页面/*/
     //测试
     self.rootRequest = [[RequestTools alloc]init];
     [_rootRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-
 }
 #pragma mark--系统列表代理方法
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -179,9 +177,9 @@
         }
         //根据数据源和下标配置展开cell内容,注意书写位置
         NSArray *list = [[self.authorListArray objectAtIndex:self.selectIndex.section] objectForKey:@"movies"];
-        
         NSLog(@"数组是:%@",list);
                     cell.titleLabel.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"movieName"];
+        cell.timeLab.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"m_duration"];
             cell.logoImageView.image = [UIImage imageNamed:@"man.png"];
         return cell;
     }else

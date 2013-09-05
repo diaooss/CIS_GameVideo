@@ -18,7 +18,6 @@
 @end
 @interface DefaultRootView : UIView<UITableViewDataSource,UITableViewDelegate,CellDelegate,AnimationViewDelegate,myHttpRequestDelegate,SRRefreshDelegate>
 {
-    Animation_Turn_View * _animationView;//轮显
     UITableView * _defaultListTab;
     SRRefreshView * rootRefreshView;
 }
