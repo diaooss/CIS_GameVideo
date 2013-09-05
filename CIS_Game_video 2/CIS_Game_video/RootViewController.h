@@ -20,6 +20,7 @@
     HMSegmentedControl *categorySegmentedControl;//标签
     SRRefreshView*rootRefreshView;//下拉刷新.
     NSString *staticCateGoryStr;//保留每次分类选择选中的类目,以便刷新时使用
+    DefaultRootView * rootView;//默认视图
 }
 @property(nonatomic,retain)RequestTools * rootRequest;//请求的代理,方便回传值.
 @property (nonatomic,retain)NSIndexPath *selectIndex;//选中的标记

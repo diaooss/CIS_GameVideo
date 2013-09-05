@@ -27,6 +27,8 @@
     [animationView release];
     self.rootRequest = nil;
     self.selectIndex = nil;
+    [rootView release];
+
     categorySegmentedControl = nil;
     rootRefreshView = nil;
     self.rootBannerArry = nil;
@@ -56,12 +58,11 @@
     [super viewDidLoad];
     [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" rightImageName:@"myFriends.png" title:@"幻方"];
 //首页界面
-    DefaultRootView * rootView = [[DefaultRootView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height)];
+     rootView = [[DefaultRootView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height)];
     [rootView addTarget:self action:@selector(transportVideoInformation:)];
     [self.view addSubview:rootView];
     [rootView setDelegate:self];
-    [rootView release];
-    [self rootAuthorListTab];
+    
     
 }
 #pragma mark-----DefaultRootView代理
@@ -75,14 +76,20 @@
 #pragma mark--切换浏览模式
 -(void)topRightCorenerBtnAction
 {
+    if (!rootAuthorListTab) {
+        [self rootAuthorListTab];
+    }
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.viewDeckController.view cache:YES];
     if (rootAuthorListTab.hidden == YES) {
         rootAuthorListTab.hidden = NO;
+        rootView.hidden  = YES;
     }
     else{
         rootAuthorListTab.hidden =YES;
+        rootView.hidden = NO;
+        
         
         
     }
@@ -91,8 +98,10 @@
 }
 -(void)rootAuthorListTab
 {
+    
+    
     /*/配置默认界面/*/
-    rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-44) style:UITableViewStylePlain];
+    rootAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height) style:UITableViewStylePlain];
     rootAuthorListTab.delegate = self;
     rootAuthorListTab.dataSource = self;
     rootAuthorListTab.sectionFooterHeight = 0;
