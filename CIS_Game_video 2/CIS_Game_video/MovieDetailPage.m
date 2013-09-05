@@ -28,9 +28,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UIMoviePlayerControllerDidExitFullscreenNotification" object:nil];
     theAuthorImageView = nil;
     movieInfoTextView = nil;
+    movieNameLable = nil;
+    durationLable = nil;
     movieWeb = nil;
     _detailRequest = nil;
+    self.detailRequest.delegate = nil;
     self.detailDic = nil;
+    self.movieId = nil;
     [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -89,15 +93,19 @@ durationLable.text = @"<<  时长:9'16''  >>";
         if (i==0) {
             [bottomBtn setTitle:@"关注作者" forState:UIControlStateNormal];
             bottomBtn.backgroundColor = rightBtnColor;
+            [bottomBtn addTarget:self action:@selector(attentionTheAuthor) forControlEvents:UIControlEventTouchUpInside];
         }else{
             bottomBtn.backgroundColor = customBlueColor;
-            [bottomBtn setTitle:@"分享视频" forState:UIControlStateNormal];}
+            [bottomBtn setTitle:@"分享视频" forState:UIControlStateNormal];
+            [bottomBtn addTarget:self action:@selector(shareTheMovie) forControlEvents:UIControlEventTouchUpInside];
+}
         [self.view addSubview:bottomBtn];
     }
     //测试
     self.detailRequest = [[RequestTools alloc]init];
     [_detailRequest setDelegate:self];
-    NSArray *strArry = [NSArray arrayWithObjects:GET_Moview_DETAIL,@"?ID=0000001",nil];
+    NSString *movieID = [NSString stringWithFormat:@"?ID=%@",self.movieId];
+    NSArray *strArry = [NSArray arrayWithObjects:GET_Moview_DETAIL,movieID,nil];
     
     [_detailRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
     NSLog(@"请求详情:%@",[MyNsstringTools groupStrByAStrArray:strArry]);
@@ -138,8 +146,19 @@ durationLable.text = @"<<  时长:9'16''  >>";
 #pragma mark--视频收藏
 -(void)topRightCorenerBtnAction
 {
+    //收藏该视频
+}
+#pragma mark--关注作者
+-(void)attentionTheAuthor
+{
     
 }
+#pragma mark--分享视频
+-(void)shareTheMovie
+{
+    [Tools makeShare];//分享内容二次定制,捆绑APP商店地址
+}
+
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {

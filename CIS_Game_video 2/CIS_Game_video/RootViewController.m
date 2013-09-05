@@ -104,8 +104,6 @@
     [self.navigationController pushViewController:Category animated:YES];
     [Category release];
 }
-
-
 #pragma mark--切换浏览模式
 -(void)topRightCorenerBtnAction
 {
@@ -140,7 +138,8 @@
         //如果是打开状态,分组内的行数根据数据数量返回,
         if (self.isOpen) {
             if (self.selectIndex.section == section) {
-                return 4;//在此多累加一行列表,以便添加更多按钮
+                 int contentCount = [[[self.authorListArray objectAtIndex:section] objectForKey:@"movies"] count];
+                return contentCount+1;
             }
         }
         //如果是关闭状态,则返回一个
@@ -225,8 +224,8 @@
     }else
     {
         //点击展开的小Cell的方法写在这里,根据下标判断
-        
-                NSLog(@"点击的下标是:%d",indexPath.row);
+     NSString *movieID =    [[[[self.authorListArray objectAtIndex:self.selectIndex.section] objectForKey:@"movies"] objectAtIndex:indexPath.row-1]objectForKey:@"movieID"];
+        [self getTheMovieDetailInfoByMovieId:movieID];//前往详情页面
         NSDictionary *dic = [_dataList objectAtIndex:indexPath.section];
         NSArray *list = [dic objectForKey:@"list"];
         NSString *item = [list objectAtIndex:indexPath.row-1];
@@ -308,13 +307,21 @@
     }
     return nil;
 }
-#pragma mark--Animation_Turn_View的代理方法
+#pragma mark--Banner的代理方法
 -(void)transportVideoInformation:(NSString *)imageID
 {
     NSLog(@"有没有传过来");
+    [self getTheMovieDetailInfoByMovieId:imageID];
+   
+}
+#pragma  mark--根据视频ID请求视频详情
+-(void)getTheMovieDetailInfoByMovieId:(NSString *)movieID
+{
     MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
+    detailPage.movieId = movieID;
     [self.navigationController pushViewController:detailPage animated:YES];
     [detailPage release];
+    
 }
 #pragma mark--发起请求
 -(void)startRequestWithCateStr:cateStr
