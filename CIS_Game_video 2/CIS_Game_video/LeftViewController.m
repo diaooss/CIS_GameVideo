@@ -39,13 +39,6 @@
     _isCraete=NO;
     return self;
 }
--(void)viewWillAppear:(BOOL)animated
-{
-    NSLog(@"出现几次啊");
-    [_setTableView reloadData];
-    
-    
-}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -138,19 +131,15 @@
             [self backToRootViewController];
             break;
         case 2:
-            NSLog(@"%@",cell.textLabel.text);
             [self toSomePlace:cell.textLabel.text];//前往公共页
             break;
         case 3:
-            NSLog(@"%@",cell.textLabel.text);
             [self toSomePlace:cell.textLabel.text];
             break;
         case 4:
-            NSLog(@"%@",cell.textLabel.text);
             [self toSomePlace:cell.textLabel.text];
             break;
         case 5:
-            NSLog(@"%@",cell.textLabel.text);//我的关注
             [self goToMyLikeAuthorListPageWith:cell.textLabel.text];
             break;
         default:
@@ -246,17 +235,10 @@
 #pragma matk-取消时
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    NSLog(@"-------");
     [self.viewDeckController dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)backToRootViewController
 {
-    _isCraete=NO;
-    UIViewController * View = (UIViewController *)self.viewDeckController.centerController;
-    if ([View.title isEqualToString:@"幻方视频"]) {
-        [self.viewDeckController closeLeftViewAnimated:YES];
-        return;
-    }
     AppDelegate * delegate = [UIApplication sharedApplication].delegate;
     [self.viewDeckController setCenterController:delegate.rootNvc];
     [self.viewDeckController closeLeftViewAnimated:YES];
@@ -264,7 +246,6 @@
 //根据标签判断去哪个页面
 - (void)toSomePlace:(NSString *)cellName;
 {
-    if (_isCraete==NO) {
         Public_ViewController * public = [[Public_ViewController alloc]init];
         UINavigationController * publicNVC =[[UINavigationController alloc]initWithRootViewController:public];
         [self.viewDeckController closeLeftViewAnimated:YES];
@@ -272,33 +253,21 @@
         [public changeInformation:cellName];//设置名字 并且更新数据
         [publicNVC release];
         [public release];
-        _isCraete=YES;
-        return;
-    }
-//如果当前的Viewcontroller存在 就需要判断是不是当前点击的
-    UINavigationController * nowViewController = (UINavigationController *)self.viewDeckController.centerController;
-    Public_ViewController *view=(Public_ViewController *)[nowViewController.viewControllers objectAtIndex:0];
-//判断点击是不是重复的
-    if ([view.title isEqualToString:cellName]) {
-        [self.viewDeckController closeLeftViewAnimated:YES];
-        return;
-    }
-//如果不是 需要冲洗夹杂数据
-    [view changeInformation:cellName];//并且更新数据_____方法需要重新定义;
-    [self.viewDeckController closeLeftViewAnimated:YES];
 }
 //前往我的关注列表,此方法未添加是否该页面已经存在的判断.
 -(void)goToMyLikeAuthorListPageWith:(NSString *)name
 {
     MyLikeAuthorListPage *likeAuthorPage = [[MyLikeAuthorListPage alloc] init] ;
-    [self judgeTheView:name changeViecontroller:likeAuthorPage];
+    UINavigationController * controllerNVC =[[UINavigationController alloc]initWithRootViewController:likeAuthorPage];
+    [self.viewDeckController closeLeftViewAnimated:YES];
+    [self.viewDeckController setCenterController:controllerNVC];
+    [controllerNVC release];
     [likeAuthorPage release];
 }
 #pragma mark--判断显示是不是当前点击的方法___
 //判断当前的center 是不是点击所选中的
 - (void)judgeTheView:(NSString *)nowSelectionCell changeViecontroller:(UIViewController *)controller
 {
-    _isCraete=NO;
     UIViewController *viewController = (UIViewController *)self.viewDeckController.centerController;
     if ([viewController.title isEqualToString:nowSelectionCell]) {
         [self.viewDeckController closeLeftViewAnimated:YES];
