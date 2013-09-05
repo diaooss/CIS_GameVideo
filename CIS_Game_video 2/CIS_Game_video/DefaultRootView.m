@@ -50,6 +50,7 @@
     }
     return self;
 }
+//开始请求数据
 -(void)requestNet
 {
     self.tool = [[RequestTools alloc]init];
@@ -60,9 +61,9 @@
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     [self setMydic:dic];//接收到数据
-   // NSLog(@"%@",dic );
     [_defaultListTab reloadData];
     [_defaultListTab reloadInputViews];
+    [rootRefreshView endRefresh];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -91,16 +92,16 @@
         [cell.textLabel setText:[nameArry objectAtIndex:indexPath.row/2]];
         return cell;
     }
-    //加载标题下的数据
+//加载标题下的数据
     static NSString *identity = @"cell";
     Cell *cell = [tableView dequeueReusableCellWithIdentifier:identity];
     if (cell==nil) {
         cell = [[[Cell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identity]autorelease];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    //*****************确保重用的cell起始位置不变
+//*****************确保重用的cell起始位置不变
     [cell.scrollerView setContentOffset:CGPointMake(0, 0)];
-    //***加载过以后不再加载-------很重要-----
+//***加载过以后不再加载-------很重要-----
     if (self.mark>indexPath.row||self.mark==19) {
         return cell;
     }
@@ -128,7 +129,7 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
     _animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.height/4)];
     [_animationView setSlideArry:[self.mydic valueForKey:@"bannerResult"]];
-    [_animationView addChildViews];
+    [_animationView addChildViews];//布局子视图
     [headerView addSubview:_animationView];
     [_animationView setDelegate:self];
     _defaultListTab.tableHeaderView = headerView;
@@ -165,7 +166,8 @@
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
 //
-    [rootRefreshView endRefresh];//
+    [self requestNet];
+    //;//
 }
 
 @end
