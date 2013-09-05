@@ -29,6 +29,7 @@
     self.selectIndex = nil;
     categorySegmentedControl = nil;
     rootRefreshView = nil;
+    self.rootBannerArry = nil;
     [staticCateGoryStr release];
     [_authorListArray release],_authorListArray = nil;
     [categorySegmentedControl release];
@@ -60,6 +61,7 @@
     [self.view addSubview:rootView];
     [rootView setDelegate:self];
     [rootView release];
+    [self rootAuthorListTab];
     
 }
 #pragma mark-----DefaultRootView代理
@@ -76,7 +78,14 @@
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self.viewDeckController.view cache:YES];
-    
+    if (rootAuthorListTab.hidden == YES) {
+        rootAuthorListTab.hidden = NO;
+    }
+    else{
+        rootAuthorListTab.hidden =YES;
+        
+        
+    }
     
     [UIView commitAnimations];
 }
@@ -272,6 +281,9 @@
         headerView.backgroundColor = [UIColor redColor];
         //滑动推荐
         animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
+        [animationView setSlideArry:self.rootBannerArry];
+        [animationView addChildViews];
+
         [headerView addSubview:animationView];
         [animationView setDelegate:self];
         /*/分类标签/*/
@@ -324,6 +336,7 @@
     NSLog(@"请求回来的数据是:%@",dic);
     [rootRefreshView endRefresh];
     self.authorListArray = [dic objectForKey:@"result"];
+    self.rootBannerArry = [dic objectForKey:@"bannerResult"];
     [rootAuthorListTab reloadData];
 }
 #pragma mark--标签选中的代理方法

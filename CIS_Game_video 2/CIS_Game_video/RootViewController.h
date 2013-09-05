@@ -25,4 +25,5 @@
 @property (nonatomic,retain)NSIndexPath *selectIndex;//选中的标记
 @property(nonatomic,assign)BOOL isOpen;//标记是否打开
 @property(nonatomic,retain) NSArray *authorListArray;//作者列表数组
+@property(nonatomic,retain)NSArray *rootBannerArry;//首页banner信息-作者列表
 @end
