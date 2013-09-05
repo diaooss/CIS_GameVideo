@@ -34,7 +34,6 @@
         [_defaultListTab setDecelerationRate:0.3];
         
         [self requestNet];
-
     }
     return self;
 }
@@ -48,7 +47,7 @@
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     [self setMydic:dic];//接收到数据
-    //NSLog(@"%@",dic );
+    NSLog(@"%@",dic );
     [_defaultListTab reloadData];
     [_defaultListTab reloadInputViews];
 }
@@ -115,6 +114,7 @@
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
     _animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.height/4)];
+    [_animationView setSlideArry:[self.mydic valueForKey:@"bannerResult"]];
     [_animationView addChildViews];
     [headerView addSubview:_animationView];
     [_animationView setDelegate:self];
