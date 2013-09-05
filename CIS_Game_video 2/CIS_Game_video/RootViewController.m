@@ -113,11 +113,9 @@
     rootRefreshView.delegate = self;
     rootRefreshView.upInset = 0;
     rootRefreshView.slimeMissWhenGoingBack = YES;
-    rootRefreshView.slime.bodyColor = [UIColor grayColor];
-    rootRefreshView.slime.skinColor = [UIColor grayColor];
+    rootRefreshView.slime.bodyColor = [UIColor blackColor];
+    rootRefreshView.slime.skinColor = [UIColor blackColor];
     rootRefreshView.slime.lineWith = 5;
-    rootRefreshView.slime.shadowBlur = 1;
-    rootRefreshView.slime.shadowColor = [UIColor yellowColor];
     rootRefreshView.activityIndicationView.color = [UIColor blackColor];
     ///
     [rootAuthorListTab addSubview:rootRefreshView];
@@ -180,6 +178,8 @@
         NSLog(@"数组是:%@",list);
                     cell.titleLabel.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"movieName"];
         cell.timeLab.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"m_duration"];
+        NSString *popularStr = [NSString stringWithFormat:@"%@",[[list objectAtIndex:indexPath.row-1] objectForKey:@"m_popular"]];
+        cell.popularLab.text =popularStr ;
             cell.logoImageView.image = [UIImage imageNamed:@"man.png"];
         return cell;
     }else

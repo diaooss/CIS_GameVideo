@@ -80,7 +80,7 @@
         _popularLab.font = [UIFont systemFontOfSize:10.0];
         _popularLab.textColor = [UIColor blackColor];
         _popularLab.highlightedTextColor = [UIColor whiteColor];
-        _popularLab.textAlignment = NSTextAlignmentLeft;
+        _popularLab.textAlignment = NSTextAlignmentCenter;
         [self.contentView addSubview:_popularLab];
         
         

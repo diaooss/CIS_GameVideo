@@ -77,7 +77,7 @@
 #pragma  mark--自定义headerview
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 200;
+    return 50;
 }
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -85,15 +85,14 @@
         
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
-    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    headerView.backgroundColor = [UIColor redColor];
-    headerImageView.image = [UIImage imageNamed:@"next.png"];
+    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 60, 60)];
+    headerView.backgroundColor = [UIColor grayColor];
     headerImageView.backgroundColor = [UIColor  yellowColor];
     [headerView addSubview:headerImageView];    
     [headerImageView release];
-    UILabel *headerLab = [[UILabel alloc] initWithFrame:CGRectMake(headerImageView.right, 10, 100, 20)];
+    UILabel *headerLab = [[UILabel alloc] initWithFrame:CGRectMake(headerImageView.right, 30, 100, 20)];
     headerLab.backgroundColor = [UIColor clearColor];
-    headerLab.textColor = [UIColor grayColor];
+    headerLab.textColor = [UIColor yellowColor];
     headerLab.font = [UIFont fontWithName:@"Arial" size:15];
     headerLab.textAlignment = NSTextAlignmentCenter;
     headerLab.shadowColor = [UIColor whiteColor];
@@ -103,14 +102,6 @@
     headerLab.text = @"魔兽阿川";
     [headerView addSubview:headerLab];    
     [headerLab release];
-    UIButton *btn = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    btn.frame = CGRectMake(headerLab.right+70, 0, 40, 20);
-    btn.backgroundColor = [UIColor greenColor];
-    btn.layer.cornerRadius = 5.0;
-    [headerView addSubview:btn];
-    [btn setTitle:@"LIKE" forState:UIControlStateNormal];
-    btn.backgroundColor = [UIColor redColor];
-    btn.showsTouchWhenHighlighted = YES;
     authorListTab.tableHeaderView = headerView;
     
     return headerView;
@@ -123,7 +114,7 @@
 }
 -(void)topRightCorenerBtnAction
 {
-    //实现收藏代码
+    //实现关注作者
 }
 - (void)didReceiveMemoryWarning
 {
