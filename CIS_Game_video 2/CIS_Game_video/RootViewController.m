@@ -342,7 +342,6 @@
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
-    NSLog(@"请求回来的数据是:%@",dic);
     [rootRefreshView endRefresh];
     self.authorListArray = [dic objectForKey:@"result"];
     self.rootBannerArry = [dic objectForKey:@"bannerResult"];
