@@ -9,6 +9,7 @@
 #import "CategoryListViewController.h"
 #import "CategoryListCell.h"
 #import "MovieDetailPage.h"
+#import "MyNsstringTools.h"
 @interface CategoryListViewController ()
 
 @end
@@ -67,7 +68,7 @@
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
     [cell.asImageView setImageURL:[arry objectAtIndex:indexPath.row]];
-    [cell.nameLabel setText:@"----aDiaos-是不是一样的呢"];
+    [cell.nameLabel setText:@"aDiaos-是不是一样的呢"];
     
     [cell.attentionTimeLabel setText:@"200"];
     [cell.timeLabel setText:@"10:20"];

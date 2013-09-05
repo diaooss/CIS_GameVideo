@@ -35,8 +35,6 @@
     }
     _nameArry = [[NSArray alloc]initWithObjects:@"返回主页",@"我的收藏",@"下载记录",@"观看记录",@"我的关注", nil];
     _pictureArry = [[NSArray alloc]initWithObjects:@"test.png",@"test.png",@"test.png",@"test.png",@"test.png",@"test.png", nil];
-    //增加一个判断  下面用
-    _isCraete=NO;
     return self;
 }
 - (void)viewDidLoad
@@ -116,7 +114,6 @@
         [cell.imageView setImage:[UIImage imageNamed:@"smile32.png"]];
     }
     
-    //[_pictureArry objectAtIndex:indexPath.row]]];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
