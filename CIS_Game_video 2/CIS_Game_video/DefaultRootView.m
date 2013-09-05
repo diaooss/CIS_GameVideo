@@ -24,6 +24,7 @@
     if (self) {
         // Initialization code
         self.mark=0;//初始化标记值
+
         _defaultListTab = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.height) style:UITableViewStylePlain];
         [_defaultListTab setDelegate:self];
         [_defaultListTab setDataSource:self];
@@ -33,6 +34,7 @@
         [_defaultListTab setDecelerationRate:0.3];
         
         [self requestNet];
+
     }
     return self;
 }
@@ -104,7 +106,6 @@
     if (self.delegate&&[self.delegate respondsToSelector:@selector(transferCategoryWithCategoryName:)]) {
         [self.delegate performSelector:@selector(transferCategoryWithCategoryName:) withObject:cell.textLabel.text];
     }
-
 }
 -(CGFloat )tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -121,7 +122,6 @@
     [_animationView release];
     return headerView;
 }
-
 #pragma mark--Animation_Turn_View的代理方法
 -(void)transportVideoInformation:(UIImage *)imageID
 {
@@ -135,7 +135,6 @@
     [self.target performSelector:self.action withObject:videoID];
 }
 -(void)addTarget:(id)target action:(SEL)action
-
 {
     self.target = target;
     self.action = action;

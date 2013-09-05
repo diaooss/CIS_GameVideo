@@ -17,7 +17,6 @@
 #import "RequestTools.h"
 #import "MyNsstringTools.h"
 #import "CategoryListViewController.h"
-
 @interface RootViewController ()
 @end
 @implementation RootViewController
@@ -93,7 +92,6 @@
     //请求测试
     self.rootRequest = [[RequestTools alloc]init];
     [_rootRequest setDelegate:self];
-    
 }
 #pragma mark-----DefaultRootView代理
 -(void)transferCategoryWithCategoryName:(NSString *)CategoryName
@@ -103,8 +101,6 @@
     [self.navigationController pushViewController:Category animated:YES];
     [Category release];
 }
-
-
 #pragma mark--切换浏览模式
 -(void)topRightCorenerBtnAction
 {
@@ -135,11 +131,11 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    
         //如果是打开状态,分组内的行数根据数据数量返回,
         if (self.isOpen) {
             if (self.selectIndex.section == section) {
-                return 4;//在此多累加一行列表,以便添加更多按钮
+                 int contentCount = [[[self.authorListArray objectAtIndex:section] objectForKey:@"movies"] count];
+                return contentCount+1;
             }
         }
         //如果是关闭状态,则返回一个
@@ -158,15 +154,13 @@
             cell = [[[MovieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
         }
-        //根据数据源和下标配置展开cell内容,注意书写位置.每个展开列表中的"更多按钮"也可以写在这里.
+        //根据数据源和下标配置展开cell内容,注意书写位置
         NSArray *list = [[self.authorListArray objectAtIndex:self.selectIndex.section] objectForKey:@"movies"];
         
         NSLog(@"数组是:%@",list);
                     cell.titleLabel.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"movieName"];
             cell.halfTitleLabel.text = @"我是副标题啊,你妹,哇哈哈哈";
             cell.logoImageView.image = [UIImage imageNamed:@"man.png"];
-               //        cell.textLabel.text = [list objectAtIndex:indexPath.row-1];
-        //更多按钮可在此添加.
         return cell;
     }else
         //没有打开分组CELL
@@ -186,21 +180,16 @@
         [cell.moreBtn addTarget:self action:@selector(getAuthorlist:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }
-    
 }
 -(void)getAuthorlist:(UIButton *)sender
 {
     NSLog(@"点中的作者是:%d",sender.tag);
     //根据标记值渠道对应的作者ID,请求推进到作者作品列表
-    
     AuthorMoviesListPage *authorMoviesList = [[AuthorMoviesListPage alloc] init];
     authorMoviesList.authorIDStr = [[self.authorListArray objectAtIndex:sender.tag] objectForKey:@"authorID"];
     authorMoviesList.authorNameStr = [[self.authorListArray objectAtIndex:sender.tag] objectForKey:@"author"];
     [self.navigationController pushViewController:authorMoviesList animated:YES];
     [authorMoviesList release];
-
-    
-    
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -224,11 +213,8 @@
     }else
     {
         //点击展开的小Cell的方法写在这里,根据下标判断
-        
-                NSLog(@"点击的下标是:%d",indexPath.row);
-        NSDictionary *dic = [_dataList objectAtIndex:indexPath.section];
-        NSArray *list = [dic objectForKey:@"list"];
-        NSString *item = [list objectAtIndex:indexPath.row-1];
+     NSString *movieID =    [[[[self.authorListArray objectAtIndex:self.selectIndex.section] objectForKey:@"movies"] objectAtIndex:indexPath.row-1]objectForKey:@"movieID"];
+        [self getTheMovieDetailInfoByMovieId:movieID];//前往详情页面
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -283,7 +269,6 @@
         //滑动推荐
         animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
         [headerView addSubview:animationView];
-        
         [animationView setDelegate:self];
         /*/分类标签/*/
         categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
@@ -291,10 +276,14 @@
         NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Dota",@"魔兽争霸",@"Dota2", @"星际争霸",nil];
         [categorySegmentedControl setSectionTitles:nameArry];
         [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
+            NSString *indexStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"index"];
+            int index = [indexStr intValue];
+            categorySegmentedControl.selectedIndex  = index;
         [categorySegmentedControl setBackgroundColor:[UIColor colorWithRed:205.0f/232.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [categorySegmentedControl setTextColor:[UIColor colorWithRed:47.0f/255.0f green:79.0f/255.0f blue:79.0f/255.0f alpha:0.8f]];
         [categorySegmentedControl setSelectionIndicatorColor:[UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:0.8f]];
-        [categorySegmentedControl setSelectionIndicatorMode:HMSelectionIndicatorFillsSegment];
+        [categorySegmentedControl setSelectionIndicatorMode:
+         HMSelectionIndicatorFillsSegment];
         [categorySegmentedControl setSegmentEdgeInset:UIEdgeInsetsMake(0, 5, 5, 0)];
         [categorySegmentedControl setTag:2];
         [headerView addSubview:categorySegmentedControl];
@@ -303,11 +292,17 @@
     }
     return nil;
 }
-#pragma mark--Animation_Turn_View的代理方法
+#pragma mark--Banner的代理方法
 -(void)transportVideoInformation:(NSString *)imageID
 {
     NSLog(@"有没有传过来");
+    [self getTheMovieDetailInfoByMovieId:imageID];
+}
+#pragma  mark--根据视频ID请求视频详情
+-(void)getTheMovieDetailInfoByMovieId:(NSString *)movieID
+{
     MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
+    detailPage.movieId = movieID;
     [self.navigationController pushViewController:detailPage animated:YES];
     [detailPage release];
 }
@@ -325,13 +320,15 @@
     NSLog(@"请求回来的数据是:%@",dic);
     [rootRefreshView endRefresh];
     self.authorListArray = [dic objectForKey:@"result"];
-    NSLog(@"到底是几?%d",[[[_authorListArray objectAtIndex:0] objectForKey:@"movies"] count]);
     [rootAuthorListTab reloadData];
 }
 #pragma mark--标签选中的代理方法
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
 	NSLog(@"选中的是: %i", segmentedControl.selectedIndex);
+    NSString *indexStr = [NSString stringWithFormat:@"%i",segmentedControl.selectedIndex];
+    [[NSUserDefaults standardUserDefaults] setObject:indexStr forKey:@"index"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     switch (segmentedControl.selectedIndex) {
         case 0:
             [self startRequestWithCateStr:@"英雄联盟"];
