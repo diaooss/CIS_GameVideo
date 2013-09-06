@@ -14,7 +14,7 @@
 +(void)addTipslabel:(UIView *)view withTitle:(NSString *)title;//加载提醒
 +(NSString * )currentNetState;//返回当前的网络类型
 //*****风火轮---
-+ (void)openLoadsign:(UIView* )view;//创建
++ (void)openLoadsign:(UIView* )view WithString:(NSString *)string;//创建
 + (void)closeLoadsign:(UIView* )view;//关闭
 //********检测邮箱格式
 +(BOOL)cheeckEmail: (NSString *)userEmail;
@@ -45,5 +45,8 @@
 //计算时间差
 + (NSString *)calTimeMiss:(NSString *)dateString;
 //创建分享
-+ (void)makeShare;
++ (void)makeShareWithString:(NSString *)string andImagePath:(NSString *)imagePath;
+//创建一个提醒框2秒后自动消失
++ (void)makeOneCautionViewOnView:(UIView *)view withString:(NSString *)string;
+
 @end

@@ -13,6 +13,9 @@
 @implementation DefaultRootView
 - (void)dealloc
 {
+    self.tool = nil;
+    [self.tool release];
+    [self.mydic release];
     [_defaultListTab release];
     [_animationView release];
     [rootRefreshView release];
@@ -29,10 +32,9 @@
         _defaultListTab = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.height) style:UITableViewStylePlain];
         [_defaultListTab setDelegate:self];
         [_defaultListTab setDataSource:self];
-        _defaultListTab.hidden = NO;
         _defaultListTab.backgroundColor = [UIColor whiteColor];
         [self addSubview:_defaultListTab];
-        [_defaultListTab setDecelerationRate:0.3];
+        [_defaultListTab setDecelerationRate:0.2];
         /*/水滴/*/
         
         rootRefreshView = [[SRRefreshView alloc] init];
@@ -44,6 +46,7 @@
         rootRefreshView.slime.lineWith = 5;
         rootRefreshView.activityIndicationView.color = [UIColor blackColor];
         [_defaultListTab addSubview:rootRefreshView];
+    //初次请求数据
         [self requestNet];
     }
     return self;
@@ -51,7 +54,7 @@
 //开始请求数据
 -(void)requestNet
 {
-    self.tool = [[RequestTools alloc]init];
+    self.tool = [[[RequestTools alloc]init] autorelease];
     [_tool setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:@"http://121.199.57.44:88/WebServer/HomeData.ashx",nil];
     [_tool requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
@@ -65,8 +68,9 @@
 }
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
+    NSLog(@"------%@",dic);
+    //  提醒用户加载失败原因-------------
     [rootRefreshView endRefresh];
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -92,6 +96,7 @@
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
+        [cell.imageView setImage:[UIImage imageNamed:@"smile32.png"]];
         [cell.textLabel setText:[nameArry objectAtIndex:indexPath.row/2]];
         return cell;
     }
@@ -130,7 +135,7 @@
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
-        self.animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.height/4)];
+    self.animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.height/4)];
     [_animationView setSlideArry:[self.mydic valueForKey:@"bannerResult"]];
     [_animationView addChildViews];//布局子视图
     [headerView addSubview:_animationView];
@@ -148,7 +153,6 @@
 -(void)accessPlayViewControllerWithVideoID:(NSString *)videoID
 {
     //可以在这里面推界面 参数 已经传过来
-    NSLog(@"--------%@",videoID);
     [self.target performSelector:self.action withObject:videoID];
 }
 -(void)addTarget:(id)target action:(SEL)action
@@ -168,9 +172,12 @@
 #pragma mark - 水滴下拉刷新
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
-//
+//刷新界面 //加载一次之后再 加载就不会请求数据-----界面就不会真的刷新
+    if (self.mydic) {
+        [rootRefreshView endRefresh];
+        return;
+    }
     [self requestNet];
-    //;//
 }
 
 @end

@@ -48,21 +48,18 @@
     }
     return self;
 }
-//-(void)loadView
-//{
-//    self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-//    [self.view setBackgroundColor:[UIColor grayColor]];
-//}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"myFriends.png" rightImageName:@"myFriends.png" title:@"幻方"];
 //首页界面
-     rootView = [[DefaultRootView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height)];
+     rootView = [[DefaultRootView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height-44)];
     [rootView addTarget:self action:@selector(transportVideoInformation:)];
     [self.view addSubview:rootView];
     [rootView setDelegate:self];
     
+    //[Tools makeOneCautionViewOnView:self.view withString:@"啊啊啊啊啊啊啊啊"];
     
 }
 #pragma mark-----DefaultRootView代理
@@ -89,9 +86,6 @@
     else{
         rootAuthorListTab.hidden =YES;
         rootView.hidden = NO;
-        
-        
-        
     }
     
     [UIView commitAnimations];
@@ -175,7 +169,6 @@
         }
         //根据数据源和下标配置展开cell内容,注意书写位置
         NSArray *list = [[self.authorListArray objectAtIndex:self.selectIndex.section] objectForKey:@"movies"];
-        NSLog(@"数组是:%@",list);
                     cell.titleLabel.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"movieName"];
         cell.timeLab.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"m_duration"];
         NSString *popularStr = [NSString stringWithFormat:@"%@",[[list objectAtIndex:indexPath.row-1] objectForKey:@"m_popular"]];

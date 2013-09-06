@@ -13,7 +13,7 @@
 #define NavigationBACKImage @"goBack.png"
 
 #import <ShareSDK/ShareSDK.h>
-
+#import <QuartzCore/QuartzCore.h>
 @implementation Tools
 
 +(BOOL)isHaveNet
@@ -48,14 +48,16 @@
 //加载一个动画
 +(void)labelMakeAnimation:(UIView* )sender
 {
-    [UIView animateWithDuration:1.0 animations:^{
+    [UIView animateWithDuration:2.0 animations:^{
         [sender setCenter:CGPointMake(160, 20)];
+
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:3.5 animations:^{
+        [UIView animateWithDuration:2.0 delay:2 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
             [sender setCenter:CGPointMake(160, -40)];
+
         } completion:^(BOOL finished) {
             [sender removeFromSuperview];
-            nil;
+
         }];
     }];
 }
@@ -67,11 +69,11 @@
     return [emailTest evaluateWithObject:userEmail];
 }
 //***风火轮
-+ (void)openLoadsign:(UIView* )view
++ (void)openLoadsign:(UIView* )view WithString:(NSString *)string
 {
     MBProgressHUD * hud =[MBProgressHUD showHUDAddedTo:view animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
-    [hud setDetailsLabelText:@"正在努力加载......"];
+    [hud setDetailsLabelText:string];
 }
 + (void)closeLoadsign:(UIView* )view
 {
@@ -258,15 +260,15 @@
     [bar release];
 
 }
-+ (void)makeShare
++ (void)makeShareWithString:(NSString *)string andImagePath:(NSString *)imagePath
 {
     //创建分享内容
-    id<ISSContent>publishContent = [ShareSDK content:@"有没有你---------"
-                                      defaultContent:@"你在或者不在她都在哪里"
-                                               image:nil
+    id<ISSContent>publishContent = [ShareSDK content:string
+                                      defaultContent:nil
+                                               image:[ShareSDK imageWithPath:imagePath]
                                                title:@"test"
-                                                 url:@"http://www.baidu.com/index.php?tn=monline_5_dg"
-                                         description:@"这是一个标题"
+                                                 url:@"http://weibo.com/u/3274767297?wvr=5&c=spr_web_sq_firefox_weibo_t001"
+                                         description:nil
                                            mediaType:SSPublishContentMediaTypeText];
     
     //创建自定义分享列表
@@ -313,7 +315,18 @@
                                 }
                             }];
  
+}
++ (void)makeOneCautionViewOnView:(UIView *)view withString:(NSString *)string
+{
+    MBProgressHUD * hud =[MBProgressHUD showHUDAddedTo:view animated:YES];
+    [hud setMode:MBProgressHUDModeText];
+    [hud setDetailsLabelText:string];
+    [hud setDetailsLabelFont:[UIFont systemFontOfSize:16]];
+    [self performSelector:@selector(cautionViewDisappear:) withObject:view afterDelay:3];
 
 }
-
++(void)cautionViewDisappear:(UIView *)view
+{
+    [MBProgressHUD hideHUDForView:view animated:YES];
+}
 @end

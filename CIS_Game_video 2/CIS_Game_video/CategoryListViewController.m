@@ -20,6 +20,10 @@
 @implementation CategoryListViewController
 -(void)dealloc
 {
+    [_refreshHeaderView release];
+    [_refreshFooterView release];
+    [self.categoryArry release];
+    [self setCategoryRequest:nil];
     [_categoryTable release];
     [super dealloc];
 }
@@ -38,18 +42,23 @@
     [super viewDidLoad];
     [Tools navigaionView:self leftImageName:@"goBack.png"];
     _categoryTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 440)];
+    [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:nil title:self.title];
+
+    _categoryTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-44)];
     [_categoryTable setDelegate:self];
     [_categoryTable setDataSource:self];
     [self.view addSubview:_categoryTable];
-    
-    
+//第一次请求数据
     [self requestCategoryList];
+//加载下拉加载 和上啦刷新
     [self createHeaderView];
     [self setFooterView];
 }
+
+//导航条 返回事件
 -(void)back
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark ====tableView代理
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -264,12 +273,12 @@
 
 //刷新调用的方法----------下拉刷新
 -(void)refreshView{
-    
+//下拉刷新--------
     if ([self.categoryArry count]>0) {
         [_categoryTable reloadData];
     }else
     {
-        flag = 0;
+        flag = 1;
         [self requestCategoryList];
     }
     
@@ -281,15 +290,13 @@
     [self removeFooterView];
     flag ++;
     [self requestCategoryList];
- [self testFinishedLoadData];
-    
-    
-    
+    [self testFinishedLoadData];
 }-(void)testFinishedLoadData{
     
     [self finishReloadingData];
     [self setFooterView];
 }
+//请求网络
 -(void)requestCategoryList
 {
     self.categoryRequest = [[[RequestTools alloc]init] autorelease];
@@ -297,6 +304,7 @@
     NSArray *strArry = [NSArray arrayWithObjects:VIDOE_LIST,[NSString stringWithFormat:@"?category=%@&dataPage=%d",self.title,flag],nil];
     [_categoryRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
 }
+//请求成功i
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     NSArray * arry =[dic valueForKey:@"result"];
@@ -308,6 +316,7 @@
     }
     else
     {
+        //数据被加载完成 提示用户已经加载完成-------没有数据
         NSLog(@"没数据啊-------");
     }
 }
