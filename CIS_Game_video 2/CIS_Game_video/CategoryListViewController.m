@@ -77,14 +77,14 @@
         cell = [[CategoryListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mark];
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
-    if ([self.categoryArry count]>0) {
-        
+    if ([self.categoryArry count]==0) {
+        return cell;
+    }
         [cell.asImageView setImageURL:[MyNsstringTools changeStrWithUT8:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"thumbnail"]]];
         [cell.nameLabel setText:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"movieName"]];
         [cell setVideoID:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"movieID"]];
         [cell.attentionTimeLabel setText:[NSString stringWithFormat:@"%@",[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"popular"]]];
         [cell.timeLabel setText:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"duration"]];
-    }
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -229,13 +229,13 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 	if (_refreshHeaderView) {
         [_refreshHeaderView egoRefreshScrollViewDidScroll:_categoryTable];
+        NSLog(@"-----------");
     }
 	
 	if (_refreshFooterView) {
         [_refreshFooterView egoRefreshScrollViewDidScroll:_categoryTable];
         [self setFooterView];
     }
-    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -323,7 +323,6 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [_categoryRequest setDelegate:nil];
-
-    [_categoryRequest release];
+    
 }
 @end
