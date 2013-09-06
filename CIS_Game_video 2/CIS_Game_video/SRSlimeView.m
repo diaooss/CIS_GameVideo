@@ -49,7 +49,7 @@ NS_INLINE CGPoint pointLineToArc(CGPoint center, CGPoint p2, float angle, CGFloa
         _viscous = 55.0f;
         _radius = 13.0f;
         _bodyColor = [UIColor blackColor];
-        _skinColor = [UIColor grayColor];
+        _skinColor = [UIColor blackColor];
         
         _missWhenApart = YES;
         _lineWith = 2;

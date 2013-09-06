@@ -108,7 +108,6 @@
     rootAuthorListTab.sectionHeaderHeight = 0;
     self.isOpen = NO;
     rootAuthorListTab.hidden = YES;
-    [self.view addSubview:rootAuthorListTab];
     ///
     rootRefreshView = [[SRRefreshView alloc] init];
     rootRefreshView.delegate = self;
@@ -117,19 +116,16 @@
     rootRefreshView.slime.bodyColor = [UIColor blackColor];
     rootRefreshView.slime.skinColor = [UIColor blackColor];
     rootRefreshView.slime.lineWith = 5;
-    rootRefreshView.slime.shadowBlur = 1;
-    rootRefreshView.slime.shadowColor = [UIColor yellowColor];
     rootRefreshView.activityIndicationView.color = [UIColor blackColor];
     ///
     [rootAuthorListTab addSubview:rootRefreshView];
+    [self.view addSubview:rootAuthorListTab];
     /*/翻转后的页面/*/
     //测试
     self.rootRequest = [[RequestTools alloc]init];
     [_rootRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-    [self.view addSubview:rootAuthorListTab];
-
 }
 #pragma mark--系统列表代理方法
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -141,7 +137,7 @@
             return 50;
         }else
         {
-        return 100;
+        return 120;
         }
 }
 //根据数据源,判断有几个分组
@@ -175,13 +171,15 @@
         if (!cell) {
             cell = [[[MovieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
             cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            cell.categoryLabel.hidden = YES;
         }
         //根据数据源和下标配置展开cell内容,注意书写位置
         NSArray *list = [[self.authorListArray objectAtIndex:self.selectIndex.section] objectForKey:@"movies"];
-        
         NSLog(@"数组是:%@",list);
                     cell.titleLabel.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"movieName"];
-            cell.halfTitleLabel.text = @"我是副标题啊,你妹,哇哈哈哈";
+        cell.timeLab.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"m_duration"];
+        NSString *popularStr = [NSString stringWithFormat:@"%@",[[list objectAtIndex:indexPath.row-1] objectForKey:@"m_popular"]];
+        cell.popularLab.text =popularStr ;
             cell.logoImageView.image = [UIImage imageNamed:@"man.png"];
         return cell;
     }else
@@ -342,10 +340,13 @@
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
-    [rootRefreshView endRefresh];
-    self.authorListArray = [dic objectForKey:@"result"];
+    NSLog(@"字典是:%@",dic);
+    self.authorListArray = [dic objectForKey:@"AuthorResult"];
     self.rootBannerArry = [dic objectForKey:@"bannerResult"];
     [rootAuthorListTab reloadData];
+    [rootRefreshView endRefresh];
+
+
 }
 #pragma mark--标签选中的代理方法
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
