@@ -305,26 +305,15 @@
 }
 + (void)makeOneCautionViewOnView:(UIView *)view withString:(NSString *)string
 {
-    UILabel * Caution = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 180, 80)];
-    [Caution.layer setCornerRadius:5];
-    [Caution.layer setMasksToBounds:YES];
-    [Caution setBackgroundColor:[UIColor blackColor]];
-    [Caution setNumberOfLines:0];
-    [Caution setTextAlignment:NSTextAlignmentCenter];
-    [Caution setLineBreakMode:NSLineBreakByWordWrapping];
-    [Caution setText:string];
-    [Caution setCenter:view.center];
-    [Caution setTextColor:[UIColor whiteColor]];
-    [view addSubview:Caution];
-    [self performSelector:@selector(cautionViewDisappear:) withObject:Caution afterDelay:3];
-}
-+(void)cautionViewDisappear:(UILabel *)label
-{
-    [UIView animateWithDuration:2 animations:^{
-        [label setAlpha:0];
+    MBProgressHUD * hud =[MBProgressHUD showHUDAddedTo:view animated:YES];
+    [hud setMode:MBProgressHUDModeText];
+    [hud setDetailsLabelText:string];
+    [hud setDetailsLabelFont:[UIFont systemFontOfSize:16]];
+    [self performSelector:@selector(cautionViewDisappear:) withObject:view afterDelay:3];
 
-    } completion:^(BOOL finished) {
-        [label removeFromSuperview];
-    }];
+}
++(void)cautionViewDisappear:(UIView *)view
+{
+    [MBProgressHUD hideHUDForView:view animated:YES];
 }
 @end

@@ -58,6 +58,9 @@
     [rootView addTarget:self action:@selector(transportVideoInformation:)];
     [self.view addSubview:rootView];
     [rootView setDelegate:self];
+    
+    [Tools makeOneCautionViewOnView:self.view withString:@"啊啊啊啊啊啊啊啊"];
+    
 }
 #pragma mark-----DefaultRootView代理
 -(void)transferCategoryWithCategoryName:(NSString *)CategoryName
@@ -83,9 +86,6 @@
     else{
         rootAuthorListTab.hidden =YES;
         rootView.hidden = NO;
-        
-        
-        
     }
     
     [UIView commitAnimations];
