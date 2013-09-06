@@ -59,6 +59,16 @@
 //反馈信息上传
 -(void)postFeedBackInfoWithUrlStr:(NSString *)urlStr infoDic:(NSDictionary *)dic
 {
+    NSString *s =  [dic JSONString];
+    NSData *data = [s dataUsingEncoding:NSUTF8StringEncoding];
+
+    httpRequest = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[urlStr stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    [httpRequest setDelegate:self];
+    httpRequest.requestMethod = @"POST";
+    httpRequest.timeOutSeconds = 5.0;
+    [httpRequest setPostBody:[NSData dataWithData:data]];
+    [httpRequest startSynchronous];
+
     
 }
 ////版本检测
@@ -67,12 +77,12 @@
 //类方法--根据请求返回的状态值,返回布尔值,以供判断
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Asynchronous:(NSString *)checkUrl//异步
 {
-    ASIHTTPRequest*Request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[MyNsstringTools changeStrWithUT8:checkUrl]]] autorelease];
-    [Request setRequestMethod:@"GET"];
-    Request.timeOutSeconds = 5.0;
-    Request.delegate  =self;
-    [Request startAsynchronous];
-    if([[[Request.responseData objectFromJSONData] valueForKey:@"status"]isEqualToString:@"ok"])
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[MyNsstringTools changeStrWithUT8:checkUrl]]];
+    [request setRequestMethod:@"GET"];
+    request.timeOutSeconds = 5.0;
+    request.delegate  =self;
+    [request startAsynchronous];
+    if([[[request.responseData objectFromJSONData] valueForKey:@"status"]isEqualToString:@"ok"])
     {
         return YES;
     }
@@ -81,11 +91,11 @@
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Synchronous:(NSString *)checkUrl//同步
 {
     NSLog(@"请求的串是:%@",checkUrl);
-    ASIHTTPRequest*Request = [[[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:[MyNsstringTools changeStrWithUT8:checkUrl]]] autorelease];
-    [Request setRequestMethod:@"GET"];
-    Request.timeOutSeconds = 5.0;
-    [Request startSynchronous];//默认是同步请求
-    if([[[Request.responseData objectFromJSONData] valueForKey:@"status"]isEqualToString:@"ok"])
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[MyNsstringTools changeStrWithUT8:checkUrl]]];
+    [request setRequestMethod:@"GET"];
+    request.timeOutSeconds = 5.0;
+    [request startSynchronous];//默认是同步请求
+    if([[[request.responseData objectFromJSONData] valueForKey:@"status"]isEqualToString:@"ok"])
     {
         return YES;
     }

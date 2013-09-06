@@ -14,6 +14,7 @@
 @interface RequestTools : NSObject<ASIHTTPRequestDelegate,NSCoding>
 {
     ASIHTTPRequest * httpRequest;//请求的执行者
+    ASIFormDataRequest *_dataRequest;
     NSURL *requestUrl;
     NSDictionary * resultDic;//请求后的解析后的结果字典
 }

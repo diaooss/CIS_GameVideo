@@ -299,7 +299,7 @@
 //请求网络
 -(void)requestCategoryList
 {
-    self.categoryRequest = [[[RequestTools alloc]init] autorelease];
+    self.categoryRequest = [[RequestTools alloc]init] ;
     [_categoryRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:VIDOE_LIST,[NSString stringWithFormat:@"?category=%@&dataPage=%d",self.title,flag],nil];
     [_categoryRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
@@ -322,6 +322,7 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];//可以成功取消全部。
     [_categoryRequest setDelegate:nil];
 
     [_categoryRequest release];
