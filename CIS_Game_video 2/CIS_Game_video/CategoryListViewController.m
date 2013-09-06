@@ -10,6 +10,8 @@
 #import "CategoryListCell.h"
 #import "MovieDetailPage.h"
 #import "MyNsstringTools.h"
+#import "RequestUrls.h"
+#import "MyNsstringTools.h"
 @interface CategoryListViewController ()
 
 @end
@@ -26,6 +28,7 @@
     if (self) {
         // Custom initialization
     }
+    self.categoryArry = [NSMutableArray arrayWithCapacity:2];
     return self;
 }
 
@@ -36,48 +39,45 @@
     [_categoryTable setDelegate:self];
     [_categoryTable setDataSource:self];
     [self.view addSubview:_categoryTable];
+    
+    
+    [self requestCategoryList];
+    [self createHeaderView];
+    [self setFooterView];
 }
+#pragma mark ====tableView代理
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return 80;
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 12;
+    return [self.categoryArry count];
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray * arry = [NSArray arrayWithObjects:
-                      @"http://121.199.57.44:88/images/m001.png",
-                      @"http://121.199.57.44:88/images/m002.png",
-                      @"http://121.199.57.44:88/images/003.gif",
-                      @"http://121.199.57.44:88/images/m004.png",
-                      @"http://121.199.57.44:88/images/m005.png",
-                      @"http://121.199.57.44:88/images/m006.png",
-                      @"http://121.199.57.44:88/images/m007.png",
-                      @"http://121.199.57.44:88/images/m008.png",
-                      @"http://121.199.57.44:88/images/m009.png",
-                      @"http://121.199.57.44:88/images/m010.png",
-                      @"http://121.199.57.44:88/images/m011.png",
-                      @"http://121.199.57.44:88/images/m012.png",
-                      nil];
     static NSString * mark = @"mark";
     CategoryListCell * cell = [tableView dequeueReusableCellWithIdentifier:mark];
     if (nil==cell) {
         cell = [[CategoryListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mark];
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
-    [cell.asImageView setImageURL:[arry objectAtIndex:indexPath.row]];
-    [cell.nameLabel setText:@"aDiaos-是不是一样的呢"];
-    
-    [cell.attentionTimeLabel setText:@"200"];
-    [cell.timeLabel setText:@"10:20"];
+    if ([self.categoryArry count]>0) {
+        
+        [cell.asImageView setImageURL:[MyNsstringTools changeStrWithUT8:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"thumbnail"]]];
+        [cell.nameLabel setText:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"movieName"]];
+        [cell setVideoID:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"movieID"]];
+        [cell.attentionTimeLabel setText:[NSString stringWithFormat:@"%@",[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"popular"]]];
+        [cell.timeLabel setText:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"duration"]];
+    }
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    CategoryListCell * cell = (CategoryListCell *)[tableView cellForRowAtIndexPath:indexPath];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
+    [detailPage setMovieId:cell.videoID];
     [self.navigationController pushViewController:detailPage animated:YES];
     [detailPage release];
     
@@ -87,5 +87,226 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+//初始化刷新视图
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+#pragma mark
+#pragma methods for creating and removing the header view
 
+-(void)createHeaderView{
+    if (_refreshHeaderView && [_refreshHeaderView superview]) {
+        [_refreshHeaderView removeFromSuperview];
+    }
+	_refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:
+                          CGRectMake(0.0f, 0.0f - self.view.bounds.size.height,
+                                     self.view.frame.size.width, self.view.bounds.size.height)];
+    _refreshHeaderView.delegate = self;
+    
+	[_categoryTable addSubview:_refreshHeaderView];
+    
+    [_refreshHeaderView refreshLastUpdatedDate];
+}
+
+-(void)removeHeaderView{
+    if (_refreshHeaderView && [_refreshHeaderView superview]) {
+        [_refreshHeaderView removeFromSuperview];
+    }
+    _refreshHeaderView = nil;
+}
+
+-(void)setFooterView{
+    // if the footerView is nil, then create it, reset the position of the footer
+    CGFloat height = MAX(_categoryTable.contentSize.height, _categoryTable.frame.size.height);
+    if (_refreshFooterView && [_refreshFooterView superview]) {
+        // reset position
+        _refreshFooterView.frame = CGRectMake(0.0f,
+                                              height,
+                                              _categoryTable.frame.size.width,
+                                              _categoryTable.bounds.size.height);
+    }else {
+        // create the footerView
+        _refreshFooterView = [[EGORefreshTableFooterView alloc] initWithFrame:
+                              CGRectMake(0.0f, height,
+                                         _categoryTable.frame.size.width, self.view.bounds.size.height)];
+        _refreshFooterView.delegate = self;
+        [_categoryTable addSubview:_refreshFooterView];
+    }
+    
+    if (_refreshFooterView) {
+        [_refreshFooterView refreshLastUpdatedDate];
+    }
+}
+
+-(void)removeFooterView{
+    if (_refreshFooterView && [_refreshFooterView superview]) {
+        [_refreshFooterView removeFromSuperview];
+    }
+    _refreshFooterView = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	return YES;
+}
+
+#pragma mark-
+#pragma mark force to show the refresh headerView
+-(void)showRefreshHeader:(BOOL)animated{
+	if (animated)
+	{
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.2];
+		_categoryTable.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
+        // scroll the table view to the top region
+        [_categoryTable scrollRectToVisible:CGRectMake(0, 0.0f, 1, 1) animated:NO];
+        [UIView commitAnimations];
+	}
+	else
+	{
+        _categoryTable.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
+		[_categoryTable scrollRectToVisible:CGRectMake(0, 0.0f, 1, 1) animated:NO];
+	}
+    
+    [_refreshHeaderView setState:EGOOPullRefreshLoading];
+}
+//===============
+//刷新delegate
+#pragma mark -
+#pragma mark data reloading methods that must be overide by the subclass
+
+-(void)beginToReloadData:(EGORefreshPos)aRefreshPos{
+	
+	//  should be calling your tableviews data source model to reload
+	_reloading = YES;
+    
+    if (aRefreshPos == EGORefreshHeader) {
+        // pull down to refresh data
+        [self performSelector:@selector(refreshView) withObject:nil afterDelay:2.0];
+    }else if(aRefreshPos == EGORefreshFooter){
+        // pull up to load more data
+        [self performSelector:@selector(getNextPageView) withObject:nil afterDelay:2.0];
+    }
+    
+	// overide, the actual loading data operation is done in the subclass
+}
+
+#pragma mark -
+#pragma mark method that should be called when the refreshing is finished
+- (void)finishReloadingData{
+	
+	//  model should call this when its done loading
+	_reloading = NO;
+    
+	if (_refreshHeaderView) {
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:_categoryTable];
+    }
+    
+    if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:_categoryTable];
+        [self setFooterView];
+    }
+    [_categoryTable reloadData];
+    // overide, the actula reloading tableView operation and reseting position operation is done in the subclass
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	if (_refreshHeaderView) {
+        [_refreshHeaderView egoRefreshScrollViewDidScroll:_categoryTable];
+    }
+	
+	if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDidScroll:_categoryTable];
+        [self setFooterView];
+    }
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	if (_refreshHeaderView) {
+        [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    }
+	
+	if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDidEndDragging:scrollView];
+    }
+}
+
+
+#pragma mark -
+#pragma mark EGORefreshTableDelegate Methods
+
+- (void)egoRefreshTableDidTriggerRefresh:(EGORefreshPos)aRefreshPos{
+	
+	[self beginToReloadData:aRefreshPos];
+	
+}
+
+- (BOOL)egoRefreshTableDataSourceIsLoading:(UIView*)view{
+	
+	return _reloading; // should return if data source model is reloading
+}
+
+
+// if we don't realize this method, it won't display the refresh timestamp
+- (NSDate*)egoRefreshTableDataSourceLastUpdated:(UIView*)view{
+	
+	return [NSDate date]; // should return date data source was last changed
+	
+}
+
+//刷新调用的方法----------下拉刷新
+-(void)refreshView{
+    
+    if ([self.categoryArry count]>0) {
+        [_categoryTable reloadData];
+    }else
+    {
+        flag = 0;
+        [self requestCategoryList];
+    }
+    
+    [self testFinishedLoadData];
+    
+}
+//加载调用的方法----------上拉加载
+-(void)getNextPageView{
+    [self removeFooterView];
+    flag ++;
+    [self requestCategoryList];
+ [self testFinishedLoadData];
+    
+    
+    
+}-(void)testFinishedLoadData{
+    
+    [self finishReloadingData];
+    [self setFooterView];
+}
+-(void)requestCategoryList
+{
+    self.categoryRequest = [[[RequestTools alloc]init] autorelease];
+    [_categoryRequest setDelegate:self];
+    NSArray *strArry = [NSArray arrayWithObjects:VIDOE_LIST,[NSString stringWithFormat:@"?category=%@&dataPage=%d",self.title,flag],nil];
+    [_categoryRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+}
+-(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
+{
+    NSArray * arry =[dic valueForKey:@"result"];
+    if ([arry count]>0) {
+        for (NSDictionary*obj in arry) {
+            [self.categoryArry addObject:obj];
+        }
+        [_categoryTable reloadData];
+    }
+    else
+    {
+        NSLog(@"没数据啊-------");
+    }
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [_categoryRequest setDelegate:nil];
+}
 @end

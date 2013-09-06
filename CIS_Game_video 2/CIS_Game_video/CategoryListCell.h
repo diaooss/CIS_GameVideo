@@ -9,6 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "AsynImageView.h"
 @interface CategoryListCell : UITableViewCell
+{
+    UIImageView * _popularityImageView;
+    UIImageView * _timeImageView;
+}
 @property(nonatomic,retain)AsynImageView * asImageView;
 @property(nonatomic,copy)NSString * videoID;
 @property(nonatomic,retain)UILabel * nameLabel;

@@ -7,9 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface CategoryListViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "RequestTools.h"
+#import "EGORefreshTableFooterView.h"
+#import "EGORefreshTableHeaderView.h"
+@interface CategoryListViewController : UIViewController<EGORefreshTableDelegate,UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,myHttpRequestDelegate>
 {
     UITableView * _categoryTable;
+    
+    //EGOHeader
+    EGORefreshTableHeaderView *_refreshHeaderView;
+    //EGOFoot
+    EGORefreshTableFooterView *_refreshFooterView;
+    //
+    BOOL _reloading;
+    int flag;
+
 }
+@property(nonatomic,retain)RequestTools * categoryRequest;
+@property(nonatomic,retain)NSMutableArray * categoryArry;
 @end
