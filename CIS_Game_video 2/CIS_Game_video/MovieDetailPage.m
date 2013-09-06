@@ -30,13 +30,12 @@
     [movieInfoTextView release];
     [movieNameLable release];
     [nameBgImg release];
-    [durationLable release];
     [authorNameLab release];
     [popularLab release];
     [popularImg release];
     [movieWeb release];
-    _detailRequest = nil;
     self.detailRequest.delegate = nil;
+    _detailRequest = nil;
     self.detailDic = nil;
     self.movieId = nil;
     [super dealloc];
@@ -74,6 +73,7 @@
     movieWeb.backgroundColor= [UIColor yellowColor];
     movieWeb.delegate = self;
     movieWeb.scalesPageToFit = YES;
+    movieWeb.scrollView.scrollEnabled = NO;
     [self.view addSubview:movieWeb];
     durationLable = [UILabel labelWithRect:CGRectMake(0, movieWeb.bottom-70, movieWeb.width/2, 30) font:[UIFont systemFontOfSize:14]];
 durationLable.text = @"<<  时长:9'16''  >>";
@@ -93,11 +93,17 @@ durationLable.text = @"<<  时长:9'16''  >>";
     [movieWeb addSubview:popularLab];
     
     
-    theAuthorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, movieWeb.bottom+5, 100, self.view.height-movieNameLable.height-movieWeb.height-125)];
+    theAuthorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, movieWeb.bottom+5, 100, self.view.height-movieNameLable.height-movieWeb.height-128)];
     theAuthorImageView.backgroundColor= [UIColor yellowColor];
     [self.view addSubview:theAuthorImageView];
     
     theAuthorImageView.image = [UIImage imageNamed:@"headerimage.png"];
+    
+    authorNameLab = [[UILabel alloc] initWithFrame:CGRectMake(0, theAuthorImageView.height/2+22, theAuthorImageView.width, 20)];
+    authorNameLab.textAlignment = NSTextAlignmentCenter;
+    authorNameLab.backgroundColor = [UIColor redColor];
+    authorNameLab.alpha = 0.5;
+    [theAuthorImageView addSubview:authorNameLab];
     movieInfoTextView = [[UITextView alloc] initWithFrame:CGRectMake(theAuthorImageView.right+5, movieWeb.bottom+5, self.view.width-theAuthorImageView.width-15, theAuthorImageView.height)];
     movieInfoTextView.editable = NO;
     movieInfoTextView.textAlignment = NSTextAlignmentCenter;
@@ -142,6 +148,8 @@ durationLable.text = @"<<  时长:9'16''  >>";
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [self.detailRequest setDelegate:nil];
+    self.detailRequest = nil;
     [movieWeb stopLoading];
     movieWeb.delegate = nil;
 }
@@ -188,6 +196,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
     NSLog(@"链接:%@",[dic objectForKey:@"m_url"]);
     NSLog(@"详情字典:%@",dic);
     movieNameLable.text = [dic objectForKey:@"m_name"];
+    authorNameLab.text = [dic objectForKey:@"m_author"];
     movieInfoTextView.text = [dic objectForKey:@"m_description"];
     durationLable.text = [dic objectForKey:@"m_duration"];
     NSString *popularStr = [NSString stringWithFormat:@"%@",[dic objectForKey:@"m_popular"]];

@@ -19,8 +19,8 @@
     //EGOFoot
     EGORefreshTableFooterView *_refreshFooterView;
     //
-    BOOL _reloading;
-    int flag;
+    BOOL _reloading;//状态提示
+    int flag;//请求的page值
 
 }
 @property(nonatomic,retain)RequestTools * categoryRequest;

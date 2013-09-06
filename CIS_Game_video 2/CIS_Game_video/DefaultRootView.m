@@ -42,8 +42,6 @@
         rootRefreshView.slime.bodyColor = [UIColor blackColor];
         rootRefreshView.slime.skinColor = [UIColor blackColor];
         rootRefreshView.slime.lineWith = 5;
-        rootRefreshView.slime.shadowBlur = 1;
-        rootRefreshView.slime.shadowColor = [UIColor yellowColor];
         rootRefreshView.activityIndicationView.color = [UIColor blackColor];
         [_defaultListTab addSubview:rootRefreshView];
         [self requestNet];

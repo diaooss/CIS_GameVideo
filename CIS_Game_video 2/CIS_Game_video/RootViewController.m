@@ -396,4 +396,9 @@
 {
     [super didReceiveMemoryWarning];
 }
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [self.rootRequest  setDelegate:nil];
+    self.rootRequest = nil;
+}
 @end

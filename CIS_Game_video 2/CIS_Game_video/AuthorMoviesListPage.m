@@ -26,6 +26,8 @@
     self.authorNameStr = nil;
     self.authorListDic = nil;
     self.moviesOfTheAuthorArry = nil;
+    [_refreshFooterView release];
+    [_refreshHeaderView release];
     [super dealloc];
 }
 
@@ -34,6 +36,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        self.moviesOfTheAuthorArry = [NSMutableArray arrayWithCapacity:10];
     }
     return self;
 }
@@ -50,14 +53,20 @@
     authorListTab.delegate = self;
     authorListTab.dataSource = self;
     [authorListTab setTag:1000];
+    flag = 1;
     [self.view addSubview:authorListTab];
+    [self createHeaderView];
+    [self setFooterView];
     [self getauthorListById];
 }
+#pragma mark--通过ID PAGE请求作品列表
 -(void)getauthorListById
 {
     getAuthorListByAuthorID = [[RequestTools alloc] init];
     [getAuthorListByAuthorID setDelegate:self];
-    NSArray *strArry = [NSArray arrayWithObjects:GET_LIST_OF_A_AUTHOR,@"?AuthorID=4&email=1601883700@qq.com",nil];
+    NSString *authorIdStr = [NSString stringWithFormat:@"?AuthorID=%@",self.authorIDStr];
+    NSString *pageStr = [NSString stringWithFormat:@"&dataPage=%d",flag];
+    NSArray *strArry = [NSArray arrayWithObjects:GET_LIST_OF_A_AUTHOR,authorIdStr,pageStr,nil];
     NSLog(@"拼接字符串是:%@",[MyNsstringTools groupStrByAStrArray:strArry]);
     [getAuthorListByAuthorID requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
     
@@ -122,7 +131,8 @@
     [headerLab setShadowOffset:CGSizeMake(0, 1)];
     [headerLab setHighlightedTextColor:[UIColor whiteColor]];
     //设置每组的的标题
-    headerLab.text = @"魔兽阿川";
+        headerLab.text = [self.authorListDic objectForKey:@"author"];
+        
     [headerView addSubview:headerLab];    
     [headerLab release];
     authorListTab.tableHeaderView = headerView;
@@ -142,8 +152,18 @@
 {
     NSLog(@"单一作者视频列表%@",dic);
     self.authorListDic = dic;
-    self.moviesOfTheAuthorArry = [dic objectForKey:@"movies"];
-    [authorListTab reloadData];
+    
+    NSArray * arry =[dic valueForKey:@"movies"];
+    if ([arry count]>0) {
+        for (NSDictionary*obj in arry) {
+            [self.moviesOfTheAuthorArry addObject:obj];
+        }
+        [authorListTab reloadData];
+    }
+    else
+    {
+        NSLog(@"没数据啊-------");
+    }
 }
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
@@ -153,4 +173,194 @@
 {
     [super didReceiveMemoryWarning];
 }
+//初始化刷新视图
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+#pragma mark
+#pragma methods for creating and removing the header view
+
+-(void)createHeaderView{
+    if (_refreshHeaderView && [_refreshHeaderView superview]) {
+        [_refreshHeaderView removeFromSuperview];
+    }
+	_refreshHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:
+                          CGRectMake(0.0f, 0.0f - self.view.bounds.size.height,
+                                     self.view.frame.size.width, self.view.bounds.size.height)];
+    _refreshHeaderView.delegate = self;
+    
+	[authorListTab addSubview:_refreshHeaderView];
+    [_refreshHeaderView refreshLastUpdatedDate];
+}
+
+-(void)removeHeaderView{
+    if (_refreshHeaderView && [_refreshHeaderView superview]) {
+        [_refreshHeaderView removeFromSuperview];
+    }
+    _refreshHeaderView = nil;
+}
+
+-(void)setFooterView{
+    // if the footerView is nil, then create it, reset the position of the footer
+    CGFloat height = MAX(authorListTab.contentSize.height, authorListTab.frame.size.height);
+    if (_refreshFooterView && [_refreshFooterView superview]) {
+        // reset position
+        _refreshFooterView.frame = CGRectMake(0.0f,
+                                              height,
+                                              authorListTab.frame.size.width,
+                                              authorListTab.bounds.size.height);
+    }else {
+        // create the footerView
+        _refreshFooterView = [[EGORefreshTableFooterView alloc] initWithFrame:
+                              CGRectMake(0.0f, height,
+                                         authorListTab.frame.size.width, self.view.bounds.size.height)];
+        _refreshFooterView.delegate = self;
+        [authorListTab addSubview:_refreshFooterView];
+    }
+    if (_refreshFooterView) {
+        [_refreshFooterView refreshLastUpdatedDate];
+    }
+}
+
+-(void)removeFooterView{
+    if (_refreshFooterView && [_refreshFooterView superview]) {
+        [_refreshFooterView removeFromSuperview];
+    }
+    _refreshFooterView = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	return YES;
+}
+
+#pragma mark-
+#pragma mark force to show the refresh headerView
+-(void)showRefreshHeader:(BOOL)animated{
+	if (animated)
+	{
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.2];
+		authorListTab.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
+        // scroll the table view to the top region
+        [authorListTab scrollRectToVisible:CGRectMake(0, 0.0f, 1, 1) animated:NO];
+        [UIView commitAnimations];
+	}
+	else
+	{
+        authorListTab.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
+		[authorListTab scrollRectToVisible:CGRectMake(0, 0.0f, 1, 1) animated:NO];
+	}
+    
+    [_refreshHeaderView setState:EGOOPullRefreshLoading];
+}
+//===============
+//刷新delegate
+#pragma mark -
+#pragma mark data reloading methods that must be overide by the subclass
+
+-(void)beginToReloadData:(EGORefreshPos)aRefreshPos{
+	
+	//  should be calling your tableviews data source model to reload
+	_reloading = YES;
+    
+    if (aRefreshPos == EGORefreshHeader) {
+        // pull down to refresh data
+        [self performSelector:@selector(refreshView) withObject:nil afterDelay:2.0];
+    }else if(aRefreshPos == EGORefreshFooter){
+        // pull up to load more data
+        [self performSelector:@selector(getNextPageView) withObject:nil afterDelay:2.0];
+    }
+    
+	// overide, the actual loading data operation is done in the subclass
+}
+
+#pragma mark -
+#pragma mark method that should be called when the refreshing is finished
+- (void)finishReloadingData{
+	
+	//  model should call this when its done loading
+	_reloading = NO;
+    
+	if (_refreshHeaderView) {
+        [_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:authorListTab];
+    }
+    
+    if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:authorListTab];
+        [self setFooterView];
+    }
+    [authorListTab reloadData];
+    // overide, the actula reloading tableView operation and reseting position operation is done in the subclass
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	if (_refreshHeaderView) {
+        [_refreshHeaderView egoRefreshScrollViewDidScroll:authorListTab];
+    }
+	if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDidScroll:authorListTab];
+        [self setFooterView];
+    }
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	if (_refreshHeaderView) {
+        [_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    }
+	
+	if (_refreshFooterView) {
+        [_refreshFooterView egoRefreshScrollViewDidEndDragging:scrollView];
+    }
+}
+
+#pragma mark EGORefreshTableDelegate Methods
+- (void)egoRefreshTableDidTriggerRefresh:(EGORefreshPos)aRefreshPos{
+	
+	[self beginToReloadData:aRefreshPos];
+}
+- (BOOL)egoRefreshTableDataSourceIsLoading:(UIView*)view{
+	
+	return _reloading; // should return if data source model is reloading
+}
+// if we don't realize this method, it won't display the refresh timestamp
+- (NSDate*)egoRefreshTableDataSourceLastUpdated:(UIView*)view{
+	
+	return [NSDate date]; // should return date data source was last changed
+	
+}
+
+//刷新调用的方法----------下拉刷新
+-(void)refreshView{
+    
+    if ([self.moviesOfTheAuthorArry count]>0) {
+        [authorListTab reloadData];
+    }else
+    {
+        flag = 0;
+        [self getauthorListById];
+    }
+    
+    [self testFinishedLoadData];
+    
+}
+//加载调用的方法----------上拉加载
+-(void)getNextPageView{
+    [self removeFooterView];
+    flag ++;
+    [self getauthorListById];
+    [self testFinishedLoadData];
+    
+    
+    
+}-(void)testFinishedLoadData{
+    
+    [self finishReloadingData];
+    [self setFooterView];
+}
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [getAuthorListByAuthorID setDelegate:nil];
+    getAuthorListByAuthorID = nil;
+}
+
 @end

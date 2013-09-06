@@ -12,6 +12,7 @@
 #import "MyNsstringTools.h"
 #import "RequestUrls.h"
 #import "MyNsstringTools.h"
+#import "Tools.h"
 @interface CategoryListViewController ()
 
 @end
@@ -35,6 +36,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [Tools navigaionView:self leftImageName:@"goBack.png"];
     _categoryTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 440)];
     [_categoryTable setDelegate:self];
     [_categoryTable setDataSource:self];
@@ -44,6 +46,10 @@
     [self requestCategoryList];
     [self createHeaderView];
     [self setFooterView];
+}
+-(void)back
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 #pragma mark ====tableView代理
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -308,5 +314,7 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [_categoryRequest setDelegate:nil];
+
+    [_categoryRequest release];
 }
 @end

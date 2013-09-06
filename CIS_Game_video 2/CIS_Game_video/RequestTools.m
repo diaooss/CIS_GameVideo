@@ -40,6 +40,30 @@
     httpRequest.timeOutSeconds = 5.0;
     [httpRequest startSynchronous];
 }
+//头像上传
++(NSDictionary *)postHeaderImageToServerWitImage:(UIImage *)postImage requestStr:(NSString *)str
+{
+    NSData *imgData = UIImageJPEGRepresentation(postImage, 1.0);
+    ASIFormDataRequest *request = [ASIFormDataRequest requestWithURL:[NSURL URLWithString:[MyNsstringTools changeStrWithUT8:str]]];
+    [request setPostBody:[NSMutableData dataWithData:imgData]];
+    [request buildRequestHeaders];
+    request.delegate = self;
+    NSLog(@"header: %@", request.requestHeaders);
+    [request addRequestHeader:@"Content-Type"value:@"text/plain"];
+    [request startSynchronous];
+    return [[request.responseData objectFromJSONData] valueForKey:@"status"];
+
+
+    
+}
+//反馈信息上传
+-(void)postFeedBackInfoWithUrlStr:(NSString *)urlStr infoDic:(NSDictionary *)dic
+{
+    
+}
+////版本检测
+//-(void)versionsCheck;
+
 //类方法--根据请求返回的状态值,返回布尔值,以供判断
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Asynchronous:(NSString *)checkUrl//异步
 {

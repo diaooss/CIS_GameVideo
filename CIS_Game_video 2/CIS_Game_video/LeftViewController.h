@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RequestTools.h"
 
-@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
+@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,myHttpRequestDelegate>
 {
     NSArray * _nameArry;
     NSArray * _pictureArry;

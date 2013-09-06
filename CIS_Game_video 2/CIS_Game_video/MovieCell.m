@@ -107,7 +107,7 @@
     
     _logoImageView.frame = CGRectMake(10, 10, logoImageViewSize.width, logoImageViewSize.height);
     _titleLabel.frame = CGRectMake(_logoImageView.right+5, _logoImageView.top, 130, cellSize.height/2);
-    _categoryLabel.frame = CGRectMake(_logoImageView.width-50, _logoImageView.bottom-40, 50, 25);
+    _categoryLabel.frame = CGRectMake(_logoImageView.width-60, _logoImageView.bottom-40, 60, 25);
     _collectBtn.frame = CGRectMake(_titleLabel.right+5, (cellSize.height-collectBtnSzie.height)/2, collectBtnSzie.width, collectBtnSzie.height);
     
     _timeImg.frame = CGRectMake(_titleLabel.left, _titleLabel.bottom+15, 20, 20);

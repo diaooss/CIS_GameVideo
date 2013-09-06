@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
+#import "ASIFormDataRequest.h"
 
 @protocol myHttpRequestDelegate;
-@interface RequestTools : NSObject<ASIHTTPRequestDelegate>
+@interface RequestTools : NSObject<ASIHTTPRequestDelegate,NSCoding>
 {
     ASIHTTPRequest * httpRequest;//请求的执行者
     NSURL *requestUrl;
@@ -21,10 +22,10 @@
 -(void )requestWithUrl_Asynchronous:(NSString *)urlStr;
 //根据字符串,发起同步请求
 -(void )requestWithUrl_Synchronous:(NSString *)urlStr;
-////头像上传
-//-(void)postHeaderImageToServer;
-////反馈信息上传
-//-(void)postFeedBackInfo;
+//头像上传
++(NSDictionary*)postHeaderImageToServerWitImage:(UIImage *)postImage requestStr:(NSString *)str;
+//反馈信息上传
+-(void)postFeedBackInfoWithUrlStr:(NSString *)urlStr infoDic:(NSDictionary *)dic;
 ////版本检测
 //-(void)versionsCheck;
 

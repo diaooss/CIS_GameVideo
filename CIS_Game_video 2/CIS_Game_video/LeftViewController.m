@@ -16,6 +16,9 @@
 #import "NetSettingPage.h"
 #import "AboutUsPage.h"
 #import "LoginPage.h"
+#import "RequestUrls.h"
+#import "RequestTools.h"
+#import "MyNsstringTools.h"
 @interface LeftViewController ()
 @end
 @implementation LeftViewController
@@ -224,6 +227,9 @@
 - (void)selectPic:(UIImage*)image
 {
     NSLog(@"image%@",image);
+    NSString *str = [NSString stringWithFormat:@"http://121.199.57.44:88/webServer/HeadPhotoUpload.ashx?email=1823870397@qq.com"];
+   NSDictionary *dic =  [RequestTools postHeaderImageToServerWitImage:image requestStr:str];
+    NSLog(@"头像成功:%@",dic);
     [_setTableView reloadData];
 [self.viewDeckController dismissViewControllerAnimated:YES completion:nil];
 }
@@ -232,6 +238,11 @@
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self.viewDeckController dismissViewControllerAnimated:YES completion:nil];
+}
+-(void)upLoadHeaderImage
+{
+    
+    
 }
 - (void)backToRootViewController
 {
@@ -300,8 +311,6 @@
             break;
     }
 }
-
-
 
 
 - (void)didReceiveMemoryWarning

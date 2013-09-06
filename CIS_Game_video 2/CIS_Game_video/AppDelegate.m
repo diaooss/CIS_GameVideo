@@ -56,12 +56,12 @@
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor greenColor];
+    self.window.backgroundColor = [UIColor grayColor];
     //给windows贴一个照片
-    UIImageView *bgImg = [[[UIImageView alloc] initWithFrame:self.window.bounds] autorelease];
-    bgImg.image = [UIImage imageNamed:@"windowBg.png"];
-    [bgImg setBackgroundColor:[UIColor greenColor]];
-    [self.window addSubview:bgImg];
+//    UIImageView *bgImg = [[[UIImageView alloc] initWithFrame:self.window.bounds] autorelease];
+//    bgImg.image = [UIImage imageNamed:@"windowBg.png"];
+//    [bgImg setBackgroundColor:[UIColor greenColor]];
+//    [self.window addSubview:bgImg];
     //增加标识，用于判断是否是第一次启动应用,以便显示引导画面
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"everLaunched"]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"everLaunched"];

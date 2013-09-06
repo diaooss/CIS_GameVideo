@@ -245,7 +245,19 @@
     }
     return strtime;
 }
+//便捷生成导航视图,不涉及抽屉.不带标题
++ (void)navigaionView:(UIViewController *)viewController leftImageName:(NSString *)imgName
+{
+    [viewController.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar.png"] forBarMetrics:UIBarMetricsDefault];
+    UIButton * button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setBackgroundImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
+    [button setFrame:CGRectMake(0, 0, 40, 30)];
+    [button addTarget:viewController action:@selector(back) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * bar = [[UIBarButtonItem alloc]initWithCustomView:button];
+    [viewController.navigationItem setLeftBarButtonItem:bar];
+    [bar release];
 
+}
 + (void)makeShare
 {
     //创建分享内容
