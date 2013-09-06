@@ -42,7 +42,7 @@
 //计算时间差
 + (NSString *)calTimeMiss:(NSString *)dateString;
 //创建分享
-+ (void)makeShare;
++ (void)makeShareWithString:(NSString *)string andImagePath:(NSString *)imagePath;
 //创建一个提醒框2秒后自动消失
 + (void)makeOneCautionViewOnView:(UIView *)view withString:(NSString *)string;
 

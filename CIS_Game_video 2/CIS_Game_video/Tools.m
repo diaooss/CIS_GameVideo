@@ -246,15 +246,15 @@
     return strtime;
 }
 
-+ (void)makeShare
++ (void)makeShareWithString:(NSString *)string andImagePath:(NSString *)imagePath
 {
     //创建分享内容
-    id<ISSContent>publishContent = [ShareSDK content:@"有没有你---------"
-                                      defaultContent:@"你在或者不在她都在哪里"
-                                               image:nil
+    id<ISSContent>publishContent = [ShareSDK content:string
+                                      defaultContent:nil
+                                               image:[ShareSDK imageWithPath:imagePath]
                                                title:@"test"
-                                                 url:@"http://www.baidu.com/index.php?tn=monline_5_dg"
-                                         description:@"这是一个标题"
+                                                 url:@"http://weibo.com/u/3274767297?wvr=5&c=spr_web_sq_firefox_weibo_t001"
+                                         description:nil
                                            mediaType:SSPublishContentMediaTypeText];
     
     //创建自定义分享列表
@@ -301,7 +301,6 @@
                                 }
                             }];
  
-
 }
 + (void)makeOneCautionViewOnView:(UIView *)view withString:(NSString *)string
 {

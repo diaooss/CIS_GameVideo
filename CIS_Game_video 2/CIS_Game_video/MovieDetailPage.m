@@ -180,7 +180,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
 #pragma mark--分享视频
 -(void)shareTheMovie
 {
-    [Tools makeShare];//分享内容二次定制,捆绑APP商店地址
+    [Tools makeShareWithString:@"#市场上可查看白色#http://weibo.com/u/3274767297?wvr=5&c=spr_web_sq_firefox_weibo_t001........sjnclsknlscnlkscnlskcnlsdkcnlskdcnlkdscnlksdcnlkcn" andImagePath:nil];//分享内容二次定制,捆绑APP商店地址
 }
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
