@@ -48,11 +48,7 @@
     }
     return self;
 }
-//-(void)loadView
-//{
-//    self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-//    [self.view setBackgroundColor:[UIColor grayColor]];
-//}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -62,8 +58,6 @@
     [rootView addTarget:self action:@selector(transportVideoInformation:)];
     [self.view addSubview:rootView];
     [rootView setDelegate:self];
-    
-    
 }
 #pragma mark-----DefaultRootView代理
 -(void)transferCategoryWithCategoryName:(NSString *)CategoryName

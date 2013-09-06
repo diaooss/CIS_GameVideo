@@ -270,7 +270,7 @@
         [_categoryTable reloadData];
     }else
     {
-        flag = 0;
+        flag = 1;
         [self requestCategoryList];
     }
     

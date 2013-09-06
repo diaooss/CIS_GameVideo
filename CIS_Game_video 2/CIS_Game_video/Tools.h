@@ -43,4 +43,7 @@
 + (NSString *)calTimeMiss:(NSString *)dateString;
 //创建分享
 + (void)makeShare;
+//创建一个提醒框2秒后自动消失
++ (void)makeOneCautionViewOnView:(UIView *)view withString:(NSString *)string;
+
 @end

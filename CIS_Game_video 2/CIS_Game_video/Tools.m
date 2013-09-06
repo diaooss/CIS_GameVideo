@@ -13,7 +13,7 @@
 #define NavigationBACKImage @"goBack.png"
 
 #import <ShareSDK/ShareSDK.h>
-
+#import <QuartzCore/QuartzCore.h>
 @implementation Tools
 
 +(BOOL)isHaveNet
@@ -303,5 +303,28 @@
  
 
 }
++ (void)makeOneCautionViewOnView:(UIView *)view withString:(NSString *)string
+{
+    UILabel * Caution = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 180, 80)];
+    [Caution.layer setCornerRadius:5];
+    [Caution.layer setMasksToBounds:YES];
+    [Caution setBackgroundColor:[UIColor blackColor]];
+    [Caution setNumberOfLines:0];
+    [Caution setTextAlignment:NSTextAlignmentCenter];
+    [Caution setLineBreakMode:NSLineBreakByWordWrapping];
+    [Caution setText:string];
+    [Caution setCenter:view.center];
+    [Caution setTextColor:[UIColor whiteColor]];
+    [view addSubview:Caution];
+    [self performSelector:@selector(cautionViewDisappear:) withObject:Caution afterDelay:3];
+}
++(void)cautionViewDisappear:(UILabel *)label
+{
+    [UIView animateWithDuration:2 animations:^{
+        [label setAlpha:0];
 
+    } completion:^(BOOL finished) {
+        [label removeFromSuperview];
+    }];
+}
 @end
