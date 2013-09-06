@@ -40,15 +40,12 @@
     }
     return tempStr;
 }
-//把扔进来的一堆字符串拼接,返回一个字符串,使用UTF8编码
-+(NSString *)groupStrWithUtf8ByAStrArray:(NSArray *)strArry
-{
-    NSString *tempStr = [NSString string];
-    for ( int i= 0; i<[strArry count]; i++) {
-        tempStr = [tempStr stringByAppendingString:[strArry objectAtIndex:i]];
-    }
-    return [tempStr stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding] ;
-}
 
+//扔进来一个任意类型的对象,布尔,int string返回一个字符串
++(NSString *)makeNewStrByAnyObj:(id)object;
+{
+    NSString *str = [NSString stringWithFormat:@"%@",object];
+    return str;
+}
 
 @end

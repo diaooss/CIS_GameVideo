@@ -15,8 +15,9 @@
 #define COLLECT_VIDOE @"http://121.199.57.44:88/webServer/FavoritesMovie.ashx"//收藏视频
 #define SIGN_IN @"http://121.199.57.44:88/webServer/Signin.ashx"//签到
 #define USER_INFOR @"http//121.199.57.44:88/webServer/GetUserInfoSample.ashx"//用户信息
-#define AUTHOR_LIST @"http://121.199.57.44:88/webServer/GetAuthorlist.ashx"//作者列表
+#define AUTHOR_LIST @"http://121.199.57.44:88/webServer/GetAuthorlist.ashx"//获得作者列表
 #define VIDOE_LIST @"http://121.199.57.44:88/webServer/GetMovielist.ashx"//视频列表
-#define GET_Moview_DETAIL @"http://121.199.57.44:88/webServer/GetMovieInfoByID.ashx"
-#define GET_NEW_PSW_byEmail @"http://121.199.57.44:88//webServer/SendEmailForPsw.ashx"
+#define GET_Moview_DETAIL @"http://121.199.57.44:88/webServer/GetMovieInfoByID.ashx"//单一视频
+#define GET_NEW_PSW_byEmail @"http://121.199.57.44:88//webServer/SendEmailForPsw.ashx"//验证邮箱以获得新密码
+#define GET_LIST_OF_A_AUTHOR @"http://121.199.57.44:88/webServer/GetSingleAuthorInfo.ashx"//获得单个作者的所有视频
 #endif

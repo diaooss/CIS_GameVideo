@@ -25,11 +25,16 @@
     //移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UIMoviePlayerControllerDidEnterFullscreenNotification" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UIMoviePlayerControllerDidExitFullscreenNotification" object:nil];
-    theAuthorImageView = nil;
-    movieInfoTextView = nil;
-    movieNameLable = nil;
-    durationLable = nil;
-    movieWeb = nil;
+    
+    [theAuthorImageView release];
+    [movieInfoTextView release];
+    [movieNameLable release];
+    [nameBgImg release];
+    [durationLable release];
+    [authorNameLab release];
+    [popularLab release];
+    [popularImg release];
+    [movieWeb release];
     _detailRequest = nil;
     self.detailRequest.delegate = nil;
     self.detailDic = nil;
@@ -52,12 +57,25 @@
 {
     self.view = [[[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"myFriends.png" title:@"影片详情"];
-    movieWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, 3, 320, self.view.height*0.5)];
+    
+    nameBgImg = [[UIImageView alloc] initWithFrame:CGRectMake(5, 5, 40, 30)];
+    [self.view addSubview:nameBgImg];
+    nameBgImg.backgroundColor = [UIColor redColor];
+    
+    movieNameLable = [UILabel labelWithRect:CGRectMake(50, 5, 260, 30) font:[UIFont systemFontOfSize:16]];
+    movieNameLable.textAlignment = NSTextAlignmentLeft;
+    movieNameLable.textColor = [UIColor blackColor];
+    movieNameLable.backgroundColor = [UIColor yellowColor];
+    movieNameLable.alpha = 0.8;
+    [self.view addSubview:movieNameLable];
+    
+
+    movieWeb = [[UIWebView alloc] initWithFrame:CGRectMake(0, movieNameLable.bottom+5, 320, self.view.height*0.5)];
     movieWeb.backgroundColor= [UIColor yellowColor];
     movieWeb.delegate = self;
     movieWeb.scalesPageToFit = YES;
     [self.view addSubview:movieWeb];
-    durationLable = [UILabel labelWithRect:CGRectMake(0, movieWeb.bottom-33, movieWeb.width, 30) font:[UIFont systemFontOfSize:14]];
+    durationLable = [UILabel labelWithRect:CGRectMake(0, movieWeb.bottom-70, movieWeb.width/2, 30) font:[UIFont systemFontOfSize:14]];
 durationLable.text = @"<<  时长:9'16''  >>";
     durationLable.layer.cornerRadius = 5.0;
     durationLable.textAlignment = NSTextAlignmentCenter;
@@ -66,24 +84,35 @@ durationLable.text = @"<<  时长:9'16''  >>";
     durationLable.alpha = 0.8;
     [movieWeb addSubview:durationLable];
     
-    movieNameLable = [UILabel labelWithRect:CGRectMake(5, movieWeb.bottom+5, durationLable.width-20, 20) font:[UIFont systemFontOfSize:16]];
-    movieNameLable.layer.cornerRadius = 5.0;
-    movieNameLable.textAlignment = NSTextAlignmentCenter;
-    movieNameLable.textColor = [UIColor blackColor];
-    movieNameLable.backgroundColor = [UIColor yellowColor];
-    movieNameLable.alpha = 0.8;
-    [self.view addSubview:movieNameLable];
-    theAuthorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, movieWeb.bottom+40, 100, self.view.height-movieWeb.height-8-movieNameLable.height-130)];
+    popularImg  = [[UIImageView alloc] initWithFrame:CGRectMake(durationLable.right+40, movieWeb.bottom-70, 30, 30)];
+    [popularImg setBackgroundColor:[UIColor yellowColor]];
+    [movieWeb addSubview:popularImg];
+    popularLab = [[UILabel alloc] initWithFrame:CGRectMake(popularImg.right+10, movieWeb.bottom-70, 60, 30)];
+    popularLab.font = [UIFont systemFontOfSize:11];
+    popularLab.textAlignment = NSTextAlignmentCenter;
+    [movieWeb addSubview:popularLab];
+    
+    
+    theAuthorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, movieWeb.bottom+5, 100, self.view.height-movieNameLable.height-movieWeb.height-125)];
     theAuthorImageView.backgroundColor= [UIColor yellowColor];
     [self.view addSubview:theAuthorImageView];
+    
     theAuthorImageView.image = [UIImage imageNamed:@"headerimage.png"];
-    movieInfoTextView = [[UITextView alloc] initWithFrame:CGRectMake(theAuthorImageView.right+5, movieNameLable.bottom+5, self.view.width-theAuthorImageView.width-15, theAuthorImageView.height+10)];
+    movieInfoTextView = [[UITextView alloc] initWithFrame:CGRectMake(theAuthorImageView.right+5, movieWeb.bottom+5, self.view.width-theAuthorImageView.width-15, theAuthorImageView.height)];
     movieInfoTextView.editable = NO;
+    movieInfoTextView.textAlignment = NSTextAlignmentCenter;
+    
     movieInfoTextView.text = @"开展评比达标表彰活动，是鼓励先进、鞭策后进、推动工作的一种手段。恰到好处的评比与表彰，能够激发相关部门与人员的工作热情，促进工作的开展、落实；能够树立好的典范，传递“正能量”，带动其他群体积极上进，推动事业的发展。";
     movieInfoTextView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:movieInfoTextView];
       for (int i = 0; i<2; i++) {
-        UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom image:nil frame:CGRectMake(160*i, self.view.bottom-110, 160, 50) target:self action:nil];
+          
+          UIImageView *frontBgImg = [[UIImageView alloc] initWithFrame:CGRectMake(160*i, self.view.bottom-110, 50, 50)];
+          frontBgImg.backgroundColor = [UIColor yellowColor];
+          [self.view addSubview:frontBgImg];
+          [frontBgImg release];
+          
+        UIButton *bottomBtn = [UIButton buttonWithType:UIButtonTypeCustom image:nil frame:CGRectMake(50+160*i, self.view.bottom-110, 110, 50) target:self action:nil];
         bottomBtn.backgroundColor = [UIColor blackColor];
         [bottomBtn setShowsTouchWhenHighlighted:YES];
         bottomBtn.tag = i*100+100;
@@ -160,6 +189,10 @@ durationLable.text = @"<<  时长:9'16''  >>";
     NSLog(@"详情字典:%@",dic);
     movieNameLable.text = [dic objectForKey:@"m_name"];
     movieInfoTextView.text = [dic objectForKey:@"m_description"];
+    durationLable.text = [dic objectForKey:@"m_duration"];
+    NSString *popularStr = [NSString stringWithFormat:@"%@",[dic objectForKey:@"m_popular"]];
+    popularLab.text = popularStr;
+
     [self loadMovieWithUrl:[dic objectForKey:@"m_url"]];
     durationLable.text = [dic objectForKey:@"m_duration"];
 }

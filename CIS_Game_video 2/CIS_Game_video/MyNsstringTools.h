@@ -15,6 +15,6 @@
 +(NSString *)changeStrWithUT8:(NSString *)oldStr;
 //把扔进来的一堆字符串拼接,返回一个字符串,
 +(NSString *)groupStrByAStrArray:(NSArray *)strArry;
-//把扔进来的一堆字符串拼接,返回一个字符串,使用UTF8编码
-+(NSString *)groupStrWithUtf8ByAStrArray:(NSArray *)strArry;
+//扔进来一个任意类型的对象,布尔,int string返回一个字符串
++(NSString *)makeNewStrByAnyObj:(id)object;
 @end

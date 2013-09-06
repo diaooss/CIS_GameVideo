@@ -10,11 +10,15 @@
 #import "RequestTools.h"
 @interface MovieDetailPage : UIViewController<UIWebViewDelegate,myHttpRequestDelegate>
 {
-    UILabel *durationLable ;
-    UIImageView *theAuthorImageView ;
-    UILabel *movieNameLable;
-    UITextView *movieInfoTextView;
-    UIWebView *movieWeb;
+    UILabel *movieNameLable;//电影名
+    UIImageView *nameBgImg;//电影名背景图片
+    UILabel *durationLable ;//显示时长
+    UIImageView *popularImg;//人气小图标
+    UILabel *popularLab;//显示人气
+    UIImageView *theAuthorImageView ;//作者头像
+    UILabel *authorNameLab;//作者姓名
+    UITextView *movieInfoTextView;//电影简介
+    UIWebView *movieWeb;//电影
    
 }
 @property(nonatomic,retain)RequestTools*detailRequest;//请求单一视频详情.

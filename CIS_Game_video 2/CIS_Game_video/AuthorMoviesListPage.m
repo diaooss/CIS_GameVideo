@@ -10,6 +10,9 @@
 #import "MovieCell.h"
 #import "Header.h"
 #import "Tools.h"
+#import "RequestTools.h"
+#import "MyNsstringTools.h"
+#import "RequestUrls.h"
 @interface AuthorMoviesListPage ()
 
 @end
@@ -17,9 +20,12 @@
 @implementation AuthorMoviesListPage
 - (void)dealloc
 {
-    authorListTab = nil;
+    [authorListTab release];
+    [getAuthorListByAuthorID release];
     self.authorIDStr = nil;
     self.authorNameStr = nil;
+    self.authorListDic = nil;
+    self.moviesOfTheAuthorArry = nil;
     [super dealloc];
 }
 
@@ -40,19 +46,26 @@
 {
     [super viewDidLoad];
     [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"goBack.png" title:_authorNameStr];
-       authorListTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+       authorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.height-50) style:UITableViewStylePlain];
     authorListTab.delegate = self;
     authorListTab.dataSource = self;
     [authorListTab setTag:1000];
     [self.view addSubview:authorListTab];
+    [self getauthorListById];
+}
+-(void)getauthorListById
+{
+    getAuthorListByAuthorID = [[RequestTools alloc] init];
+    [getAuthorListByAuthorID setDelegate:self];
+    NSArray *strArry = [NSArray arrayWithObjects:GET_LIST_OF_A_AUTHOR,@"?AuthorID=4&email=1601883700@qq.com",nil];
+    NSLog(@"拼接字符串是:%@",[MyNsstringTools groupStrByAStrArray:strArry]);
+    [getAuthorListByAuthorID requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
     
-    
-
 }
 #pragma mark--列表代理方法
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 10;
+    return [_moviesOfTheAuthorArry count];
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -65,9 +78,21 @@
     if (moviesListCell == nil) {
         moviesListCell = [[[MovieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseName] autorelease];
     }
-    moviesListCell.titleLabel.text = @"哈哈哈,我是大标题,分组内的行数根据数据数量返回,分组内的行数根据数据数量返回";
-    moviesListCell.categoryLabel.text = @"哈副标题";
+    moviesListCell.titleLabel.text = [[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"movieName"];
+    moviesListCell.categoryLabel.text = [[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"category"];
+     moviesListCell.timeLab.text = [[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"m_duration"];
+    moviesListCell.popularLab.text =[MyNsstringTools makeNewStrByAnyObj:[[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"m_popular"]];
     moviesListCell.logoImageView.image = [UIImage imageNamed:@"test.png"];
+    moviesListCell.collectBtn.tag = indexPath.row;
+    NSString *isLikeStr = [MyNsstringTools makeNewStrByAnyObj:[[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"isLiked"]];
+    if ([isLikeStr intValue]==0) {
+        NSLog(@"没有被收藏");
+        NSLog(@"%d",[isLikeStr intValue]);
+        moviesListCell.collectBtn.backgroundColor = [UIColor greenColor];
+    }else
+    {
+        moviesListCell.collectBtn.backgroundColor = [UIColor grayColor];
+    }
     return moviesListCell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -82,10 +107,8 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        
-    
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
-    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 60, 60)];
+    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 5, 60, 60)];
     headerView.backgroundColor = [UIColor grayColor];
     headerImageView.backgroundColor = [UIColor  yellowColor];
     [headerView addSubview:headerImageView];    
@@ -103,7 +126,6 @@
     [headerView addSubview:headerLab];    
     [headerLab release];
     authorListTab.tableHeaderView = headerView;
-    
     return headerView;
     }
     return nil;
@@ -115,6 +137,17 @@
 -(void)topRightCorenerBtnAction
 {
     //实现关注作者
+}
+-(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
+{
+    NSLog(@"单一作者视频列表%@",dic);
+    self.authorListDic = dic;
+    self.moviesOfTheAuthorArry = [dic objectForKey:@"movies"];
+    [authorListTab reloadData];
+}
+-(void)requestFailedWithResultDictionary:(NSDictionary *)dic
+{
+    
 }
 - (void)didReceiveMemoryWarning
 {
