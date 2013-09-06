@@ -34,6 +34,7 @@
     
     self.nameLabel = [[UILabel alloc]initWithFrame:CGRectZero];
     [self addSubview:_nameLabel];
+    [_nameLabel setFont:[UIFont systemFontOfSize:12]];
     [_nameLabel setNumberOfLines:0];
     [_nameLabel setLineBreakMode:NSLineBreakByWordWrapping];
     [_nameLabel setBackgroundColor:[UIColor clearColor]];

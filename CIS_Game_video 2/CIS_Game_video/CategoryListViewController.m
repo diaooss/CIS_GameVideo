@@ -12,6 +12,7 @@
 #import "MyNsstringTools.h"
 #import "RequestUrls.h"
 #import "MyNsstringTools.h"
+#import "Tools.h"
 @interface CategoryListViewController ()
 
 @end
@@ -35,7 +36,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    _categoryTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 440)];
+    [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:nil title:self.title];
+
+    _categoryTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-44)];
     [_categoryTable setDelegate:self];
     [_categoryTable setDataSource:self];
     [self.view addSubview:_categoryTable];
@@ -44,6 +47,10 @@
     [self requestCategoryList];
     [self createHeaderView];
     [self setFooterView];
+}
+-(void)back
+{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark ====tableView代理
 -(float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -258,7 +265,7 @@
 
 //刷新调用的方法----------下拉刷新
 -(void)refreshView{
-    
+    //下拉刷新--------
     if ([self.categoryArry count]>0) {
         [_categoryTable reloadData];
     }else
@@ -275,15 +282,13 @@
     [self removeFooterView];
     flag ++;
     [self requestCategoryList];
- [self testFinishedLoadData];
-    
-    
-    
+    [self testFinishedLoadData];
 }-(void)testFinishedLoadData{
     
     [self finishReloadingData];
     [self setFooterView];
 }
+//请求网络
 -(void)requestCategoryList
 {
     self.categoryRequest = [[[RequestTools alloc]init] autorelease];
@@ -291,6 +296,7 @@
     NSArray *strArry = [NSArray arrayWithObjects:VIDOE_LIST,[NSString stringWithFormat:@"?category=%@&dataPage=%d",self.title,flag],nil];
     [_categoryRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
 }
+//请求成功i
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     NSArray * arry =[dic valueForKey:@"result"];

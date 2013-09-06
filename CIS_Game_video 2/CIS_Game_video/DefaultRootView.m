@@ -29,10 +29,9 @@
         _defaultListTab = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.height) style:UITableViewStylePlain];
         [_defaultListTab setDelegate:self];
         [_defaultListTab setDataSource:self];
-        _defaultListTab.hidden = NO;
         _defaultListTab.backgroundColor = [UIColor whiteColor];
         [self addSubview:_defaultListTab];
-        [_defaultListTab setDecelerationRate:0.3];
+        [_defaultListTab setDecelerationRate:0.2];
         /*/水滴/*/
         
         rootRefreshView = [[SRRefreshView alloc] init];
@@ -94,6 +93,7 @@
             [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
+        [cell.imageView setImage:[UIImage imageNamed:@"smile32.png"]];
         [cell.textLabel setText:[nameArry objectAtIndex:indexPath.row/2]];
         return cell;
     }
