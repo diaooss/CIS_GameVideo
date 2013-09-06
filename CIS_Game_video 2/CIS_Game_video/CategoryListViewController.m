@@ -20,6 +20,10 @@
 @implementation CategoryListViewController
 -(void)dealloc
 {
+    [_refreshHeaderView release];
+    [_refreshFooterView release];
+    [self.categoryArry release];
+    [self setCategoryRequest:nil];
     [_categoryTable release];
     [super dealloc];
 }
@@ -42,12 +46,13 @@
     [_categoryTable setDelegate:self];
     [_categoryTable setDataSource:self];
     [self.view addSubview:_categoryTable];
-    
-    
+//第一次请求数据
     [self requestCategoryList];
+//加载下拉加载 和上啦刷新
     [self createHeaderView];
     [self setFooterView];
 }
+//导航条 返回事件
 -(void)back
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -265,7 +270,7 @@
 
 //刷新调用的方法----------下拉刷新
 -(void)refreshView{
-    //下拉刷新--------
+//下拉刷新--------
     if ([self.categoryArry count]>0) {
         [_categoryTable reloadData];
     }else
@@ -308,6 +313,7 @@
     }
     else
     {
+        //数据被加载完成 提示用户已经加载完成-------没有数据
         NSLog(@"没数据啊-------");
     }
 }

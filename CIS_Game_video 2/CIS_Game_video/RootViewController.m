@@ -59,7 +59,7 @@
     [self.view addSubview:rootView];
     [rootView setDelegate:self];
     
-    [Tools makeOneCautionViewOnView:self.view withString:@"啊啊啊啊啊啊啊啊"];
+    //[Tools makeOneCautionViewOnView:self.view withString:@"啊啊啊啊啊啊啊啊"];
     
 }
 #pragma mark-----DefaultRootView代理

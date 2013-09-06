@@ -61,11 +61,11 @@
     [self.view addGestureRecognizer:tap];
     [tap release];
     /*/顶部定制 /*/
-    [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:@"goBack.png" title:@"意见反馈"];
+    [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:nil title:@"意见反馈"];
     
     
     /*/ 初始化一些东西/*/
-    [Tools addTipslabel:self.view withTitle:@"网络中断了"];
+    [Tools addTipslabel:self.view withTitle:@"网络中断了........"];
        
 }
 #pragma mark--提交意见

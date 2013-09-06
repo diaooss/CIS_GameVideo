@@ -14,7 +14,7 @@
 +(void)addTipslabel:(UIView *)view withTitle:(NSString *)title;//加载提醒
 +(NSString * )currentNetState;//返回当前的网络类型
 //*****风火轮---
-+ (void)openLoadsign:(UIView* )view;//创建
++ (void)openLoadsign:(UIView* )view WithString:(NSString *)string;//创建
 + (void)closeLoadsign:(UIView* )view;//关闭
 //********检测邮箱格式
 +(BOOL)cheeckEmail: (NSString *)userEmail;

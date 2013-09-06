@@ -52,10 +52,11 @@
     [self addSubview:_timeLabel];
     [_timeLabel setFont:[UIFont systemFontOfSize:13.0]];
     [_timeLabel release];
-
+//人气图标需要添加-------
     _popularityImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
     [_popularityImageView setImage:[UIImage imageNamed:@"smile32.png"]];
     [self addSubview:_popularityImageView];
+//时间图标--------
     _timeImageView = [[UIImageView alloc]initWithFrame:CGRectZero];
     [self addSubview:_timeImageView];
     [_timeImageView setImage:[UIImage imageNamed:@"smile32.png"]];

@@ -48,14 +48,16 @@
 //加载一个动画
 +(void)labelMakeAnimation:(UIView* )sender
 {
-    [UIView animateWithDuration:1.0 animations:^{
+    [UIView animateWithDuration:2.0 animations:^{
         [sender setCenter:CGPointMake(160, 20)];
+
     } completion:^(BOOL finished) {
-        [UIView animateWithDuration:3.5 animations:^{
+        [UIView animateWithDuration:2.0 delay:2 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
             [sender setCenter:CGPointMake(160, -40)];
+
         } completion:^(BOOL finished) {
             [sender removeFromSuperview];
-            nil;
+
         }];
     }];
 }
@@ -67,11 +69,11 @@
     return [emailTest evaluateWithObject:userEmail];
 }
 //***风火轮
-+ (void)openLoadsign:(UIView* )view
++ (void)openLoadsign:(UIView* )view WithString:(NSString *)string
 {
     MBProgressHUD * hud =[MBProgressHUD showHUDAddedTo:view animated:YES];
     [hud setMode:MBProgressHUDModeIndeterminate];
-    [hud setDetailsLabelText:@"正在努力加载......"];
+    [hud setDetailsLabelText:string];
 }
 + (void)closeLoadsign:(UIView* )view
 {
