@@ -34,11 +34,13 @@
         // Custom initialization
     }
     self.categoryArry = [NSMutableArray arrayWithCapacity:2];
+    
     return self;
 }
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
     [Tools navigaionView:self leftImageName:@"goBack.png"];
     _categoryTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 440)];
@@ -229,7 +231,6 @@
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
 	if (_refreshHeaderView) {
         [_refreshHeaderView egoRefreshScrollViewDidScroll:_categoryTable];
-        NSLog(@"-----------");
     }
 	
 	if (_refreshFooterView) {
@@ -275,7 +276,7 @@
 -(void)refreshView{
 //下拉刷新--------
     if ([self.categoryArry count]>0) {
-        [_categoryTable reloadData];
+        [self testFinishedLoadData];
     }else
     {
         flag = 1;
