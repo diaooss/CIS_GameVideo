@@ -325,7 +325,8 @@
 #pragma mark--发起请求
 -(void)startRequestWithCateStr:cateStr
 {
-    staticCateGoryStr = cateStr==NULL?@"dota":cateStr;
+   cateStr = cateStr==NULL?@"dota":cateStr;
+    staticCateGoryStr = cateStr;
     NSString *newCateStr = [NSString stringWithFormat:@"?category=%@",cateStr];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,newCateStr,nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];

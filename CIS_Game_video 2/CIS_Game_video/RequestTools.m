@@ -56,6 +56,18 @@
 
     
 }
+//版本检测
+-(NSDictionary *)versionsCheck:(NSString *)urlStr
+{
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[MyNsstringTools changeStrWithUT8:urlStr]]];
+    [request setRequestMethod:@"GET"];
+    request.timeOutSeconds = 5.0;
+    request.delegate  =self;
+    [request startAsynchronous];
+    return [request.responseData objectFromJSONData] ;
+
+    
+}
 //反馈信息上传
 -(void)postFeedBackInfoWithUrlStr:(NSString *)urlStr infoDic:(NSDictionary *)dic
 {
@@ -71,9 +83,6 @@
 
     
 }
-////版本检测
-//-(void)versionsCheck;
-
 //类方法--根据请求返回的状态值,返回布尔值,以供判断
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Asynchronous:(NSString *)checkUrl//异步
 {

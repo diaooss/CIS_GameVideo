@@ -79,7 +79,6 @@
     /*/归档,讲字典转为data/*/
     [mobileInfoDic setObject:feedTextField.text forKey:@"feedContent"];
     [mobileInfoDic setObject:qqOrPhoneField.text forKey:@"qqNum"];
-    
     NSMutableData *data = [[NSMutableData alloc] init];
     NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
     [archiver encodeObject:mobileInfoDic forKey:@"mobileInfo"];

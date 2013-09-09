@@ -27,8 +27,8 @@
 +(NSDictionary*)postHeaderImageToServerWitImage:(UIImage *)postImage requestStr:(NSString *)str;
 //反馈信息上传
 -(void)postFeedBackInfoWithUrlStr:(NSString *)urlStr infoDic:(NSDictionary *)dic;
-////版本检测
-//-(void)versionsCheck;
+//版本检测
+-(NSDictionary *)versionsCheck;
 
 //类方法--根据请求返回的状态值,返回布尔值,以供判断
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Asynchronous:(NSString *)checkUrl;//异步

@@ -56,7 +56,7 @@
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor grayColor];
+    self.window.backgroundColor = [UIColor whiteColor];
     //给windows贴一个照片
 //    UIImageView *bgImg = [[[UIImageView alloc] initWithFrame:self.window.bounds] autorelease];
 //    bgImg.image = [UIImage imageNamed:@"windowBg.png"];
