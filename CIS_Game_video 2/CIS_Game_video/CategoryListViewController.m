@@ -34,11 +34,13 @@
         // Custom initialization
     }
     self.categoryArry = [NSMutableArray arrayWithCapacity:2];
+    
     return self;
 }
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
     [Tools navigaionView:self leftImageName:@"goBack.png"];
     _categoryTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 440)];
@@ -77,14 +79,14 @@
         cell = [[CategoryListCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mark];
         [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     }
-    if ([self.categoryArry count]>0) {
-        
+    if ([self.categoryArry count]==0) {
+        return cell;
+    }
         [cell.asImageView setImageURL:[MyNsstringTools changeStrWithUT8:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"thumbnail"]]];
         [cell.nameLabel setText:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"movieName"]];
         [cell setVideoID:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"movieID"]];
         [cell.attentionTimeLabel setText:[NSString stringWithFormat:@"%@",[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"popular"]]];
         [cell.timeLabel setText:[[_categoryArry objectAtIndex:indexPath.row] valueForKey:@"duration"]];
-    }
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -235,7 +237,6 @@
         [_refreshFooterView egoRefreshScrollViewDidScroll:_categoryTable];
         [self setFooterView];
     }
-    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -275,7 +276,7 @@
 -(void)refreshView{
 //下拉刷新--------
     if ([self.categoryArry count]>0) {
-        [_categoryTable reloadData];
+        [self testFinishedLoadData];
     }else
     {
         flag = 1;
@@ -325,5 +326,6 @@
     [NSObject cancelPreviousPerformRequestsWithTarget:self];//可以成功取消全部。
     [_categoryRequest setDelegate:nil];
 
+    
 }
 @end

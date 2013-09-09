@@ -34,7 +34,6 @@
         [_defaultListTab setDataSource:self];
         _defaultListTab.backgroundColor = [UIColor whiteColor];
         [self addSubview:_defaultListTab];
-        [_defaultListTab setDecelerationRate:0.2];
         /*/水滴/*/
         
         rootRefreshView = [[SRRefreshView alloc] init];
@@ -110,7 +109,7 @@
 //*****************确保重用的cell起始位置不变
     [cell.scrollerView setContentOffset:CGPointMake(0, 0)];
 //***加载过以后不再加载-------很重要-----
-    if (self.mark>indexPath.row||self.mark==19) {
+    if (self.mark>indexPath.row||self.mark==9) {
         return cell;
     }
     if ([[self.mydic valueForKey:@"dota"]count]>0) {
