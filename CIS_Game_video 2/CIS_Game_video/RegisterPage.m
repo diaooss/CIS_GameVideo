@@ -66,7 +66,6 @@
         [self.view addSubview:contentFiled];
         [contentFiled release];
     }
-    
     UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     registerBtn.frame = CGRectMake(10, 240, 300, 40);
     registerBtn.layer.cornerRadius = 5.0;
@@ -75,12 +74,10 @@
     [registerBtn setShowsTouchWhenHighlighted:YES];
     [registerBtn addTarget:self action:@selector(goToRegister) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:registerBtn];
-    
     //添加手势
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackGround)];
     [self.view addGestureRecognizer:tap];
     [tap release];
-
 }
 #pragma mark--取消键盘
 -(void)tapBackGround
@@ -89,7 +86,6 @@
         UITextField *ff = (UITextField *)[self.view viewWithTag:100*i+100];
         [ff resignFirstResponder];
     }
-    
 }
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {

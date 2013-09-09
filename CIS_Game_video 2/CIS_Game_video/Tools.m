@@ -34,14 +34,14 @@
     return @"3G";
 }
 /*****************************/
-+(void)addTipslabel:(UIView *)view withTitle:(NSString *)title//加载提醒
++(void)addTipslabelWithTitle:(NSString *)title//加载提醒
 {
     UILabel * notLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, -40, 320, 40)];
     [notLabel setText:title];
     notLabel.textColor = [UIColor whiteColor];
     notLabel.backgroundColor = [UIColor lightGrayColor];
     [notLabel setTextAlignment:NSTextAlignmentCenter];
-    [view addSubview:notLabel];
+    [[UIApplication sharedApplication].keyWindow addSubview:notLabel];
     [self labelMakeAnimation:notLabel];
     [notLabel release];
 }
@@ -49,7 +49,7 @@
 +(void)labelMakeAnimation:(UIView* )sender
 {
     [UIView animateWithDuration:2.0 animations:^{
-        [sender setCenter:CGPointMake(160, 20)];
+        [sender setCenter:CGPointMake(160, 40)];
 
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:2.0 delay:2 options:UIViewAnimationOptionShowHideTransitionViews animations:^{
@@ -116,6 +116,7 @@
         [mobileInfoDic setObject:@"爱疯4" forKey:@"mobileType"];
     }
     [mobileInfoDic setObject:[self getNowAppVersions] forKey:@"nowAppVersions"];
+    
     return mobileInfoDic;
 }
 //获得当前版本号

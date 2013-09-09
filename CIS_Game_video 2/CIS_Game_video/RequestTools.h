@@ -11,7 +11,7 @@
 #import "ASIFormDataRequest.h"
 
 @protocol myHttpRequestDelegate;
-@interface RequestTools : NSObject<ASIHTTPRequestDelegate,NSCoding>
+@interface RequestTools : NSObject<ASIHTTPRequestDelegate>
 {
     ASIHTTPRequest * httpRequest;//请求的执行者
     ASIFormDataRequest *_dataRequest;
@@ -26,9 +26,9 @@
 //头像上传
 +(NSDictionary*)postHeaderImageToServerWitImage:(UIImage *)postImage requestStr:(NSString *)str;
 //反馈信息上传
--(void)postFeedBackInfoWithUrlStr:(NSString *)urlStr infoDic:(NSDictionary *)dic;
++(BOOL)postFeedBackInfoWithUrlStr:(NSString *)urlStr infoDic:(NSDictionary *)dic;
 //版本检测
--(NSDictionary *)versionsCheck;
++(NSDictionary *)versionsCheck:(NSString *)urlStr;
 
 //类方法--根据请求返回的状态值,返回布尔值,以供判断
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Asynchronous:(NSString *)checkUrl;//异步

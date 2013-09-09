@@ -25,11 +25,12 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //缩略图
-        _logoImageView = [[UIImageView alloc] init];
+        _logoImageView = [[AsynImageView alloc] init];
         _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
         _logoImageView.backgroundColor = [UIColor grayColor];
         _logoImageView.layer.cornerRadius = 3.0;
         _logoImageView.layer.masksToBounds = YES;
+        _logoImageView.placeholderImage = nil;
         [self.contentView addSubview:_logoImageView];
         //标题
         _titleLabel  =[[UILabel alloc] init];

@@ -11,6 +11,8 @@
 #import "FeedBackpage.h"
 #import "Tools.h"
 #import "JustWEBToShowSomeThing.h"
+#import "RequestUrls.h"
+#import "RequestTools.h"
 @interface AboutUsPage ()
 
 @end
@@ -113,6 +115,7 @@
             case 1:
                 [self goToGetHelpOrDeal:@"http://121.199.57.44:88/Help.htm" title:@"用户帮助"];
                 break;
+                
             default:
                 break;
         }
@@ -127,6 +130,7 @@
 
                  break;
             case 2:
+                [self checkVersions];//版本检测
                 break;
             default:
                 break;
@@ -147,6 +151,16 @@
     FeedBackpage *feedbackPage = [[FeedBackpage alloc] init];
     [self.navigationController pushViewController:feedbackPage animated:YES];
     [feedbackPage release];
+}
+-(void)checkVersions
+{
+  NSDictionary *versionsDic =   [RequestTools versionsCheck:@"http://121.199.57.44:88/webServer/GetVersionInfo.ashx"];
+    NSLog(@"版本信息是:%@",versionsDic);
+    //根据返回的信息进行判断
+    /*/appURL = "http://cisgame.com";
+    status = ok;
+    title = "\U7b2c\U4e00\U6b21\U53d1\U5e03";
+    versionNo = 00989;/*/
 }
 - (void)viewDidLoad
 {

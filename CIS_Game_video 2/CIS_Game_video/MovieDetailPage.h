@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "RequestTools.h"
+#import "AsynImageView.h"
 @interface MovieDetailPage : UIViewController<UIWebViewDelegate,myHttpRequestDelegate>
 {
     UILabel *movieNameLable;//电影名
@@ -15,7 +16,7 @@
     UILabel *durationLable ;//显示时长
     UIImageView *popularImg;//人气小图标
     UILabel *popularLab;//显示人气
-    UIImageView *theAuthorImageView ;//作者头像
+    AsynImageView *theAuthorImageView ;//作者头像
     UILabel *authorNameLab;//作者姓名
     UITextView *movieInfoTextView;//电影简介
     UIWebView *movieWeb;//电影

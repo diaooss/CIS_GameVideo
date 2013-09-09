@@ -9,6 +9,9 @@
 #import "FeedBackpage.h"
 #import "Header.h"
 #import "Tools.h"
+#import "RequestTools.h"
+#import "RequestUrls.h"
+#import "MyNsstringTools.h"
 @interface FeedBackpage ()
 
 @end
@@ -65,28 +68,21 @@
     
     
     /*/ 初始化一些东西/*/
-    [Tools addTipslabel:self.view withTitle:@"网络中断了........"];
+    [Tools addTipslabelWithTitle:@"网络中断了........"];
        
 }
 #pragma mark--提交意见
 -(void)topRightCorenerBtnAction
 {
     //首先进行合法性判断
-    
     //提交反馈意见
     NSMutableDictionary *mobileInfoDic = [Tools getMobileInfo];
-    NSLog(@"设备者姓名:%@",[mobileInfoDic objectForKey:@"mobileUserName"]);
-    /*/归档,讲字典转为data/*/
     [mobileInfoDic setObject:feedTextField.text forKey:@"feedContent"];
     [mobileInfoDic setObject:qqOrPhoneField.text forKey:@"qqNum"];
-    NSMutableData *data = [[NSMutableData alloc] init];
-    NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
-    [archiver encodeObject:mobileInfoDic forKey:@"mobileInfo"];
-    [archiver finishEncoding];
-    [data release];
-    [archiver release];
-    
-
+    [mobileInfoDic setObject:@"" forKey:@"userEmail"];
+    NSLog(@"最终的字典是:%@",mobileInfoDic);
+  BOOL flag =   [RequestTools postFeedBackInfoWithUrlStr:FEED_BACK_URL infoDic:mobileInfoDic];
+    NSLog(@"反馈成功:%d",flag);
     
     
     

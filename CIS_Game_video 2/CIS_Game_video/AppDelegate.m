@@ -11,7 +11,7 @@
 #import "IIViewDeckController.h"
 #import "LeftViewController.h"
 #import "WZGuideViewController.h"
-
+#import "Reachability.h"
 //
 #import <ShareSDK/ShareSDK.h>
 #import <TencentOpenAPI/QQApiInterface.h>
@@ -53,6 +53,20 @@
 {
     [ShareSDK registerApp:@"74d0e5cd250"];//初始化ShareSDK的App
     [self initAllPlatforms];
+    /*/网络监控/*/
+     
+     // 监测网络情况
+     [[NSNotificationCenter defaultCenter] addObserver:self
+     selector:@selector(reachabilityChanged:)
+     name: kReachabilityChangedNotification
+     object: nil];
+     hostReach = [[Reachability reachabilityWithHostName:@"http://www.baidu.com"] retain];
+     [hostReach startNotifier];
+
+     
+     
+     
+     
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     // Override point for customization after application launch.
@@ -101,6 +115,23 @@
 {
     return [ShareSDK handleOpenURL:url sourceApplication:sourceApplication annotation:annotation wxDelegate:self];
 }
+#pragma mark--监控网络状态
+- (void)reachabilityChanged:(NSNotification *)note {
+    Reachability* curReach = [note object];
+    NSParameterAssert([curReach isKindOfClass: [Reachability class]]);
+    NetworkStatus status = [curReach currentReachabilityStatus];
+    
+    if (status == NotReachable) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"幻方视频"
+                                                        message:@"貌似断网了"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"去看看" otherButtonTitles:nil];
+        [alert show];
+        [alert release];
+    }
+}
+
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

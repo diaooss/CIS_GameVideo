@@ -91,8 +91,9 @@
     moviesListCell.categoryLabel.text = [[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"category"];
      moviesListCell.timeLab.text = [[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"m_duration"];
     moviesListCell.popularLab.text =[MyNsstringTools makeNewStrByAnyObj:[[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"m_popular"]];
-    moviesListCell.logoImageView.image = [UIImage imageNamed:@"test.png"];
+    moviesListCell.logoImageView.imageURL = [MyNsstringTools changeStrWithUT8:[[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"thumbnail"]];
     moviesListCell.collectBtn.tag = indexPath.row;
+    [moviesListCell.collectBtn addTarget:self action:@selector(collectMovie:) forControlEvents:UIControlEventTouchUpInside];
     NSString *isLikeStr = [MyNsstringTools makeNewStrByAnyObj:[[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"isLiked"]];
     if ([isLikeStr intValue]==0) {
         NSLog(@"没有被收藏");
@@ -144,6 +145,21 @@
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+#pragma mark--收藏视频/关注作者
+-(void)collectMovie:(UIButton *)sender
+{
+    NSString *movieID = [[self.moviesOfTheAuthorArry objectAtIndex:sender.tag] objectForKey:@"m_duration"];
+    RequestTools *collectRequest = [[RequestTools alloc] init];
+    [collectRequest setDelegate:self];
+    NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,@"?email=1823870397@qq.com&movieID=",movieID, nil];
+    [collectRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    //进行按钮颜色的变化等.
+
+    
+    
+}
+#pragma mark--收藏视频/关注作者
+
 -(void)topRightCorenerBtnAction
 {
     //实现关注作者
@@ -360,8 +376,8 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [getAuthorListByAuthorID setDelegate:nil];
-    getAuthorListByAuthorID = nil;
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];//可以成功取消全部。
+     getAuthorListByAuthorID = nil;
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];//可以成功取消全部延迟方法。
 }
 
 @end

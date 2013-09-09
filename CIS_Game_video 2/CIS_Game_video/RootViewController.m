@@ -28,6 +28,7 @@
     self.rootRequest = nil;
     self.selectIndex = nil;
     [rootView release];
+    self.collectResultDic = nil;
 
     categorySegmentedControl = nil;
     rootRefreshView = nil;
@@ -173,7 +174,9 @@
         cell.timeLab.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"m_duration"];
         NSString *popularStr = [NSString stringWithFormat:@"%@",[[list objectAtIndex:indexPath.row-1] objectForKey:@"m_popular"]];
         cell.popularLab.text =popularStr ;
-            cell.logoImageView.image = [UIImage imageNamed:@"man.png"];
+            cell.logoImageView.imageURL = [[list objectAtIndex:indexPath.row-1] objectForKey:@"thumbnail"];
+        [cell.collectBtn setTag:indexPath.row-1];//给收藏按钮加上标记值方便进行收藏操作
+        [cell.collectBtn addTarget:self action:@selector(collectMovie:) forControlEvents:UIControlEventTouchUpInside];
         return cell;
     }else
         //没有打开分组CELL
@@ -322,6 +325,18 @@
     [self.navigationController pushViewController:detailPage animated:YES];
     [detailPage release];
 }
+#pragma mark--视频收藏
+-(void)collectMovie:(UIButton *)sender
+{
+ 
+    NSString *movieIDStr = [[[[self.authorListArray objectAtIndex:self.selectIndex.section] objectForKey:@"movies"] objectAtIndex:sender.tag]objectForKey:@"movieID"];
+    NSLog(@"用来被收藏的视频ID是:%@",movieIDStr);
+    RequestTools *collectRequest = [[RequestTools alloc] init];
+    [collectRequest setDelegate:self];
+    NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,@"?email=1823870397@qq.com&movieID=",movieIDStr, nil];
+    [collectRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    //进行按钮颜色的变化等.
+ }
 #pragma mark--发起请求
 -(void)startRequestWithCateStr:cateStr
 {
@@ -334,13 +349,17 @@
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
-    NSLog(@"字典是:%@",dic);
-    self.authorListArray = [dic objectForKey:@"AuthorResult"];
-    self.rootBannerArry = [dic objectForKey:@"bannerResult"];
-    [rootAuthorListTab reloadData];
     [rootRefreshView endRefresh];
 
-
+    if ([[dic allKeys] containsObject:@"AuthorResult"]==YES) {
+        NSLog(@"字典是:%@",dic);
+        self.authorListArray = [dic objectForKey:@"AuthorResult"];
+        self.rootBannerArry = [dic objectForKey:@"bannerResult"];
+        [rootAuthorListTab reloadData];
+    } else
+    {
+        self.collectResultDic = dic;
+    }
 }
 #pragma mark--标签选中的代理方法
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
@@ -371,6 +390,9 @@
 }
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
+    [rootRefreshView endRefresh];
+
+    
 }
 #pragma mark - scrollView delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -393,6 +415,10 @@
 -(void)viewWillDisappear:(BOOL)animated
 {
     [self.rootRequest  setDelegate:nil];
-    self.rootRequest = nil;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self.rootRequest  setDelegate:self];
+
 }
 @end

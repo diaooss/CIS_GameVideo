@@ -11,7 +11,7 @@
 @interface Tools : NSObject
 //网络监测************
 +(BOOL)isHaveNet;//判断是不是有网
-+(void)addTipslabel:(UIView *)view withTitle:(NSString *)title;//加载提醒
++(void)addTipslabelWithTitle:(NSString *)title;//加载提醒
 +(NSString * )currentNetState;//返回当前的网络类型
 //*****风火轮---
 + (void)openLoadsign:(UIView* )view WithString:(NSString *)string;//创建

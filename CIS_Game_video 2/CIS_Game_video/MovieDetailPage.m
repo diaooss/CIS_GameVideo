@@ -13,6 +13,7 @@
 #import "MyNsstringTools.h"
 #import "RequestTools.h"
 #import "RequestUrls.h"
+#import "AsynImageView.h"
 #define leftBtnColor [UIColor colorWithRed:98/255.0 green:138/255.0 blue:14/255.0 alpha:1]
 #define rightBtnColor [UIColor colorWithRed:176/255.0 green:45/255.0 blue:35/255.0 alpha:1]
 #define customBlueColor [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0]
@@ -93,7 +94,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
     [movieWeb addSubview:popularLab];
     
     
-    theAuthorImageView = [[UIImageView alloc] initWithFrame:CGRectMake(5, movieWeb.bottom+5, 100, self.view.height-movieNameLable.height-movieWeb.height-128)];
+    theAuthorImageView = [[AsynImageView alloc] initWithFrame:CGRectMake(5, movieWeb.bottom+5, 100, self.view.height-movieNameLable.height-movieWeb.height-128)];
     theAuthorImageView.backgroundColor= [UIColor yellowColor];
     [self.view addSubview:theAuthorImageView];
     
@@ -179,6 +180,13 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)topRightCorenerBtnAction
 {
     //收藏该视频
+    RequestTools *collectRequest = [[RequestTools alloc] init];
+    [collectRequest setDelegate:self];
+    NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,@"?email=1823870397@qq.com&movieID=",self.movieId, nil];
+    [collectRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    //进行按钮颜色的变化等.
+    
+    
 }
 #pragma mark--关注作者
 -(void)attentionTheAuthor
@@ -201,7 +209,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
     durationLable.text = [dic objectForKey:@"m_duration"];
     NSString *popularStr = [NSString stringWithFormat:@"%@",[dic objectForKey:@"m_popular"]];
     popularLab.text = popularStr;
-
+    theAuthorImageView.imageURL = [dic objectForKey:@"authImg"];
     [self loadMovieWithUrl:[dic objectForKey:@"m_url"]];
     durationLable.text = [dic objectForKey:@"m_duration"];
 }
