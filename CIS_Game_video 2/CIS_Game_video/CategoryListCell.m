@@ -28,12 +28,12 @@
     }
     self.asImageView = [[AsynImageView alloc]init];
     [_asImageView setPlaceholderImage:[UIImage imageNamed:@"plant1.jpg"]];
-    [self addSubview:_asImageView];
+    [self.contentView addSubview:_asImageView];
     [_asImageView release];
     
     
     self.nameLabel = [[UILabel alloc]init];
-    [self addSubview:_nameLabel];
+    [self.contentView addSubview:_nameLabel];
     [_nameLabel setFont:[UIFont systemFontOfSize:12]];
     [_nameLabel setNumberOfLines:0];
     [_nameLabel setLineBreakMode:NSLineBreakByWordWrapping];
@@ -43,22 +43,22 @@
     
     
     self.attentionTimeLabel = [[UILabel alloc]init];
-    [self addSubview:_attentionTimeLabel];
+    [self.contentView addSubview:_attentionTimeLabel];
     [_attentionTimeLabel setFont:[UIFont systemFontOfSize:13.0]];
     [_attentionTimeLabel release];
     
     
     self.timeLabel=[[UILabel alloc]init];
-    [self addSubview:_timeLabel];
+    [self.contentView addSubview:_timeLabel];
     [_timeLabel setFont:[UIFont systemFontOfSize:13.0]];
     [_timeLabel release];
 //人气图标需要添加-------
     _popularityImageView = [[UIImageView alloc]init];
     [_popularityImageView setImage:[UIImage imageNamed:@"smile32.png"]];
-    [self addSubview:_popularityImageView];
+    [self.contentView addSubview:_popularityImageView];
 //时间图标--------
     _timeImageView = [[UIImageView alloc]init];
-    [self addSubview:_timeImageView];
+    [self.contentView addSubview:_timeImageView];
     [_timeImageView setImage:[UIImage imageNamed:@"smile32.png"]];
 
 
@@ -73,6 +73,10 @@
     [_timeLabel setFrame:CGRectMake(_timeImageView.right+5, _nameLabel.bottom+5,70, 20)];
 
     return self;
+}
+-(void)layoutSubviews
+{
+    [super layoutSubviews];
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {

@@ -275,14 +275,8 @@
 //刷新调用的方法----------下拉刷新
 -(void)refreshView{
 //下拉刷新--------
-    if ([self.categoryArry count]>0) {
-        [self testFinishedLoadData];
-    }else
-    {
-        flag = 1;
-        [self requestCategoryList];
-    }
-    
+    flag = 1;
+    [self requestCategoryList];
     [self testFinishedLoadData];
     
 }

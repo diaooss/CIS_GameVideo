@@ -20,6 +20,7 @@
     EGORefreshTableFooterView *_refreshFooterView;
     //
     BOOL _reloading;//状态提示
+    
     int flag;//请求的page值
 
 }

@@ -19,4 +19,5 @@
     UITableView * _setTableView;
 }
 @property(nonatomic,copy)NSString * photoPath;
+
 @end

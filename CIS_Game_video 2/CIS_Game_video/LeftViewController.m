@@ -252,15 +252,14 @@
     [self.viewDeckController setCenterController:delegate.rootNvc];
     [self.viewDeckController closeLeftViewAnimated:YES];
 }
-//根据标签判断去哪个页面
+//进入我的收藏
 - (void)toSomePlace:(NSString *)cellName;
 {
         Public_ViewController * public = [[Public_ViewController alloc]init];
         UINavigationController * publicNVC =[[UINavigationController alloc]initWithRootViewController:public];
         [self.viewDeckController setCenterController:publicNVC ];
-    [self.viewDeckController closeLeftViewAnimated:YES];
+        [self.viewDeckController closeLeftViewAnimated:YES];
 
-        [public changeInformation:cellName];//设置名字 并且更新数据
         [publicNVC release];
         [public release];
 }

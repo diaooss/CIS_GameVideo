@@ -7,15 +7,30 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface Public_ViewController : UIViewController<UITableViewDataSource,UITableViewDelegate>
+#import "EGORefreshTableFooterView.h"
+#import "EGORefreshTableHeaderView.h"
+#import "RequestTools.h"
+@interface Public_ViewController : UIViewController<EGORefreshTableDelegate,UIScrollViewDelegate,UITableViewDataSource,UITableViewDelegate,myHttpRequestDelegate>
 {
+    //EGOHeader
+    EGORefreshTableHeaderView *_refreshHeaderView;
+    //EGOFoot
+    EGORefreshTableFooterView *_refreshFooterView;
+    //
+    BOOL _reloading;//状态提示
+    
+    int flag;//请求的page值
     UIButton *eiditBtn;
+    int flagTow;
 }
+//六个类别的
+
 
 @property (nonatomic,retain)UITableView * showTab;
+@property (nonatomic,retain)RequestTools * request;
+@property (nonatomic,retain)NSMutableArray * myArry;
+@property (nonatomic,copy)NSString * nenwCategory;
+@property (nonatomic,copy)NSString * oldCategory;
 
-
-- (void)changeInformation:(NSString *)titleName;
 
 @end
