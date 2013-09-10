@@ -21,6 +21,8 @@
     UITextView *movieInfoTextView;//电影简介
     UIWebView *movieWeb;//电影
     RequestTools *collectRequest;//收藏视频
+    
+    RequestTools * _attentionTool;
    
 }
 @property(nonatomic,retain)RequestTools*detailRequest;//请求单一视频详情.

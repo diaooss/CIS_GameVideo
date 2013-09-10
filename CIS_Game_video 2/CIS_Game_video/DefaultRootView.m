@@ -13,8 +13,7 @@
 @implementation DefaultRootView
 - (void)dealloc
 {
-    self.tool = nil;
-    [self.tool release];
+    [self setTool:nil];
     [self.mydic release];
     [_defaultListTab release];
     [_animationView release];

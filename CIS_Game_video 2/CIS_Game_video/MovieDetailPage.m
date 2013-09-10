@@ -182,6 +182,10 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)topRightCorenerBtnAction
 {
     //收藏该视频
+    NSLog(@"SHOU----");
+    
+
+
     collectRequest = [[RequestTools alloc] init];
     [collectRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,@"?email=1823870397@qq.com&movieID=",self.movieId, nil];
@@ -193,7 +197,12 @@ durationLable.text = @"<<  时长:9'16''  >>";
 #pragma mark--关注作者
 -(void)attentionTheAuthor
 {
-    
+    NSLog(@"作者:%@",authorNameLab.text);
+    _attentionTool = [[RequestTools alloc]init];
+    [_attentionTool setDelegate:self];
+    NSArray *strArry = [NSArray arrayWithObjects:ATTENTION_AUTHOR,[NSString stringWithFormat:@"?email=%@&authName=%@",@"1019938654@qq.com",authorNameLab.text],nil];
+    [_attentionTool requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+
 }
 #pragma mark--分享视频
 -(void)shareTheMovie
@@ -203,14 +212,14 @@ durationLable.text = @"<<  时长:9'16''  >>";
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
-    NSLog(@"链接:%@",[dic objectForKey:@"m_url"]);
-    NSLog(@"详情字典:%@",dic);
+    NSLog(@"链接:%@",dic );
     movieNameLable.text = [dic objectForKey:@"m_name"];
     authorNameLab.text = [dic objectForKey:@"m_author"];
     movieInfoTextView.text = [dic objectForKey:@"m_description"];
     durationLable.text = [dic objectForKey:@"m_duration"];
     NSString *popularStr = [NSString stringWithFormat:@"%@",[dic objectForKey:@"m_popular"]];
     popularLab.text = popularStr;
+
     theAuthorImageView.imageURL = [dic objectForKey:@"authImg"];
     [self loadMovieWithUrl:[dic objectForKey:@"m_url"]];
     durationLable.text = [dic objectForKey:@"m_duration"];
