@@ -15,5 +15,9 @@
 @property(nonatomic,retain)UIImageView * authorLogoView;//作者头像
 @property(nonatomic,retain)UILabel *authorNameLabel;//作者姓名
 @property(nonatomic,retain)UIButton *favorBtn;//关注按钮
+@property(nonatomic,retain)UIImageView *popularImg;
+@property(nonatomic,retain)UILabel *popularLab;
+@property(nonatomic,retain)UIImageView *countImg;
+@property(nonatomic,retain)UILabel *countLab;
 
 @end

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface MyLikeAuthorListPage : UIViewController<UITableViewDataSource,UITableViewDelegate>
-
+#import "RequestTools.h"
+@interface MyLikeAuthorListPage : UIViewController<UITableViewDataSource,UITableViewDelegate,myHttpRequestDelegate>
+{
+    RequestTools *getMyLikeAuthorListRequest;
+    UITableView *likeAuthorListTab;
+    
+}
+@property(nonatomic,retain)NSDictionary *myLikeAuthorListDic;//
 @end

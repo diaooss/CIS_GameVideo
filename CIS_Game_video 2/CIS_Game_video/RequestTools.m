@@ -69,7 +69,6 @@
     return nil;
 
 
-    
 }
 //版本检测
 +(NSDictionary *)versionsCheck:(NSString *)urlStr
@@ -128,7 +127,6 @@
         return NO;
     }
 
-    return nil;
    
 }
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Synchronous:(NSString *)checkUrl//同步
@@ -147,7 +145,6 @@
 
     }
 
-    return nil;
 }
 #pragma mark--ASI的请求代理方法
 -(void)requestStarted:(ASIHTTPRequest *)request
@@ -157,10 +154,10 @@
 - (void)requestFinished:(ASIHTTPRequest *)request
 {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-    resultDic = (NSDictionary *)[request.responseData objectFromJSONData];
+    resultDic = [(NSDictionary *)[request.responseData objectFromJSONData] retain];
     //回调代理
     if (self.delegate&&[self.delegate respondsToSelector:@selector(requestSuccessWithResultDictionary:)]) {
-        [self.delegate requestSuccessWithResultDictionary:resultDic];
+        [self.delegate requestSuccessWithResultDictionary:[resultDic autorelease]];
     }
 }
 #pragma mark--ASI的代理方法

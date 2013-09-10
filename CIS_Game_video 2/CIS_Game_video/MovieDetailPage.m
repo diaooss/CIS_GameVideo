@@ -36,6 +36,8 @@
     [popularImg release];
     [movieWeb release];
     self.detailRequest.delegate = nil;
+    collectRequest.delegate = nil;
+    [collectRequest release];
     _detailRequest = nil;
     self.detailDic = nil;
     self.movieId = nil;
@@ -180,7 +182,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)topRightCorenerBtnAction
 {
     //收藏该视频
-    RequestTools *collectRequest = [[RequestTools alloc] init];
+    collectRequest = [[RequestTools alloc] init];
     [collectRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,@"?email=1823870397@qq.com&movieID=",self.movieId, nil];
     [collectRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];

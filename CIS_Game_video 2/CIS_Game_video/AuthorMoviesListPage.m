@@ -13,6 +13,7 @@
 #import "RequestTools.h"
 #import "MyNsstringTools.h"
 #import "RequestUrls.h"
+#import "AsynImageView.h"
 @interface AuthorMoviesListPage ()
 
 @end
@@ -118,10 +119,11 @@
 {
     if (section == 0) {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];//创建一个视图
-    UIImageView *headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(30, 5, 60, 60)];
-    headerView.backgroundColor = [UIColor grayColor];
-    headerImageView.backgroundColor = [UIColor  yellowColor];
-    [headerView addSubview:headerImageView];    
+    AsynImageView *headerImageView = [[AsynImageView alloc] initWithFrame:CGRectMake(15, 10, 60, 60)];
+        NSLog(@"在这头像%d",[_authorListDic retainCount]);
+        headerImageView.imageURL = [self.authorListDic objectForKey:@"authImg"];
+        
+    [headerView addSubview:headerImageView];
     [headerImageView release];
     UILabel *headerLab = [[UILabel alloc] initWithFrame:CGRectMake(headerImageView.right, 30, 100, 20)];
     headerLab.backgroundColor = [UIColor clearColor];
@@ -148,7 +150,7 @@
 #pragma mark--收藏视频/关注作者
 -(void)collectMovie:(UIButton *)sender
 {
-    NSString *movieID = [[self.moviesOfTheAuthorArry objectAtIndex:sender.tag] objectForKey:@"m_duration"];
+    NSString *movieID = [[self.moviesOfTheAuthorArry objectAtIndex:sender.tag] objectForKey:@"movieID"];
     RequestTools *collectRequest = [[RequestTools alloc] init];
     [collectRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,@"?email=1823870397@qq.com&movieID=",movieID, nil];
@@ -166,9 +168,10 @@
 }
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
-    NSLog(@"单一作者视频列表%@",dic);
-    self.authorListDic = dic;
-    
+    NSLog(@"请求字典详情:%@",dic);
+    //self.authorListDic = dic;
+   [self setAuthorListDic:dic];//通
+   // NSLog(@"%@头像",[dic valueForKey:@"authImg"]);
     NSArray * arry =[dic valueForKey:@"movies"];
     if ([arry count]>0) {
         for (NSDictionary*obj in arry) {

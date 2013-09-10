@@ -13,6 +13,10 @@
 {
     self.authorLogoView = nil;
     self.authorNameLabel = nil;
+    self.popularImg = nil;
+    self.popularLab = nil;
+    self.countImg = nil;
+    self.countLab = nil;
 //    self.favorBtn = nil;
     [super dealloc];
 }
@@ -35,6 +39,44 @@
         [_authorNameLabel setNumberOfLines:0];
         _authorNameLabel.highlightedTextColor = [UIColor whiteColor];
         [self.contentView addSubview:_authorNameLabel];
+        //人气小图标
+        self.popularImg = [[UIImageView alloc] init];
+        self.popularImg.backgroundColor  = [UIColor greenColor];
+        self.contentMode  = UIViewContentModeScaleAspectFit;
+        self.popularImg.layer.cornerRadius = 3.0;
+        self.popularImg.layer.masksToBounds = YES;
+        [self.contentView addSubview:_popularImg];
+        //作品数量小图标
+        self.countImg = [[UIImageView alloc] init];
+        self.countImg.backgroundColor  = [UIColor greenColor];
+        self.contentMode  = UIViewContentModeScaleAspectFit;
+        self.countImg.layer.cornerRadius = 3.0;
+        self.countImg.layer.masksToBounds = YES;
+        [self.contentView addSubview:_countImg];
+        
+        //人气标签
+        _popularLab = [[UILabel alloc] init];
+        _popularLab  =[[UILabel alloc] init];
+        _popularLab.backgroundColor = [UIColor redColor];
+        _popularLab.font = [UIFont systemFontOfSize:10.0];
+        _popularLab.textColor = [UIColor blackColor];
+        _popularLab.highlightedTextColor = [UIColor whiteColor];
+        _popularLab.textAlignment = NSTextAlignmentCenter;
+        [self.contentView addSubview:_popularLab];
+        
+        //作品数量标签
+        _countLab = [[UILabel alloc] init];
+        _countLab  =[[UILabel alloc] init];
+        _countLab.backgroundColor = [UIColor redColor];
+        _countLab.font = [UIFont systemFontOfSize:10.0];
+        _countLab.textColor = [UIColor blackColor];
+        _countLab.highlightedTextColor = [UIColor whiteColor];
+        _countLab.textAlignment = NSTextAlignmentCenter;
+        [self.contentView addSubview:_countLab];
+
+        
+        
+        
         //
         _favorBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         _favorBtn.backgroundColor = [UIColor redColor];
@@ -70,8 +112,13 @@
     [super layoutSubviews];
     CGSize cellSize = self.bounds.size;
         _authorLogoView.size = CGSizeMake(80, 80);
-    _authorLogoView.frame = CGRectMake(5, 5, _authorLogoView.width, _authorLogoView.height);
-    _authorNameLabel.frame = CGRectMake(_authorLogoView.right, 25, cellSize.width-130, cellSize.height/2);
+    _authorLogoView.frame = CGRectMake(5, 10, _authorLogoView.width, _authorLogoView.height);
+    _authorNameLabel.frame = CGRectMake(_authorLogoView.right, 10, cellSize.width-130, cellSize.height/2);
+    
+    _popularImg.frame = CGRectMake(_authorLogoView.right+10, _authorNameLabel.bottom+10, 20, 20);
+    _popularLab.frame = CGRectMake(_popularImg.right, _popularImg.top, 50, 20);
+    _countImg.frame = CGRectMake(_popularLab.right+10, _popularLab.top, 20, 20);
+    _countLab.frame = CGRectMake(_countImg.right, _countImg.top, 50, 20);
     _favorBtn.size = CGSizeMake(40, 40);
     _favorBtn.frame = CGRectMake(_authorNameLabel.right, (cellSize.height-40)/2, _favorBtn.width, _favorBtn.height);
     _favorBtn.alpha = 0;

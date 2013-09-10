@@ -26,7 +26,7 @@
     if (self) {
         //缩略图
         _logoImageView = [[AsynImageView alloc] init];
-        _logoImageView.contentMode = UIViewContentModeScaleAspectFit;
+        _logoImageView.contentMode = UIViewContentModeScaleAspectFill;
         _logoImageView.backgroundColor = [UIColor grayColor];
         _logoImageView.layer.cornerRadius = 3.0;
         _logoImageView.layer.masksToBounds = YES;

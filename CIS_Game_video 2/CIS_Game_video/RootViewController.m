@@ -174,7 +174,7 @@
         cell.timeLab.text = [[list objectAtIndex:indexPath.row-1] objectForKey:@"m_duration"];
         NSString *popularStr = [NSString stringWithFormat:@"%@",[[list objectAtIndex:indexPath.row-1] objectForKey:@"m_popular"]];
         cell.popularLab.text =popularStr ;
-            cell.logoImageView.imageURL = [[list objectAtIndex:indexPath.row-1] objectForKey:@"thumbnail"];
+       cell.logoImageView.imageURL = [MyNsstringTools changeStrWithUT8:[[list objectAtIndex:indexPath.row-1] objectForKey:@"thumbnail"]];
         [cell.collectBtn setTag:indexPath.row-1];//给收藏按钮加上标记值方便进行收藏操作
         [cell.collectBtn addTarget:self action:@selector(collectMovie:) forControlEvents:UIControlEventTouchUpInside];
         return cell;

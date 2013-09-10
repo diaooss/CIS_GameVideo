@@ -10,11 +10,21 @@
 #import "Header.h"
 #import "MyFavorAuthorCell.h"
 #import "Tools.h"
+#import "RequestTools.h"
+#import "RequestUrls.h"
+#import "MyNsstringTools.h"
 @interface MyLikeAuthorListPage ()
 
 @end
 
 @implementation MyLikeAuthorListPage
+- (void)dealloc
+{
+    [likeAuthorListTab release];
+    self.myLikeAuthorListDic = nil;
+    
+    [super dealloc];
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,19 +45,28 @@
     [super viewDidLoad];
     [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"goBack.png" title:@"我的关注"];
     
-    UITableView *likeAuthorListTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    likeAuthorListTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     likeAuthorListTab.dataSource = self;
     likeAuthorListTab.delegate = self;
     [self.view addSubview:likeAuthorListTab];
-    [likeAuthorListTab release];
     
-    
+    [self getMyLikeAuthorListDic];
 
+}
+#pragma mark--抓取到关注列表
+-(void)getMyLikeAuthorListDic
+{
+    getMyLikeAuthorListRequest = [[RequestTools alloc] init];
+    NSString *emailStr = [NSString stringWithFormat:@"?email=1601883700@qq.com"];
+    getMyLikeAuthorListRequest.delegate = self;
+    NSArray *strArry  =[NSArray arrayWithObjects:AUTHOR_LIST,emailStr,@"&isCarelist=1", nil];
+    [getMyLikeAuthorListRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    
 }
 #pragma mark--列表代理方法
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return [[self.myLikeAuthorListDic objectForKey:@"AuthorCount"] integerValue];//值转换
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -77,8 +96,8 @@
         myCell.selectionStyle = UITableViewCellSelectionStyleGray;
         
     }
-        
-        //3
+//    myCell.authorNameLabel.text = [self.myLikeAuthorListDic o]
+    
         myCell.authorLogoView.image = [UIImage imageNamed:@"test.png"];
        myCell.authorNameLabel.text = @"魔兽大仙-只哈哈哈哈哈看看";
 
@@ -94,6 +113,18 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+#pragma mark--请求的代理方法
+-(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
+{
+    NSLog(@"关注列表%@",dic);
+    self.myLikeAuthorListDic = dic;
+    [likeAuthorListTab reloadData];
+    
+}
+-(void)requestFailedWithResultDictionary:(NSDictionary *)dic
+{
+    
 }
 - (void)didReceiveMemoryWarning
 {
