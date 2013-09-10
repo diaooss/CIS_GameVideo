@@ -212,7 +212,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
-    [nameTextField setText:[[NSUserDefaults standardUserDefaults] valueForKey:@"user_psw"]];
+    [nameTextField setText:[[NSUserDefaults standardUserDefaults] valueForKey:@"user_email"]];
 }
 - (void)didReceiveMemoryWarning
 {

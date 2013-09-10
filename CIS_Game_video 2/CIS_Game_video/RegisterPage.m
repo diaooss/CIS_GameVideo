@@ -100,6 +100,8 @@
     self.isEmailExist = [RequestTools requestReturnYesOrOkWithCheckUrl_Synchronous:[NSString stringWithFormat:@"%@?email=%@",CHECK_EMAIL,email]];
     if (!self.isEmailExist) {
         [self performSelectorOnMainThread:@selector(remindBoxWith:) withObject:@"邮箱已被注册.." waitUntilDone:NO];
+        UITextField * emailText = (UITextField *)[self.view viewWithTag:200];
+        [emailText becomeFirstResponder];
     }
 }
 
