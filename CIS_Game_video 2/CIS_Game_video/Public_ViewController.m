@@ -60,7 +60,7 @@
     [_showTab setDataSource:self];
     [self.view addSubview:_showTab];
     [_showTab release];
-    
+    [Tools openLoadsign:self.view WithString:@"正在为你回调数据....."];
     [self createHeaderView];
     [self setFooterView];
     [self requestCategoryList];
@@ -341,6 +341,7 @@
 //请求成功i
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
+    [Tools closeLoadsign:self.view];
     NSArray * arry =[dic valueForKey:@"result"];
     //NSLog(@"这个几个数据---%@",dic);
     if ([self checkCategory]&&flag==1) {

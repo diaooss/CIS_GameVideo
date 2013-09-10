@@ -23,9 +23,6 @@
     UIButton *eiditBtn;
     int flagTow;
 }
-//六个类别的
-
-
 @property (nonatomic,retain)UITableView * showTab;
 @property (nonatomic,retain)RequestTools * request;
 @property (nonatomic,retain)NSMutableArray * myArry;

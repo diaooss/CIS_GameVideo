@@ -10,6 +10,7 @@
 #import "Header.h"
 #import "Animation_Turn_View.h"
 #import "MyNsstringTools.h"
+#import "Tools.h"
 @implementation DefaultRootView
 - (void)dealloc
 {
@@ -46,6 +47,7 @@
         [_defaultListTab addSubview:rootRefreshView];
     //初次请求数据
         [self requestNet];
+        [Tools openLoadsign:self WithString:@"正在为你辛勤加载...."];
     }
     return self;
 }
@@ -57,17 +59,20 @@
     NSArray *strArry = [NSArray arrayWithObjects:@"http://121.199.57.44:88/WebServer/HomeData.ashx",nil];
     [_tool requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
 }
+#pragma mark----请求数据
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     [self setMydic:dic];//接收到数据
     [_defaultListTab reloadData];
     [_defaultListTab reloadInputViews];
     [rootRefreshView endRefresh];
+    [Tools closeLoadsign:self];
 }
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
     NSLog(@"------%@",dic);
     //  提醒用户加载失败原因-------------
+    [Tools closeLoadsign:self];
     [rootRefreshView endRefresh];
 }
 

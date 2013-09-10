@@ -36,7 +36,7 @@
     if (self) {
         // Custom initialization
     }
-    _nameArry = [[NSArray alloc]initWithObjects:@"返回主页",@"我的收藏",@"下载记录",@"观看记录",@"我的关注", nil];
+    _nameArry = [[NSArray alloc]initWithObjects:@"返回主页",@"我的收藏",@"观看记录",@"我的关注", nil];
     _pictureArry = [[NSArray alloc]initWithObjects:@"test.png",@"test.png",@"test.png",@"test.png",@"test.png",@"test.png", nil];
     return self;
 }
@@ -49,9 +49,9 @@
     [_setTableView setDataSource:self];
     [self.view addSubview:_setTableView];
    
-    NSArray * arry = [NSArray arrayWithObjects:@"系统设置",@"分享设置",@"应用推荐",@"网络设置",@"关于CIS", nil];
+    NSArray * arry = [NSArray arrayWithObjects:@"系统设置",@"应用推荐",@"网络设置",@"关于CIS", nil];
 //有待更改
-    for (int j=0; j<3; j++) {
+    for (int j=0; j<2; j++) {
         for (int i=0; i<2; i++) {
             if (2*j+i<5) {
                 //but??????
@@ -84,7 +84,7 @@
 #pragma mark -----UItableView 的代理方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 5;
 }
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -136,9 +136,6 @@
             [self toSomePlace:cell.textLabel.text];
             break;
         case 4:
-            [self toSomePlace:cell.textLabel.text];
-            break;
-        case 5:
             [self goToMyLikeAuthorListPageWith:cell.textLabel.text];
             break;
         default:
@@ -295,14 +292,14 @@
             [configPage release];
         }
             break;
-        case 103:
+        case 102:
         {
             NetSettingPage *netConfigPage = [[NetSettingPage alloc] init];
             [self judgeTheView:[sender titleForState:UIControlStateNormal] changeViecontroller:netConfigPage];
             [netConfigPage release];
         }
             break;
-        case 104:
+        case 103:
         {
             AboutUsPage *usPage = [[AboutUsPage alloc] init];
             [self judgeTheView:[sender titleForState:UIControlStateNormal] changeViecontroller:usPage];
