@@ -30,6 +30,8 @@
 +(NSString *)changeStrWithUT8:(NSString *)oldStr
 {
     return [[NSString stringWithString:oldStr] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    //stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding还原字符串
+
 }
 //把扔进来的一堆字符串拼接,返回一个字符串,
 +(NSString *)groupStrByAStrArray:(NSArray *)strArry

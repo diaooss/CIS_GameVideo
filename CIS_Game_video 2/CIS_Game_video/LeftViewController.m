@@ -224,10 +224,12 @@
     }];
     [self performSelector:@selector(selectPic:) withObject:[info objectForKey:@"UIImagePickerControllerEditedImage"] afterDelay:0.1];
 }
+#pragma mark--头像上传
 - (void)selectPic:(UIImage*)image
 {
     NSLog(@"image%@",image);
     NSString *str = [NSString stringWithFormat:@"http://121.199.57.44:88/webServer/HeadPhotoUpload.ashx?email=1823870397@qq.com"];
+    
    NSDictionary *dic =  [RequestTools postHeaderImageToServerWitImage:image requestStr:str];
     NSLog(@"头像成功:%@",dic);
     [_setTableView reloadData];

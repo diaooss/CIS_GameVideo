@@ -27,4 +27,5 @@
 @property(nonatomic,assign)BOOL isOpen;//标记是否打开
 @property(nonatomic,retain) NSArray *authorListArray;//作者列表数组
 @property(nonatomic,retain)NSArray *rootBannerArry;//首页banner信息-作者列表
+@property(nonatomic,retain)NSDictionary *collectResultDic;//进行视频收藏返回的字典
 @end

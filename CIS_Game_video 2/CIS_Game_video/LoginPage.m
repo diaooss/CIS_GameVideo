@@ -174,8 +174,6 @@
 {
     //做邮箱格式及所有内容是否为空的判断
     if ([Tools cheeckEmail:nameTextField.text]==YES) {
-        
-    
     NSString *nameStr = [NSString stringWithFormat:@"?email=%@",nameTextField.text];
     NSString *pswStr = [NSString stringWithFormat:@"&psw=%@",psdTextField.text];
   BOOL isLogin =   [RequestTools requestReturnYesOrOkWithCheckUrl_Synchronous:[MyNsstringTools groupStrByAStrArray:[NSArray arrayWithObjects:LOGIN,nameStr,pswStr,nil]]];
@@ -206,7 +204,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
     
     
     

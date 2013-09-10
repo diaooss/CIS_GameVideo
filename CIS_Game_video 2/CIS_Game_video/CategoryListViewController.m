@@ -325,6 +325,7 @@
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];//可以成功取消全部。
     [_categoryRequest setDelegate:nil];
+
     
 }
 @end

@@ -21,4 +21,5 @@
 #define GET_NEW_PSW_byEmail @"http://121.199.57.44:88//webServer/SendEmailForPsw.ashx"//验证邮箱以获得新密码
 #define GET_LIST_OF_A_AUTHOR @"http://121.199.57.44:88/webServer/GetSingleAuthorInfo.ashx"//获得单个作者的所有视频
 #define post_Header_Image @"http://121.199.57.44:88/webServer/HeadPhotoUpload.ashx"//上传头像
+#define FEED_BACK_URL @"http://121.199.57.44:88/webServer/Feedback.ashx"
 #endif
