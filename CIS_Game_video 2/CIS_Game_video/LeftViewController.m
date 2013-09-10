@@ -89,7 +89,7 @@
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==0) {
-        return self.view.height*10/63;
+        return 80;
     }return self.view.height*5/63;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -97,11 +97,14 @@
     static NSString * mark = @"mark";
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:mark];
     if (nil==cell) {
-        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:mark] autorelease];
+        cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mark] autorelease];
         cell.textLabel.font = mainFont;
     }
     if (indexPath.row==0) {
-        [cell.textLabel setText:@"我是小强"];
+//        NSString *namrStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"<#string#>"];
+        [cell.textLabel setText:@"我是小强"];//
+        cell.detailTextLabel.text = @"这个人很懒,不喜欢签名...";
+        cell.imageView.image = [UIImage imageNamed:@"headerimage.png"];
         UITapGestureRecognizer *tapHeaerImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTheHeaerImageView)];
         [cell.imageView setUserInteractionEnabled:YES];
         [cell.imageView addGestureRecognizer:tapHeaerImageView];
@@ -109,12 +112,8 @@
     }else
     {
     [cell.textLabel setText:[_nameArry objectAtIndex:indexPath.row-1]];
-    }
-    if (self.photoPath) {
-        [cell.imageView setImage:[UIImage imageWithContentsOfFile:self.photoPath]];
-    }else
-    {
         [cell.imageView setImage:[UIImage imageNamed:@"smile32.png"]];
+
     }
     
     return cell;
@@ -268,8 +267,9 @@
 {
     MyLikeAuthorListPage *likeAuthorPage = [[MyLikeAuthorListPage alloc] init] ;
     UINavigationController * controllerNVC =[[UINavigationController alloc]initWithRootViewController:likeAuthorPage];
-    [self.viewDeckController closeLeftViewAnimated:YES];
     [self.viewDeckController setCenterController:controllerNVC];
+
+    [self.viewDeckController closeLeftViewAnimated:YES];
     [controllerNVC release];
     [likeAuthorPage release];
 }
@@ -278,8 +278,9 @@
 - (void)judgeTheView:(NSString *)nowSelectionCell changeViecontroller:(UIViewController *)controller
 {
        UINavigationController * controllerNVC =[[UINavigationController alloc]initWithRootViewController:controller];
-    [self.viewDeckController closeLeftViewAnimated:YES];
     [self.viewDeckController setCenterController:controllerNVC];
+
+    [self.viewDeckController closeLeftViewAnimated:YES];
     [controllerNVC release];
 }
 #pragma mark--设置按钮等的点击事件

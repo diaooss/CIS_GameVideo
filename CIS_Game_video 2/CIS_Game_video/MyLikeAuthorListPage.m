@@ -22,7 +22,10 @@
 {
     [likeAuthorListTab release];
     self.myLikeAuthorListDic = nil;
-    
+    [getMyLikeAuthorListRequest setDelegate:nil];
+    [getMyLikeAuthorListRequest release];
+    [likeAuthorListHeaderView release];
+    [likeAuthorListFooterView release];
     [super dealloc];
 }
 
@@ -45,11 +48,13 @@
     [super viewDidLoad];
     [Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"goBack.png" title:@"我的关注"];
     
-    likeAuthorListTab = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    likeAuthorListTab = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-44) style:UITableViewStylePlain];
     likeAuthorListTab.dataSource = self;
     likeAuthorListTab.delegate = self;
     [self.view addSubview:likeAuthorListTab];
-    
+    [self setFooterView];
+    [self createHeaderView];
+    flag = 1;
     [self getMyLikeAuthorListDic];
 
 }
@@ -59,9 +64,8 @@
     getMyLikeAuthorListRequest = [[RequestTools alloc] init];
     NSString *emailStr = [NSString stringWithFormat:@"?email=1601883700@qq.com"];
     getMyLikeAuthorListRequest.delegate = self;
-    NSArray *strArry  =[NSArray arrayWithObjects:AUTHOR_LIST,emailStr,@"&isCarelist=1", nil];
+    NSArray *strArry  =[NSArray arrayWithObjects:AUTHOR_LIST,emailStr,@"&isCarelist=1&dataPage=1", nil];
     [getMyLikeAuthorListRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-    
 }
 #pragma mark--列表代理方法
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -82,10 +86,8 @@
                 UISwipeGestureRecognizer *swipeRight = [[UISwipeGestureRecognizer alloc] initWithTarget:myCell action:@selector(cancelLike)];
                 [swipeRight setDirection:UISwipeGestureRecognizerDirectionRight];
                 [myCell addGestureRecognizer:swipeRight];
-        
                 //长按手势
                 UILongPressGestureRecognizer *longPressCell = [[UILongPressGestureRecognizer alloc] initWithTarget:myCell action:@selector(cancelLike)];
-        
                 [myCell addGestureRecognizer:longPressCell];
         //书写取消按钮方法
 //        [myCell.favorBtn addTarget:<#(id)#> action:<#(SEL)#> forControlEvents:<#(UIControlEvents)#>]
@@ -96,14 +98,16 @@
         myCell.selectionStyle = UITableViewCellSelectionStyleGray;
         
     }
-//    myCell.authorNameLabel.text = [self.myLikeAuthorListDic o]
-    
-        myCell.authorLogoView.image = [UIImage imageNamed:@"test.png"];
-       myCell.authorNameLabel.text = @"魔兽大仙-只哈哈哈哈哈看看";
+    myCell.authorNameLabel.text = [[[self.myLikeAuthorListDic objectForKey:@"AuthorResult"] objectAtIndex:indexPath.row] objectForKey:@"author"];
+    NSString *popStr = [MyNsstringTools makeNewStrByAnyObj:[[[self.myLikeAuthorListDic objectForKey:@"AuthorResult"] objectAtIndex:indexPath.row] objectForKey:@"popular"]];
+    myCell.popularLab.text = popStr;
+    NSString *countStr  = [MyNsstringTools makeNewStrByAnyObj:[[[self.myLikeAuthorListDic objectForKey:@"AuthorResult"] objectAtIndex:indexPath.row] objectForKey:@"opusCount"]];
+    myCell.countLab.text = countStr;
+
+        myCell.authorLogoView.imageURL = [[[self.myLikeAuthorListDic objectForKey:@"AuthorResult"] objectAtIndex:indexPath.row] objectForKey:@"photo"];
 
        
     return myCell;
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -125,6 +129,189 @@
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
     
+}
+//初始化刷新视图
+//＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
+#pragma mark
+#pragma methods for creating and removing the header view
+
+-(void)createHeaderView{
+    if (likeAuthorListHeaderView && [likeAuthorListHeaderView superview]) {
+        [likeAuthorListHeaderView removeFromSuperview];
+    }
+	likeAuthorListHeaderView = [[EGORefreshTableHeaderView alloc] initWithFrame:
+                          CGRectMake(0.0f, 0.0f - self.view.bounds.size.height,
+                                     self.view.frame.size.width, self.view.bounds.size.height)];
+    likeAuthorListHeaderView.delegate = self;
+    
+	[likeAuthorListTab addSubview:likeAuthorListHeaderView];
+    [likeAuthorListHeaderView refreshLastUpdatedDate];
+}
+
+-(void)removeHeaderView{
+    if (likeAuthorListHeaderView && [likeAuthorListHeaderView superview]) {
+        [likeAuthorListHeaderView removeFromSuperview];
+    }
+    likeAuthorListHeaderView = nil;
+}
+
+-(void)setFooterView{
+    // if the footerView is nil, then create it, reset the position of the footer
+    CGFloat height = MAX(likeAuthorListTab.contentSize.height, likeAuthorListTab.frame.size.height);
+    if (likeAuthorListFooterView && [likeAuthorListFooterView superview]) {
+        // reset position
+        likeAuthorListFooterView.frame = CGRectMake(0.0f,
+                                              height,
+                                              likeAuthorListTab.frame.size.width,
+                                              likeAuthorListTab.bounds.size.height);
+    }else {
+        // create the footerView
+        likeAuthorListFooterView = [[EGORefreshTableFooterView alloc] initWithFrame:
+                              CGRectMake(0.0f, height,
+                                         likeAuthorListTab.frame.size.width, self.view.bounds.size.height)];
+        likeAuthorListFooterView.delegate = self;
+        [likeAuthorListTab addSubview:likeAuthorListFooterView];
+    }
+    if (likeAuthorListFooterView) {
+        [likeAuthorListFooterView refreshLastUpdatedDate];
+    }
+}
+
+-(void)removeFooterView{
+    if (likeAuthorListFooterView && [likeAuthorListFooterView superview]) {
+        [likeAuthorListFooterView removeFromSuperview];
+    }
+    likeAuthorListFooterView = nil;
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+	return YES;
+}
+
+#pragma mark-
+#pragma mark force to show the refresh headerView
+-(void)showRefreshHeader:(BOOL)animated{
+	if (animated)
+	{
+		[UIView beginAnimations:nil context:NULL];
+		[UIView setAnimationDuration:0.2];
+		likeAuthorListTab.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
+        // scroll the table view to the top region
+        [likeAuthorListTab scrollRectToVisible:CGRectMake(0, 0.0f, 1, 1) animated:NO];
+        [UIView commitAnimations];
+	}
+	else
+	{
+        likeAuthorListTab.contentInset = UIEdgeInsetsMake(60.0f, 0.0f, 0.0f, 0.0f);
+		[likeAuthorListTab scrollRectToVisible:CGRectMake(0, 0.0f, 1, 1) animated:NO];
+	}
+    
+    [likeAuthorListHeaderView setState:EGOOPullRefreshLoading];
+}
+//===============
+//刷新delegate
+#pragma mark -
+#pragma mark data reloading methods that must be overide by the subclass
+
+-(void)beginToReloadData:(EGORefreshPos)aRefreshPos{
+	
+	//  should be calling your tableviews data source model to reload
+	isLoading = YES;
+    
+    if (aRefreshPos == EGORefreshHeader) {
+        // pull down to refresh data
+        [self performSelector:@selector(refreshView) withObject:nil afterDelay:2.0];
+    }else if(aRefreshPos == EGORefreshFooter){
+        // pull up to load more data
+        [self performSelector:@selector(getNextPageView) withObject:nil afterDelay:2.0];
+    }
+    
+	// overide, the actual loading data operation is done in the subclass
+}
+
+#pragma mark -
+#pragma mark method that should be called when the refreshing is finished
+- (void)finishReloadingData{
+	
+	//  model should call this when its done loading
+	isLoading = NO;
+    
+	if (likeAuthorListHeaderView) {
+        [likeAuthorListHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:likeAuthorListTab];
+    }
+    
+    if (likeAuthorListFooterView) {
+        [likeAuthorListFooterView egoRefreshScrollViewDataSourceDidFinishedLoading:likeAuthorListTab];
+        [self setFooterView];
+    }
+    [likeAuthorListTab reloadData];
+    // overide, the actula reloading tableView operation and reseting position operation is done in the subclass
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+	if (likeAuthorListHeaderView) {
+        [likeAuthorListHeaderView egoRefreshScrollViewDidScroll:likeAuthorListTab];
+    }
+	if (likeAuthorListFooterView) {
+        [likeAuthorListFooterView egoRefreshScrollViewDidScroll:likeAuthorListTab];
+        [self setFooterView];
+    }
+}
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+	if (likeAuthorListHeaderView) {
+        [likeAuthorListHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    }
+	
+	if (likeAuthorListFooterView) {
+        [likeAuthorListFooterView egoRefreshScrollViewDidEndDragging:scrollView];
+    }
+}
+
+#pragma mark EGORefreshTableDelegate Methods
+- (void)egoRefreshTableDidTriggerRefresh:(EGORefreshPos)aRefreshPos{
+	
+	[self beginToReloadData:aRefreshPos];
+}
+- (BOOL)egoRefreshTableDataSourceIsLoading:(UIView*)view{
+	
+	return isLoading; // should return if data source model is reloading
+}
+// if we don't realize this method, it won't display the refresh timestamp
+- (NSDate*)egoRefreshTableDataSourceLastUpdated:(UIView*)view{
+	
+	return [NSDate date]; // should return date data source was last changed
+	
+}
+
+//刷新调用的方法----------下拉刷新
+-(void)refreshView{
+    
+        
+    [self testFinishedLoadData];
+    
+}
+//加载调用的方法----------上拉加载
+-(void)getNextPageView{
+    [self removeFooterView];
+    flag ++;
+    [self getMyLikeAuthorListDic];
+   
+    [self testFinishedLoadData];
+    
+    
+    
+}-(void)testFinishedLoadData{
+    
+    [self finishReloadingData];
+    [self setFooterView];
+}
+-(void)viewDidDisappear:(BOOL)animated
+{
+    [getMyLikeAuthorListRequest setDelegate:nil];
+    [NSObject cancelPreviousPerformRequestsWithTarget:self];//可以成功取消全部延迟方法。
 }
 - (void)didReceiveMemoryWarning
 {

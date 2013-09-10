@@ -121,6 +121,7 @@
     [_rootRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    [Tools openLoadsign:self.view WithString:@"正在加载..."];
 }
 #pragma mark--系统列表代理方法
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -345,14 +346,13 @@
     NSString *newCateStr = [NSString stringWithFormat:@"?category=%@",cateStr];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,newCateStr,nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    [Tools openLoadsign:self.view WithString:@"正在加载..."];
+
 }
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
-    self.authorListArray = [dic objectForKey:@"AuthorResult"];
-    self.rootBannerArry = [dic objectForKey:@"bannerResult"];
-    [rootAuthorListTab reloadData];
-
+    [Tools closeLoadsign:self.view];
     [rootRefreshView endRefresh];
 
     if ([[dic allKeys] containsObject:@"AuthorResult"]==YES) {
@@ -395,6 +395,8 @@
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
     [rootRefreshView endRefresh];
+    [Tools closeLoadsign:self.view];
+
 
     
 }

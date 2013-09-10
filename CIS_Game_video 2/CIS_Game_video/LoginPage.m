@@ -46,7 +46,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     [Tools navigaionView:self leftImageName:@"goBack.png" title:@"用户登录"];
     /*/布局登陆面板/*/
-    UIImageView *logoImg = [[UIImageView alloc]  initWithFrame:CGRectMake(115, 40, 90, 90)];
+    UIImageView *logoImg = [[UIImageView alloc]  initWithFrame:CGRectMake(100, 40, 120, 120)];
     logoImg.backgroundColor = [UIColor blueColor];
     logoImg.layer.cornerRadius = 5.0;
     logoImg.image = [UIImage imageNamed:@"headerimage.png"];
@@ -94,10 +94,10 @@
     //注册和忘记密码
     UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     registerBtn.backgroundColor = [UIColor brownColor];
-    registerBtn.frame = CGRectMake(login_btn.left, login_btn.bottom+30, 90, 40);
+    registerBtn.frame = CGRectMake(login_btn.left, login_btn.bottom+30, 90, 30);
     [registerBtn setTitle:@"注册账号" forState:UIControlStateNormal];
     [registerBtn setShowsTouchWhenHighlighted:YES];
-    registerBtn.layer.cornerRadius = 5.0;
+    registerBtn.layer.cornerRadius = 2.0;
     [registerBtn addTarget:self action:@selector(newRegister) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:registerBtn];
     //忘记密码
@@ -107,7 +107,7 @@
     [forgetPsdBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
     [forgetPsdBtn setShowsTouchWhenHighlighted:YES];
     [forgetPsdBtn addTarget:self action:@selector(forgetPSD) forControlEvents:UIControlEventTouchUpInside];
-    forgetPsdBtn.layer.cornerRadius = 5.0;
+    forgetPsdBtn.layer.cornerRadius = 2.0;
     [self.view addSubview:forgetPsdBtn];
     //添加手势
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackGround)];

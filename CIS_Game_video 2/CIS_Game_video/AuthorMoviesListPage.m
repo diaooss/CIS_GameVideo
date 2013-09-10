@@ -63,6 +63,8 @@
 #pragma mark--通过ID PAGE请求作品列表
 -(void)getauthorListById
 {
+    [Tools openLoadsign:self.view WithString:@"正在加载..."];
+
     getAuthorListByAuthorID = [[RequestTools alloc] init];
     [getAuthorListByAuthorID setDelegate:self];
     NSString *authorIdStr = [NSString stringWithFormat:@"?AuthorID=%@",self.authorIDStr];
@@ -125,17 +127,15 @@
         
     [headerView addSubview:headerImageView];
     [headerImageView release];
-    UILabel *headerLab = [[UILabel alloc] initWithFrame:CGRectMake(headerImageView.right, 30, 100, 20)];
+    UITextView *headerLab = [[UITextView alloc] initWithFrame:CGRectMake(headerImageView.right, 5, 250, 60)];
     headerLab.backgroundColor = [UIColor clearColor];
-    headerLab.textColor = [UIColor yellowColor];
-    headerLab.font = [UIFont fontWithName:@"Arial" size:15];
-    headerLab.textAlignment = NSTextAlignmentCenter;
-    headerLab.shadowColor = [UIColor whiteColor];
-    [headerLab setShadowOffset:CGSizeMake(0, 1)];
-    [headerLab setHighlightedTextColor:[UIColor whiteColor]];
-    //设置每组的的标题
-        headerLab.text = [self.authorListDic objectForKey:@"author"];
+    headerLab.textColor = [UIColor blackColor];
+    headerLab.font = [UIFont fontWithName:@"Arial" size:11];
+    headerLab.textAlignment = NSTextAlignmentLeft;
+
         
+    //设置每组的的标题
+    headerLab.text = [self.authorListDic objectForKey:@"intro"];
     [headerView addSubview:headerLab];    
     [headerLab release];
     authorListTab.tableHeaderView = headerView;
@@ -168,6 +168,7 @@
 }
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
+    [Tools closeLoadsign:self.view];
     NSLog(@"请求字典详情:%@",dic);
     //self.authorListDic = dic;
    [self setAuthorListDic:dic];//通
@@ -186,7 +187,7 @@
 }
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
-    
+    [Tools closeLoadsign:self.view];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -379,7 +380,6 @@
 -(void)viewDidDisappear:(BOOL)animated
 {
     [getAuthorListByAuthorID setDelegate:nil];
-     getAuthorListByAuthorID = nil;
     [NSObject cancelPreviousPerformRequestsWithTarget:self];//可以成功取消全部延迟方法。
 }
 

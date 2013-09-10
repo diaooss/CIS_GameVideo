@@ -182,7 +182,7 @@
     [button setBackgroundImage:[UIImage imageNamed:imgName] forState:UIControlStateNormal];
     [button setFrame:CGRectMake(0, 0, 40, 30)];
     viewController.navigationItem.title = title;
-    [button addTarget:deckViewController action:@selector(toggleLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:deckViewController action:@selector(openLeftViewAnimated:) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * bar = [[UIBarButtonItem alloc]initWithCustomView:button];
     [viewController.navigationItem setLeftBarButtonItem:bar];
     [bar release];

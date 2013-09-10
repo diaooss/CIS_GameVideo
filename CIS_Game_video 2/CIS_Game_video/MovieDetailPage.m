@@ -26,22 +26,26 @@
     //移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UIMoviePlayerControllerDidEnterFullscreenNotification" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"UIMoviePlayerControllerDidExitFullscreenNotification" object:nil];
-    
-    [theAuthorImageView release];
-    [movieInfoTextView release];
-    [movieNameLable release];
+//    [movieNameLable release];
     [nameBgImg release];
-    [authorNameLab release];
-    [popularLab release];
+//    [durationLable release];
     [popularImg release];
+    [popularLab release];
+    [theAuthorImageView release];
+    [authorNameLab release];
+    [movieInfoTextView release];
     [movieWeb release];
-    self.detailRequest.delegate = nil;
     collectRequest.delegate = nil;
     [collectRequest release];
-    _detailRequest = nil;
-    self.detailDic = nil;
+    _attentionTool.delegate = nil;
+    [_attentionTool release];
+    self.detailRequest.delegate = nil;
+    self.detailRequest = nil;
     self.movieId = nil;
-    [super dealloc];
+    self.detailDic = nil;
+    
+    
+        [super dealloc];
 }
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -100,9 +104,8 @@ durationLable.text = @"<<  时长:9'16''  >>";
     theAuthorImageView.backgroundColor= [UIColor yellowColor];
     [self.view addSubview:theAuthorImageView];
     
-    theAuthorImageView.image = [UIImage imageNamed:@"headerimage.png"];
     
-    authorNameLab = [[UILabel alloc] initWithFrame:CGRectMake(0, theAuthorImageView.height/2+22, theAuthorImageView.width, 20)];
+    authorNameLab = [[UILabel alloc] initWithFrame:CGRectMake(0, theAuthorImageView.height-20, theAuthorImageView.width, 20)];
     authorNameLab.textAlignment = NSTextAlignmentCenter;
     authorNameLab.backgroundColor = [UIColor redColor];
     authorNameLab.alpha = 0.5;
@@ -152,7 +155,8 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)viewWillDisappear:(BOOL)animated
 {
     [self.detailRequest setDelegate:nil];
-    self.detailRequest = nil;
+    collectRequest.delegate = nil;
+    _attentionTool.delegate = nil;
     [movieWeb stopLoading];
     movieWeb.delegate = nil;
 }
@@ -213,6 +217,9 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     NSLog(@"链接:%@",dic );
+
+    if ([[dic allKeys] containsObject:@"m_url"]==YES){
+    NSLog(@"链接:%@",dic );
     movieNameLable.text = [dic objectForKey:@"m_name"];
     authorNameLab.text = [dic objectForKey:@"m_author"];
     movieInfoTextView.text = [dic objectForKey:@"m_description"];
@@ -220,9 +227,10 @@ durationLable.text = @"<<  时长:9'16''  >>";
     NSString *popularStr = [NSString stringWithFormat:@"%@",[dic objectForKey:@"m_popular"]];
     popularLab.text = popularStr;
 
-    theAuthorImageView.imageURL = [dic objectForKey:@"authImg"];
+    theAuthorImageView.imageURL = [MyNsstringTools changeStrWithUT8:[dic objectForKey:@"authImg"]];
     [self loadMovieWithUrl:[dic objectForKey:@"m_url"]];
     durationLable.text = [dic objectForKey:@"m_duration"];
+    }
 }
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
