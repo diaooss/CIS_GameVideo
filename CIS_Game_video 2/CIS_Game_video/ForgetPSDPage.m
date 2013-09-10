@@ -105,7 +105,7 @@
         [self back];
         //同时进行合理提示
     }
-    [self back];
+//    [self back];
     
 }
 -(void)back
