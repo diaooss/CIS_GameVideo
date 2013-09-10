@@ -196,7 +196,7 @@
 }
 -(void)getAuthorlist:(UIButton *)sender
 {
-    NSLog(@"点中的作者是:%d",sender.tag);
+    NSLog(@"找不到你了.........");
     //根据标记值渠道对应的作者ID,请求推进到作者作品列表
     AuthorMoviesListPage *authorMoviesList = [[AuthorMoviesListPage alloc] init];
     authorMoviesList.authorIDStr = [[self.authorListArray objectAtIndex:sender.tag] objectForKey:@"authorID"];
@@ -333,7 +333,6 @@
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
-    NSLog(@"字典是:%@",dic);
     self.authorListArray = [dic objectForKey:@"AuthorResult"];
     self.rootBannerArry = [dic objectForKey:@"bannerResult"];
     [rootAuthorListTab reloadData];

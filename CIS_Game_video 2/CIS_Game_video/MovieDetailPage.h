@@ -19,6 +19,9 @@
     UILabel *authorNameLab;//作者姓名
     UITextView *movieInfoTextView;//电影简介
     UIWebView *movieWeb;//电影
+    
+    RequestTools * _attentionTool;
+    RequestTools * _collectTool;
    
 }
 @property(nonatomic,retain)RequestTools*detailRequest;//请求单一视频详情.

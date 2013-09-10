@@ -212,7 +212,10 @@
     
 	// Do any additional setup after loading the view.
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [nameTextField setText:[[NSUserDefaults standardUserDefaults] valueForKey:@"user_psw"]];
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

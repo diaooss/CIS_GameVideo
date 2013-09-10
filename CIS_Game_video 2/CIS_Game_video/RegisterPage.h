@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RequestTools.h"
-@interface RegisterPage : UIViewController<UITextFieldDelegate,myHttpRequestDelegate>
+@interface RegisterPage : UIViewController<UITextFieldDelegate,myHttpRequestDelegate,UIAlertViewDelegate>
+@property(nonatomic,assign)BOOL isEmailRingt;//邮箱是否正确
+@property(nonatomic,assign)BOOL isEmailExist;//邮箱是否已经被注册
 
 @end
