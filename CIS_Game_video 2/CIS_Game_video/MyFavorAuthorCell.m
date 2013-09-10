@@ -8,6 +8,7 @@
 
 #import "MyFavorAuthorCell.h"
 #import "Header.h"
+#import "AsynImageView.h"
 @implementation MyFavorAuthorCell
 - (void)dealloc
 {
@@ -25,9 +26,9 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        _authorLogoView = [[UIImageView alloc] init];
+        _authorLogoView = [[AsynImageView alloc] init];
         _authorLogoView.userInteractionEnabled =  YES;
-        _authorLogoView.contentMode = UIViewContentModeScaleAspectFit;
+        _authorLogoView.contentMode = UIViewContentModeScaleAspectFill;
         _authorLogoView.backgroundColor = [UIColor greenColor];
         _authorLogoView.layer.cornerRadius = 10.0;
         [self.contentView addSubview:_authorLogoView];
@@ -112,8 +113,8 @@
     [super layoutSubviews];
     CGSize cellSize = self.bounds.size;
         _authorLogoView.size = CGSizeMake(80, 80);
-    _authorLogoView.frame = CGRectMake(5, 10, _authorLogoView.width, _authorLogoView.height);
-    _authorNameLabel.frame = CGRectMake(_authorLogoView.right, 10, cellSize.width-130, cellSize.height/2);
+    _authorLogoView.frame = CGRectMake(10, 10, _authorLogoView.width, _authorLogoView.height);
+    _authorNameLabel.frame = CGRectMake(_authorLogoView.right+10, 10, cellSize.width-150, cellSize.height/2);
     
     _popularImg.frame = CGRectMake(_authorLogoView.right+10, _authorNameLabel.bottom+10, 20, 20);
     _popularLab.frame = CGRectMake(_popularImg.right, _popularImg.top, 50, 20);

@@ -107,7 +107,6 @@
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //初始化刷新视图
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
-#pragma mark
 #pragma methods for creating and removing the header view
 
 -(void)createHeaderView{
