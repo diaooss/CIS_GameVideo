@@ -77,10 +77,12 @@
 }
 +(void)deleteAllGoods
 {
-//    NSMutableArray * allArry = [self allGoodsInformation];
-//    for(Goods * goods in allArry)
-//    {
-//        [HandleData deleteOneGoods:goods];
-//    }
+    sqlite3 * db = [DataBase openDB];
+    sqlite3_stmt * stmt = nil;
+    int flag = sqlite3_prepare_v2(db, "delete * from huanfang", -1, &stmt, nil);
+    if (flag==SQLITE_OK) {
+        sqlite3_step(stmt);
+    }
+    sqlite3_finalize(stmt);
 }
 @end

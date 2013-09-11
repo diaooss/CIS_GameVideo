@@ -163,7 +163,6 @@
 		23DA1F6E17938B740092FB0F /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA1F6D17938B740092FB0F /* RootViewController.m */; };
 		23DA1F7C17938F790092FB0F /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA1F7B17938F790092FB0F /* iCarousel.m */; };
 		23DA1F7E17938F9A0092FB0F /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23DA1F7D17938F9A0092FB0F /* QuartzCore.framework */; };
-		23DA1F881793BB960092FB0F /* SBView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23DA1F871793BB960092FB0F /* SBView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -399,8 +398,8 @@
 		23DA1F5917938B030092FB0F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		23DA1F5B17938B030092FB0F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		23DA1F5D17938B030092FB0F /* CIS_Game_video-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CIS_Game_video-Prefix.pch"; sourceTree = "<group>"; };
-		23DA1F5E17938B030092FB0F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		23DA1F5F17938B030092FB0F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		23DA1F5E17938B030092FB0F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = CIS_Game_video/AppDelegate.h; sourceTree = "<group>"; };
+		23DA1F5F17938B030092FB0F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = CIS_Game_video/AppDelegate.m; sourceTree = "<group>"; };
 		23DA1F6117938B030092FB0F /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		23DA1F6317938B030092FB0F /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		23DA1F6517938B030092FB0F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
@@ -409,8 +408,6 @@
 		23DA1F7A17938F790092FB0F /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		23DA1F7B17938F790092FB0F /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		23DA1F7D17938F9A0092FB0F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		23DA1F861793BB960092FB0F /* SBView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBView.h; sourceTree = "<group>"; };
-		23DA1F871793BB960092FB0F /* SBView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -699,11 +696,32 @@
 			isa = PBXGroup;
 			children = (
 				2323777117E04605008EBFF9 /* SQlite */,
-				2074013017D0722C00B08A38 /* plant1.jpg */,
 				2074012C17D0713600B08A38 /* GroupView */,
 				2074012817D0710D00B08A38 /* AsynImageView */,
 				2074012417D070D200B08A38 /* GroupViewCell */,
 				233DC57317CC3E5700822759 /* MyCell */,
+				2323777D17E0499C008EBFF9 /* TOOl */,
+			);
+			name = ModelssAndTools;
+			sourceTree = "<group>";
+		};
+		2323777117E04605008EBFF9 /* SQlite */ = {
+			isa = PBXGroup;
+			children = (
+				2323777217E04618008EBFF9 /* HUANFANG.sqlite */,
+				2323777417E0462D008EBFF9 /* DataBase.h */,
+				2323777517E0462D008EBFF9 /* DataBase.m */,
+				2323777617E0462D008EBFF9 /* Video.h */,
+				2323777717E0462D008EBFF9 /* Video.m */,
+				2323777817E0462D008EBFF9 /* HandleData.h */,
+				2323777917E0462D008EBFF9 /* HandleData.m */,
+			);
+			name = SQlite;
+			sourceTree = "<group>";
+		};
+		2323777D17E0499C008EBFF9 /* TOOl */ = {
+			isa = PBXGroup;
+			children = (
 				23AA7CFA179518FC00C7A8B1 /* Header.h */,
 				2074012117D032DC00B08A38 /* RequestTools.h */,
 				2074012217D032DC00B08A38 /* RequestTools.m */,
@@ -717,21 +735,27 @@
 				20903B1A17C450900052EF21 /* PublciViewsTools.h */,
 				20903B1B17C450900052EF21 /* PublciViewsTools.m */,
 			);
-			name = ModelssAndTools;
+			name = TOOl;
 			sourceTree = "<group>";
 		};
-		2323777117E04605008EBFF9 /* SQlite */ = {
+		2323777E17E04A00008EBFF9 /* DefaultView */ = {
 			isa = PBXGroup;
 			children = (
-				2323777417E0462D008EBFF9 /* DataBase.h */,
-				2323777517E0462D008EBFF9 /* DataBase.m */,
-				2323777617E0462D008EBFF9 /* Video.h */,
-				2323777717E0462D008EBFF9 /* Video.m */,
-				2323777817E0462D008EBFF9 /* HandleData.h */,
-				2323777917E0462D008EBFF9 /* HandleData.m */,
-				2323777217E04618008EBFF9 /* HUANFANG.sqlite */,
+				206E1DE317D6BED200F55C22 /* DefaultRootView.h */,
+				206E1DE417D6BED200F55C22 /* DefaultRootView.m */,
 			);
-			name = SQlite;
+			name = DefaultView;
+			sourceTree = "<group>";
+		};
+		2323777F17E04A4E008EBFF9 /* CategoryList */ = {
+			isa = PBXGroup;
+			children = (
+				2327068817D5BFE700AF9832 /* CategoryListViewController.h */,
+				2327068917D5BFE700AF9832 /* CategoryListViewController.m */,
+				2327068B17D5C03100AF9832 /* CategoryListCell.h */,
+				2327068C17D5C03100AF9832 /* CategoryListCell.m */,
+			);
+			name = CategoryList;
 			sourceTree = "<group>";
 		};
 		233197EB17D96691001F3DED /* EGO */ = {
@@ -944,16 +968,11 @@
 		23AA7CF51794E20900C7A8B1 /* CenterVIewController */ = {
 			isa = PBXGroup;
 			children = (
-				20E8A4E91797E96200160DE1 /* AthorMoviesListPage */,
 				23DA1F6C17938B740092FB0F /* RootViewController.h */,
 				23DA1F6D17938B740092FB0F /* RootViewController.m */,
-				206E1DE317D6BED200F55C22 /* DefaultRootView.h */,
-				206E1DE417D6BED200F55C22 /* DefaultRootView.m */,
-				2327068817D5BFE700AF9832 /* CategoryListViewController.h */,
-				2327068917D5BFE700AF9832 /* CategoryListViewController.m */,
-				2327068B17D5C03100AF9832 /* CategoryListCell.h */,
-				2327068C17D5C03100AF9832 /* CategoryListCell.m */,
-				23DA1F901793D6A60092FB0F /* showVIew */,
+				20E8A4E91797E96200160DE1 /* AthorMoviesListPage */,
+				2323777E17E04A00008EBFF9 /* DefaultView */,
+				2323777F17E04A4E008EBFF9 /* CategoryList */,
 				20B971EE17C5AC0000BA6554 /* MovieDetailPage.h */,
 				20B971EF17C5AC0000BA6554 /* MovieDetailPage.m */,
 			);
@@ -963,13 +982,13 @@
 		23AA7CF61794E28200C7A8B1 /* LeftViewController */ = {
 			isa = PBXGroup;
 			children = (
+				23AA7CF71794E2C300C7A8B1 /* LeftViewController.h */,
+				23AA7CF81794E2C300C7A8B1 /* LeftViewController.m */,
 				20A0BC8A17993CEC00CFB711 /* AboutUS */,
 				20E8A4E51797E13700160DE1 /* SetTingPage */,
 				20E8A4D91797D51900160DE1 /* MyLikeAuthorListPage */,
 				2306E45A1796626300BD3808 /* JustViewsORpublicViews */,
 				2306E45917962EB600BD3808 /* User */,
-				23AA7CF71794E2C300C7A8B1 /* LeftViewController.h */,
-				23AA7CF81794E2C300C7A8B1 /* LeftViewController.m */,
 			);
 			name = LeftViewController;
 			sourceTree = "<group>";
@@ -977,6 +996,8 @@
 		23DA1F4317938B030092FB0F = {
 			isa = PBXGroup;
 			children = (
+				23DA1F5F17938B030092FB0F /* AppDelegate.m */,
+				23DA1F5E17938B030092FB0F /* AppDelegate.h */,
 				23DA1F5517938B030092FB0F /* CIS_Game_video */,
 				23DA1F4E17938B030092FB0F /* Frameworks */,
 				23DA1F4D17938B030092FB0F /* Products */,
@@ -1016,6 +1037,8 @@
 		23DA1F5517938B030092FB0F /* CIS_Game_video */ = {
 			isa = PBXGroup;
 			children = (
+				2074013017D0722C00B08A38 /* plant1.jpg */,
+				20B971F117C5EC0800BA6554 /* headerimage.png */,
 				2316907F17C3505600B47694 /* ModelssAndTools */,
 				20E8A4B51797BE3C00160DE1 /* TestData */,
 				23AA7CF41794E1D900C7A8B1 /* Image */,
@@ -1031,8 +1054,6 @@
 			isa = PBXGroup;
 			children = (
 				20B971EC17C5A7BD00BA6554 /* windowBg.png */,
-				23DA1F5F17938B030092FB0F /* AppDelegate.m */,
-				23DA1F5E17938B030092FB0F /* AppDelegate.h */,
 				23DA1F5717938B030092FB0F /* CIS_Game_video-Info.plist */,
 				23DA1F5817938B030092FB0F /* InfoPlist.strings */,
 				23DA1F5B17938B030092FB0F /* main.m */,
@@ -1060,16 +1081,6 @@
 				2327068617D5AE2300AF9832 /* Animation_Turn_View.m */,
 			);
 			name = JustViews;
-			sourceTree = "<group>";
-		};
-		23DA1F901793D6A60092FB0F /* showVIew */ = {
-			isa = PBXGroup;
-			children = (
-				20B971F117C5EC0800BA6554 /* headerimage.png */,
-				23DA1F861793BB960092FB0F /* SBView.h */,
-				23DA1F871793BB960092FB0F /* SBView.m */,
-			);
-			name = showVIew;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1192,7 +1203,6 @@
 				23DA1F6017938B030092FB0F /* AppDelegate.m in Sources */,
 				23DA1F6E17938B740092FB0F /* RootViewController.m in Sources */,
 				23DA1F7C17938F790092FB0F /* iCarousel.m in Sources */,
-				23DA1F881793BB960092FB0F /* SBView.m in Sources */,
 				23AA7CE31794E0C700C7A8B1 /* UIViewAdditions.m in Sources */,
 				23AA7CEF1794E10400C7A8B1 /* WZGuideViewController.m in Sources */,
 				23AA7CF91794E2C300C7A8B1 /* LeftViewController.m in Sources */,
