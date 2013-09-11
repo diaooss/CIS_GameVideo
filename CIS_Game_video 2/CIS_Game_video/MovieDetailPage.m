@@ -18,6 +18,8 @@
 #define rightBtnColor [UIColor colorWithRed:176/255.0 green:45/255.0 blue:35/255.0 alpha:1]
 #define customBlueColor [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0]
 #define testColor [UIColor colorWithRed:77/255.0 green:88/255.0 blue:0/255.0 alpha:1.0]
+#import "HandleData.h"
+#import "Video.h"
 @interface MovieDetailPage ()
 @end
 @implementation MovieDetailPage
@@ -165,8 +167,32 @@ durationLable.text = @"<<  时长:9'16''  >>";
     NSLog(@"退出全屏");
     [[UIDevice currentDevice] performSelector:@selector(setOrientation:) withObject:(id)UIDeviceOrientationPortrait];
 }
+-(BOOL)isIn
+{
+    NSMutableArray* arry = [HandleData allVideosInformation];
+    for(Video * obj in arry)
+    {
+        if ([obj.videoID isEqualToString:self.movieId]) {
+            return NO;
+        }
+    }
+    return YES;
+}
 -(void)enterFullScreen
 {
+
+    
+    if ([self isIn]) {
+        Video * video = [[Video alloc]initWithVideoName:[self.detailDic valueForKey:@"m_name"]
+                                           videoPicture:theAuthorImageView.fileName
+                                                videoID:self.movieId
+                                            videoAuthor:[self.detailDic valueForKey:@"m_author"]
+                                              videoTime:[self.detailDic valueForKey:@"m_duration"]
+                                           videoPopular:[NSString stringWithFormat:@"%@",[self.detailDic objectForKey:@"m_popular"]]];
+        
+        [HandleData insertOneVideo:video];
+        [video release];
+    }
     
     NSLog(@"全屏");
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
@@ -218,7 +244,8 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     NSLog(@"链接:%@",dic );
-
+    [self setDetailDic:dic];
+    
     if ([[dic allKeys] containsObject:@"m_url"]==YES){
     NSLog(@"链接:%@",dic );
     movieNameLable.text = [dic objectForKey:@"m_name"];

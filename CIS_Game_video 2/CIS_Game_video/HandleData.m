@@ -44,38 +44,38 @@
     NSLog(@"----------内部%d",[allArry count]);
     return [allArry autorelease];
 }
-+(void)insertOneGoods:(Video *)goods
++(void)insertOneVideo:(Video *)video
 {
     sqlite3 * db = [DataBase openDB];
     sqlite3_stmt * stmt = nil;
     int flag = sqlite3_prepare_v2(db, "insert into huanfang(videoName,videoPicture,videoID,videoAuthor,videoTime,videoPopular) values(?,?,?,?,?,?)", -1, &stmt, nil);
     NSLog(@"看看你是几---%d",flag);
     if (flag==SQLITE_OK) {
-        sqlite3_bind_text(stmt, 1, [goods.videoName UTF8String], -1, nil);
-        sqlite3_bind_text(stmt, 2, [goods.videoPicture UTF8String], -1, nil);
-        sqlite3_bind_text(stmt, 3, [goods.videoID UTF8String], -1, nil);
-        sqlite3_bind_text(stmt, 4, [goods.videoAuthor UTF8String], -1, nil);
-        sqlite3_bind_text(stmt, 5, [goods.videoTime UTF8String], -1, nil);
-        sqlite3_bind_text(stmt, 6, [goods.videoPopular UTF8String], -1, nil);
+        sqlite3_bind_text(stmt, 1, [video.videoName UTF8String], -1, nil);
+        sqlite3_bind_text(stmt, 2, [video.videoPicture UTF8String], -1, nil);
+        sqlite3_bind_text(stmt, 3, [video.videoID UTF8String], -1, nil);
+        sqlite3_bind_text(stmt, 4, [video.videoAuthor UTF8String], -1, nil);
+        sqlite3_bind_text(stmt, 5, [video.videoTime UTF8String], -1, nil);
+        sqlite3_bind_text(stmt, 6, [video.videoPopular UTF8String], -1, nil);
         sqlite3_step(stmt);
         sqlite3_finalize(stmt);
     }
 }
-+(void)deleteOneGoods:(Video *)goods
++(void)deleteOneVideo:(Video *)video
 {
     //干掉图片
     
     //
     sqlite3 * db = [DataBase openDB];
     sqlite3_stmt * stmt = nil;
-    NSString * str = [NSString stringWithFormat:@"delete from huanfang where ID=%d",goods.ID];
+    NSString * str = [NSString stringWithFormat:@"delete from huanfang where ID=%d",video.ID];
     int flag =sqlite3_prepare_v2(db, [str UTF8String], -1, &stmt, nil);
     if (flag==SQLITE_OK) {
         sqlite3_step(stmt);
     }
     sqlite3_finalize(stmt);
 }
-+(void)deleteAllGoods
++(void)deleteAllVideo
 {
     sqlite3 * db = [DataBase openDB];
     sqlite3_stmt * stmt = nil;

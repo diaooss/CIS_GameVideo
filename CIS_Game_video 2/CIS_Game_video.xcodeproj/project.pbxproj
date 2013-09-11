@@ -147,6 +147,7 @@
 		233DC5DB17CC400C00822759 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC5B217CC400B00822759 /* ShareSDKiPhoneDefaultShareViewUI.framework */; };
 		233DC5DC17CC400C00822759 /* ShareSDKiPhoneSimpleShareViewUI.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 233DC5B317CC400B00822759 /* ShareSDKiPhoneSimpleShareViewUI.bundle */; };
 		233DC5DD17CC400C00822759 /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233DC5B417CC400B00822759 /* ShareSDKiPhoneSimpleShareViewUI.framework */; };
+		239A3B6E17E06BFD00FB8BCA /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 239A3B6D17E06BFD00FB8BCA /* RecordViewController.m */; };
 		23AA7CE31794E0C700C7A8B1 /* UIViewAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CE21794E0C700C7A8B1 /* UIViewAdditions.m */; };
 		23AA7CEF1794E10400C7A8B1 /* WZGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CEE1794E10400C7A8B1 /* WZGuideViewController.m */; };
 		23AA7CF91794E2C300C7A8B1 /* LeftViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA7CF81794E2C300C7A8B1 /* LeftViewController.m */; };
@@ -382,6 +383,8 @@
 		233DC5B217CC400B00822759 /* ShareSDKiPhoneDefaultShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneDefaultShareViewUI.framework; sourceTree = "<group>"; };
 		233DC5B317CC400B00822759 /* ShareSDKiPhoneSimpleShareViewUI.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ShareSDKiPhoneSimpleShareViewUI.bundle; sourceTree = "<group>"; };
 		233DC5B417CC400B00822759 /* ShareSDKiPhoneSimpleShareViewUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ShareSDKiPhoneSimpleShareViewUI.framework; sourceTree = "<group>"; };
+		239A3B6C17E06BFD00FB8BCA /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
+		239A3B6D17E06BFD00FB8BCA /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
 		23AA7CE11794E0C700C7A8B1 /* UIViewAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIViewAdditions.h; sourceTree = "<group>"; };
 		23AA7CE21794E0C700C7A8B1 /* UIViewAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIViewAdditions.m; sourceTree = "<group>"; };
 		23AA7CED1794E10400C7A8B1 /* WZGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WZGuideViewController.h; sourceTree = "<group>"; };
@@ -995,6 +998,8 @@
 		23AA7CF61794E28200C7A8B1 /* LeftViewController */ = {
 			isa = PBXGroup;
 			children = (
+				239A3B6C17E06BFD00FB8BCA /* RecordViewController.h */,
+				239A3B6D17E06BFD00FB8BCA /* RecordViewController.m */,
 				23AA7CF71794E2C300C7A8B1 /* LeftViewController.h */,
 				23AA7CF81794E2C300C7A8B1 /* LeftViewController.m */,
 				20A0BC8A17993CEC00CFB711 /* AboutUS */,
@@ -1284,6 +1289,7 @@
 				2323777B17E0462D008EBFF9 /* Video.m in Sources */,
 				2323777C17E0462D008EBFF9 /* HandleData.m in Sources */,
 				2050B4C917E04B7D004C9AA7 /* SqCached.m in Sources */,
+				239A3B6E17E06BFD00FB8BCA /* RecordViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

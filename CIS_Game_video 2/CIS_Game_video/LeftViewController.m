@@ -19,6 +19,7 @@
 #import "RequestUrls.h"
 #import "RequestTools.h"
 #import "MyNsstringTools.h"
+#import "RecordViewController.h"
 @interface LeftViewController ()
 @end
 @implementation LeftViewController
@@ -132,8 +133,14 @@
         case 2:
             [self toSomePlace:cell.textLabel.text];//前往公共页
             break;
-        case 3:
-            [self toSomePlace:cell.textLabel.text];
+        case 3:{
+            RecordViewController * Record = [[RecordViewController alloc]init];
+            UINavigationController * RecordNVC =[[UINavigationController alloc]initWithRootViewController:Record];
+            [self.viewDeckController setCenterController:RecordNVC ];
+            [self.viewDeckController closeLeftViewAnimated:YES];
+            [RecordNVC release];
+            [Record release];
+            }
             break;
         case 4:
             [self goToMyLikeAuthorListPageWith:cell.textLabel.text];

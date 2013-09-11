@@ -97,8 +97,8 @@
     [detailPage setMovieId:cell.videoID];
     [self.navigationController pushViewController:detailPage animated:YES];
     [detailPage release];
-    
 }
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
