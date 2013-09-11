@@ -19,6 +19,7 @@
 #import "CategoryListViewController.h"
 #import "SqCached.h"
 #import "JSONKit.h"
+//jianch
 @interface RootViewController ()
 @end
 @implementation RootViewController
@@ -443,6 +444,7 @@
             break;
     }
 }
+
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
     [rootRefreshView endRefresh];
