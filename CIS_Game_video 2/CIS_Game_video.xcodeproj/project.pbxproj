@@ -12,6 +12,7 @@
 		203B802B179CBA7F0083016C /* IIViewDeckController.m in Sources */ = {isa = PBXBuildFile; fileRef = 203B8027179CBA7F0083016C /* IIViewDeckController.m */; };
 		203C637B17D574D1001595AA /* MyNsstringTools.m in Sources */ = {isa = PBXBuildFile; fileRef = 203C637A17D574D1001595AA /* MyNsstringTools.m */; };
 		2045085917C6F2560062A6D8 /* HMSegmentedControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 2045085817C6F2560062A6D8 /* HMSegmentedControl.m */; };
+		2050B4C917E04B7D004C9AA7 /* SqCached.m in Sources */ = {isa = PBXBuildFile; fileRef = 2050B4C817E04B7D004C9AA7 /* SqCached.m */; };
 		206E1DE517D6BED300F55C22 /* DefaultRootView.m in Sources */ = {isa = PBXBuildFile; fileRef = 206E1DE417D6BED200F55C22 /* DefaultRootView.m */; };
 		206E1DEE17D6F49800F55C22 /* sr_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 206E1DE717D6F49800F55C22 /* sr_refresh.png */; };
 		206E1DEF17D6F49800F55C22 /* sr_refresh@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 206E1DE817D6F49800F55C22 /* sr_refresh@2x.png */; };
@@ -177,6 +178,8 @@
 		203C637C17D57BEA001595AA /* RequestUrls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestUrls.h; sourceTree = "<group>"; };
 		2045085717C6F2560062A6D8 /* HMSegmentedControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HMSegmentedControl.h; sourceTree = "<group>"; };
 		2045085817C6F2560062A6D8 /* HMSegmentedControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HMSegmentedControl.m; sourceTree = "<group>"; };
+		2050B4C717E04B7D004C9AA7 /* SqCached.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SqCached.h; sourceTree = "<group>"; };
+		2050B4C817E04B7D004C9AA7 /* SqCached.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SqCached.m; sourceTree = "<group>"; };
 		206E1DE317D6BED200F55C22 /* DefaultRootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultRootView.h; sourceTree = "<group>"; };
 		206E1DE417D6BED200F55C22 /* DefaultRootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultRootView.m; sourceTree = "<group>"; };
 		206E1DE717D6F49800F55C22 /* sr_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sr_refresh.png; sourceTree = "<group>"; };
@@ -460,6 +463,15 @@
 			path = HMSegmentedControl;
 			sourceTree = "<group>";
 		};
+		2050B4C617E04B66004C9AA7 /* CacheData */ = {
+			isa = PBXGroup;
+			children = (
+				2050B4C717E04B7D004C9AA7 /* SqCached.h */,
+				2050B4C817E04B7D004C9AA7 /* SqCached.m */,
+			);
+			name = CacheData;
+			sourceTree = "<group>";
+		};
 		206E1DE617D6F48300F55C22 /* RefreshSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -695,6 +707,7 @@
 		2316907F17C3505600B47694 /* ModelssAndTools */ = {
 			isa = PBXGroup;
 			children = (
+				2050B4C617E04B66004C9AA7 /* CacheData */,
 				2323777117E04605008EBFF9 /* SQlite */,
 				2074012C17D0713600B08A38 /* GroupView */,
 				2074012817D0710D00B08A38 /* AsynImageView */,
@@ -1270,6 +1283,7 @@
 				2323777A17E0462D008EBFF9 /* DataBase.m in Sources */,
 				2323777B17E0462D008EBFF9 /* Video.m in Sources */,
 				2323777C17E0462D008EBFF9 /* HandleData.m in Sources */,
+				2050B4C917E04B7D004C9AA7 /* SqCached.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

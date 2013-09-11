@@ -30,10 +30,8 @@
     [httpRequest setDelegate:self];
     httpRequest.requestMethod = @"GET";
     httpRequest.timeOutSeconds = 5.0;
-    if ([Tools isHaveNet]==YES) {
-        [httpRequest startAsynchronous];
-    }
-
+            [httpRequest startAsynchronous];
+    
 }
 //根据字符串,发起同步请求
 -(void )requestWithUrl_Synchronous:(NSString *)urlStr
@@ -60,14 +58,12 @@
     request.delegate = self;
     NSLog(@"header: %@", request.requestHeaders);
     [request addRequestHeader:@"Content-Type"value:@"text/plain"];
-    if ([Tools isHaveNet]==YES) {
+    
         [request startSynchronous];
         return [[request.responseData objectFromJSONData] valueForKey:@"status"];
 
 
-    }
-
-    return nil;
+   
 
 
 }
@@ -78,13 +74,11 @@
     [request setRequestMethod:@"GET"];
     request.timeOutSeconds = 5.0;
     request.delegate  =self;
-    if ([Tools isHaveNet]==YES) {
-        [request startSynchronous];
+           [request startSynchronous];
         NSLog(@"版本:%@",[request.responseData objectFromJSONData]);
         return [request.responseData objectFromJSONData] ;
 
-    }
-    return nil;
+   
 }
 //反馈信息上传
 +(BOOL)postFeedBackInfoWithUrlStr:(NSString *)urlStr infoDic:(NSDictionary *)dic
@@ -96,7 +90,7 @@
     httpRequest.requestMethod = @"POST";
     httpRequest.timeOutSeconds = 5.0;
     [httpRequest setPostBody:[NSMutableData dataWithData:data]];
-    if ([Tools isHaveNet]==YES) {
+    
         [httpRequest startSynchronous];
         NSLog(@"反馈状态%@",[httpRequest.responseData objectFromJSONData] );
         
@@ -107,9 +101,7 @@
         return NO;
         
 
-    }
-
-    return nil;
+   
     
 }
 //类方法--根据请求返回的状态值,返回布尔值,以供判断
@@ -119,15 +111,14 @@
     [request setRequestMethod:@"GET"];
     request.timeOutSeconds = 5.0;
     request.delegate  =self;
-    if ([Tools isHaveNet]==YES) {
+  
         [request startAsynchronous];
         if([[[request.responseData objectFromJSONData] valueForKey:@"status"]isEqualToString:@"ok"])
         {
             return YES;
         }
         return NO;
-    }
-
+   
    
 }
 +(BOOL)requestReturnYesOrOkWithCheckUrl_Synchronous:(NSString *)checkUrl//同步
@@ -136,16 +127,14 @@
     ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:[NSURL URLWithString:[MyNsstringTools changeStrWithUT8:checkUrl]]];
     [request setRequestMethod:@"GET"];
     request.timeOutSeconds = 5.0;
-    if ([Tools isHaveNet]==YES) {
-        [request startSynchronous];//默认是同步请求
+           [request startSynchronous];//默认是同步请求
         if([[[request.responseData objectFromJSONData] valueForKey:@"status"]isEqualToString:@"ok"])
         {
             return YES;
         }
         return NO;
 
-    }
-
+    
 }
 #pragma mark--ASI的请求代理方法
 -(void)requestStarted:(ASIHTTPRequest *)request

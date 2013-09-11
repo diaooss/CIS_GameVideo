@@ -167,6 +167,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
 }
 -(void)enterFullScreen
 {
+    
     NSLog(@"全屏");
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
         [[UIDevice currentDevice] performSelector:@selector(setOrientation:)

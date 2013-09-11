@@ -17,6 +17,8 @@
 #import "RequestTools.h"
 #import "MyNsstringTools.h"
 #import "CategoryListViewController.h"
+#import "SqCached.h"
+#import "JSONKit.h"
 @interface RootViewController ()
 @end
 @implementation RootViewController
@@ -43,6 +45,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         NSString *path  = [[NSBundle mainBundle] pathForResource:@"ExpansionTableTestData" ofType:@"plist"];
+        NSString *str = @"4";
+        [[NSUserDefaults standardUserDefaults] setObject:str forKey:@"index"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         //数据源为一个大数组,里面内嵌字典或者小数组等,可变化.
         _dataList = [[NSMutableArray alloc] initWithContentsOfFile:path];
         _authorListArray = [NSArray array];
@@ -119,7 +124,7 @@
     //测试
     self.rootRequest = [[RequestTools alloc]init];
     [_rootRequest setDelegate:self];
-    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=dota",nil];
+    NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,@"?category=星际大战2",nil];
     [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
     [Tools openLoadsign:self.view WithString:@"正在加载..."];
 }
@@ -207,6 +212,7 @@
     authorMoviesList.authorNameStr = [[self.authorListArray objectAtIndex:sender.tag] objectForKey:@"author"];
     [self.navigationController pushViewController:authorMoviesList animated:YES];
     [authorMoviesList release];
+    [self readCacheData];
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -293,7 +299,7 @@
         /*/分类标签/*/
         categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
             [categorySegmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
-        NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Dota",@"魔兽争霸",@"Dota2", @"星际争霸",nil];
+        NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Dota",@"魔兽争霸",@"Dota2", @"星际大战2",nil];
         [categorySegmentedControl setSectionTitles:nameArry];
         [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
             NSString *indexStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"index"];
@@ -335,6 +341,7 @@
     RequestTools *collectRequest = [[RequestTools alloc] init];
     [collectRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,@"?email=1823870397@qq.com&movieID=",movieIDStr, nil];
+    
     [collectRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
     //进行按钮颜色的变化等.
  }
@@ -345,8 +352,15 @@
     staticCateGoryStr = cateStr;
     NSString *newCateStr = [NSString stringWithFormat:@"?category=%@",cateStr];
     NSArray *strArry = [NSArray arrayWithObjects:AUTHOR_LIST,newCateStr,nil];
-    [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-    [Tools openLoadsign:self.view WithString:@"正在加载..."];
+    if ([Tools isHaveNet]==YES) {
+        [_rootRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+        [Tools openLoadsign:self.view WithString:@"正在加载..."];
+    }
+    else
+    {
+        [self defaultLoadData];
+    }
+    
 
 }
 #pragma mark--请求的回调方法
@@ -359,11 +373,47 @@
         NSLog(@"字典是:%@",dic);
         self.authorListArray = [dic objectForKey:@"AuthorResult"];
         self.rootBannerArry = [dic objectForKey:@"bannerResult"];
+        [self writeCacheData:dic];
+        
+        
         [rootAuthorListTab reloadData];
     } else
     {
         self.collectResultDic = dic;
     }
+}
+#pragma mark--缓存操作,数据读写,补尝加载
+//每一次刷新即刷新缓存数据源
+-(void)writeCacheData:(NSDictionary *)dic
+{
+    /*/写入缓存/*/
+    NSMutableDictionary *tempDic = [NSMutableDictionary dictionary];
+    [tempDic setObject:[dic objectForKey:@"bannerResult"] forKey:@"bannerResult"];
+    [tempDic setObject:[dic objectForKey:@"AuthorResult"] forKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"index"]];
+    NSString *tempStr = [tempDic JSONString];
+    NSData *tempData = [tempStr dataUsingEncoding:NSUTF8StringEncoding];
+    [[SqCached shareCache] setCacheData:tempData ForKey:@"authorList"];
+    /////*/写入缓存/*/////
+
+    
+    
+}
+//读取缓冲数据-
+-(NSDictionary *)readCacheData
+{
+    NSDictionary *dic =  [[SqCached shareCache] cacheDataForKey:@"authorList"];
+    NSLog(@"缓存的数据解析是:%@",dic);
+    return dic;
+    
+}
+#pragma mark--无网或者网络请求失败时进行补偿加载数据
+-(void)defaultLoadData
+{
+    NSLog(@"我是补偿加载啊");
+    self.rootBannerArry = [[self readCacheData ] objectForKey:@"bannerResult"];
+    self.authorListArray= [[self readCacheData] objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"index"]];
+    NSLog(@"取出来的是:%@",self.authorListArray);
+    [rootAuthorListTab reloadData];
 }
 #pragma mark--标签选中的代理方法
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
@@ -372,6 +422,7 @@
     NSString *indexStr = [NSString stringWithFormat:@"%i",segmentedControl.selectedIndex];
     [[NSUserDefaults standardUserDefaults] setObject:indexStr forKey:@"index"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"标记是;%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"bannerResult"]);
     switch (segmentedControl.selectedIndex) {
         case 0:
             [self startRequestWithCateStr:@"英雄联盟"];

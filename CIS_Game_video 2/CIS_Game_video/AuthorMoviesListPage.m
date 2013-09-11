@@ -14,6 +14,8 @@
 #import "MyNsstringTools.h"
 #import "RequestUrls.h"
 #import "AsynImageView.h"
+#import "SqCached.h"
+#import "JSONKit.h"
 @interface AuthorMoviesListPage ()
 
 @end
@@ -156,6 +158,7 @@
     NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,@"?email=1823870397@qq.com&movieID=",movieID, nil];
     [collectRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
     //进行按钮颜色的变化等.
+    
 
     
     
@@ -171,23 +174,32 @@
     [Tools closeLoadsign:self.view];
     NSLog(@"请求字典详情:%@",dic);
     //self.authorListDic = dic;
-   [self setAuthorListDic:dic];//通
-   // NSLog(@"%@头像",[dic valueForKey:@"authImg"]);
-    NSArray * arry =[dic valueForKey:@"movies"];
+   [self setAuthorListDic:dic];//
+        NSArray * arry =[dic valueForKey:@"movies"];
     if ([arry count]>0) {
         for (NSDictionary*obj in arry) {
             [self.moviesOfTheAuthorArry addObject:obj];
         }
         [authorListTab reloadData];
+        [self readCache];
     }
     else
     {
         NSLog(@"没数据啊-------");
     }
 }
+///读取缓存
+-(void)readCache
+{
+    NSDictionary *dic =  [[SqCached shareCache] cacheDataForKey:@"aList"];
+    NSLog(@"缓存的数据解析是:%@",dic);
+}
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
     [Tools closeLoadsign:self.view];
+  
+    
+    
 }
 - (void)didReceiveMemoryWarning
 {
