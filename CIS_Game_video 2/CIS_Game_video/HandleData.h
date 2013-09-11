@@ -10,7 +10,7 @@
 @class Video;
 @interface HandleData : NSObject
 +(NSMutableArray*)allVideosInformation;
-+(void)insertOneVideo:(Video *)goods;
-+(void)deleteOneVideo:(Video *)goods;
-+(void)deleteAllVideo;
++(void)insertOneGoods:(Video *)goods;
++(void)deleteOneGoods:(Video *)goods;
++(void)deleteAllGoods;
 @end
