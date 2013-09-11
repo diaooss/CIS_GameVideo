@@ -19,6 +19,7 @@
 #import "RequestUrls.h"
 #import "RequestTools.h"
 #import "MyNsstringTools.h"
+#import "RecordViewController.h"
 @interface LeftViewController ()
 @end
 @implementation LeftViewController
@@ -130,10 +131,23 @@
             [self backToRootViewController];
             break;
         case 2:
-            [self toSomePlace:cell.textLabel.text];//前往公共页
+        {
+            Public_ViewController * public = [[Public_ViewController alloc]init];
+            UINavigationController * publicNVC =[[UINavigationController alloc]initWithRootViewController:public];
+            [self.viewDeckController setCenterController:publicNVC ];
+            [self.viewDeckController closeLeftViewAnimated:YES];
+            
+            [publicNVC release];
+            [public release];
+        }
             break;
         case 3:
-            [self toSomePlace:cell.textLabel.text];
+        {
+            RecordViewController * record = [[RecordViewController alloc]init];
+            UINavigationController * recordNVC =[[UINavigationController alloc]initWithRootViewController:record];
+            [self.viewDeckController setCenterController:recordNVC ];
+            [self.viewDeckController closeLeftViewAnimated:YES];
+        }
             break;
         case 4:
             [self goToMyLikeAuthorListPageWith:cell.textLabel.text];
@@ -248,17 +262,7 @@
     [self.viewDeckController setCenterController:delegate.rootNvc];
     [self.viewDeckController closeLeftViewAnimated:YES];
 }
-//进入我的收藏
-- (void)toSomePlace:(NSString *)cellName;
-{
-        Public_ViewController * public = [[Public_ViewController alloc]init];
-        UINavigationController * publicNVC =[[UINavigationController alloc]initWithRootViewController:public];
-        [self.viewDeckController setCenterController:publicNVC ];
-        [self.viewDeckController closeLeftViewAnimated:YES];
 
-        [publicNVC release];
-        [public release];
-}
 //前往我的关注列表,此方法未添加是否该页面已经存在的判断.
 -(void)goToMyLikeAuthorListPageWith:(NSString *)name
 {

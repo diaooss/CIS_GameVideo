@@ -44,7 +44,7 @@
     NSLog(@"----------内部%d",[allArry count]);
     return [allArry autorelease];
 }
-+(void)insertOneGoods:(Video *)goods
++(void)insertOneVideo:(Video *)goods
 {
     sqlite3 * db = [DataBase openDB];
     sqlite3_stmt * stmt = nil;
@@ -61,7 +61,7 @@
         sqlite3_finalize(stmt);
     }
 }
-+(void)deleteOneGoods:(Video *)goods
++(void)deleteOneVideo:(Video *)goods
 {
     //干掉图片
     
@@ -75,7 +75,7 @@
     }
     sqlite3_finalize(stmt);
 }
-+(void)deleteAllGoods
++(void)deleteAllVideo
 {
     sqlite3 * db = [DataBase openDB];
     sqlite3_stmt * stmt = nil;
