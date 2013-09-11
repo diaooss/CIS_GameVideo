@@ -42,6 +42,8 @@
 {
     
     [super viewDidLoad];
+    [Tools navigaionView:self leftImageName:@"goBack.png"];
+    _categoryTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, 440)];
     [Tools navigaionView:self leftImageName:@"goBack.png" rightImageName:nil title:self.title];
 
     _categoryTable = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.frame.size.height-44)];

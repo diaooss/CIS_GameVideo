@@ -18,8 +18,6 @@
 #define rightBtnColor [UIColor colorWithRed:176/255.0 green:45/255.0 blue:35/255.0 alpha:1]
 #define customBlueColor [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0]
 #define testColor [UIColor colorWithRed:77/255.0 green:88/255.0 blue:0/255.0 alpha:1.0]
-#import "Video.h"
-#import "HandleData.h"
 @interface MovieDetailPage ()
 @end
 @implementation MovieDetailPage
@@ -169,19 +167,6 @@ durationLable.text = @"<<  时长:9'16''  >>";
 }
 -(void)enterFullScreen
 {
-<<<<<<< HEAD
-=======
-#pragma mark ----这里 少个 图片--------
-    Video * video = [[Video alloc]initWithVideoName:[self.detailDic valueForKey:@"m_name"]
-                                       videoPicture:theAuthorImageView.fileName
-                                            videoID:self.movieId
-                                        videoAuthor:[self.detailDic valueForKey:@"m_author"]
-                                          videoTime:[self.detailDic valueForKey:@"m_duration"]
-                                       videoPopular:[NSString stringWithFormat:@"%@",[self.detailDic objectForKey:@"m_popular"]]];
-    
-    [HandleData insertOneVideo:video];
-    [video release];
->>>>>>> d6afd1e2278bc72943dbe61d515e9ba1e05e6e4f
     
     NSLog(@"全屏");
     if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
@@ -202,6 +187,10 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)topRightCorenerBtnAction
 {
     //收藏该视频
+    NSLog(@"SHOU----");
+    
+
+
     collectRequest = [[RequestTools alloc] init];
     [collectRequest setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,@"?email=1823870397@qq.com&movieID=",self.movieId, nil];
@@ -230,7 +219,6 @@ durationLable.text = @"<<  时长:9'16''  >>";
 {
     NSLog(@"链接:%@",dic );
 
-    [self setDetailDic:dic];
     if ([[dic allKeys] containsObject:@"m_url"]==YES){
     NSLog(@"链接:%@",dic );
     movieNameLable.text = [dic objectForKey:@"m_name"];
