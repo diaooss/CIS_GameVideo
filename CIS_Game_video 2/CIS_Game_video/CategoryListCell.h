@@ -18,6 +18,4 @@
 @property(nonatomic,retain)UILabel * nameLabel;
 @property(nonatomic,retain)UILabel * attentionTimeLabel;
 @property(nonatomic,retain)UILabel *timeLabel;
-/******此ID只在数据库操作做的时候用到*****/
-@property (nonatomic,assign)int ID;
 @end
