@@ -100,11 +100,10 @@
 		2316907E17C3500D00B47694 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2316907D17C3500D00B47694 /* CFNetwork.framework */; };
 		2316908617C3508B00B47694 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2316908117C3508B00B47694 /* MBProgressHUD.m */; };
 		2316908817C3508B00B47694 /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 2316908517C3508B00B47694 /* Tools.m */; };
+		2323777317E04618008EBFF9 /* HUANFANG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2323777217E04618008EBFF9 /* HUANFANG.sqlite */; };
 		2323777A17E0462D008EBFF9 /* DataBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 2323777517E0462D008EBFF9 /* DataBase.m */; };
 		2323777B17E0462D008EBFF9 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = 2323777717E0462D008EBFF9 /* Video.m */; };
 		2323777C17E0462D008EBFF9 /* HandleData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2323777917E0462D008EBFF9 /* HandleData.m */; };
-		2323778317E054BF008EBFF9 /* RecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2323778217E054BF008EBFF9 /* RecordViewController.m */; };
-		2323778517E0622B008EBFF9 /* HUANFANG.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2323778417E0622B008EBFF9 /* HUANFANG.sqlite */; };
 		2327068717D5AE2300AF9832 /* Animation_Turn_View.m in Sources */ = {isa = PBXBuildFile; fileRef = 2327068617D5AE2300AF9832 /* Animation_Turn_View.m */; };
 		2327068A17D5BFE700AF9832 /* CategoryListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2327068917D5BFE700AF9832 /* CategoryListViewController.m */; };
 		2327068D17D5C03100AF9832 /* CategoryListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2327068C17D5C03100AF9832 /* CategoryListCell.m */; };
@@ -319,15 +318,13 @@
 		2316908117C3508B00B47694 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		2316908417C3508B00B47694 /* Tools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		2316908517C3508B00B47694 /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
+		2323777217E04618008EBFF9 /* HUANFANG.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = HUANFANG.sqlite; sourceTree = "<group>"; };
 		2323777417E0462D008EBFF9 /* DataBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBase.h; sourceTree = "<group>"; };
 		2323777517E0462D008EBFF9 /* DataBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBase.m; sourceTree = "<group>"; };
 		2323777617E0462D008EBFF9 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
 		2323777717E0462D008EBFF9 /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
 		2323777817E0462D008EBFF9 /* HandleData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HandleData.h; sourceTree = "<group>"; };
 		2323777917E0462D008EBFF9 /* HandleData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HandleData.m; sourceTree = "<group>"; };
-		2323778117E054BF008EBFF9 /* RecordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordViewController.h; sourceTree = "<group>"; };
-		2323778217E054BF008EBFF9 /* RecordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordViewController.m; sourceTree = "<group>"; };
-		2323778417E0622B008EBFF9 /* HUANFANG.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = HUANFANG.sqlite; sourceTree = "<group>"; };
 		2327068517D5AE2300AF9832 /* Animation_Turn_View.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Animation_Turn_View.h; sourceTree = "<group>"; };
 		2327068617D5AE2300AF9832 /* Animation_Turn_View.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Animation_Turn_View.m; sourceTree = "<group>"; };
 		2327068817D5BFE700AF9832 /* CategoryListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CategoryListViewController.h; sourceTree = "<group>"; };
@@ -724,7 +721,7 @@
 		2323777117E04605008EBFF9 /* SQlite */ = {
 			isa = PBXGroup;
 			children = (
-				2323778417E0622B008EBFF9 /* HUANFANG.sqlite */,
+				2323777217E04618008EBFF9 /* HUANFANG.sqlite */,
 				2323777417E0462D008EBFF9 /* DataBase.h */,
 				2323777517E0462D008EBFF9 /* DataBase.m */,
 				2323777617E0462D008EBFF9 /* Video.h */,
@@ -1000,8 +997,6 @@
 			children = (
 				23AA7CF71794E2C300C7A8B1 /* LeftViewController.h */,
 				23AA7CF81794E2C300C7A8B1 /* LeftViewController.m */,
-				2323778117E054BF008EBFF9 /* RecordViewController.h */,
-				2323778217E054BF008EBFF9 /* RecordViewController.m */,
 				20A0BC8A17993CEC00CFB711 /* AboutUS */,
 				20E8A4E51797E13700160DE1 /* SetTingPage */,
 				20E8A4D91797D51900160DE1 /* MyLikeAuthorListPage */,
@@ -1206,7 +1201,7 @@
 				233197FF17D966C4001F3DED /* grayArrow@2x.png in Resources */,
 				2331980017D966C4001F3DED /* whiteArrow.png in Resources */,
 				2331980117D966C4001F3DED /* whiteArrow@2x.png in Resources */,
-				2323778517E0622B008EBFF9 /* HUANFANG.sqlite in Resources */,
+				2323777317E04618008EBFF9 /* HUANFANG.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1288,11 +1283,7 @@
 				2323777A17E0462D008EBFF9 /* DataBase.m in Sources */,
 				2323777B17E0462D008EBFF9 /* Video.m in Sources */,
 				2323777C17E0462D008EBFF9 /* HandleData.m in Sources */,
-<<<<<<< HEAD
 				2050B4C917E04B7D004C9AA7 /* SqCached.m in Sources */,
-=======
-				2323778317E054BF008EBFF9 /* RecordViewController.m in Sources */,
->>>>>>> d6afd1e2278bc72943dbe61d515e9ba1e05e6e4f
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
