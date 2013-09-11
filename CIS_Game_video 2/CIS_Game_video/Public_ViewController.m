@@ -12,6 +12,7 @@
 #import "MyNsstringTools.h"
 #import "RequestUrls.h"
 #import "CategoryListCell.h"
+#import "MovieDetailPage.h"
 @interface Public_ViewController ()
 
 @end
@@ -142,6 +143,16 @@
         [self.myArry removeObjectAtIndex:indexPath.row];
         [_showTab reloadData];
     }
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    CategoryListCell * cell = (CategoryListCell *)[tableView cellForRowAtIndexPath:indexPath];
+    MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
+    detailPage.movieId = cell.videoID;
+    [self.navigationController pushViewController:detailPage animated:YES];
+    [detailPage release];
+    
 }
 //＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝
 //初始化刷新视图

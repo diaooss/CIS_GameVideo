@@ -26,6 +26,6 @@
    
 }
 @property(nonatomic,retain)RequestTools*detailRequest;//请求单一视频详情.
-@property(nonatomic,retain)NSMutableDictionary *detailDic;//请求详情回来的字典
+@property(nonatomic,retain)NSDictionary *detailDic;//请求详情回来的字典
 @property(nonatomic,copy)NSString * movieId;//等待被请求的视频ID
 @end
