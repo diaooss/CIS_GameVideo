@@ -12,7 +12,7 @@
 #import "RequestTools.h"
 @protocol AnimationViewDelegate <NSObject>
 @required
--(void)transportVideoInformation:(NSString *)imageID;
+-(void)transportVideoInformation:(NSString *)imageUrl;
 
 @end
 @interface Animation_Turn_View : UIView<iCarouselDataSource,iCarouselDelegate,GroupViewDelegate,myHttpRequestDelegate>

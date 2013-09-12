@@ -14,9 +14,10 @@
 @protocol DefaultRootViewDelegate <NSObject>
 
 -(void)transferCategoryWithCategoryName:(NSString * )CategoryName;
+-(void)transferTheVideoID:(NSString *)videoID;
 
 @end
-@interface DefaultRootView : UIView<UITableViewDataSource,UITableViewDelegate,CellDelegate,AnimationViewDelegate,myHttpRequestDelegate,SRRefreshDelegate>
+@interface DefaultRootView : UIView<UITableViewDataSource,UITableViewDelegate,AnimationViewDelegate,CellDelegate,myHttpRequestDelegate,SRRefreshDelegate>
 {
     UITableView * _defaultListTab;
     SRRefreshView * rootRefreshView;
