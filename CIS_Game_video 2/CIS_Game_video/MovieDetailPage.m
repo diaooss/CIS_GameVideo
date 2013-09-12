@@ -141,6 +141,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
 }
         [self.view addSubview:bottomBtn];
     }
+    NSLog(@"%@回来的ID",self.movieId);
     //测试
     self.detailRequest = [[RequestTools alloc]init];
     [_detailRequest setDelegate:self];
@@ -231,7 +232,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
     NSLog(@"作者:%@",authorNameLab.text);
     _attentionTool = [[RequestTools alloc]init];
     [_attentionTool setDelegate:self];
-    NSArray *strArry = [NSArray arrayWithObjects:ATTENTION_AUTHOR,[NSString stringWithFormat:@"?email=%@&authName=%@",@"1019938654@qq.com",authorNameLab.text],nil];
+    NSArray *strArry = [NSArray arrayWithObjects:ATTENTION_AUTHOR,[NSString stringWithFormat:@"?email=%@&authName=%@",@"1601883700@qq.com",authorNameLab.text],nil];
     [_attentionTool requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
 
 }
@@ -243,9 +244,9 @@ durationLable.text = @"<<  时长:9'16''  >>";
 #pragma mark--请求的回调方法
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
-    NSLog(@"链接:%@",dic );
-    [self setDetailDic:dic];
-    
+    NSLog(@"视频详情:%@",dic );
+//    self.detailDic = dic;
+
     if ([[dic allKeys] containsObject:@"m_url"]==YES){
     NSLog(@"链接:%@",dic );
     movieNameLable.text = [dic objectForKey:@"m_name"];

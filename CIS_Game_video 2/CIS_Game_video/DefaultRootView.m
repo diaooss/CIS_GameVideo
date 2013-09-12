@@ -11,6 +11,8 @@
 #import "Animation_Turn_View.h"
 #import "MyNsstringTools.h"
 #import "Tools.h"
+#import "SqCached.h"
+#import "JSONKit.h"
 @implementation DefaultRootView
 - (void)dealloc
 {
@@ -47,7 +49,6 @@
         [_defaultListTab addSubview:rootRefreshView];
     //初次请求数据
         [self requestNet];
-        [Tools openLoadsign:self WithString:@"正在为你辛勤加载...."];
     }
     return self;
 }
@@ -57,12 +58,21 @@
     self.tool = [[[RequestTools alloc]init] autorelease];
     [_tool setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:@"http://121.199.57.44:88/WebServer/HomeData.ashx",nil];
-    [_tool requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    if ([Tools isHaveNet]==YES) {
+        [Tools openLoadsign:self WithString:@"正在为你辛勤加载...."];
+
+        [_tool requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+
+    }else
+    {
+        [self defaultLoadCacheData];
+    }
 }
 #pragma mark----请求数据
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     [self setMydic:dic];//接收到数据
+    [self setCacheData:dic];//写入缓存
     [_defaultListTab reloadData];
     [_defaultListTab reloadInputViews];
     [rootRefreshView endRefresh];
@@ -73,7 +83,32 @@
     NSLog(@"------%@",dic);
     //  提醒用户加载失败原因-------------
     [Tools closeLoadsign:self];
+    [self defaultLoadCacheData];
+
     [rootRefreshView endRefresh];
+}
+#pragma mark--补偿加载
+-(void)setCacheData:(NSDictionary *)dic
+{
+    
+    NSString *tempStr = [dic JSONString];
+    NSData *tempData = [tempStr dataUsingEncoding:NSUTF8StringEncoding];
+    [[SqCached shareCache] setCacheData:tempData ForKey:@"defaultData"];
+
+}
+
+-(NSDictionary *)readerCacheData
+{
+    NSDictionary *dic = [[SqCached shareCache] cacheDataForKey:@"defaultData"];
+    return dic;
+    
+}
+-(void)defaultLoadCacheData
+{
+    self.mydic = [self readerCacheData];
+    [_defaultListTab reloadData];
+    
+    
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -175,11 +210,8 @@
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
 //刷新界面 //加载一次之后再 加载就不会请求数据-----界面就不会真的刷新
-    if (self.mydic) {
-        [rootRefreshView endRefresh];
-        return;
-    }
-    [self requestNet];
+           [self requestNet];
+    
 }
 
 @end
