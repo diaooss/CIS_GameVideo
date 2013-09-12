@@ -169,7 +169,7 @@
         _slime.hidden = NO;
         _refleshView.hidden = NO;
         _refleshView.layer.transform = CATransform3DIdentity;
-        [UIView transitionWithView:_scrollView duration:0.3f options:UIViewAnimationCurveEaseOut animations:^{
+        [UIView transitionWithView:_scrollView duration:0.3f options:UIViewAnimationOptionCurveEaseOut animations:^{
             UIEdgeInsets inset = _scrollView.contentInset;
             inset.top = _upInset;
             _scrollView.contentInset = inset;
@@ -289,7 +289,7 @@
         if (self.loading) {
             [UIView transitionWithView:_scrollView
                               duration:0.2
-                               options:UIViewAnimationCurveEaseOut
+                               options:UIViewAnimationOptionCurveEaseOut
                             animations:^{
                                 UIEdgeInsets inset = _scrollView.contentInset;
                                 inset.top = _upInset + _dragingHeight;

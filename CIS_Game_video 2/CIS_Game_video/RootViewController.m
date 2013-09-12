@@ -288,10 +288,10 @@
 -(UIView*)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
         if (section==0) {
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 20)] ;//创建一个视图
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 0)] ;//创建一个视图
         headerView.backgroundColor = [UIColor redColor];
         //滑动推荐
-        animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 5, 320, self.view.height/3-37)];
+        animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 3, 320, self.view.height/3-37)];
         [animationView setSlideArry:self.rootBannerArry];
         [animationView addChildViews];
 
