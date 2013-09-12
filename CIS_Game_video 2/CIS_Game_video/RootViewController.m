@@ -53,6 +53,7 @@
         _dataList = [[NSMutableArray alloc] initWithContentsOfFile:path];
         _authorListArray = [NSArray array];
     }
+    testDic = [[NSMutableDictionary alloc]initWithCapacity:2];
     return self;
 }
 
@@ -243,6 +244,7 @@
     {
         //点击展开的小Cell的方法写在这里,根据下标判断
      NSString *movieID =    [[[[self.authorListArray objectAtIndex:self.selectIndex.section] objectForKey:@"movies"] objectAtIndex:indexPath.row-1]objectForKey:@"movieID"];
+        NSLog(@"点击的MOvieIds 是:%@",movieID);
         [self getTheMovieDetailInfoByMovieId:movieID];//前往详情页面
     }
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
@@ -308,9 +310,7 @@
         NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Dota",@"魔兽争霸",@"Dota2", @"星际大战2",nil];
         [categorySegmentedControl setSectionTitles:nameArry];
         [categorySegmentedControl setSelectionIndicatorHeight:5.0f];
-            NSString *indexStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"index"];
-            int index = [indexStr intValue];
-            categorySegmentedControl.selectedIndex  = index;
+            categorySegmentedControl.selectedIndex  = flag;
         [categorySegmentedControl setBackgroundColor:[UIColor colorWithRed:205.0f/232.0f green:232.0f/255.0f blue:232.0f/255.0f alpha:1.0f]];
         [categorySegmentedControl setTextColor:[UIColor colorWithRed:47.0f/255.0f green:79.0f/255.0f blue:79.0f/255.0f alpha:0.8f]];
         [categorySegmentedControl setSelectionIndicatorColor:[UIColor colorWithRed:52.0f/255.0f green:181.0f/255.0f blue:229.0f/255.0f alpha:0.8f]];
@@ -391,16 +391,19 @@
 //每一次刷新即刷新缓存数据源
 -(void)writeCacheData:(NSDictionary *)dic
 {
+
+    
     /*/写入缓存/*/
-    NSMutableDictionary *tempDic = [NSMutableDictionary dictionary];
-    [tempDic setObject:[dic objectForKey:@"bannerResult"] forKey:@"bannerResult"];
-    [tempDic setObject:[dic objectForKey:@"AuthorResult"] forKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"index"]];
-    NSString *tempStr = [tempDic JSONString];
+    
+    [testDic setObject:[dic objectForKey:@"bannerResult"] forKey:@"bannerResult"];
+    [testDic setObject:[dic objectForKey:@"AuthorResult"] forKey:[NSString stringWithFormat:@"%d",flag]];
+    NSString *tempStr = [testDic JSONString];
     NSData *tempData = [tempStr dataUsingEncoding:NSUTF8StringEncoding];
     [[SqCached shareCache] setCacheData:tempData ForKey:@"authorList"];
     /////*/写入缓存/*/////
+    NSDictionary *m_dic =  [[SqCached shareCache] cacheDataForKey:@"authorList"];
+    NSLog(@"写入的数据是:%@",[m_dic objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"index"]]);
 
-    
     
 }
 //读取缓冲数据-
@@ -410,22 +413,26 @@
     NSLog(@"缓存的数据解析是:%@",dic);
     return dic;
     
+    
 }
 #pragma mark--无网或者网络请求失败时进行补偿加载数据
 -(void)defaultLoadData
 {
+    
     NSLog(@"我是补偿加载啊");
-    self.rootBannerArry = [[self readCacheData ] objectForKey:@"bannerResult"];
-    self.authorListArray= [[self readCacheData] objectForKey:[[NSUserDefaults standardUserDefaults] objectForKey:@"index"]];
-    NSLog(@"取出来的是:%@",self.authorListArray);
+    self.rootBannerArry = [[self readCacheData ] valueForKey:@"bannerResult"];
+    self.authorListArray= [[self readCacheData] valueForKey:[NSString stringWithFormat:@"%d",flag]];
+
+    NSLog(@"取出来的是:%@---*****%d",[self readCacheData],flag);
     [rootAuthorListTab reloadData];
 }
 #pragma mark--标签选中的代理方法
 - (void)segmentedControlChangedValue:(HMSegmentedControl *)segmentedControl
 {
 	NSLog(@"选中的是: %i", segmentedControl.selectedIndex);
+    flag = segmentedControl.selectedIndex ;
     NSString *indexStr = [NSString stringWithFormat:@"%i",segmentedControl.selectedIndex];
-    [[NSUserDefaults standardUserDefaults] setObject:indexStr forKey:@"index"];
+    [[NSUserDefaults standardUserDefaults] setObject:indexStr forKey:[NSString stringWithFormat:@"index%d",flag]];
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSLog(@"标记是;%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"bannerResult"]);
     switch (segmentedControl.selectedIndex) {
