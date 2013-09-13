@@ -16,6 +16,7 @@
 #import "AsynImageView.h"
 #import "SqCached.h"
 #import "JSONKit.h"
+#import "MovieDetailPage.h"
 @interface AuthorMoviesListPage ()
 
 @end
@@ -110,10 +111,7 @@
     }
     return moviesListCell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
+
 #pragma  mark--自定义headerview
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -144,6 +142,14 @@
     return headerView;
     }
     return nil;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    MovieDetailPage *detailPage = [[MovieDetailPage alloc] init];
+    detailPage.movieId = [[self.moviesOfTheAuthorArry objectAtIndex:indexPath.row] objectForKey:@"movieID"];
+    [self.navigationController pushViewController:detailPage animated:YES];
+    [detailPage release];
 }
 -(void)back
 {

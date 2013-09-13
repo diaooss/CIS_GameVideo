@@ -295,6 +295,19 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)requestFailedWithResultDictionary:(NSDictionary *)dic
 {
 }
+-(void)webViewDidStartLoad:(UIWebView *)webView
+{
+    [Tools openLoadsign:self.view WithString:@"正在加载..."];
+}
+-(void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [Tools closeLoadsign:self.view];
+}
+-(void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [Tools closeLoadsign:self.view];
+
+}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

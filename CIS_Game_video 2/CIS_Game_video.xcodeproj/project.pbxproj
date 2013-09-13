@@ -117,6 +117,17 @@
 		2331980117D966C4001F3DED /* whiteArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 233197F917D966C4001F3DED /* whiteArrow@2x.png */; };
 		2331980717D966EF001F3DED /* EGORefreshTableFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2331980317D966EF001F3DED /* EGORefreshTableFooterView.m */; };
 		2331980817D966EF001F3DED /* EGORefreshTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2331980517D966EF001F3DED /* EGORefreshTableHeaderView.m */; };
+		2336410417E297860041302C /* bootstrap-responsive.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 233640E417E297860041302C /* bootstrap-responsive.min.css */; };
+		2336410517E297860041302C /* bootstrap.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 233640E517E297860041302C /* bootstrap.min.css */; };
+		2336410617E297860041302C /* doc.css in Resources */ = {isa = PBXBuildFile; fileRef = 233640E617E297860041302C /* doc.css */; };
+		2336410717E297860041302C /* docs.css in Resources */ = {isa = PBXBuildFile; fileRef = 233640E717E297860041302C /* docs.css */; };
+		2336410817E297860041302C /* style.css in Resources */ = {isa = PBXBuildFile; fileRef = 233640E817E297860041302C /* style.css */; };
+		2336410917E297860041302C /* xcode.min.css in Resources */ = {isa = PBXBuildFile; fileRef = 233640E917E297860041302C /* xcode.min.css */; };
+		2336410A17E297860041302C /* doc.html in Resources */ = {isa = PBXBuildFile; fileRef = 233640EA17E297860041302C /* doc.html */; };
+		2336410B17E297860041302C /* doc_en.html in Resources */ = {isa = PBXBuildFile; fileRef = 233640EB17E297860041302C /* doc_en.html */; };
+		2336410C17E297860041302C /* glyphicons-halflings-white.png in Resources */ = {isa = PBXBuildFile; fileRef = 233640ED17E297860041302C /* glyphicons-halflings-white.png */; };
+		2336410D17E297860041302C /* glyphicons-halflings.png in Resources */ = {isa = PBXBuildFile; fileRef = 233640EE17E297860041302C /* glyphicons-halflings.png */; };
+		2336411617E297860041302C /* libYouMi.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2336410317E297860041302C /* libYouMi.a */; };
 		233A4ED917CB4996007F1143 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4ED817CB4996007F1143 /* MessageUI.framework */; };
 		233A4EDB17CB49E6007F1143 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EDA17CB49E6007F1143 /* CoreTelephony.framework */; };
 		233A4EDD17CB4A08007F1143 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 233A4EDC17CB4A08007F1143 /* libsqlite3.dylib */; };
@@ -345,6 +356,30 @@
 		2331980417D966EF001F3DED /* EGORefreshTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGORefreshTableHeaderView.h; sourceTree = "<group>"; };
 		2331980517D966EF001F3DED /* EGORefreshTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EGORefreshTableHeaderView.m; sourceTree = "<group>"; };
 		2331980617D966EF001F3DED /* EGOViewCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EGOViewCommon.h; sourceTree = "<group>"; };
+		233640E417E297860041302C /* bootstrap-responsive.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "bootstrap-responsive.min.css"; sourceTree = "<group>"; };
+		233640E517E297860041302C /* bootstrap.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = bootstrap.min.css; sourceTree = "<group>"; };
+		233640E617E297860041302C /* doc.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = doc.css; sourceTree = "<group>"; };
+		233640E717E297860041302C /* docs.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = docs.css; sourceTree = "<group>"; };
+		233640E817E297860041302C /* style.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = style.css; sourceTree = "<group>"; };
+		233640E917E297860041302C /* xcode.min.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = xcode.min.css; sourceTree = "<group>"; };
+		233640EA17E297860041302C /* doc.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = doc.html; sourceTree = "<group>"; };
+		233640EB17E297860041302C /* doc_en.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = doc_en.html; sourceTree = "<group>"; };
+		233640ED17E297860041302C /* glyphicons-halflings-white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glyphicons-halflings-white.png"; sourceTree = "<group>"; };
+		233640EE17E297860041302C /* glyphicons-halflings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "glyphicons-halflings.png"; sourceTree = "<group>"; };
+		233640F417E297860041302C /* bootstrap.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bootstrap.js; sourceTree = "<group>"; };
+		233640F517E297860041302C /* bootstrap.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = bootstrap.min.js; sourceTree = "<group>"; };
+		233640F617E297860041302C /* doc.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = doc.js; sourceTree = "<group>"; };
+		233640F717E297860041302C /* highlight.pack.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = highlight.pack.js; sourceTree = "<group>"; };
+		233640F817E297860041302C /* jquery-1.9.1.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-1.9.1.min.js"; sourceTree = "<group>"; };
+		233640FB17E297860041302C /* YouMiConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiConfig.h; sourceTree = "<group>"; };
+		233640FC17E297860041302C /* YouMiDelegateProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiDelegateProtocol.h; sourceTree = "<group>"; };
+		233640FD17E297860041302C /* YouMiPointsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiPointsManager.h; sourceTree = "<group>"; };
+		233640FE17E297860041302C /* YouMiSpot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiSpot.h; sourceTree = "<group>"; };
+		233640FF17E297860041302C /* YouMiView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiView.h; sourceTree = "<group>"; };
+		2336410017E297860041302C /* YouMiWall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWall.h; sourceTree = "<group>"; };
+		2336410117E297860041302C /* YouMiWallAppModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallAppModel.h; sourceTree = "<group>"; };
+		2336410217E297860041302C /* YouMiWallBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YouMiWallBanner.h; sourceTree = "<group>"; };
+		2336410317E297860041302C /* libYouMi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libYouMi.a; sourceTree = "<group>"; };
 		233A4ED817CB4996007F1143 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		233A4EDA17CB49E6007F1143 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		233A4EDC17CB4A08007F1143 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
@@ -451,6 +486,7 @@
 				233DC5D917CC400C00822759 /* ShareSDKiPhoneAppRecommendShareViewUI.framework in Frameworks */,
 				233DC5DB17CC400C00822759 /* ShareSDKiPhoneDefaultShareViewUI.framework in Frameworks */,
 				233DC5DD17CC400C00822759 /* ShareSDKiPhoneSimpleShareViewUI.framework in Frameworks */,
+				2336411617E297860041302C /* libYouMi.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -710,6 +746,7 @@
 		2316907F17C3505600B47694 /* ModelssAndTools */ = {
 			isa = PBXGroup;
 			children = (
+				233640E117E2975C0041302C /* AddID */,
 				2050B4C617E04B66004C9AA7 /* CacheData */,
 				2323777117E04605008EBFF9 /* SQlite */,
 				2074012C17D0713600B08A38 /* GroupView */,
@@ -784,6 +821,93 @@
 				2331980617D966EF001F3DED /* EGOViewCommon.h */,
 			);
 			name = EGO;
+			sourceTree = "<group>";
+		};
+		233640E117E2975C0041302C /* AddID */ = {
+			isa = PBXGroup;
+			children = (
+				233640E217E297860041302C /* doc */,
+				233640F917E297860041302C /* lib */,
+			);
+			name = AddID;
+			sourceTree = "<group>";
+		};
+		233640E217E297860041302C /* doc */ = {
+			isa = PBXGroup;
+			children = (
+				233640E317E297860041302C /* css */,
+				233640EA17E297860041302C /* doc.html */,
+				233640EB17E297860041302C /* doc_en.html */,
+				233640EC17E297860041302C /* img */,
+				233640F317E297860041302C /* js */,
+			);
+			path = doc;
+			sourceTree = "<group>";
+		};
+		233640E317E297860041302C /* css */ = {
+			isa = PBXGroup;
+			children = (
+				233640E417E297860041302C /* bootstrap-responsive.min.css */,
+				233640E517E297860041302C /* bootstrap.min.css */,
+				233640E617E297860041302C /* doc.css */,
+				233640E717E297860041302C /* docs.css */,
+				233640E817E297860041302C /* style.css */,
+				233640E917E297860041302C /* xcode.min.css */,
+			);
+			path = css;
+			sourceTree = "<group>";
+		};
+		233640EC17E297860041302C /* img */ = {
+			isa = PBXGroup;
+			children = (
+				233640ED17E297860041302C /* glyphicons-halflings-white.png */,
+				233640EE17E297860041302C /* glyphicons-halflings.png */,
+				233640F017E297860041302C /* youmisdk */,
+			);
+			path = img;
+			sourceTree = "<group>";
+		};
+		233640F017E297860041302C /* youmisdk */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = youmisdk;
+			sourceTree = "<group>";
+		};
+		233640F317E297860041302C /* js */ = {
+			isa = PBXGroup;
+			children = (
+				233640F417E297860041302C /* bootstrap.js */,
+				233640F517E297860041302C /* bootstrap.min.js */,
+				233640F617E297860041302C /* doc.js */,
+				233640F717E297860041302C /* highlight.pack.js */,
+				233640F817E297860041302C /* jquery-1.9.1.min.js */,
+			);
+			path = js;
+			sourceTree = "<group>";
+		};
+		233640F917E297860041302C /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				233640FA17E297860041302C /* include */,
+				2336410317E297860041302C /* libYouMi.a */,
+			);
+			path = lib;
+			sourceTree = "<group>";
+		};
+		233640FA17E297860041302C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				233640FB17E297860041302C /* YouMiConfig.h */,
+				233640FC17E297860041302C /* YouMiDelegateProtocol.h */,
+				233640FD17E297860041302C /* YouMiPointsManager.h */,
+				233640FE17E297860041302C /* YouMiSpot.h */,
+				233640FF17E297860041302C /* YouMiView.h */,
+				2336410017E297860041302C /* YouMiWall.h */,
+				2336410117E297860041302C /* YouMiWallAppModel.h */,
+				2336410217E297860041302C /* YouMiWallBanner.h */,
+			);
+			path = include;
 			sourceTree = "<group>";
 		};
 		233DC57317CC3E5700822759 /* MyCell */ = {
@@ -1207,6 +1331,16 @@
 				2331980017D966C4001F3DED /* whiteArrow.png in Resources */,
 				2331980117D966C4001F3DED /* whiteArrow@2x.png in Resources */,
 				2323777317E04618008EBFF9 /* HUANFANG.sqlite in Resources */,
+				2336410417E297860041302C /* bootstrap-responsive.min.css in Resources */,
+				2336410517E297860041302C /* bootstrap.min.css in Resources */,
+				2336410617E297860041302C /* doc.css in Resources */,
+				2336410717E297860041302C /* docs.css in Resources */,
+				2336410817E297860041302C /* style.css in Resources */,
+				2336410917E297860041302C /* xcode.min.css in Resources */,
+				2336410A17E297860041302C /* doc.html in Resources */,
+				2336410B17E297860041302C /* doc_en.html in Resources */,
+				2336410C17E297860041302C /* glyphicons-halflings-white.png in Resources */,
+				2336410D17E297860041302C /* glyphicons-halflings.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1394,6 +1528,7 @@
 					"\"$(SRCROOT)/CIS_Game_video/ShareSDK_v2.3.1/Extend/TencentWeiboSSO\"",
 					"\"$(SRCROOT)/CIS_Game_video/Extend/SDKExport\"",
 					"\"$(SRCROOT)/CIS_Game_video/Extend/TencentWeiboSSO\"",
+					"\"$(SRCROOT)/CIS_Game_video/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -1430,6 +1565,7 @@
 					"\"$(SRCROOT)/CIS_Game_video/ShareSDK_v2.3.1/Extend/TencentWeiboSSO\"",
 					"\"$(SRCROOT)/CIS_Game_video/Extend/SDKExport\"",
 					"\"$(SRCROOT)/CIS_Game_video/Extend/TencentWeiboSSO\"",
+					"\"$(SRCROOT)/CIS_Game_video/lib\"",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

@@ -65,6 +65,7 @@
      rootView = [[DefaultRootView alloc]initWithFrame:CGRectMake(0, 0, 320, self.view.height-44)];
     [rootView addTarget:self action:@selector(transportVideoInformation:)];
     [self.view addSubview:rootView];
+    
     [rootView setDelegate:self];
     
     //[Tools makeOneCautionViewOnView:self.view withString:@"啊啊啊啊啊啊啊啊"];
@@ -77,6 +78,10 @@
     [Category setTitle:CategoryName];
     [self.navigationController pushViewController:Category animated:YES];
     [Category release];
+}
+-(void)transferTheVideoID:(NSString *)videoID
+{
+    [self getTheMovieDetailInfoByMovieId:videoID];
 }
 #pragma mark--切换浏览模式
 -(void)topRightCorenerBtnAction
@@ -319,11 +324,10 @@
     }
     return nil;
 }
-#pragma mark--Banner的代理方法
--(void)transportVideoInformation:(NSString *)imageID
+#pragma mark--Banner的代理方法----------广告推荐页面-------------
+-(void)transportVideoInformation:(NSString *)imageUrl
 {
-    NSLog(@"有没有传过来");
-    [self getTheMovieDetailInfoByMovieId:imageID];
+    NSLog(@"有没有传过来%@",imageUrl);
 }
 #pragma  mark--根据视频ID请求视频详情
 -(void)getTheMovieDetailInfoByMovieId:(NSString *)movieID
@@ -371,7 +375,7 @@
     [rootRefreshView endRefresh];
 
     if ([[dic allKeys] containsObject:@"AuthorResult"]==YES) {
-        NSLog(@"字典是:%@",dic);
+        //NSLog(@"字典是:%@",dic);
         self.authorListArray = [dic objectForKey:@"AuthorResult"];
         self.rootBannerArry = [dic objectForKey:@"bannerResult"];
         [self writeCacheData:dic];
@@ -480,11 +484,18 @@
 }
 -(void)viewWillDisappear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [self.rootRequest  setDelegate:nil];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillDisappear:animated];
     [self.rootRequest  setDelegate:self];
+
+}
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
 
 }
 @end

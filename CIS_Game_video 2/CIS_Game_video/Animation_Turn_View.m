@@ -52,7 +52,7 @@
      if ([self.slideArry count]>0) {
          [view.asImageView setImageURL:[MyNsstringTools changeStrWithUT8:[[self.slideArry objectAtIndex:index] valueForKey:@"picPath"]]];
          //加ID
-         [view setVideoID:[[self.slideArry objectAtIndex:index] valueForKey:@"m_ID"]];
+         [view setVideoID:[[self.slideArry objectAtIndex:index] valueForKey:@"linkUrl"]];
      }
      return view;
 }

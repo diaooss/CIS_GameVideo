@@ -174,6 +174,7 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320,0.5)];//创建一个视图
     self.animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.height/4-14)];
 //    [self.animationView setCenter: headerView.center];
+    self.animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.height/4)];
     [_animationView setSlideArry:[self.mydic valueForKey:@"bannerResult"]];
     [_animationView addChildViews];//布局子视图
     [headerView addSubview:_animationView];
@@ -183,15 +184,18 @@
     return headerView;
 }
 #pragma mark--Animation_Turn_View的代理方法
--(void)transportVideoInformation:(UIImage *)imageID
+-(void)transportVideoInformation:(UIImage *)imageUrl
 {
-    [self.target performSelector:self.action withObject:imageID];
+    NSLog(@"---%@",imageUrl);
+    //[self.target performSelector:self.action withObject:imageID];
 }
 //自定义cell的代理 找到当前点击的视频
 -(void)accessPlayViewControllerWithVideoID:(NSString *)videoID
 {
     //可以在这里面推界面 参数 已经传过来
-    [self.target performSelector:self.action withObject:videoID];
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(transferTheVideoID:)]) {
+        [self.delegate performSelector:@selector(transferTheVideoID:) withObject:videoID];
+    }
 }
 -(void)addTarget:(id)target action:(SEL)action
 {

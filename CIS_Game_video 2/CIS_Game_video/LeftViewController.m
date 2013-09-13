@@ -21,6 +21,11 @@
 #import "MyNsstringTools.h"
 #import "RecordViewController.h"
 #import "Tools.h"
+#import "SqCached.h"
+#import "JSONKit.h"
+//广告
+#import "YouMiView.h"
+#import "YouMiWall.h"
 @interface LeftViewController ()
 @end
 @implementation LeftViewController
@@ -29,6 +34,8 @@
     [_setTableView release];
     [_nameArry release];
     [_pictureArry release];
+    getInfoRequest.delegate = nil;
+    [getInfoRequest release];
     [checkLabel release],checkLabel = nil;
     [super dealloc];
 }
@@ -77,12 +84,23 @@
     [self.view addGestureRecognizer:recognizer];
     [recognizer release];
     //签到
-    checkLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bottom-60, 320, 30)];
+    checkLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bottom-104, 320, 30)];
     checkLabel.text = @"每日签到(您已连续签到XX次)";
     checkLabel.textAlignment = NSTextAlignmentCenter;
     checkLabel.textColor = [UIColor grayColor];
     checkLabel.backgroundColor  =[UIColor clearColor];
     [self.view addSubview:checkLabel];
+    
+    
+    ///广告
+    // 320x50
+    YouMiView *adView320x50=[[YouMiView alloc] initWithContentSizeIdentifier:YouMiBannerContentSizeIdentifier320x50 delegate:self];
+    adView320x50.frame = CGRectMake(0, checkLabel.bottom, CGRectGetWidth(adView320x50.bounds), CGRectGetHeight(adView320x50.bounds));
+    [adView320x50 start];
+    [self.view addSubview:adView320x50];
+    [adView320x50 release];
+    
+    
 }
 #pragma mark -----UItableView 的代理方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -102,12 +120,33 @@
     if (nil==cell) {
         cell = [[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:mark] autorelease];
         cell.textLabel.font = mainFont;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }
     if (indexPath.row==0) {
-//        NSString *namrStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"<#string#>"];
-        [cell.textLabel setText:@"我是小强"];//
-        cell.detailTextLabel.text = @"这个人很懒,不喜欢签名...";
-        cell.imageView.image = [UIImage imageNamed:@"headerimage.png"];
+       NSString *namrStr = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_email"];
+        if (namrStr==NULL) {
+            [cell.textLabel setText:@"未登录"];//
+        }
+        else{
+            cell.textLabel.text = [[NSUserDefaults standardUserDefaults] objectForKey:@"user_name"];
+            cell.textLabel.font = [UIFont systemFontOfSize:17];
+            cell.textLabel.numberOfLines = 0;
+            [cell.detailTextLabel setText:[[NSUserDefaults standardUserDefaults] objectForKey:@"user_email"]];//
+
+        }
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"user_image"]) {
+           cell.imageView.image = [UIImage imageWithContentsOfFile:[[NSUserDefaults standardUserDefaults] objectForKey:@"user_image"]];
+        }else if ([self.infoDic objectForKey:@"photo"]!=NULL)
+        {
+            NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:[self.infoDic objectForKey:@"photo"]]];
+            cell.imageView.image = [UIImage imageWithData:data];
+
+            
+        }else
+        {
+            cell.imageView.image = [UIImage imageNamed:@"plant1.jpg"];
+
+        }
         UITapGestureRecognizer *tapHeaerImageView = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapTheHeaerImageView)];
         [cell.imageView setUserInteractionEnabled:YES];
         [cell.imageView addGestureRecognizer:tapHeaerImageView];
@@ -116,9 +155,7 @@
     {
     [cell.textLabel setText:[_nameArry objectAtIndex:indexPath.row-1]];
         [cell.imageView setImage:[UIImage imageNamed:@"smile32.png"]];
-
     }
-    
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -172,6 +209,7 @@
 #pragma mark--选择头像创建方式.点击时需确认是否登陆,如登陆执行如下动作
 -(void)tapTheHeaerImageView
 {
+    
     UIActionSheet *imageActionSheet  =[[UIActionSheet alloc] initWithTitle:@"更换头像" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"从相册" otherButtonTitles:@"拍照", nil];
     [imageActionSheet showInView:self.view];
     [imageActionSheet release];
@@ -179,16 +217,25 @@
 #pragma mark--选择头像创建方式.
 -(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    if ([Tools isHaveLogin]==YES) {
+        
     switch (buttonIndex) {
         case 0:
             [self congXiangCe];
-            
             break;
         case 1:
             [self congXiangJi];
             break;
         default:
             break;
+    }
+    }else
+    {
+        LoginPage *login = [[LoginPage alloc] init];
+        UINavigationController *loginNavc = [[UINavigationController alloc] initWithRootViewController:login];
+        [self presentViewController:loginNavc animated:YES completion:nil];
+        [login release];
+        [loginNavc release];
     }
 }
 #pragma matk-从相册
@@ -202,7 +249,6 @@
     pickC.delegate = self;
     [self presentViewController:pickC animated:YES completion:nil];
     [pickC release];
-    
 }
 #pragma matk-从相机
 -(void)congXiangJi
@@ -223,22 +269,113 @@
         NSData *data = UIImageJPEGRepresentation([info objectForKey:@"UIImagePickerControllerEditedImage"], 0.5);
         NSString *cachePath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)objectAtIndex:0];
         static int i = 0;
-        self.photoPath = [cachePath stringByAppendingPathComponent:[NSString stringWithFormat:@"%d.png",i++]];
-        [data writeToFile:self.photoPath atomically:YES];
+//        [data writeToFile:self.photoPath atomically:YES];
     }];
     [self performSelector:@selector(selectPic:) withObject:[info objectForKey:@"UIImagePickerControllerEditedImage"] afterDelay:0.1];
+}
+#pragma mark--保存图片到本地
+-(void)saveImage:(UIImage *)tempImage 
+{
+    
+    NSData* imageData = UIImagePNGRepresentation(tempImage);
+    [imageData writeToFile:[[self getPhotoPath] stringByAppendingString:@"/header.png"] atomically:YES];
+    //存起来用户名(邮箱)和登陆密码
+    [[NSUserDefaults standardUserDefaults] setObject:[[self getPhotoPath] stringByAppendingString:@"/header.png"] forKey:@"user_image"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    
+}
+#pragma mark--压缩图片
+-(UIImage*)imageWithImageSimple:(UIImage*)image scaledToSize:(CGSize)newSize
+{
+    UIGraphicsBeginImageContext(newSize);
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+#pragma mark--获得头像存放路径
+-(NSString *)getPhotoPath
+{
+    //获得cash文件夹的路径
+    NSString *cashPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    //在cash文件夹中创建logo文件夹,专门存放店铺图标
+    NSFileManager *fm = [NSFileManager defaultManager];
+    [fm createDirectoryAtPath:[NSString stringWithFormat:@"%@/headerImages", cashPath] withIntermediateDirectories:YES attributes:nil error:nil];
+    //找到在CASH中创建的图片文件夹的路径
+    return  [cashPath stringByAppendingPathComponent:@"headerImages" ];
 }
 #pragma mark--头像上传
 - (void)selectPic:(UIImage*)image
 {
     NSLog(@"image%@",image);
+    [self saveImage:image ];
     NSString *str = [NSString stringWithFormat:@"http://121.199.57.44:88/webServer/HeadPhotoUpload.ashx?email=1823870397@qq.com"];
-    
    NSDictionary *dic =  [RequestTools postHeaderImageToServerWitImage:image requestStr:str];
     NSLog(@"头像成功:%@",dic);
     [_setTableView reloadData];
 [self.viewDeckController dismissViewControllerAnimated:YES completion:nil];
 }
+#pragma mark--请求个人详情
+-(void)getUserInfoByEmail
+{
+    getInfoRequest  = [[RequestTools alloc] init];
+    getInfoRequest.delegate = self;
+    NSLog(@"youxiang%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"user_email"]);
+    NSArray *strArry = [NSArray arrayWithObjects:USER_INFO,@"?email=",[[NSUserDefaults standardUserDefaults] objectForKey:@"user_email"],nil];
+    if ([Tools isHaveLogin]==YES) {
+    [getInfoRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+    }
+    
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [self getUserInfoByEmail];
+}
+-(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
+{
+    if ([[dic allKeys] containsObject:@"likedCount"]) {
+        self.infoDic = dic;
+        [self setCacheData:dic];
+        NSLog(@"%@",dic);
+        //存起来用户名(邮箱)和登陆密码
+        [[NSUserDefaults standardUserDefaults] setObject:[dic objectForKey:@"userName"] forKey:@"user_name"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+
+        [_setTableView reloadData];
+    }else{
+    NSLog(@"%@",dic);
+    }
+
+}
+-(void)requestFailedWithResultDictionary:(NSDictionary *)dic
+{
+    [self defaultLoadCacheData];
+}
+#pragma mark--补偿加载
+-(void)setCacheData:(NSDictionary *)dic
+{
+    
+    NSString *tempStr = [dic JSONString];
+    NSData *tempData = [tempStr dataUsingEncoding:NSUTF8StringEncoding];
+    [[SqCached shareCache] setCacheData:tempData ForKey:@"userInfo"];
+    
+}
+
+-(NSDictionary *)readerCacheData
+{
+    NSDictionary *dic = [[SqCached shareCache] cacheDataForKey:@"userInfo"];
+    return dic;
+    
+}
+-(void)defaultLoadCacheData
+{
+    self.infoDic = [self readerCacheData];
+    [_setTableView reloadData];
+    
+    
+}
+
 /*/-----------/*/
 #pragma matk-取消时
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -298,6 +435,16 @@
             SetTingPage *configPage = [[SetTingPage alloc] init];
             [self judgeTheView:[sender titleForState:UIControlStateNormal] changeViecontroller:configPage];
             [configPage release];
+        }
+            break;
+        case 101:
+        {
+            [YouMiConfig setUseInAppStore:NO];
+            [YouMiWall showOffers:NO didShowBlock:^{
+                NSLog(@"有米推荐墙已显示");
+            } didDismissBlock:^{
+                NSLog(@"有米推荐墙已退出");
+            }];
         }
             break;
         case 102:

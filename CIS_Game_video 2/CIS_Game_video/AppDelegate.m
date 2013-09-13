@@ -18,6 +18,9 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
 #import <TencentOpenAPI/QQApi.h>
+
+//广告
+#import "YouMiConfig.h"
 @implementation AppDelegate
 
 
@@ -51,6 +54,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    //广告
+    [YouMiConfig launchWithAppID:@"a056be90c288eae7" appSecret:@"dc5552d38d1cc16a"];
+
+    
+    
     [ShareSDK registerApp:@"74d0e5cd250"];//初始化ShareSDK的App
     [self initAllPlatforms];
     /*/网络监控/*/

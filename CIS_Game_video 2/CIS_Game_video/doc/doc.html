@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<title>有米广告SDK开发者文档</title>
+		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+		<link href="css/docs.css" rel="stylesheet" />
+		<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="js/doc.js"></script>
+
+		<link rel="stylesheet" href="css/xcode.min.css">
+		<script src="js/highlight.pack.js"></script>
+		<script>
+			hljs.tabReplace = ' ';
+			hljs.initHighlightingOnLoad();
+		</script>
+	</head>
+
+	<body data-spy="scroll" data-target="#ym-navbar" >
+		<div class="header navbar-inner">
+			<div class="container clearfix">
+                <img class="pull-left" src="img/icon.png">
+                <span class="pull-left brand">有米广告 iOS SDK开发者文档</span>
+			</div>
+		</div>
+		
+		<div class="container">
+			<ul class="nav nav-list bs-docs-sidenav affix" id="ym-navbar">  
+				<li class='has-sub'> <a class='sub-header' href='#section_wall'>积分墙推荐墙使用文档  <i class="icon-chevron-down"></i></a><ul class='nav nav-list'><li><a href='#section_wall_change'>积分墙各版本使用改动 </a></li><li><a href='#section_wall_procedure'>嵌入步骤 </a></li><li><a href='#section_wall_how_to_use'>使用方法 </a></li><li><a href='#section_wall_init'>1. 在AppDelegate.m中初始化【必须】</a></li><li><a href='#section_wall_enable'>2. 启用积分墙【必须】</a></li><li><a href='#section_wall_points_enable'>3. 启用积分管理 </a></li><li><a href='#section_wall_show'>4. 显示 </a></li><li><a href='#section_wall_get_points'>5. 获取积分 </a></li><li><a href='#section_wall_opensource'>6. 使用源数据 </a></li></ul></li><li class='has-sub'> <a class='sub-header' href='#section_spot'>插播广告使用文档  <i class="icon-chevron-right"></i></a><ul class='nav nav-list hide'><li><a href='#section_spot_changes'>插播广告各版本使用改动 </a></li><li><a href='#section_spot_procedure'>嵌入步骤 </a></li><li><a href='#section_spot_how_to_use'>使用方法 </a></li><li><a href='#section_spot_init'>1. 在AppDelegate.m中初始化 </a></li><li><a href='#section_spot_show'>2. 显示插播广告 </a></li><li><a href='#section_spot_get_points'>3. 获取积分 </a></li></ul></li><li class='has-sub'> <a class='sub-header' href='#section_banner'>广告条使用文档  <i class="icon-chevron-right"></i></a><ul class='nav nav-list hide'><li><a href='#section_banner_procedure'>嵌入步骤 </a></li><li><a href='#section_banner_how_to_use'>使用方法 </a></li><li><a href='#section_banner_init'>1. 在AppDelegate.m中初始化 </a></li><li><a href='#section_banner_add'>2. 在需要用到广告条的地方创建广告条并添加 </a></li></ul></li><li class='has-sub'> <a class='sub-header' href='#section_faq'>YouMiSDK 常见问题解答  <i class="icon-chevron-right"></i></a><ul class='nav nav-list hide'><li><a href='#section_faq_1'>1. YouMiSDK4.7以及之前的积分查询有什么需要注意的 </a></li><li><a href='#section_faq_2'>2. 是否使用了UDID </a></li><li><a href='#section_faq_3'>3. 什么是内置AppStore </a></li><li><a href='#section_faq_4'>4. iOS6系统内置AppStore无法下载安装，应该如何使用 </a></li><li><a href='#section_faq_5'>5. 编译时提示 Undefined symbols </a></li><li><a href='#section_faq_6'>6. 如何取消获取用户地理位置 </a></li><li><a href='#section_faq_7'>7. Banner广告重复点击是否有效 </a></li><li><a href='#section_faq_8'>8. 有积分模式和无积分模式有什么区别 </a></li><li><a href='#section_faq_9'>9. 使用了YouMiView并设置了delegate，退出ViewController后偶尔崩溃 </a></li><li><a href='#section_faq_qq'>温馨提示 </a></li></ul></li>
+			</ul>
+
+			<div class="doc-content" >
+				<h1 class="sdkhead" id="section_title">YouMi iOS SDK 开发者文档</h1>
+<h2 class="sdkhead" id="section_wall">积分墙推荐墙使用文档</h2>
+<p>推荐墙相当于无积分的积分墙，下面如无特别说明，适用积分墙的同时也适用于推荐墙。</p>
+<h3 class="sdkhead" id="section_wall_change">积分墙各版本使用改动</h3>
+<h4>4.8</h4>
+<blockquote>
+<p>添加 YouMiPointsManager</p>
+</blockquote>
+<h4>5.0</h4>
+<blockquote>
+<p>全新的使用方式</p>
+</blockquote>
+<h4>新版积分墙有重大更改，SDK使用方式与以往有所不同，请重新阅读教程</h4>
+<h3 class="sdkhead" id="section_wall_procedure">嵌入步骤</h3>
+<h4>1. 注册应用，申请ID</h4>
+<p>请登陆到 <strong>www.youmi.net/sdk</strong> 注册一个开发者账号，同时选择注册一个应用，获取该应用的 <code>appid</code> 和 <code>appsecret</code> 。</p>
+<h4>2. 下载YouMi SDK iOS 压缩包</h4>
+<h4>3. 往工程导入头文件， 静态库文件</h4>
+<h5>积分墙必须的头文件为</h5>
+<ul>
+<li>YouMiConfig.h</li>
+<li>YouMiWall.h</li>
+<li>YouMiWallAppModel.h</li>
+<li>YouMiPointsManager.h (用于查询积分)</li>
+</ul>
+<h5>静态库文件为</h5>
+<ul>
+<li>libYouMi.a</li>
+</ul>
+<h4>4. 为工程添加Frameworks</h4>
+<ul>
+<li>SystemConfiguration.framework</li>
+<li>CFNetwork.framework</li>
+<li>QuartzCore.framework</li>
+<li>libsqlite3.dylib</li>
+</ul>
+<h3 class="sdkhead" id="section_wall_how_to_use">使用方法</h3>
+<h3>1. 在AppDelegate.m中初始化【必须】{: #section_wall_init .sdkhead}</h3>
+<ul>
+<li>导入 YouMiWall.h</li>
+</ul>
+<pre><code>#import &quot;YouMiWall.h&quot;
+</code></pre>
+
+<ul>
+<li>在 application:didFinishLaunchingWithOptions: 中设置SDK共用属性(可选)(<strong>必须在设置<code>appid</code>, <code>appsecret</code>之前</strong>) appid 和 appsecret</li>
+</ul>
+<pre><code>[YouMiConfig setUserID:id_you_define]; // 可选 (用于帮助开发者区分用户，例如应用有不同账号登陆，可以把账号名设置为userID，如果不设置，则返回积分时userID字段为&quot;&quot;)
+[YouMiConfig setUseInAppStore:YES];  // 可选，详细请看YouMiSDK常见问题解答
+[YouMiConfig launchWithAppID:@&quot;[Your AppID]&quot; appSecret:@&quot;[Your AppSecret]&quot;]; 
+</code></pre>
+
+<ul>
+<li>
+<p>设置显示全屏广告（如积分墙）的全屏UIWindow(可选，推荐设置)</p>
+<p>对于使用UIKit编写的APP可以在application:didFinishLaunchingWithOptions:中的[self.window makeKeyAndVisible]之后设置：</p>
+</li>
+</ul>
+<pre><code>[self.window makeKeyAndVisible];
+// 设置显示全屏广告的window   
+[YouMiConfig setFullScreenWindow:self.window];
+</code></pre>
+
+<h3>2. 启用积分墙【必须】{: #section_wall_enable .sdkhead}</h3>
+<p>告诉有米SDK使用到的广告形式是积分墙. 在设置 <code>appid</code> <code>appsecret</code>之后调用:</p>
+<pre><code>[YouMiWall enable];
+</code></pre>
+
+<h3 class="sdkhead" id="section_wall_points_enable">3. 启用积分管理</h3>
+<ul>
+<li>【使用有积分广告时若使用SDK客户端回调，必须】</li>
+</ul>
+<p>让有米SDK从服务器查询积分，并通知；对于 <strong>自动积分管理</strong> 以及 <strong>手动积分管理</strong> 的详细解释，请看后面 <code>5. 获取积分</code></p>
+<p>在设置 <code>appid</code> <code>appsecret</code>之后调用:</p>
+<p>若使用自动积分管理</p>
+<pre><code>[YouMiPointsManager enable];
+</code></pre>
+
+<p>若使用手动积分管理</p>
+<pre><code>[YouMiPointsManager enableManually];
+</code></pre>
+
+<h3 class="sdkhead" id="section_wall_show">4. 显示</h3>
+<p>显示积分墙：</p>
+<pre><code>[YouMiWall showOffers:YES didShowBlock:^{
+    NSLog(@&quot;有米积分墙已显示&quot;);
+} didDismissBlock:^{
+    NSLog(@&quot;有米积分墙已退出&quot;);
+}];
+</code></pre>
+
+<p>显示推荐墙：</p>
+<pre><code>[YouMiWall showOffers:NO didShowBlock:^{
+    NSLog(@&quot;有米推荐墙已显示&quot;);
+} didDismissBlock:^{
+    NSLog(@&quot;有米推荐墙已退出&quot;);
+}];
+</code></pre>
+
+<h3 class="sdkhead" id="section_wall_get_points">5. 获取积分</h3>
+<p>我们提供了 "SDK客户端回调" 和 "服务器回调" 两种获取积分方式。</p>
+<ul>
+<li>YouMiPointsManager (YouMiSDK4.8之后提供):</li>
+<li>服务器回调: 用户完成安装(或者注册等步骤)后有米服务器向开发者的服务器发送积分数据，由开发者服务器负责管理积分</li>
+<li><strong><em>客户端开发者调用的查询接口在 YouMiSDK 5.0 以及之后取消</em></strong>。</li>
+</ul>
+<h5>YouMiPointsManager</h5>
+<p>从YouMiSDK 5.0开始 YouMiPointsManager 有两种使用方式：</p>
+<ol>
+<li>
+<p>自动积分管理(同YouMiSDK 4.8)</p>
+<p>YouMiSDK 从服务器接收到积分后，发出通知的同时，会把积分存在客户端上，供开发者调用spendPoints方法消耗；</p>
+<p>自动积分管理简单方便；</p>
+<p>对于一个有多个账户的APP，自动积分管理无法区分哪些积分属于哪个账户。</p>
+</li>
+<li>
+<p>手动积分管理</p>
+<p>YouMiSDK 从服务器接收到积分后，发出的通知，里面包含了各份积分属于哪个账户(userID)，开发者接收到通知后自己处理拿到的积分。</p>
+<p>手动积分管理无法使用spendPoints，pointsRemained方法。</p>
+</li>
+</ol>
+<p>使用YouMiPointsManager，首先需要启动YouMiPointsManager 启动方法如前面 <code>3. 启用积分管理</code></p>
+<hr />
+<p><strong>自动积分管理使用方法如下：</strong></p>
+<p>查询剩余积分</p>
+<pre><code>[YouMiPointsManager pointsRemained];
+</code></pre>
+
+<p>消耗剩余的积分</p>
+<pre><code>[YouMiPointsManager spendPoints:10];
+</code></pre>
+
+<p>当用户获得新的积分的时候，YouMiSDK(不是YouMiPointsManager)会发出一个 kYouMiPointsManagerRecivedPointsNotification。</p>
+<pre><code>[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pointsGotted:) name:kYouMiPointsManagerRecivedPointsNotification object:nil];
+
+- (void)pointsGotted:(NSNotification *)notification {
+    NSDictionary *dict = [notification userInfo];
+    NSNumber *freshPoints = [dict objectForKey:kYouMiPointsManagerFreshPointsKey];
+
+    // 这里的积分不应该拿来使用, 只是用于告知一下用户, 可以通过 [YouMiPointsManager spendPoints:]来使用积分
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@&quot;通知&quot; message:[NSString stringWithFormat:@&quot;获得%@积分&quot;, freshPoints] delegate:nil cancelButtonTitle:@&quot;好的&quot; otherButtonTitles:nil];
+    [alert show];
+    [alert release];
+
+    self.pointsLabel.text = [NSString stringWithFormat:@&quot;当前积分: %d&quot;, [YouMiPointsManager pointsRemained]];
+}
+</code></pre>
+
+<hr />
+<p><strong>手动积分管理使用方法如下：</strong></p>
+<p>当用户获得新的积分的时候，YouMiSDK(注意可能不是YouMiPointsManager)会发出一个 kYouMiPointsManagerRecivedPointsNotification。</p>
+<pre><code>[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pointsGotted:) name:kYouMiPointsManagerRecivedPointsNotification object:nil];
+
+- (void)pointsGotted:(NSNotification *)notification {
+    NSDictionary *dict = [notification userInfo];
+    // 手动积分管理可以通过下面这种方法获得每份积分的信息。
+    NSArray *pointInfos = dict[kYouMiPointsManagerPointInfosKey];
+    for (NSDictionary *aPointInfo in pointInfos) {
+        // aPointInfo 是每份积分的信息，包括积分数，userID，下载的APP的名字
+        NSLog(@&quot;积分数：%@&quot;, aPointInfo[kYouMiPointsManagerPointAmountKey]);
+        NSLog(@&quot;userID：%@&quot;, aPointInfo[kYouMiPointsManagerPointUserIDKey]);
+        NSLog(@&quot;产品名字：%@&quot;, aPointInfo[kYouMiPointsManagerPointProductNameKey]);
+
+        // TODO 按需要处理
+    }
+}
+</code></pre>
+
+<h5>服务器回调</h5>
+<p>详细请看 </p>
+<p><a href="http://wiki.youmi.net/%E5%AF%B9%E5%BC%80%E5%8F%91%E8%80%85%E7%9A%84%E7%A7%AF%E5%88%86%E5%8F%8D%E9%A6%88%E6%8E%A5%E5%8F%A3">对开发者的积分反馈接口</a></p>
+<h3 class="sdkhead" id="section_wall_opensource">6. 使用源数据</h3>
+<p>通过YouMiSDK能够方便获取到APP广告列表，我们为开发者提供APP的实用信息，方便开发者自定义界面。</p>
+<p>获取APP的方法如下（以有积分模式为例）：</p>
+<pre><code>[YouMiWall requestOffersOpenData:YES revievedBlock:^(NSArray *theApps, NSError *error) {
+            // theApps 是 YouMiWallAppModel 的对象列表
+        if (!error) {
+            self.apps = theApps;
+            [self.table reloadData];
+        }
+}];
+</code></pre>
+
+<p>当用户点击一个APP时，调用userInstallApp:方法安装APP：</p>
+<pre><code>- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    YouMiWallAppModel *model = self.apps[indexPath.row];
+    [YouMiWall userInstallApp:model];
+}
+</code></pre>
+
+<p>更详细用法请看例子程序。</p>
+<hr />
+<h2 class="sdkhead" id="section_spot">插播广告使用文档</h2>
+<h3 class="sdkhead" id="section_spot_changes">插播广告各版本使用改动</h3>
+<h4>4.8</h4>
+<ul>
+<li>添加有积分插播</li>
+</ul>
+<h3 class="sdkhead" id="section_spot_procedure">嵌入步骤</h3>
+<h4>1. 注册应用，申请ID</h4>
+<p>请登陆到 <strong>www.youmi.net/sdk</strong> 注册一个开发者账号，同时选择注册一个应用，获取该应用的 <strong><code>appid</code></strong> 和 <strong><code>appsecret</code></strong> 。</p>
+<h4>2. 下载YouMi SDK iOS 压缩包</h4>
+<h4>3. 往工程导入头文件， 静态库文件</h4>
+<h5>插播广告所需头文件</h5>
+<ul>
+<li>YouMiConfig.h</li>
+<li>YouMiWall.h (插播广告已被归类到积分墙)</li>
+<li>YouMiSpot.h</li>
+<li>YouMiPointsManager.h (<code>可选</code>, 用于有积分插播)</li>
+</ul>
+<h5>静态库文件为</h5>
+<ul>
+<li>libYouMi.a</li>
+</ul>
+<h4>4. 为工程添加Frameworks</h4>
+<ul>
+<li>SystemConfiguration.framework</li>
+<li>CFNetwork.framework</li>
+<li>QuartzCore.framework</li>
+<li>libsqlite3.dylib</li>
+</ul>
+<h3 class="sdkhead" id="section_spot_how_to_use">使用方法</h3>
+<h3 class="sdkhead" id="section_spot_init">1. 在AppDelegate.m中初始化</h3>
+<ul>
+<li>导入 YouMiSpot.h</li>
+</ul>
+<pre><code>#import &quot;YouMiSpot.h&quot;
+</code></pre>
+
+<ul>
+<li>在 application:didFinishLaunchingWithOptions: 中设置SDK共用属性(可选)(<strong>必须在设置<code>appid</code>, <code>appsecret</code>之前</strong>), appid 和 appsecret</li>
+</ul>
+<pre><code>// [YouMiConfig setUseInAppStore:NO]; // 可选, 默认YES, iOS 6是否使用内置AppStore，详细请看YouMiSDK常见问题解答
+[YouMiConfig launchWithAppID:@&quot;[Your AppID]&quot; appSecret:@&quot;[Your AppSecret]&quot;]; 
+</code></pre>
+
+<ul>
+<li>在 application:didFinishLaunchingWithOptions: 中启用积分墙(插播广告已被归类到积分墙)</li>
+</ul>
+<pre><code>[YouMiWall enable];
+</code></pre>
+
+<ul>
+<li>
+<p>如果使用有积分插播，需要获得积分，参照前面积分墙使用说明中的 <code>5. 获取积分</code></p>
+</li>
+<li>
+<p>在 application:didFinishLaunchingWithOptions: 中请求插播广告数据</p>
+</li>
+</ul>
+<pre><code>[YouMiSpot requestSpotADs:YES]; // 请求有积分插播 (有积分模式和无积分模式在一个APP中不可以双选)
+// [YouMiSpot requestSpotADs:NO];  // 请求无积分插播
+</code></pre>
+
+<ul>
+<li>
+<p>设置显示全屏广告（如插播广告）的全屏UIWindow(可选，推荐设置)</p>
+<p>对于使用UIKit编写的APP可以在application:didFinishLaunchingWithOptions:中的[self.window makeKeyAndVisible]之后设置：</p>
+</li>
+</ul>
+<pre><code>[self.window makeKeyAndVisible];
+// 设置显示全屏广告的window   
+[YouMiConfig setFullScreenWindow:self.window];
+</code></pre>
+
+<h3 class="sdkhead" id="section_spot_show">2. 显示插播广告</h3>
+<p>以场景切换为例：</p>
+<pre><code>- (void)enterTheDoorButtonPressed:(id)sender {
+    [YouMiSpot showSpotDismiss:^() {
+        [self enterTheDoor];
+    }];
+}
+</code></pre>
+
+<p>[YouMiSpot showSpotDismiss:] 的具体说明请看 YouMiSpot.h 文件 </p>
+<h3 class="sdkhead" id="section_spot_get_points">3. 获取积分</h3>
+<p>参照前面积分墙使用说明中的 <code>5. 获取积分</code></p>
+<hr />
+<h2 class="sdkhead" id="section_banner">广告条使用文档</h2>
+<h3 class="sdkhead" id="section_banner_procedure">嵌入步骤</h3>
+<h4>1. 注册应用，申请ID</h4>
+<p>请登陆到 <strong>www.youmi.net/sdk</strong> 注册一个开发者账号，同时选择注册一个应用，获取该应用的 <strong><code>appid</code></strong> 和 <strong><code>appsecret</code></strong> 。</p>
+<h4>2. 下载YouMi SDK iOS 压缩包</h4>
+<h4>3. 往工程导入头文件， 静态库文件</h4>
+<h5>广告条广告必须的头文件为</h5>
+<ul>
+<li>YouMiConfig.h</li>
+<li>YouMiDelegateProtocol.h</li>
+<li>YouMiView.h</li>
+</ul>
+<h5>静态库文件为</h5>
+<ul>
+<li>libYouMi.a</li>
+</ul>
+<h4>4. 为工程添加Frameworks</h4>
+<ul>
+<li>SystemConfiguration.framework</li>
+<li>CFNetwork.framework</li>
+<li>QuartzCore.framework</li>
+<li>libsqlite3.dylib</li>
+</ul>
+<h3 class="sdkhead" id="section_banner_how_to_use">使用方法</h3>
+<h3 class="sdkhead" id="section_banner_init">1. 在AppDelegate.m中初始化</h3>
+<ul>
+<li>导入 YouMiConfig.h</li>
+</ul>
+<pre><code>#import &quot;YouMiConfig.h&quot;
+</code></pre>
+
+<p>在 application:didFinishLaunchingWithOptions: 中设置SDK共用属性(可选)(<strong>必须在设置<code>appid</code>, <code>appsecret</code>之前</strong>) appid 和 appsecret</p>
+<pre><code>// [YouMiConfig setShouldGetLocation:NO]; // 可选，控制是否使用地理位置
+[YouMiConfig launchWithAppID:@&quot;[Your AppID]&quot; appSecret:@&quot;[Your AppSecret]&quot;]; 
+</code></pre>
+
+<ul>
+<li>
+<p>设置显示全屏广告（如网页广告）的全屏UIWindow(可选，推荐设置)</p>
+<p>对于使用UIKit编写的APP可以在application:didFinishLaunchingWithOptions:中的[self.window makeKeyAndVisible]之后设置：</p>
+</li>
+</ul>
+<pre><code>[self.window makeKeyAndVisible];
+// 设置显示全屏广告window   
+[YouMiConfig setFullScreenWindow:self.window];
+</code></pre>
+
+<h3 class="sdkhead" id="section_banner_add">2. 在需要用到广告条的地方创建广告条并添加</h3>
+<pre><code>// 创建广告条
+adView = [[YouMiView alloc] initWithContentSizeIdentifier:YouMiBannerContentSizeIdentifier320x50 delegate:nil];
+
+//可以设置委托[可选]
+adView.delegate = self;
+//设置文字广告的属性[可选]
+adView.indicateTranslucency = YES;
+adView.indicateRounded = NO;
+//添加对应的关键词 [可选]
+[adView addKeyword:@&quot;女性&quot;];
+
+// 开始请求广告
+[adView start];
+
+// 把广告条添加到特定的view中 [例如]
+[self.view addSubview:adView];
+</code></pre>
+
+<hr />
+<h2 class="sdkhead" id="section_faq">YouMiSDK 常见问题解答</h2>
+<h3 class="sdkhead" id="section_faq_1">1. YouMiSDK4.7以及之前的积分查询有什么需要注意的</h3>
+<ol>
+<li>同一个应用多次安装, 只会返回一次积分；</li>
+<li>有米服务器不会保存被查询过的积分，需要开发者自行管理；</li>
+<li>建议程序从后台进入前台是查询2-3次积分；</li>
+<li>建议更新到YouMiSDK最新版本使用YouMiPointsManager来获得积分。</li>
+</ol>
+<h3 class="sdkhead" id="section_faq_2">2. 是否使用了UDID</h3>
+<p>YouMiSDK 4.7 以及之后版本 不再使用UDID</p>
+<h3 class="sdkhead" id="section_faq_3">3. 什么是内置AppStore</h3>
+<p><code>内置AppStore</code> 是在应用内显示的AppStore页面。 如图 iPad 中的效果：</p>
+<p><img alt="in-appstore" src="./img/youmisdk/in-appstore.png" /></p>
+<p>开启了内置AppStore，不需要跳出应用也能够安装App，但有若干限制  </p>
+<ol>
+<li>iOS 6 或以上系统才有此功能。</li>
+<li>没有通过AppStore审核的应用的 <code>内置AppStore</code> 只能够显示，不能下载。</li>
+</ol>
+<h3 class="sdkhead" id="section_faq_4">4. iOS6系统内置AppStore无法下载安装，应该如何使用</h3>
+<p>YouMiSDK 提供 [YouMiConfig setUseInAppStore:] 控制开启关闭 <code>内置AppStore</code>。开发期间可以暂时关闭 <code>内置AppStore</code>, 建议提交审核前开启, 方便用户使用。</p>
+<h3 class="sdkhead" id="section_faq_5">5. 编译时提示 Undefined symbols</h3>
+<p>这种情况一般发生在升级YouMiSDK时，或者和聚合SDK一起使用时。要作如下检查<br />
+1. 检查工程里有没有两份YouMiSDK (libYouMi.a 以及 头文件)， 如果有，请去掉旧的；<br />
+2. 检查工程<strong>目录</strong>下有没有两分YouMiSDK，如果有，请去掉旧的；
+3. 检查编译Target里的Library Seach Paths 是否有两个YouMiSDK的路径，如果有请去掉旧的。<br />
+<img alt="library-search-paths.png" src="./img/youmisdk/library-search-paths.png" /></p>
+<h3 class="sdkhead" id="section_faq_6">6. 如何取消获取用户地理位置</h3>
+<p>在  </p>
+<pre><code>[YouMiConfig launchWithAppID:@&quot;Your AppID&quot; appSecret:@&quot;Your AppSecret&quot;]
+</code></pre>
+
+<p>前使用</p>
+<pre><code>[YouMiConfig setShouldGetLocation:NO];
+</code></pre>
+
+<h3 class="sdkhead" id="section_faq_7">7. Banner广告重复点击是否有效</h3>
+<p>若一个广告被多次点击，只会记录第一次点击效果。重复的点击无效。</p>
+<h3 class="sdkhead" id="section_faq_8">8. 有积分模式和无积分模式有什么区别</h3>
+<p>两者作用不同：有积分模式用于激励下载，用户通过下载安装APP来获得积分；无积分模式用于推荐。</p>
+<h3 class="sdkhead" id="section_faq_9">9. 使用了YouMiView并设置了delegate，退出ViewController后偶尔崩溃</h3>
+<p>请记得在ViewController销毁的时候把 YouMiView 对象的 delegate 设置为nil，只要这样就不会崩溃。</p>
+<h3 class="sdkhead" id="section_faq_qq">温馨提示</h3>
+<p>如果您在使用有米Banner广告过程中遇到了问题，或者对于Banner产品有任何宝贵的改进意见，欢迎联系我们的客服Q:539369969</p>
+			</div>
+		</div>
+
+<!--style="margin-top:30px;" style="margin-top:60px;" -->
+	</body>
+</html>

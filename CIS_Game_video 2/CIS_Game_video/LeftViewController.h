@@ -8,16 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import "RequestTools.h"
-
-@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,myHttpRequestDelegate>
+#import "YouMiDelegateProtocol.h"
+@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,myHttpRequestDelegate,YouMiDelegate>
 {
     NSArray * _nameArry;
     NSArray * _pictureArry;
     UILabel *checkLabel;//签到的标签
     UIImage * _tempImage;
-    
     UITableView * _setTableView;
+    RequestTools *getInfoRequest;
+    
 }
-@property(nonatomic,copy)NSString * photoPath;
-
+@property(nonatomic,retain)NSDictionary *infoDic;//个人详情
 @end
