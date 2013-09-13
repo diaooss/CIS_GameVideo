@@ -14,6 +14,7 @@
 #import "RequestTools.h"
 #import "RequestUrls.h"
 #import "AsynImageView.h"
+#import "LoginPage.h"
 #define leftBtnColor [UIColor colorWithRed:98/255.0 green:138/255.0 blue:14/255.0 alpha:1]
 #define rightBtnColor [UIColor colorWithRed:176/255.0 green:45/255.0 blue:35/255.0 alpha:1]
 #define customBlueColor [UIColor colorWithRed:86.0/255.0 green:161.0/255.0 blue:217.0/255.0 alpha:1.0]
@@ -116,7 +117,6 @@ durationLable.text = @"<<  时长:9'16''  >>";
     movieInfoTextView.editable = NO;
     movieInfoTextView.textAlignment = NSTextAlignmentCenter;
     
-    movieInfoTextView.text = @"开展评比达标表彰活动，是鼓励先进、鞭策后进、推动工作的一种手段。恰到好处的评比与表彰，能够激发相关部门与人员的工作热情，促进工作的开展、落实；能够树立好的典范，传递“正能量”，带动其他群体积极上进，推动事业的发展。";
     movieInfoTextView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:movieInfoTextView];
       for (int i = 0; i<2; i++) {
@@ -196,10 +196,10 @@ durationLable.text = @"<<  时长:9'16''  >>";
     }
     
     NSLog(@"全屏");
-    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
-        [[UIDevice currentDevice] performSelector:@selector(setOrientation:)
-                                       withObject:(id)UIInterfaceOrientationLandscapeRight];
-    }
+//    if ([[UIDevice currentDevice] respondsToSelector:@selector(setOrientation:)]) {
+//        [[UIDevice currentDevice] performSelector:@selector(setOrientation:)
+//                                       withObject:(id)UIInterfaceOrientationLandscapeRight];
+//    }
 }
 -(void)back
 {
@@ -214,27 +214,58 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)topRightCorenerBtnAction
 {
     //收藏该视频
-    NSLog(@"SHOU----");
+    if ([Tools isHaveLogin]==YES) {
+                //进行按钮颜色的变化等.
+        [self shouChang];
+
+    }
+    else{
+        
+        [Tools showLoginPagesByViewController:self];
+   
+        
+    }
+    
     
 
 
-    collectRequest = [[RequestTools alloc] init];
-    [collectRequest setDelegate:self];
-    NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,@"?email=1823870397@qq.com&movieID=",self.movieId, nil];
-    [collectRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
-    //进行按钮颜色的变化等.
-    
+       
     
 }
+-(void)shouChang
+{
+    collectRequest = [[RequestTools alloc] init];
+    [collectRequest setDelegate:self];
+    NSString *nameStr = [NSString stringWithFormat:@"?email=%@&movieID=",    [[NSUserDefaults standardUserDefaults] objectForKey:@"user_email"]];
+    NSArray *strArry = [NSArray arrayWithObjects:COLLECT_VIDOE,nameStr,self.movieId, nil];
+    [collectRequest requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
+
+}
+
 #pragma mark--关注作者
 -(void)attentionTheAuthor
 {
-    NSLog(@"作者:%@",authorNameLab.text);
+    if ([Tools isHaveLogin]==YES) {
+        [self guanzhu];
+        NSLog(@"作者:%@",authorNameLab.text);
+
+    }
+    else
+    {
+        [Tools showLoginPagesByViewController:self];
+        
+    }
+    
+       
+}
+-(void)guanzhu
+{
     _attentionTool = [[RequestTools alloc]init];
     [_attentionTool setDelegate:self];
-    NSArray *strArry = [NSArray arrayWithObjects:ATTENTION_AUTHOR,[NSString stringWithFormat:@"?email=%@&authName=%@",@"1601883700@qq.com",authorNameLab.text],nil];
+    NSArray *strArry = [NSArray arrayWithObjects:ATTENTION_AUTHOR,[NSString stringWithFormat:@"?email=%@&authName=%@",[[NSUserDefaults standardUserDefaults] objectForKey:@"user_email"],authorNameLab.text],nil];
     [_attentionTool requestWithUrl_Asynchronous:[MyNsstringTools groupStrByAStrArray:strArry]];
 
+    
 }
 #pragma mark--分享视频
 -(void)shareTheMovie

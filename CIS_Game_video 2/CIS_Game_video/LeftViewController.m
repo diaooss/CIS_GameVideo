@@ -20,6 +20,7 @@
 #import "RequestTools.h"
 #import "MyNsstringTools.h"
 #import "RecordViewController.h"
+#import "Tools.h"
 @interface LeftViewController ()
 @end
 @implementation LeftViewController
@@ -45,8 +46,9 @@
 {
     [super viewDidLoad];
     //基础信息
-    _setTableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0,320, self.view.height*5/9) style:UITableViewStylePlain];
+    _setTableView =[[UITableView alloc]initWithFrame:CGRectMake(0, 0,320, self.view.height*6/9) style:UITableViewStylePlain];
     [_setTableView setDelegate:self];
+    _setTableView.scrollEnabled = NO;
     [_setTableView setDataSource:self];
     [self.view addSubview:_setTableView];
    
@@ -90,8 +92,8 @@
 - (CGFloat )tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row==0) {
-        return 80;
-    }return self.view.height*5/63;
+        return self.view.height*2/9;
+    }return self.view.height*1/9;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -152,9 +154,8 @@
 #pragma mark-- cell的点击触发事件
 - (void)goIntoUserCenterWith:(NSString *)name
 {
-    NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
-    NSDictionary *userInfor = [userDefaults valueForKey:@"UserInfo"];
-    if (userInfor) {
+    
+    if ([Tools isHaveLogin]==YES) {
         NSLog(@"存在");
         UserViewController* user = [[UserViewController alloc]init];
         [self judgeTheView:name changeViecontroller:user];

@@ -18,8 +18,9 @@
 + (void)closeLoadsign:(UIView* )view;//关闭
 //********检测邮箱格式
 +(BOOL)cheeckEmail: (NSString *)userEmail;
-//*****判断是不是登陆过
+//*****判断是不是登陆
 +(BOOL)isHaveLogin;
+
 //评价
 +(void)giveAppraiseForOurApp;
 //获得硬件信息
@@ -48,5 +49,6 @@
 + (void)makeShareWithString:(NSString *)string andImagePath:(NSString *)imagePath;
 //创建一个提醒框2秒后自动消失
 + (void)makeOneCautionViewOnView:(UIView *)view withString:(NSString *)string;
-
+//拉出登陆页面
++(void)showLoginPagesByViewController:(UIViewController *)viewController;
 @end

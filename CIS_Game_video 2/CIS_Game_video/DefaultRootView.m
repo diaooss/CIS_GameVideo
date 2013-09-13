@@ -171,8 +171,9 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320,0)];//创建一个视图
-    self.animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 3, 320, self.height/4)];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320,0.5)];//创建一个视图
+    self.animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 7, 320, self.height/4-14)];
+//    [self.animationView setCenter: headerView.center];
     [_animationView setSlideArry:[self.mydic valueForKey:@"bannerResult"]];
     [_animationView addChildViews];//布局子视图
     [headerView addSubview:_animationView];

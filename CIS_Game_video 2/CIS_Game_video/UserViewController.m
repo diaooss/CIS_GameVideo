@@ -29,14 +29,14 @@
 {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor brownColor]];
-    [Tools navigaionView:self leftImageName:@"goBack.png" title:@"用户中心"];
+[Tools navigaionView:self deckVC:self.viewDeckController leftImageName:@"goBack.png" title:@"用户中心"];
     /*/ 配置用户中心/*/
     //仿新浪微薄,背景
-    UIImageView *userCenterBgImgView = [UIImageView imageViewWithRect:CGRectMake(0, 40, 320, 150) image:nil interaction:NO];
+    UIImageView *userCenterBgImgView = [UIImageView imageViewWithRect:CGRectMake(0, 0, 320, 150) image:nil interaction:NO];
     userCenterBgImgView.backgroundColor = [UIColor yellowColor];
     [self.view addSubview:userCenterBgImgView];
     //头像
-    UIImageView *userHeaderImgView = [UIImageView imageViewWithRect:CGRectMake(20, userCenterBgImgView.bottom-30, 80, 80) image:nil interaction:YES];
+    UIImageView *userHeaderImgView = [UIImageView imageViewWithRect:CGRectMake(20, userCenterBgImgView.bottom-40, 80, 80) image:nil interaction:YES];
     userHeaderImgView.backgroundColor = [UIColor greenColor];
     userHeaderImgView.layer.cornerRadius = 5.0;
     [self.view addSubview:userHeaderImgView];
@@ -98,10 +98,7 @@
 {
     
 }
--(void)back
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

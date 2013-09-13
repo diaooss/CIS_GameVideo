@@ -52,7 +52,7 @@
     logoImg.image = [UIImage imageNamed:@"headerimage.png"];
     [self.view addSubview:logoImg];
     [logoImg release];
-    nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, logoImg.bottom+30, 280, 35)];
+    nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, logoImg.bottom+20, 280, 35)];
     nameTextField.delegate= self;
     nameTextField.backgroundColor = [UIColor yellowColor];
     nameTextField.textColor = [UIColor grayColor];
@@ -93,21 +93,21 @@
     [self.view addSubview:login_btn];
     //注册和忘记密码
     UIButton *registerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    registerBtn.backgroundColor = [UIColor brownColor];
+    registerBtn.backgroundColor = [UIColor greenColor];
     registerBtn.frame = CGRectMake(login_btn.left, login_btn.bottom+30, 90, 30);
     [registerBtn setTitle:@"注册账号" forState:UIControlStateNormal];
     [registerBtn setShowsTouchWhenHighlighted:YES];
-    registerBtn.layer.cornerRadius = 2.0;
+    registerBtn.layer.cornerRadius = 4.0;
     [registerBtn addTarget:self action:@selector(newRegister) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:registerBtn];
     //忘记密码
     UIButton *forgetPsdBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    forgetPsdBtn.backgroundColor = [UIColor brownColor];
+    forgetPsdBtn.backgroundColor = [UIColor grayColor];
     forgetPsdBtn.frame = CGRectMake(registerBtn.right+100, login_btn.bottom+30, registerBtn.width, registerBtn.height);
     [forgetPsdBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
     [forgetPsdBtn setShowsTouchWhenHighlighted:YES];
     [forgetPsdBtn addTarget:self action:@selector(forgetPSD) forControlEvents:UIControlEventTouchUpInside];
-    forgetPsdBtn.layer.cornerRadius = 2.0;
+    forgetPsdBtn.layer.cornerRadius = 3.0;
     [self.view addSubview:forgetPsdBtn];
     //添加手势
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapBackGround)];

@@ -114,9 +114,9 @@
     CGSize cellSize = self.bounds.size;
         _authorLogoView.size = CGSizeMake(80, 80);
     _authorLogoView.frame = CGRectMake(10, 10, _authorLogoView.width, _authorLogoView.height);
-    _authorNameLabel.frame = CGRectMake(_authorLogoView.right+10, 10, cellSize.width-150, cellSize.height/2);
+    _authorNameLabel.frame = CGRectMake(_authorLogoView.right+20, 10, cellSize.width-160, cellSize.height/2);
     
-    _popularImg.frame = CGRectMake(_authorLogoView.right+10, _authorNameLabel.bottom+10, 20, 20);
+    _popularImg.frame = CGRectMake(_authorLogoView.right+20, _authorNameLabel.bottom+10, 20, 20);
     _popularLab.frame = CGRectMake(_popularImg.right, _popularImg.top, 50, 20);
     _countImg.frame = CGRectMake(_popularLab.right+10, _popularLab.top, 20, 20);
     _countLab.frame = CGRectMake(_countImg.right, _countImg.top, 50, 20);

@@ -9,6 +9,7 @@
 #import "Tools.h"
 #import "Reachability.h"
 #import "MBProgressHUD.h"
+#import "LoginPage.h"
 #define NavigationBGImage @"navbar.png"
 #define NavigationBACKImage @"goBack.png"
 
@@ -80,11 +81,10 @@
 {
     [MBProgressHUD hideHUDForView:view animated:YES];
 }
-//***用户是否注册登陆
+//***用户是否登陆
 +(BOOL)isHaveLogin
 {
-    NSUserDefaults * user = [NSUserDefaults standardUserDefaults];
-    if ([user valueForKeyPath:@"user_name"]) {
+    if ( [[NSUserDefaults standardUserDefaults] objectForKey:@"user_email"]&&    [[NSUserDefaults standardUserDefaults] objectForKey:@"user_psw"]) {
         return YES;
     }
     return NO;
@@ -330,5 +330,15 @@
 +(void)cautionViewDisappear:(UIView *)view
 {
     [MBProgressHUD hideHUDForView:view animated:YES];
+}
+//拉出登陆页面
++(void)showLoginPagesByViewController:(UIViewController *)viewController
+{
+    LoginPage *login = [[LoginPage alloc] init];
+    UINavigationController *loginNavc = [[UINavigationController alloc] initWithRootViewController:login];
+    [viewController presentViewController:loginNavc animated:YES completion:nil];
+    [login release];
+    [loginNavc release];
+    
 }
 @end

@@ -291,7 +291,7 @@
 {
         if (section==0) {
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,0, 320, 0)] ;//创建一个视图
-        headerView.backgroundColor = [UIColor redColor];
+        headerView.backgroundColor = [UIColor clearColor];
         //滑动推荐
         animationView = [[Animation_Turn_View alloc]initWithFrame:CGRectMake(0, 3, 320, self.view.height/3-37)];
         [animationView setSlideArry:self.rootBannerArry];
@@ -300,7 +300,7 @@
         [headerView addSubview:animationView];
         [animationView setDelegate:self];
         /*/分类标签/*/
-        categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom-2, 320, 32)];
+        categorySegmentedControl = [[HMSegmentedControl alloc] initWithFrame:CGRectMake(0, animationView.bottom+2, 320, 32)];
             [categorySegmentedControl addTarget:self action:@selector(segmentedControlChangedValue:) forControlEvents:UIControlEventValueChanged];
         NSArray * nameArry = [NSArray arrayWithObjects:@"英雄联盟",@"Dota",@"魔兽争霸",@"Dota2", @"星际大战2",nil];
         [categorySegmentedControl setSectionTitles:nameArry];
