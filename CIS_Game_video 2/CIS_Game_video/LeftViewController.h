@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "RequestTools.h"
-
-@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,myHttpRequestDelegate>
+#import "YouMiDelegateProtocol.h"
+@interface LeftViewController : UIViewController<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate,myHttpRequestDelegate,YouMiDelegate>
 {
     NSArray * _nameArry;
     NSArray * _pictureArry;

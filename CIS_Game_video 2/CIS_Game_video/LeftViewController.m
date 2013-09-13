@@ -20,6 +20,10 @@
 #import "RequestTools.h"
 #import "MyNsstringTools.h"
 #import "RecordViewController.h"
+
+//广告
+#import "YouMiView.h"
+#import "YouMiWall.h"
 @interface LeftViewController ()
 @end
 @implementation LeftViewController
@@ -75,12 +79,21 @@
     [self.view addGestureRecognizer:recognizer];
     [recognizer release];
     //签到
-    checkLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bottom-60, 320, 30)];
+    checkLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.bottom-104, 320, 30)];
     checkLabel.text = @"每日签到(您已连续签到XX次)";
     checkLabel.textAlignment = NSTextAlignmentCenter;
     checkLabel.textColor = [UIColor grayColor];
     checkLabel.backgroundColor  =[UIColor clearColor];
     [self.view addSubview:checkLabel];
+    
+    
+    ///广告
+    // 320x50
+    YouMiView *adView320x50=[[YouMiView alloc] initWithContentSizeIdentifier:YouMiBannerContentSizeIdentifier320x50 delegate:self];
+    adView320x50.frame = CGRectMake(0, checkLabel.bottom, CGRectGetWidth(adView320x50.bounds), CGRectGetHeight(adView320x50.bounds));
+    [adView320x50 start];
+    [self.view addSubview:adView320x50];
+    [adView320x50 release];
 }
 #pragma mark -----UItableView 的代理方法
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -297,6 +310,16 @@
             SetTingPage *configPage = [[SetTingPage alloc] init];
             [self judgeTheView:[sender titleForState:UIControlStateNormal] changeViecontroller:configPage];
             [configPage release];
+        }
+            break;
+        case 101:
+        {
+            [YouMiConfig setUseInAppStore:NO];
+            [YouMiWall showOffers:NO didShowBlock:^{
+                NSLog(@"有米推荐墙已显示");
+            } didDismissBlock:^{
+                NSLog(@"有米推荐墙已退出");
+            }];
         }
             break;
         case 102:
