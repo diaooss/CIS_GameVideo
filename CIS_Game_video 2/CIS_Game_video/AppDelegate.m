@@ -28,20 +28,20 @@
 - (void)initAllPlatforms
 {
     //initSina//新浪
-    [ShareSDK connectSinaWeiboWithAppKey:@"905230395"
-                               appSecret:@"4a30c302c193396e5520a2a2e778f830"
-                             redirectUri:@"http://hunagfang.cn"];
+    [ShareSDK connectSinaWeiboWithAppKey:@"3224078821"
+                               appSecret:@"5ad0997882d85be5eb787afea08f16ad"
+                             redirectUri:@"http://open.weibo.com/developers/identity/edit"];
     //initQQzone
-    [ShareSDK connectQZoneWithAppKey:@"100509825"
-                           appSecret:@"f614d4292c15d510c31d3eede48e9dfb"
+    [ShareSDK connectQZoneWithAppKey:@"100520775"
+                           appSecret:@"40c7bfff572e310870555ffc6576590f"
                    qqApiInterfaceCls:[QQApiInterface class]
                      tencentOAuthCls:[TencentOAuth class]];
     //initQQFriend
-    [ShareSDK connectQQWithQZoneAppKey:@"100509825"
+    [ShareSDK connectQQWithQZoneAppKey:@"100520775"
                      qqApiInterfaceCls:[QQApiInterface class]
                        tencentOAuthCls:[TencentOAuth class]];
     //微信
-    [ShareSDK connectWeChatWithAppId:@"wxcfa8e03b146447d4"
+    [ShareSDK connectWeChatWithAppId:@"wx89d583dd8184e112"
                            wechatCls:[WXApi class]];
     
 }
@@ -59,7 +59,7 @@
 
     
     
-    [ShareSDK registerApp:@"74d0e5cd250"];//初始化ShareSDK的App
+    [ShareSDK registerApp:@"91c0678912e"];//初始化ShareSDK的App
     [self initAllPlatforms];
     /*/网络监控/*/
      

@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>${PRODUCT_NAME}</string>
+	<string>解说汇</string>
 	<key>CFBundleExecutable</key>
 	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIdentifier</key>
@@ -47,10 +47,10 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>sinaweibosso.905230395</string>
-				<string>wxcfa8e03b146447d4</string>
-				<string>tencent100509825</string>
-				<string>QQ05FDA881</string>
+				<string>sinaweibosso.3224078821</string>
+				<string>wx89d583dd8184e112</string>
+				<string>tencent100520775</string>
+				<string>QQ05FDD347</string>
 			</array>
 			<key>CFBundleURLName</key>
 			<string></string>

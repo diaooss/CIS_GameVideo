@@ -184,13 +184,17 @@ durationLable.text = @"<<  时长:9'16''  >>";
 
     
     if ([self isIn]) {
-        Video * video = [[Video alloc]initWithVideoName:[self.detailDic valueForKey:@"m_name"]
+        //NSLog(@"%@",self.detailDic);
+        //为空判断
+        ;
+        Video * video = [[Video alloc]initWithVideoName:[[self.detailDic valueForKey:@"m_name"]isEqual:nil]?@"幻方":[self.detailDic valueForKey:@"m_name"]
                                            videoPicture:theAuthorImageView.fileName
                                                 videoID:self.movieId
-                                            videoAuthor:[self.detailDic valueForKey:@"m_author"]
-                                              videoTime:[self.detailDic valueForKey:@"m_duration"]
-                                           videoPopular:[NSString stringWithFormat:@"%@",[self.detailDic objectForKey:@"m_popular"]]];
+                                            videoAuthor:[[self.detailDic valueForKey:@"m_author"]isEqual:nil]?@"幻方":[self.detailDic valueForKey:@"m_author"]
+                                              videoTime:[[self.detailDic valueForKey:@"m_duration"] isEqual:nil]?@"00:00":[self.detailDic valueForKey:@"m_duration"]
+                                           videoPopular:[[NSString stringWithFormat:@"%@",[self.detailDic objectForKey:@"m_popular"]]isEqual:nil]?@"0":[NSString stringWithFormat:@"%@",[self.detailDic objectForKey:@"m_popular"]]];
         
+        NSLog(@"---%@---%@-----%@------%@------%@------%@",video.videoID,video.videoName,video.videoTime,video.videoPopular,video.videoAuthor,video.videoPicture);
         [HandleData insertOneVideo:video];
         [video release];
     }
@@ -214,7 +218,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)topRightCorenerBtnAction
 {
     //收藏该视频
-    NSLog(@"SHOU----");
+    //NSLog(@"SHOU----");
     
 
 
@@ -229,7 +233,7 @@ durationLable.text = @"<<  时长:9'16''  >>";
 #pragma mark--关注作者
 -(void)attentionTheAuthor
 {
-    NSLog(@"作者:%@",authorNameLab.text);
+    //NSLog(@"作者:%@",authorNameLab.text);
     _attentionTool = [[RequestTools alloc]init];
     [_attentionTool setDelegate:self];
     NSArray *strArry = [NSArray arrayWithObjects:ATTENTION_AUTHOR,[NSString stringWithFormat:@"?email=%@&authName=%@",@"1601883700@qq.com",authorNameLab.text],nil];
@@ -245,10 +249,10 @@ durationLable.text = @"<<  时长:9'16''  >>";
 -(void)requestSuccessWithResultDictionary:(NSDictionary *)dic
 {
     NSLog(@"视频详情:%@",dic );
-//    self.detailDic = dic;
+    self.detailDic = dic;
 
     if ([[dic allKeys] containsObject:@"m_url"]==YES){
-    NSLog(@"链接:%@",dic );
+    //NSLog(@"链接:%@",dic );
     movieNameLable.text = [dic objectForKey:@"m_name"];
     authorNameLab.text = [dic objectForKey:@"m_author"];
     movieInfoTextView.text = [dic objectForKey:@"m_description"];
